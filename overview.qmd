@@ -1,0 +1,19 @@
+# Overview of indicators {.unnumbered}
+
+*Lacking content* The idea of this page is to give a quick overview of the available indicators, and to possibly present the Norwegian fact sheets for each. For now this page is just an example what it could look like.
+
+## Areal av isbreer / Glacier area {.unnumbered}
+
+This indicator reflects the relative loss of glacial area between tha last climatic normal persion and today.
+
+```{r, echo=F}
+source("indicators/indicatorMetaData/Areal av isbreer.R")
+knitr::kable(t(out), 
+            format = "html",
+            caption = paste("Fakatark for tilstandindikatoren ", 
+                        out$Indikator, col.names = NULL))
+```
+
+## Indicator X {.unnumbered}
+
+And this indicator is about...

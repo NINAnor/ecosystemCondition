@@ -1,0 +1,51 @@
+[
+  {
+    "objectID": "overview.html#areal-av-isbreer-glacier-area",
+    "href": "overview.html#areal-av-isbreer-glacier-area",
+    "title": "Overview of indicators",
+    "section": "Areal av isbreer / Glacier area",
+    "text": "Areal av isbreer / Glacier area\nThis indicator reflects the relative loss of glacial area between tha last climatic normal persion and today.\n\n\n\n\nFakatark for tilstandindikatoren  Areal av isbreer \n\n  \n    Indikator \n    Areal av isbreer \n  \n  \n    Utfylling.av.protokollen \n    Anders L. Kolstad \n  \n  \n    Data.utfylt.revidert \n    08.12.2021"
+  },
+  {
+    "objectID": "overview.html#indicator-x",
+    "href": "overview.html#indicator-x",
+    "title": "Overview of indicators",
+    "section": "Indicator X",
+    "text": "Indicator X\nAnd this indicator is about…"
+  },
+  {
+    "objectID": "indicatorTest.html",
+    "href": "indicatorTest.html",
+    "title": "(PART*) INDICATORS FOR WETLANDS",
+    "section": "",
+    "text": "This is an indicator\n\n\n\n\n\n\n\n\n\nEcosystem\nØkologisk.egenskap\nECT.class\n\n\n\n\nSkog og fjell\nPrimærproduksjon\nStructural state characteristic\n\n\n\n\n\n \n\n\nplot(rnorm(10,10,10))"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "ecosystemCondition",
+    "section": "",
+    "text": "About\nOn this site you may view the nitty gritty details for how certain indicators for ecosystem condition for Norway has been calculated.\nThe web page is made to document the work related to a R&D project to develop indicators for ecosystem condition for three main ecosystems in Norway: wetlands, open areas below the forest line, and semi-natural land. These indicators are not yet used in real assessments, and may represent unfinished work pending future data availability. In addition, we may chose to also present some analyses documenting indicators that are used in existing assessments of ecosystem condition."
+  },
+  {
+    "objectID": "index.html#eatools",
+    "href": "index.html#eatools",
+    "title": "ecosystemCondition",
+    "section": "eaTools ",
+    "text": "eaTools \neaTools is an R package aimed at solving common tasks in GIS oriented ecosystem accounting, especially ecosystem condition accounting. We will use functions from this package, such as this function to normalise condition variables seen in Figure @ref(fig:eaTools-example).\n\n#devtools::install_github(\"NINAnor/eaTools\")\nlibrary(eaTools)\n\n# Import example data\ndata(\"ex_polygons\")\n\n# Use the questionmark to readabout the example data sets or to view the  function documentation \n#?ex_polygons\n\neaTools::ea_normalise(data = ex_polygons,\n             vector = \"condition_variable_2\",\n             upper_reference_level = 7,\n             scaling_function = \"sigmoid\",\n             plot = T)\n\n\n\n\nA normalised condition variable is called an indicator. This indicator had been transformed with a sigmoid function.\n\n\n\n\nSee the package documentation, especially under Articles for more information and examples of use."
+  },
+  {
+    "objectID": "index.html#community-review",
+    "href": "index.html#community-review",
+    "title": "ecosystemCondition",
+    "section": "Community review",
+    "text": "Community review\nWe want our work to be transparent and credible. Therefor we encourage all types of feedback on the analyses of the indicators for ecological condition that you can read about on this web site. To submit your comments, please to to this github repository and open a new issue and we will answer them there."
+  },
+  {
+    "objectID": "index.html#author-guidelines",
+    "href": "index.html#author-guidelines",
+    "title": "ecosystemCondition",
+    "section": "Author guidelines",
+    "text": "Author guidelines\nThis project uses a type of standardised reporting where reproducible workflows (typically code) for calculating each indicator is presented on separate webpages within a shared website. The website is built from the GitHub repo using seperate RMarkdown files for each chapter. These files must be in English. The process of authoring and sharing/distributing these Rmarkdown-files is explained below.\nIt is highly encouraged that the indicators are delivered as georeferenced maps, hereafter called indicator maps, and not a simple tables. There is a common structure that all indicator maps should follow. The indicator maps can be vector formats raster formats. For vector data, .Rdata or .rds files can be used, as for example shape files do not allow field names (i.e. column names) that are as long as the ones we use. All georeferenced data should use EPSG:25833 - ETRS89 / UTM zone 33N.\nIndicator maps should have the highest possible spatial resolution possible but weighing this against the need for spatial representativity. For example, you may need to aggregate x number of data points to get an average which is stable and representative for a given region. There is no need to spatially aggregate indicator maps any further, for example to produce a national estimate.\nThe indicator values, reference values ect should be mapped to the following columns (vector data) or bands (raster data):\n\nv_YYYY for variable value (i.e. un-scaled or raw indicator values) for year YYYY.\nsd_YYYY for the standard deviation associated with v_YYYY. Other measures for uncertainty is currently not supported.\nreferance_high for the reference value, i.e. the value of the variable v under reference conditions. This value cannot vary between years.\nreferance_low for the lower limit reference value, i.e. the worst possible value of the variable v. This value cannot vary between years. If missing, this value is assumed to be zero.\nthr for the threshold value defining good condition for variable v. If missing, this value will default to 0.6.\ni_YYYY for the indicator value at year YYYY. This value depends on all the above values, but also the scaling function (.e. linear, exponential, two-sided, ect.). The scaling function needs to be presented in other documentation.\n\nThe rest of the workflow is as follows.\n\nObtain a go ahead signal from the coordination group to make sure you are free to start your work\nRead the template.Rmd file. Make a copy of it and store it, in the same (root) folder as DRAFT_myIndicator.Rmd. (For an example, see DRAFT_breareal.Rmd). Finish your documentation and analyses there.\n\nYou can load data from internal NINA servers, from web hosts, of store smaller data set under data. The data folder also contains some supporting data sets that you may want to use, such as a delineation of the five regions used in the ecosystem assessment (data/regions.shp), and an outline of Norway (outlineOfNorway_EPSG25833.shp).\nTo preview you rmarkdown file as html in R, type rmarkdown::render('DRAFT_myIndicator.Rmd', output_format = \"html_document\", output_dir = \"temp\") in the console (the knitr shortcuts don’t work as expected inside bookdown projects).\nWhen filling out the template.Rmd file with your own work, try not to change the headers too much.\nFinal result from the analyses should be written to the indicators folder. The preferred output is georeferenced data (rasters or shape files), and these should be placed under indators/indicatorMaps. Non-georeferenced data, like data tables, can be stored under indicators.\n\nMake a pull request to the main GitHub repository to submit your file. If you are not comfortable using GitHub, contac Anders to rrange sending the files via email.\nAnders or someone else in the project wil conduct a rapid code review, making sure the code is reproducible, interpretable and that it renders locally on the R Studio server.\nWhen approved, the reviewer will make a copy of the DRAFT_ file, removing the DRAFT_ part of the name, as well as the YML header, and as well as updating the rmd_files part of _bookdown.yml. (For an example of such a file, see breareal.Rmd.)\nTo update the web site (this web site), an admin user needs to pull down the repo to R Studio server, compile the book there (Ctr+Shift+B), commit and push to main. The html version of the book will be in the docs folder."
+  }
+]

@@ -1,0 +1,21 @@
+project: 
+  type: book
+book:
+  title: "ecosystemCondition"
+  chapters: 
+    - index.qmd
+    - overview.qmd
+    - breareal.qmd
+    - rosslyng.qmd
+    - indicatorTest.qmd
+    - naturtype.qmd
+    - scalingFunctions.qmd
+    
+    
+bibliography: book.bib
+
+format: 
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: scrreport

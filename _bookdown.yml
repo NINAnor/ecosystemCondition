@@ -1,9 +1,0 @@
-book_filename: "ecosystemCondition"
-new_session: true
-before_chapter_script: _common.R
-delete_merged_file: true
-language:
-  ui:
-    chapter_name: "Chapter "
-rmd_files: ["index.Rmd", "02-overview.Rmd", "breareal.Rmd", "rosslyng.Rmd", "indicatorTest.Rmd", "naturtype.Rmd", "scalingFunctions.Rmd"]
-output_dir: "docs"
