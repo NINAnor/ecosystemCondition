@@ -1,0 +1,1186 @@
+<h1>Climate indicators</h1>
+
+<p><br /></p>
+
+<p><em>Author and date:</em></p>
+
+<p>Anders L. Kolstad</p>
+
+<p>March 2023</p>
+
+<p><br /></p>
+
+<!-- Load all you dependencies here -->
+
+<pre><code class="r setup, include=FALSE">library(knitr)
+knitr::opts_chunk$set(echo = TRUE)
+#library(tidyverse) # cant update to v2 on server
+library(dplyr)
+library(ggplot2)
+library(stars)
+library(sf)
+library(tmap)
+library(lubridate)
+library(ggpubr)
+library(microbenchmark)
+library(tictoc)
+library(ncmeta)
+library(parallel)
+library(readr)
+library(exactextractr)
+library(tidyr)
+library(data.table)
+library(terra)
+dir &lt;- substr(getwd(), 1,2)
+
+</code></pre>
+
+<pre><code class="r, echo=F">Ecosystem &lt;- &quot;All&quot; # e.g. &quot;Skog og fjell&quot;
+Egenskap  &lt;- &quot;Abiotiske egenskaper&quot; # e.g. &quot;Primærproduksjon&quot;
+ECT       &lt;- &quot;Physical state characteristics&quot; # e.g. &quot;Structural state characteristic&quot;
+Contact   &lt;- &quot;Anders L. Kolstad&quot; # e.g. &quot;Anders Kolstad&quot;
+</code></pre>
+
+<pre><code class="r, echo=F">metaData &lt;- data.frame(Ecosystem,
+                       &quot;Økologisk egenskap&quot; = Egenskap,
+                       &quot;ECT class&quot; = ECT)
+knitr::kable(metaData)
+</code></pre>
+
+<p><br /> <br /></p>
+
+<hr />
+
+<h2>Introduction</h2>
+
+<p>This chapters describes the development of a workflow for generating or preparing indicators based on interpolated climate data from <a href="https://senorge.no/">SeNorge</a>.</p>
+
+<h2>About the underlying data</h2>
+
+<p>The data is in a raster format and extends back to 1957 in the form of multiple interpolated climate variables. The spatial resolution is 1 x 1 km.</p>
+
+<h3>Representativity in time and space</h3>
+
+<p>The data includes the last normal period (1961-1990) which defines the reference condition for climate variables. Therefore the temporal resolution is very good. Also considering the daily resolution of the data.</p>
+
+<p>Spatially, a 1x1 km resolution is sufficient for most climate variables, esp. in homogeneous terrain, but this needs to be evaluation for each variable and scenario specifically.</p>
+
+<h3>Original units</h3>
+
+<p>Varied. Specified below for each parameter.</p>
+
+<h3>Temporal coverage</h3>
+
+<p>1957 - present</p>
+
+<h3>Additional comments about the data set</h3>
+
+<p>The data format has recently changed from .BIL to .nc (netcdf) and now a single file contains all the rasters for one year (365 days), and sometimes for multiple variables also.</p>
+
+<h2>Ecosystem characteristic</h2>
+
+<h3>Norwegian standard</h3>
+
+<p>These variables typically will fall under the <em>abiotiske egenskaper</em> class.</p>
+
+<h3>SEEA EA</h3>
+
+<p>In SEEA EA, these variables will typically fall under A1 - Physical state characteristics.</p>
+
+<h2>Collinearities with other indicators</h2>
+
+<p>Climate variables are most likely to be correlated with each other (e.g. temperature and snow). Also, some climate variables are better classed as pressure indicators, and these might have a causal association with several condition indicators.</p>
+
+<h2>Reference condition and values</h2>
+
+<h3>Reference condition</h3>
+
+<p>The reference condition for climate variables is defined as the last normal period 1961-1990.</p>
+
+<h3>Reference values, thresholds for defining <em>good ecological condition</em>, minimum and/or maximum values</h3>
+
+<ul>
+<li><p>Un-scaled indicator value = median value over 5 year periods</p></li>
+<li><p>Upper reference level (best possible condition) = median value from the reference period</p></li>
+<li><p>Thresholds for good ecosystem condition = 2 standard deviation units away from the upper reference level for the climate variable during the reference period.</p></li>
+<li><p>Lower reference values (two-directional) = 5 standard deviation units for the climate variable during the reference period (implies linear scaling).</p></li>
+</ul>
+
+<h2>Uncertainties</h2>
+
+<p>For the indicator map (1 x 1 km raster) there is no uncertainty associated with the indicator values. For aggregated indicator values (e.g. for regions), the uncertainty in the indicator value is calculated from the spatial variation in the indicator values via bootstrapping. This might, however, be changed later to the temporal variation between the five years of each period.</p>
+
+<h2>References</h2>
+
+<p><a href="https://senorge.no/">https://senorge.no/</a></p>
+
+<p><em>rr and tm are being download from:</em> <a href="https://thredds.met.no/thredds/catalog/senorge/seNorge_2018/Archive/catalog.html">https://thredds.met.no/thredds/catalog/senorge/seNorge_2018/Archive/catalog.html</a></p>
+
+<h3>Additional resources</h3>
+
+<p><a href="https://r-spatial.github.io/stars/">Stars package</a></p>
+
+<p><a href="https://tmieno2.github.io/R-as-GIS-for-Economists/stars-basics.html">R as a GIS for economists</a> chapter 7</p>
+
+<h2>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;</h2>
+
+<h2>Analyses</h2>
+
+<h3>Data set</h3>
+
+<p>The data is downloaded to a local NINA server, and updated regularly.</p>
+
+<pre><code class="r">path &lt;- ifelse(dir == &quot;C:&quot;, 
+      &quot;R:/GeoSpatialData/Meteorology/Norway_SeNorge2018_v22.09/Original&quot;,
+      &quot;/data/R/GeoSpatialData/Meteorology/Norway_SeNorge2018_v22.09/Original&quot;)
+</code></pre>
+
+<p>This folder contains folder for the different parameters</p>
+
+<pre><code class="r">(files &lt;- list.files(path))
+</code></pre>
+
+<p>This table explains them in more detail</p>
+
+<pre><code class="r, fig.cap=&quot;Table explaining the available climate parameters in the data set.&quot;">senorgelayers &lt;- read_delim(&quot;data/senorgelayers.txt&quot;, 
+    delim = &quot;\t&quot;, escape_double = FALSE, 
+    trim_ws = TRUE)
+DT::datatable(senorgelayers)
+</code></pre>
+
+<p>Here is the content of one of these folders (first 10 entries)</p>
+
+<pre><code class="r">(files_tm &lt;- list.files(paste0(path, &quot;/rr_tm&quot;)))[1:10]
+</code></pre>
+
+<p>There are <code>r length(files_tm)</code> files, i.e. <code>r length(files_tm)</code> years of data, one file per year.</p>
+
+<p>Importing (proxy) file:</p>
+
+<pre><code class="r, warning=F">tg_1957 &lt;- stars::read_ncdf(paste0(path, &quot;/rr_tm/seNorge2018_1957.nc&quot;),
+                            var=&quot;tg&quot;)
+</code></pre>
+
+<p>I know the CRS, so setting it manually. Although I cannot rule out 32633, I don&#39;t think it matters.</p>
+
+<pre><code class="r">st_crs(tg_1957) &lt;- 25833
+</code></pre>
+
+<p>The data has three dimension</p>
+
+<pre><code class="r">dim(tg_1957)
+</code></pre>
+
+<p>Initially the data had four attributes, but I subsettet to only include <em>tg</em>.</p>
+
+<pre><code class="r">names(tg_1957)
+</code></pre>
+
+<p><code>tg_1957</code> is a stars proxy object and <a href="https://r-spatial.github.io/stars/articles/stars8.html">most commands</a> will not initiate any change until later, typically I write to file and all the lazy operations are done in squeal. Therefore, I will prepare a test data set, which is smaller and which I can import to memory. Then I can perform the operations on that data set and we can see the results.</p>
+
+<h4>Dummy data</h4>
+
+<p>This test data is included in the {stars} package</p>
+
+<pre><code class="r">tif = system.file(&quot;tif/L7_ETMs.tif&quot;, package = &quot;stars&quot;)
+t1 = as.Date(&quot;1970-05-31&quot;)
+x = read_stars(c(tif, tif, tif, tif), along = 
+                  list(time = c(t1, t1+1, t1+50, t1+100)), 
+               RasterIO = list(nXOff = c(1), 
+                               nYOff = c(1), 
+                               nXSize = 50, 
+                               nYSize = 50, 
+                               bands = c(1:6)))
+</code></pre>
+
+<p>A single attribute</p>
+
+<pre><code class="r">names(x)
+</code></pre>
+
+<p>I can rename it like this</p>
+
+<pre><code class="r">x &lt;- setNames(x, &quot;Attribute_A&quot;)
+</code></pre>
+
+<p>And I can add another dummy attribute.</p>
+
+<pre><code class="r">x &lt;- x %&gt;%
+  mutate(&quot;Attribute_B&quot; = Attribute_A/2)
+</code></pre>
+
+<p>The dummy data also has four dimensions</p>
+
+<pre><code class="r">dim(x)
+</code></pre>
+
+<p>X and y area the coordinates. Band is an integer:</p>
+
+<pre><code class="r">st_get_dimension_values(x, &quot;band&quot;)
+</code></pre>
+
+<p>I will remove the <em>band</em> dimension.</p>
+
+<pre><code class="r">x &lt;- x %&gt;% filter(band==1) %&gt;% adrop()
+</code></pre>
+
+<p>Time is four dates covering four months in 1970:</p>
+
+<pre><code class="r">(oldTime &lt;- st_get_dimension_values(x, &quot;time&quot;))
+</code></pre>
+
+<p>I&#39;ll add some extra seasonal variation between to the mix</p>
+
+<pre><code class="r">x$Attribute_A[,,2] &lt;- x$Attribute_A[,,1]*1.2
+x$Attribute_A[,,3] &lt;- x$Attribute_A[,,1]*1.4
+x$Attribute_A[,,4] &lt;- x$Attribute_A[,,1]*1.1
+</code></pre>
+
+<p>Now I create another four copies of this data, adding some random noise and a continuous decreasing trend.</p>
+
+<pre><code class="r"># Function to add random noise
+myRandom &lt;- function(x) x*rnorm(1,1,.05)
+</code></pre>
+
+<pre><code class="r">y1 &lt;- x
+y2 &lt;- x %&gt;% st_apply(1:3, myRandom) %&gt;% st_set_dimensions(&quot;time&quot;, values = oldTime %m+% years(-1)) %&gt;% mutate(Attribute_A = Attribute_A*0.95)
+y3 &lt;- x %&gt;% st_apply(1:3, myRandom) %&gt;% st_set_dimensions(&quot;time&quot;, values = oldTime %m+% years(-2)) %&gt;% mutate(Attribute_A = Attribute_A*0.90)
+y4 &lt;- x %&gt;% st_apply(1:3, myRandom) %&gt;% st_set_dimensions(&quot;time&quot;, values = oldTime %m+% years(-3)) %&gt;% mutate(Attribute_A = Attribute_A*0.85)
+y5 &lt;- x %&gt;% st_apply(1:3, myRandom) %&gt;% st_set_dimensions(&quot;time&quot;, values = oldTime %m+% years(-4)) %&gt;% mutate(Attribute_A = Attribute_A*0.80)
+
+</code></pre>
+
+<pre><code class="r"># We combine the data into one cube for plotting:
+temp &lt;- c(y1, y2, y3, y4, y5) 
+
+ggplot() + 
+  geom_stars(data = temp) +
+  coord_equal() +
+  theme_void() +
+  scale_fill_viridis_c(option = &quot;D&quot;) +  
+  scale_x_discrete(expand = c(0, 0)) +
+  scale_y_discrete(expand = c(0, 0))+
+  facet_wrap(~time, ncol=4)
+</code></pre>
+
+<p>Saving these to file.</p>
+
+<pre><code class="r, eval=F">path &lt;- &quot;P:/41201785_okologisk_tilstand_2022_2023/data/climate_indicators/dummy_data&quot;
+saveRDS(y1, paste0(path, &quot;/y1.rds&quot;))
+saveRDS(y2, paste0(path, &quot;/y2.rds&quot;))
+saveRDS(y3, paste0(path, &quot;/y3.rds&quot;))
+saveRDS(y4, paste0(path, &quot;/y4.rds&quot;))
+saveRDS(y5, paste0(path, &quot;/y5.rds&quot;))
+</code></pre>
+
+<h5>Dummy regions and ET map</h5>
+
+<p>Here is some dummy data for accounting areas (regions) and ecosystem occurrences as well, in case I need them later.</p>
+
+<pre><code class="r, fig.cap=&quot;Showing the example account area delineation (raster format)&quot;">dummy_aa &lt;- x %&gt;%
+  filter(time == oldTime[1]) %&gt;%
+  adrop() %&gt;%
+  mutate(accountingAreas = rep(c(1,2), each=length(Attribute_A)/2)) %&gt;%
+  select(accountingAreas)
+
+tm_shape(dummy_aa) +
+  tm_raster(style=&quot;cat&quot;)
+</code></pre>
+
+<pre><code class="r, fig.cap=&quot;Showing the example Ecosystem type delineation data.&quot;">dummy_et &lt;- x %&gt;%
+  filter(time == oldTime[1]) %&gt;%
+  adrop() %&gt;%
+  mutate(ecosystemType = rep(c(1,NA), length.out = length(Attribute_A))) %&gt;%
+  select(ecosystemType)
+
+tm_shape(dummy_et) +
+  tm_raster(style=&quot;cat&quot;)
+</code></pre>
+
+<h4>Regions</h4>
+
+<p>Importing a shape file with the regional delineation.</p>
+
+<pre><code class="r">reg &lt;- sf::st_read(&quot;data/regions.shp&quot;, options = &quot;ENCODING=UTF8&quot;)
+#st_crs(reg)
+</code></pre>
+
+<p>Outline of Norway</p>
+
+<pre><code class="r, message=FALSE">nor &lt;- sf::st_read(&quot;data/outlineOfNorway_EPSG25833.shp&quot;)
+</code></pre>
+
+<p>Remove marine areas from regions</p>
+
+<pre><code class="r">reg &lt;- st_intersection(reg, nor)
+</code></pre>
+
+<pre><code class="r, fig.cap=&quot;Five accounting areas (regions) in Norway.&quot;">
+tm_shape(reg) +
+  tm_polygons(col=&quot;region&quot;)
+
+</code></pre>
+
+<h4>Ecosystem map</h4>
+
+<p>Coming soon &hellip;.</p>
+
+<p>The climate indicators need to be masked with ecosystem type maps. This step is part of this chapter.</p>
+
+<h2>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;</h2>
+
+<h3>Conceptual workflow</h3>
+
+<p>The general, the conceptual workflow is like this:</p>
+
+<ol>
+<li> Collate variable data series</li>
+</ol>
+
+<pre><code>-   Import .nc files (loop though year 1961-1990) and subset to the correct attribute
+
+-   Filter data by dates (optional) (`dplyr::filter`). *This means reading all 365 rasters into memory, and it is much quicker to filter out the correct rasters in the importing step above (see examples later in this chapter)*
+
+-   Aggregate across time within a year (`stars::st_apply`). *This is the most time consuming operation in the workflow.*
+
+-   Join all data into one data cube (`stars:c`)
+</code></pre>
+
+<ol>
+<li> Calculate reference values</li>
+</ol>
+
+<pre><code>-   Aggregate (`st_apply)` across reference years (`dplyr::filter`) to get median and sd values
+
+-   Join with existing data cube (`stars:c`)
+</code></pre>
+
+<ol>
+<li> Calculate indicator values</li>
+</ol>
+
+<pre><code>-   Normalize climate variable at the individual grid cell level using the three reference values (`mutate(across()))`
+</code></pre>
+
+<ol>
+<li><p>Mask by ecosystem type (<em>This could also be done in step one, but it doesn&#39;t speed things up to set some cells to NA</em>)</p></li>
+<li><p>Aggregate in space (to accounting areas) (<em>zonal statistics</em>)</p></li>
+</ol>
+
+<pre><code>-   Aggregate across 5 year time steps to smooth out random inter-annual variation and leave climate signal
+
+-   Intersect with accounting area polygons `exactextrar::exact_extract` and get mean/median and (spatial) sd. (*Alternatively, get temporal sd at the grid cell level in the step above.*)
+</code></pre>
+
+<ol>
+<li> Make trend figure and spatially aggregated maps,</li>
+</ol>
+
+<h3>1. Collate variable data series</h3>
+
+<p>I include a for loop for importing the .nc files at the end.</p>
+
+<h4>Filter data by dates</h4>
+
+<p>Say we want to calculate the mean summer temperature. We then want to exclude the data for the times that is not withing our definition of summer.</p>
+
+<p>Let&#39;s try it on the dummy data. Remember this data had four time steps.</p>
+
+<pre><code class="r">st_get_dimension_values(x, &quot;time&quot;)
+</code></pre>
+
+<p>Our real data has 365 time steps for each year.</p>
+
+<p>First I define my start and end dates. I want to keep only the summer data, defined as jun - aug.</p>
+
+<pre><code class="r">start_month &lt;-  &quot;06&quot;
+end_month &lt;- &quot;08&quot;
+</code></pre>
+
+<p>Then for each iteration I need to get the year as well</p>
+
+<pre><code class="r">(year_temp &lt;- year(st_get_dimension_values(x, &quot;time&quot;)[1]))
+</code></pre>
+
+<p>Then I can create a time interval object</p>
+
+<pre><code class="r">start &lt;- ym(paste(year_temp, start_month, sep=&quot;-&quot;))
+end &lt;-  ym(paste(year_temp, end_month, sep=&quot;-&quot;))
+(myInterval &lt;- interval(start, end))
+</code></pre>
+
+<p>Then I filter</p>
+
+<pre><code class="r">x_aug &lt;- x %&gt;%
+  select(Attribute_A) %&gt;%
+  adrop() %&gt;%
+  filter(time %within% myInterval)
+st_get_dimension_values(x_aug, &quot;time&quot;)
+</code></pre>
+
+<p><em>Later I discover that dplyr::filter work after reading the whole object to file, and therefor it is too slow for our use. I therefore filter data a different way further down.</em></p>
+
+<h4>Aggregate across time within a year</h4>
+
+<p>For this example I want to calculate the mean temperature over the summer. I therefore need to aggregate over time. Many climate indicators will need this functionality. There are two ways, either using <code>st_apply</code> or using <code>aggregate</code>.</p>
+
+<pre><code class="r">temp_names &lt;- year(st_get_dimension_values(x_aug, &quot;time&quot;)[1])
+
+microOut &lt;- microbenchmark(
+st_apply =  x_aug %&gt;%
+  st_apply(1:2, mean) %&gt;%
+  setNames(paste0(&quot;v_&quot;,temp_names)),
+aggregate = x_aug %&gt;%
+  aggregate(by = &quot;year&quot;, mean),
+times=30
+)
+</code></pre>
+
+<p>The time dimension is now gone as we have aggregated across it.</p>
+
+<pre><code class="r, fig.cap=&quot;Comparing computation tome for two spatial aggregation functions.&quot;">autoplot(microOut)
+</code></pre>
+
+<p><code>st_apply</code> is slightly faster, but <code>aggregate</code> has the advantage of that it retains the time dimension, whereas for <code>st_apply</code> I need to set the attribute name to be the year. I will try to use <code>st_apply</code>.</p>
+
+<p>But let me see if I can save time by masking to ET before doing this operation.</p>
+
+<pre><code class="r, fig.cap=&quot;Demonstrating the effect of maskig the dummy data using a perfectly aligne raster ET map.&quot;">x_masked &lt;- x_aug
+x_masked[is.na(dummy_et)] &lt;- NA
+plot(x_masked[,,,1])
+</code></pre>
+
+<pre><code class="r withMasking, fig.cap=&quot;Comparing computation time before and after masking of raster data. There is no performance increase by masking before aggregating.&quot;">autoplot(
+  microbenchmark(
+No_masking =  x_aug %&gt;%
+  st_apply(1:2, mean) %&gt;%
+  setNames(paste0(&quot;v_&quot;,temp_names)),
+Masking =  x_masked %&gt;%
+  st_apply(1:2, mean) %&gt;%
+  setNames(paste0(&quot;v_&quot;,temp_names))
+ ), times=30
+)
+
+</code></pre>
+
+<p>Since there is no increase in performance from masking, as we see in Fig. \@ref(fig: withMasking) then it basically means we it is slower to mask beforehand, since the masking was not past of the benchmark assessment.</p>
+
+<p>So, this is my solution:</p>
+
+<pre><code class="r"># setNames dont work on stars proxy obejct, so I use rename instead
+lookup &lt;- setNames(&quot;mean&quot;, paste0(&quot;v_&quot;, temp_names))
+
+x_summerMean &lt;-   x_aug %&gt;%
+  st_apply(1:2, mean) %&gt;%
+  rename(all_of(lookup))
+</code></pre>
+
+<p>The <em>v_</em> follows the naming convention we have developed for ourselves.</p>
+
+<pre><code class="r, fig.cap=&quot;Plotting the dummy data showing Attribute_A for the two dates as small maps, and a larger map showing the mean for year 2018&quot;">ggarrange(
+ggplot() + 
+  geom_stars(data = x_aug) +
+  coord_equal() +
+  facet_wrap(~time) +
+  theme_void() +
+  scale_fill_viridis_c(option = &quot;D&quot;) +  scale_x_discrete(expand = c(0, 0)) +
+  scale_y_discrete(expand = c(0, 0)),  
+
+
+ggplot() + 
+  geom_stars(data = x_summerMean) +
+  coord_equal() +
+  #facet_wrap(~time) +
+  theme_void() +
+  scale_fill_viridis_c(option = &quot;D&quot;) +
+  scale_x_discrete(expand = c(0, 0)) +
+  scale_y_discrete(expand = c(0, 0))
+)
+</code></pre>
+
+<p>Here&#39;s the whole first step of the conceptual workflow in action, on the dummy data.</p>
+
+<pre><code class="r">
+# Setting up the parameters
+dir &lt;- substr(getwd(), 1,2)
+path &lt;- ifelse(dir == &quot;C:&quot;,
+       &quot;P:/&quot;, 
+       &quot;/data/P-Prosjekter2/&quot;)
+path2 &lt;- paste0(path, 
+                &quot;41201785_okologisk_tilstand_2022_2023/data/climate_indicators/dummy_data&quot;)
+start_month &lt;-  &quot;06&quot;
+end_month &lt;- &quot;08&quot;
+myFiles &lt;- list.files(path2, pattern=&quot;.rds&quot;, full.names = T)
+summerTemp_fullSeries &lt;- NULL
+
+# Looping though the files in the directory
+system.time({
+for(i in 1:length(myFiles)){
+
+  temp &lt;- readRDS(myFiles[i]) %&gt;%
+    select(Attribute_A)
+
+  year_temp &lt;- year(st_get_dimension_values(temp, &quot;time&quot;)[1])
+  start &lt;- ym(paste(year_temp, start_month, sep=&quot;-&quot;))
+  end &lt;-  ym(paste(year_temp, end_month, sep=&quot;-&quot;))
+  myInterval &lt;- interval(start, end)
+  lookup &lt;- setNames(&quot;mean&quot;, paste0(&quot;v_&quot;, year_temp))
+
+  temp &lt;- temp %&gt;%
+    filter(time %within% myInterval) %&gt;%
+    st_apply(1:2, mean) %&gt;%
+    rename(all_of(lookup))
+
+  summerTemp_fullSeries &lt;- c(temp, summerTemp_fullSeries)
+  rm(temp) # same computation time with and without this function, but more tidy this way
+}
+
+
+# Turn the attributes into a dimension and rename the new attribute
+summerTemp_fullSeries &lt;- summerTemp_fullSeries %&gt;%
+  merge(name=&quot;Year&quot;) %&gt;%
+  setNames(&quot;Attribute_A&quot;)
+})
+</code></pre>
+
+<p>And this is the result.</p>
+
+<pre><code class="r, fig.cap=&quot;Temporal aggregation on the dummy data set.&quot;">ggplot()+
+  geom_stars(data = summerTemp_fullSeries) +
+  coord_equal() +
+  theme_void() +
+  scale_fill_viridis_c(option = &quot;D&quot;) +  
+  scale_x_discrete(expand = c(0, 0)) +
+  scale_y_discrete(expand = c(0, 0))+
+  facet_wrap(~Year)
+</code></pre>
+
+<p>Now let&#39;s try it on the real data.</p>
+
+<p><em>I initially tried to read stars proxy object and add steps to the call_list and execute these with <code>st_as_stars</code>, but this still returned proxy objects. Therefore I read the whole file in without proxy. To save time I can subset based on Julian dates.</em></p>
+
+<p>I will use <a href="https://tmieno2.github.io/R-as-GIS-for-Economists/EE.html">parallelization</a> to speed things up.</p>
+
+<pre><code class="r, warning=F, eval=F">path &lt;- path &lt;- ifelse(dir == &quot;C:&quot;, 
+      &quot;R:/&quot;,
+      &quot;/data/R/&quot;)
+
+path2 &lt;- paste0(path, &quot;GeoSpatialData/Meteorology/Norway_SeNorge2018_v22.09/Original/rr_tm/&quot;)
+
+myFiles &lt;- list.files(path2, pattern=&quot;.nc$&quot;,full.names = T)
+# The last file (the last year) is incomplete and don&#39;t include all julian dates that we select below, so I will not include it:
+myFiles &lt;- myFiles[-length(myFiles)]
+
+real_temp_summer &lt;- NULL
+
+# set up parallel cluster using 10 cores
+cl &lt;- makeCluster(10L)
+
+# Get julian days after defining months
+temp &lt;- stars::read_ncdf(paste(myFiles[1]), var=&quot;tg&quot;)
+start_month_num &lt;-  6
+end_month_num &lt;- 8
+
+julian_start &lt;- yday(st_get_dimension_values(temp, &quot;time&quot;)[1] %m+%
+                       months(+start_month_num))
+julian_end &lt;- yday(st_get_dimension_values(temp, &quot;time&quot;)[1] %m+%
+                     months(+end_month_num))
+step &lt;- julian_end-julian_start
+
+
+
+for(i in 1:length(myFiles)){
+
+  tic(&quot;init&quot;)
+  temp &lt;- stars::read_ncdf(paste(myFiles[i]), var=&quot;tg&quot;, proxy=F,
+                           ncsub = cbind(start = c(1, 1, julian_start), 
+                              count = c(NA, NA, step)))
+  year_temp &lt;- year(st_get_dimension_values(temp, &quot;time&quot;)[1])
+  print(year_temp)
+  lookup &lt;- setNames(&quot;mean&quot;, paste0(&quot;v_&quot;, year_temp)) 
+    # Perhaps leave out the v_ to get a numeric vector instead, 
+    # which is easier to subset
+  st_crs(temp) &lt;- 25833
+  toc()
+
+  tic(&quot;filter and st_apply&quot;)
+  temp &lt;- temp %&gt;%
+    #filter(time %within% myInterval) %&gt;%
+    st_apply(1:2, mean, CLUSTER = cl) %&gt;%
+    rename(all_of(lookup)) 
+  toc()
+
+  tic(&quot;c()&quot;)
+  real_temp_summer &lt;- c(temp, real_temp_summer)
+  #rm(temp)
+  toc()
+}
+
+tic(&quot;Merge&quot;)
+real_temp_summer &lt;- real_temp_summer %&gt;%
+  merge(name = &quot;Year&quot;) %&gt;%
+  setNames(&quot;climate_variable&quot;)
+toc()
+
+stopCluster(cl)
+
+</code></pre>
+
+<p>This takes about 20 sec per file/year, or 22 min on total. That is not too bad. About 6000 raster are read into memory. Here&#39;s a test for the effect of splitting over more cores.</p>
+
+<pre><code class="r, eval=F">cl &lt;- makeCluster(2L)
+cl2 &lt;- makeCluster(6L)
+cl3 &lt;- makeCluster(10L)
+
+
+tic(&quot;No cluster&quot;)
+temp %&gt;%
+    #filter(time %within% myInterval) %&gt;%
+    st_apply(1:2, mean) %&gt;%
+    rename(all_of(lookup)) 
+toc()
+
+tic(&quot;Two clusters&quot;)
+temp %&gt;%
+    #filter(time %within% myInterval) %&gt;%
+    st_apply(1:2, mean, CLUSTER = cl) %&gt;%
+    rename(all_of(lookup)) 
+stopCluster(cl)
+toc()
+
+tic(&quot;Six clusters&quot;)
+temp %&gt;%
+    #filter(time %within% myInterval) %&gt;%
+    st_apply(1:2, mean, CLUSTER = cl2) %&gt;%
+    rename(all_of(lookup)) 
+stopCluster(cl2)
+toc()
+
+tic(&quot;Ten clusters&quot;)
+temp %&gt;%
+    #filter(time %within% myInterval) %&gt;%
+    st_apply(1:2, mean, CLUSTER = cl3) %&gt;%
+    rename(all_of(lookup)) 
+stopCluster(cl3)
+toc()
+
+</code></pre>
+
+<ul>
+<li><p>No cluster: 21.401 sec elapsed</p></li>
+<li><p>Two clusters: 21.546 sec elapsed</p></li>
+<li><p>Six clusters: 14.548 sec elapsed</p></li>
+<li><p>Ten clusters: 15.29 sec elapsed</p></li>
+<li><p>Ten clusters (second run): 13.617 sec elapsed</p></li>
+</ul>
+
+<p>The RStudio server has 48 cores. More parallel cores is probably on average faster. The NINA guidelines is to use max 10 cores, and to remember to close parallel cluster when done.</p>
+
+<pre><code class="r, eval=F">saveRDS(real_temp_summer, &quot;/data/P-Prosjekter2/41201785_okologisk_tilstand_2022_2023/data/climate_indicators/aggregated_climate_time_series/summer_median_temp.rds&quot;)
+write_stars(real_temp_summer, &quot;/data/P-Prosjekter2/41201785_okologisk_tilstand_2022_2023/data/climate_indicators/aggregated_climate_time_series/summer_median_temp.tiff&quot;)
+</code></pre>
+
+<p>These files are about 500 MB, but the tiff file reads in a lot quicker then the rds file, so from now on I&#39;ll just export as tiff. <em>(This could perhaps have been solved with a <code>gc()</code>,. Later I save as RData with no problems).</em></p>
+
+<pre><code class="r">summer_median_temp &lt;- read_stars(&quot;/data/P-Prosjekter2/41201785_okologisk_tilstand_2022_2023/data/climate_indicators/aggregated_climate_time_series/temp_median_summer.tiff&quot;,
+                                 proxy=F)
+# This is too slow:
+# readRDS(&quot;/data/P-Prosjekter2/41201785_okologisk_tilstand_2022_2023/data/climate_indicators/dummy_data/summer_median_temp.rds&quot;)
+# but it could be that RData works better 
+</code></pre>
+
+<pre><code class="r, eval=T">names(summer_median_temp)
+</code></pre>
+
+<pre><code class="r, eval=T">dim(summer_median_temp)
+</code></pre>
+
+<pre><code class="r, eval=T">st_get_dimension_values(summer_median_temp, &quot;Year&quot;)
+</code></pre>
+
+<p>Note that GTiff automatically renames the third dimension <em>band</em> and also renames the attribute.</p>
+
+<pre><code class="r">st_get_dimension_values(summer_median_temp, &quot;band&quot;)
+</code></pre>
+
+<p>I can rename them.</p>
+
+<pre><code class="r">summer_median_temp &lt;- summer_median_temp %&gt;% 
+  st_set_dimensions(names = c(&quot;x&quot;, &quot;y&quot;, &quot;v_YEAR&quot;)) %&gt;%
+  setNames(&quot;temperature&quot;)
+dim(summer_median_temp)
+</code></pre>
+
+<pre><code class="r, fig.cap=&quot;Showing three random slices of the year dimension.&quot;">ggplot()+
+  geom_stars(data = summer_median_temp[,,,c(1,11,22)], downsample = c(10, 10, 0)) +
+  coord_equal() +
+  theme_void() +
+  scale_fill_viridis_c(option = &quot;D&quot;) +  
+  scale_x_discrete(expand = c(0, 0)) +
+  scale_y_discrete(expand = c(0, 0))+
+  facet_wrap(~v_YEAR)
+</code></pre>
+
+<h3>2. Calculate reference values</h3>
+
+<h4>Aggregate across reference years</h4>
+
+<p>We need to first to define a reference period and then to subset our data <code>summer_median_temp</code>. We can practice on the dummy data <code>y</code>.</p>
+
+<pre><code class="r">dir &lt;- substr(getwd(), 1,2)
+path &lt;- ifelse(dir == &quot;C:&quot;,
+       &quot;P:/&quot;, 
+       &quot;/data/P-Prosjekter2/&quot;)
+path2 &lt;- paste0(path, 
+                &quot;41201785_okologisk_tilstand_2022_2023/data/climate_indicators/dummy_data&quot;)
+myFiles &lt;- list.files(path2, pattern=&quot;.rds&quot;, full.names = T)
+y &lt;- NULL
+
+# Looping though the files in the directory
+for(i in 1:length(myFiles)){
+  temp &lt;- readRDS(myFiles[i])
+  y &lt;- c(temp, y)
+}
+</code></pre>
+
+<pre><code class="r">st_get_dimension_values(y, &quot;time&quot;)
+</code></pre>
+
+<pre><code class="r">y_filtered &lt;- y %&gt;%
+  select(Attribute_A) %&gt;%
+  filter(time %within% interval(&quot;1961-01-01&quot;, &quot;1990-12-31&quot;))
+</code></pre>
+
+<p>Now we aggregate across years, again using st_apply.</p>
+
+<pre><code class="r">median_sd &lt;- function(x) { c(median = median(x), sd = sd(x))}
+</code></pre>
+
+<pre><code class="r">y_ref &lt;- y_filtered %&gt;%
+  st_apply(c(&quot;x&quot;, &quot;y&quot;), FUN =  median_sd)
+</code></pre>
+
+<pre><code class="r">dim(y_ref)
+</code></pre>
+
+<pre><code class="r">st_get_dimension_values(y_ref, &quot;median_sd&quot;)
+</code></pre>
+
+<p>It&#39;s perhaps easier if median and sd are unique attributes, rather than levels of a dimension.</p>
+
+<pre><code class="r">y_ref &lt;- y_ref %&gt;% split(&quot;median_sd&quot;)
+</code></pre>
+
+<p>The attribute name <em>mean</em> we can change this to something more meaningful.</p>
+
+<pre><code class="r">y_ref &lt;- setNames(y_ref, c(&quot;reference_upper&quot;, &quot;sd&quot;))
+</code></pre>
+
+<pre><code class="r, fig.cap=&quot;Showing the upper reference levels and the standard deviation from the dummy data set.&quot;">tmap_arrange(
+tm_shape(y_ref)+
+  tm_raster(&quot;reference_upper&quot;)
+,
+tm_shape(y_ref)+
+  tm_raster(&quot;sd&quot;,
+            palette = &quot;-viridis&quot;)
+)
+</code></pre>
+
+<p>Let&#39;s transfer this over to the real data. First we need to rename our dimension values and turn them back into dates.</p>
+
+<pre><code class="r">new_dims &lt;- as.Date(paste0(
+  substr(st_get_dimension_values(summer_median_temp, &quot;v_YEAR&quot;), 3, 6), &quot;-01-01&quot;))
+summer_median_temp_ref &lt;- summer_median_temp %&gt;%
+  st_set_dimensions(&quot;v_YEAR&quot;, values = new_dims)
+</code></pre>
+
+<p>Then I can filter to leave only the reference period.</p>
+
+<pre><code class="r">summer_median_temp_ref &lt;- summer_median_temp_ref %&gt;%
+  filter(v_YEAR %within% interval(&quot;1961-01-01&quot;, &quot;1990-12-31&quot;))
+st_get_dimension_values(summer_median_temp_ref, &quot;v_YEAR&quot;)
+</code></pre>
+
+<p>And then we calculate the median and sd like above</p>
+
+<pre><code class="r, eval=FALSE">system.time({
+cl &lt;- makeCluster(10L)
+summer_median_temp_ref &lt;- summer_median_temp_ref %&gt;%
+  st_apply(c(&quot;x&quot;, &quot;y&quot;), 
+           FUN =  median_sd,
+           CLUSTER = cl)
+stopCluster(cl)
+})
+</code></pre>
+
+<table><thead>
+<tr>
+<th>user</th>
+<th>system</th>
+<th>elapsed</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>9.624</td>
+<td>6.069</td>
+<td>20.903</td>
+</tr>
+</tbody></table>
+
+<p>This is also something I can export.</p>
+
+<pre><code class="r, eval=F"># write_stars can only export a single attribute 
+#write_stars(summer_median_temp_ref, &quot;/data/P-Prosjekter2/41201785_okologisk_tilstand_2022_2023/data/climate_indicators/aggregated_climate_time_series/summer_median_temp_ref.tiff&quot;)
+
+saveRDS(summer_median_temp_ref, &quot;/data/P-Prosjekter2/41201785_okologisk_tilstand_2022_2023/data/climate_indicators/aggregated_climate_time_series/summer_median_temp_ref.RData&quot;)
+</code></pre>
+
+<pre><code class="r, eval=T, include=F">summer_median_temp_ref &lt;- readRDS(&quot;/data/P-Prosjekter2/41201785_okologisk_tilstand_2022_2023/data/climate_indicators/aggregated_climate_time_series/temp_median_summer_ref.RData&quot;)
+</code></pre>
+
+<p>Pivot and turn dimension into attributes:</p>
+
+<pre><code class="r, eval=T">summer_median_temp_ref_long &lt;- summer_median_temp_ref %&gt;% split(&quot;median_sd&quot;)
+</code></pre>
+
+<p>The attribute name is <em>mean</em>. We can change this to something more meaningful.</p>
+
+<pre><code class="r, eval=T">summer_median_temp_ref_long &lt;- setNames(summer_median_temp_ref_long, c(&quot;reference_upper&quot;, &quot;sd&quot;))
+</code></pre>
+
+<pre><code class="r, fig.cap=&quot;Showing the upper reference levels and the standard deviation from actual data of median summer temperatures.&quot;">tmap_arrange(
+tm_shape(st_downsample(summer_median_temp_ref_long, 10))+
+  tm_raster(&quot;reference_upper&quot;)
+,
+tm_shape(st_downsample(summer_median_temp_ref_long, 10))+
+  tm_raster(&quot;sd&quot;,
+            palette = &quot;-viridis&quot;)
+)
+</code></pre>
+
+<h4>Combine</h4>
+
+<p>I need to combine the variables and the ref values in one data cube</p>
+
+<pre><code class="r">y_var &lt;- summer_median_temp %&gt;%
+  split(3) %&gt;%
+  c(summer_median_temp_ref_long)
+
+</code></pre>
+
+<h4>Normalise variable</h4>
+
+<pre><code class="r"># select the columns to normalise
+cols &lt;- names(y_var)[!names(y_var) %in% c(&quot;reference_upper&quot;, &quot;sd&quot;) ]
+cols_new &lt;- cols
+names(cols_new) &lt;- gsub(&quot;v_&quot;, &quot;i_&quot;, cols)
+</code></pre>
+
+<pre><code class="r, eval=F"># Mutate
+
+# The break point scaling is actually not needed here, since 
+# having the lower ref value to be 5 sd implies that the threshold is
+# 2 sd in a linear scaling.
+
+system.time(
+y_var_norm &lt;- y_var %&gt;%
+  mutate(reference_low = reference_upper - 5*sd ) %&gt;%
+  mutate(reference_low2 = reference_upper + 5*sd ) %&gt;%
+  mutate(threshold_low = reference_upper -2*sd ) %&gt;%
+  mutate(threshold_high = reference_upper +2*sd ) %&gt;%
+  mutate(across(all_of(cols), ~ 
+                  if_else(.x &lt; reference_upper,
+                  if_else(.x &lt; threshold_low, 
+                                        (.x - reference_low) / (threshold_low - reference_low),
+                                        (.x - threshold_low) / (reference_upper - threshold_low),
+                                        ),
+                  if_else(.x &gt; threshold_high, 
+                                        (reference_low2 - .x) / (reference_low2 - threshold_high),
+                                        (threshold_high - .x) / (threshold_high - reference_upper),
+                                        )
+                ))) %&gt;%
+  mutate(across(all_of(cols), ~ if_else(.x &gt; 1, 1, .x))) %&gt;%
+  mutate(across(all_of(cols), ~ if_else(.x &lt; 0, 0, .x))) %&gt;%
+  rename(all_of(cols_new)) %&gt;%
+  c(select(y_var, all_of(cols)))
+)
+</code></pre>
+
+<table><thead>
+<tr>
+<th>user</th>
+<th>system</th>
+<th>elapsed</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>14.803</td>
+<td>2.717</td>
+<td>17.512</td>
+</tr>
+</tbody></table>
+
+<pre><code class="r, eval=F">gc()
+saveRDS(y_var_norm, &quot;/data/P-Prosjekter2/41201785_okologisk_tilstand_2022_2023/data/climate_indicators/aggregated_climate_time_series/summer_median_temp_normalised.RData&quot;)
+</code></pre>
+
+<pre><code class="r, include=FALSE">y_var_norm &lt;- readRDS(&quot;/data/P-Prosjekter2/41201785_okologisk_tilstand_2022_2023/data/climate_indicators/aggregated_climate_time_series/temp_median_summer_normalised.RData&quot;)
+</code></pre>
+
+<pre><code class="r, fig.cap=&quot;Example showing median summer tempretur in 1970, the upper and lwoer reference temperture, i.e. median and 5 SD units of the temperature between 1961-1990, and finally, the scaled indicator values.&quot;">
+lims &lt;- c(-5, 22)
+
+ggarrange(
+ggplot() + 
+  geom_stars(data = st_downsample(y_var_norm[&quot;v_1970&quot;],10)) +
+  coord_equal() +
+  theme_void() +
+  scale_fill_viridis_c(option = &quot;D&quot;,
+                       limits = lims) +  
+  scale_x_discrete(expand = c(0, 0)) +
+  scale_y_discrete(expand = c(0, 0))
+,
+ggplot() + 
+  geom_stars(data = st_downsample(y_var_norm[&quot;reference_upper&quot;], 10)) +
+  coord_equal() +
+  theme_void() +
+  scale_fill_viridis_c(option = &quot;D&quot;,
+                       limits = lims) +  
+  scale_x_discrete(expand = c(0, 0)) +
+  scale_y_discrete(expand = c(0, 0))
+,
+ggplot() + 
+  geom_stars(data = st_downsample(y_var_norm[&quot;reference_low&quot;], 10)) +
+  coord_equal() +
+  theme_void() +
+  scale_fill_viridis_c(option = &quot;D&quot;,
+                       limits = lims) +  
+  scale_x_discrete(expand = c(0, 0)) +
+  scale_y_discrete(expand = c(0, 0))
+,
+
+ggplot() + 
+  geom_stars(data = st_downsample(y_var_norm[&quot;reference_low2&quot;], 10)) +
+  coord_equal() +
+  theme_void() +
+  scale_fill_viridis_c(option = &quot;D&quot;,
+                       limits = lims) +  
+  scale_x_discrete(expand = c(0, 0)) +
+  scale_y_discrete(expand = c(0, 0))
+,
+
+ggplot() + 
+  geom_stars(data = st_downsample(y_var_norm[&quot;i_1970&quot;],10)) +
+  coord_equal() +
+  theme_void() +
+  scale_fill_viridis_c(option = &quot;A&quot;,
+                       limits = c(0, 1)) +  
+  scale_x_discrete(expand = c(0, 0)) +
+  scale_y_discrete(expand = c(0, 0))
+, ncol=2, nrow=3, align = &quot;hv&quot;
+)
+</code></pre>
+
+<p>The <em>real</em> indicator values should be means over 5 year periods. Calculating a running mean for all time steps is too time consuming. Therefore, the scaled, regional indicator values will be calculated for distinct time steps. The time series can perhaps best be presented with yearly resolution.</p>
+
+<h4>Plot time series as line graphs</h4>
+
+<p>We could also plot a time series as a series of maps, but then we need to average over these 5 year time periods first. We can get to that later.</p>
+
+<p>To plot time series I first need to do a spatial aggregation. One option is to spatially aggregate the stars object directly, using the <code>reg</code> data set:</p>
+
+<pre><code class="r, eval=F">temp &lt;- y_var_norm[1,,] %&gt;%
+  aggregate(reg, mean, na.rm=T)
+plot(temp)
+temp2 &lt;- temp %&gt;%
+  st_as_sf() # too slow
+</code></pre>
+
+<p>However, this does no preserve the region name, and a subsequent <code>st_intersection</code> taks a little while and gives some boundary problems.</p>
+
+<p>I can also convert pixels to points and then do the intersection.</p>
+
+<pre><code class="r, eval=F">temp_points &lt;- y_var_norm[1,,] %&gt;%
+  st_as_sf(as_points = TRUE, merge = FALSE)
+temp_points2 &lt;- temp_points %&gt;%
+  st_intersection(reg) &quot; too slow&quot;
+</code></pre>
+
+<p>But this also took too long.</p>
+
+<p>I can perhaps aggregate, and then turn to points and intersect, but that did not work perfect either.</p>
+
+<p>I can rasterize the regions data set, turn it into a coded dimension and use st_apply, but that is tedious.</p>
+
+<p>Let me try using <code>exact_extract</code>, as an alternative to <code>aggregate</code>. This requires us to turn to the <code>terra</code> package for a bit.</p>
+
+<pre><code class="r, eval=F">system.time(
+regional_means &lt;- rast(y_var_norm) %&gt;%
+  exact_extract(reg, fun = &#39;mean&#39;, append_cols = &quot;region&quot;, progress=T) %&gt;%
+  setNames(c(&quot;region&quot;, names(y_var_norm)))
+  )
+</code></pre>
+
+<p>user; system; elapsed: 7.603; 3.071; 10.697</p>
+
+<p>That was fast!</p>
+
+<p>I should also get the sd:</p>
+
+<pre><code class="r, eval=F">system.time(
+regional_sd &lt;- rast(y_var_norm) %&gt;%
+  exact_extract(reg, fun = &#39;stdev&#39;, append_cols = &quot;region&quot;, progress=T) %&gt;%
+  setNames(c(&quot;region&quot;, names(y_var_norm)))
+  )
+</code></pre>
+
+<p>user; system; elapsed: 7.420; 2.921; 10.355</p>
+
+<pre><code class="r, eval=F">saveRDS(regional_means, &quot;temp/regional_means.rds&quot;)
+saveRDS(regional_sd, &quot;temp/regional_sd.rds&quot;)
+</code></pre>
+
+<pre><code class="r, include=F">regional_means &lt;- readRDS(&quot;temp/regional_means.rds&quot;)
+regional_sd &lt;- readRDS(&quot;temp/regional_sd.rds&quot;)
+</code></pre>
+
+<pre><code class="r">regional_means
+</code></pre>
+
+<p>Reshape and plot</p>
+
+<pre><code class="r, warning=F">div &lt;- c(&quot;reference_upper&quot;,
+         &quot;reference_low&quot;,
+         &quot;reference_low2&quot;,
+         &quot;threshold_low&quot;,
+         &quot;threshold_high&quot;,
+         &quot;sd&quot;)
+
+temp &lt;- regional_means %&gt;%
+  as.data.frame() %&gt;%
+  select(region, div)
+
+regional_means_long &lt;- regional_means %&gt;%
+  as.data.frame() %&gt;%
+  select(!all_of(div)) %&gt;%
+  pivot_longer(!region) %&gt;%
+  separate(name, into=c(&quot;type&quot;, &quot;year&quot;)) %&gt;%
+  pivot_wider(#id_cols = region,
+              names_from = type)  %&gt;%
+  left_join(temp, by=join_by(region)) %&gt;% 
+  mutate(diff = v-reference_upper) %&gt;%
+  mutate(threshold_low_centered = threshold_low-reference_upper) %&gt;%
+  mutate(threshold_high_centered = threshold_high-reference_upper)
+
+#Adding the spatial sd
+(
+regional_means_long &lt;- regional_sd %&gt;%
+  select(!all_of(div)) %&gt;%
+  pivot_longer(!region) %&gt;%
+  separate(name, into=c(&quot;type&quot;, &quot;year&quot;)) %&gt;%
+  pivot_wider(names_from = type) %&gt;%
+  rename(i_sd = i,
+         v_sd = v) %&gt;%
+  left_join(regional_means_long, by=join_by(region, year))
+)
+</code></pre>
+
+<pre><code class="r, fig.cap=&quot;Times series for median summer temperature centered on the median value during the reference period. The reference period is indicated with a thick horizontal line. Dottet horisontal lines are 2 sd units for the reference period.&quot;">regOrder = c(&quot;Østlandet&quot;,&quot;Sørlandet&quot;,&quot;Vestlandet&quot;,&quot;Midt-Norge&quot;,&quot;Nord-Norge&quot;)
+
+regional_means_long %&gt;%
+  mutate(col = if_else(diff&gt;0, &quot;1&quot;, &quot;2&quot;)) %&gt;%
+  ggplot(aes(x = as.numeric(year), 
+           y = diff, fill = col))+
+  geom_bar(stat=&quot;identity&quot;)+
+  geom_hline(aes(yintercept = threshold_low_centered),
+        linetype=2)+
+  geom_hline(aes(yintercept = threshold_high_centered),
+        linetype=2)+
+  geom_segment(x = 1961, xend=1990,
+               y = 0, yend = 0,
+               linewidth=2)+
+  scale_fill_hue(l=70, c=60)+
+  theme_bw(base_size = 12)+
+  ylab(&quot;Sommertempratur\navvik fra 1961-1990&quot;)+
+  xlab(&quot;&quot;)+
+  guides(fill=&quot;none&quot;)+
+  facet_wrap( .~ factor(region, levels = regOrder),
+              ncol=3,
+              scales = &quot;free_y&quot;)
+</code></pre>
+
+<p>Then we can take the mean over the last 5 years and add to a spatial representation.</p>
+
+<pre><code class="r">(
+i_aggregatedToPeriods &lt;- regional_means_long %&gt;%
+  mutate(year = as.numeric(year)) %&gt;%
+  mutate(period = case_when(
+    year %between% c(2018, 2022) ~ &quot;2018-2022&quot;,
+    year %between% c(2013, 2017) ~ &quot;2013-2017&quot;,
+    year %between% c(2008, 2012) ~ &quot;2008-2012&quot;,
+    year %between% c(2003, 2007) ~ &quot;2003-2007&quot;,
+    .default = &quot;pre 2003&quot;
+  )) %&gt;%
+  mutate(period_rank = case_when(
+   period == &quot;2018-2022&quot; ~ 5,
+   period == &quot;2013-2017&quot; ~ 4,
+   period == &quot;2008-2012&quot; ~ 3,
+   period == &quot;2003-2007&quot; ~ 2,
+    .default = 1
+  )) %&gt;%
+  group_by(region, period, period_rank) %&gt;%
+  summarise(indicator = mean(i),
+            spatial_sd = sqrt(sum(i_sd^2))/length(i_sd)
+            #,
+            #spatial_sd_mean = mean(i_sd),
+            #spatial_sd2_max = max(i_sd),
+            #spatial_sd2_length = length(i_sd)
+            )
+)
+</code></pre>
+
+<pre><code class="r, fig.cap=&quot;Scaled indicator values, aggregated over 5 year intervals. Errors represent spatial variation within regions and across years.&quot;">labs &lt;- unique(i_aggregatedToPeriods$period[order(i_aggregatedToPeriods$period_rank)])
+
+i_aggregatedToPeriods %&gt;%
+  ggplot(aes(x = period_rank, 
+             y = indicator,
+             colour=region))+
+  geom_line() +
+  geom_point() +
+  geom_errorbar(aes(ymin=indicator-spatial_sd, 
+                    ymax=indicator+spatial_sd), 
+                    width=.2,
+                 position=position_dodge(0.2)) +
+  theme_bw(base_size = 12)+
+  scale_x_continuous(breaks = 1:5,
+                     labels = labs)+
+  labs(x = &quot;&quot;, y = &quot;indikatorverdi&quot;)
+</code></pre>
+
+<p>Finally, I can add these values to the sp object.</p>
+
+<pre><code class="r">reg2 &lt;- reg %&gt;%
+  left_join(i_aggregatedToPeriods[i_aggregatedToPeriods$period_rank==5,], by=join_by(region))
+names(reg2)
+</code></pre>
+
+<pre><code class="r, fig.cap=&quot;Summer tempreature indicator values for five accounting areas in Norway. SD is the spatial variation.&quot;">myCol &lt;- &quot;RdYlGn&quot;
+myCol2 &lt;- &quot;-RdYlGn&quot;
+
+tm_main &lt;- tm_shape(reg2)+
+  tm_polygons(col=&quot;indicator&quot;,
+              title=&quot;Indikator:\nsommertemperatur&quot;,
+    palette = myCol,
+    style=&quot;fixed&quot;,
+    breaks = seq(0,1,.2)) 
+
+tm_inset &lt;- tm_shape(reg2)+
+  tm_polygons(col=&quot;spatial_sd&quot;,
+              title=&quot;SD&quot;,
+              palette = myCol2,
+              style=&quot;cont&quot;)+
+  tm_layout(legend.format = list(digits=2))
+
+tmap_arrange(tm_main, 
+             tm_inset)
+</code></pre>

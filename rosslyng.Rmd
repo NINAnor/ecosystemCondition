@@ -7,9 +7,7 @@
 _Author and date:_
 Anders L. Kolstad
 
-```{r, echo=F}
-Sys.Date()
-```
+March 2023
 
 <br />
 

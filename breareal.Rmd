@@ -19,13 +19,10 @@ knitr::opts_chunk$set(echo = TRUE)
 <br />
 
 _Author and date:_
-Anders Kolstad
 
+Anders L. Kolstad
 
-```{r, echo=F}
-Sys.Date()
-```
-
+March 2023
 
 <br />
 

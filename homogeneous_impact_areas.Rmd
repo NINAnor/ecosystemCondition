@@ -4,7 +4,9 @@
 
 *Author and date:* 
 
-Anders Kolstad
+Anders L. Kolstad
+
+March 2023
 
 <br />
 

@@ -7,9 +7,9 @@ library(data.table)
 theme_set(theme_bw(base_size = 12))
 ```
 
-Author. Anders L. Kolstad
+Anders L. Kolstad
 
-Date: `r Sys.Date()`
+March 2023
 
 **Superseeded :** *The functionality explained here is moved over to the [eaTools](https://github.com/NINAnor/eaTools) package. Please see the documentation there for updated examples.*
 
