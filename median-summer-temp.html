@@ -1,0 +1,752 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Chapter 1 Median Summer Temperature | medianSummerTemperature.knit</title>
+
+  
+   
+   <meta name="generator" content="placeholder" />
+  <meta property="og:title" content="Chapter 1 Median Summer Temperature | medianSummerTemperature.knit" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 1 Median Summer Temperature | medianSummerTemperature.knit" />
+  
+  
+  
+  <!-- JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script>
+    <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet" />
+    <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script>
+    <script src="libs/bs3compat-0.4.2/transition.js"></script>
+    <script src="libs/bs3compat-0.4.2/tabs.js"></script>
+    <script src="libs/bs3compat-0.4.2/bs3compat.js"></script>
+    <link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet" />
+    <script src="libs/bs4_book-1.0.0/bs4_book.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script>
+
+  <!-- CSS -->
+  <style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+      <link rel="stylesheet" href="style.css" />
+  
+</head>
+
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book">
+    <a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title=""></a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+      </form>
+
+      <nav aria-label="Table of contents">
+        <h2>Table of contents</h2>
+        <div id="book-toc"></div>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="#">View book source <i class="fab fa-github"></i></a></li></p>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="col-sm-12 col-md-9 col-lg-7" id="content">
+<!--bookdown:title:end-->
+<!--bookdown:title:start-->
+<div id="median-summer-temp" class="section level1" number="1">
+<h1><span class="header-section-number">Chapter 1</span> Median Summer Temperature</h1>
+<p><br /></p>
+<p><em>Author and date:</em></p>
+<p>Anders L. Kolstad</p>
+<p>March 2023</p>
+<p><br /></p>
+<!-- Load all you dependencies here -->
+<table>
+<thead>
+<tr class="header">
+<th align="left">Ecosystem</th>
+<th align="left">Økologisk.egenskap</th>
+<th align="left">ECT.class</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">All</td>
+<td align="left">Abiotiske egenskaper</td>
+<td align="left">Physical state characteristics</td>
+</tr>
+</tbody>
+</table>
+<p><br /> <br /></p>
+<hr />
+<div id="introduction" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Introduction</h2>
+<p>This chapters describes the workflow for an indicator describing the median summer temperature. For a more comprehensive documentation on the development of the workflow itself, see <a href="#climate-indicators-explained">here</a>. The data comes from interpolated climate surfaces from <a href="https://senorge.no/">SeNorge</a> which contain one 1x1km raster for each day since 1957 to present. The reference levels are extracted from the time period 1961-1990 (a temporal reference condition).</p>
+<p><strong>Workflow</strong></p>
+<ol style="list-style-type: decimal">
+<li><p>Collate variable data series, ending up with one raster per year after aggregating across days within a year</p></li>
+<li><p>Calculate spatially explicit reference values by aggregating across the years 1961-1990. The upper reference value is equal to the median value of this period, and the lower reference values (two-sided) is equal to 5 SD units. The indicator value is the mean over a five year period.</p></li>
+<li><p>Calculate indicator values through spatially explicit rescaling based on the reference values</p></li>
+<li><p>Mask by ecosystem type (<em>This step is not yet done as we do not have ready available ecosystem maps</em>)</p></li>
+<li><p>Aggregate in space (to accounting areas) and take the mean over a five year period to get final indicator values</p></li>
+<li><p>Make trend figure and spatially aggregated maps</p></li>
+</ol>
+</div>
+<div id="about-the-underlying-data" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> About the underlying data</h2>
+<p>The data is in a raster format and extends back to 1957 in the form of multiple interpolated climate variables. The spatial resolution is 1 x 1 km.</p>
+<div id="representativity-in-time-and-space" class="section level3" number="1.2.1">
+<h3><span class="header-section-number">1.2.1</span> Representativity in time and space</h3>
+<p>The data includes the last normal period (1961-1990) which defines the reference condition for climate variables. Therefore the temporal resolution is very good. Also considering the daily resolution of the data.</p>
+<p>Spatially, a 1x1 km resolution is sufficient for most climate variables, esp. in homogeneous terrain, but this needs to be evaluation for each variable and scenario specifically.</p>
+</div>
+<div id="original-units" class="section level3" number="1.2.2">
+<h3><span class="header-section-number">1.2.2</span> Original units</h3>
+<p>Varied. Specified below for each parameter.</p>
+</div>
+<div id="temporal-coverage" class="section level3" number="1.2.3">
+<h3><span class="header-section-number">1.2.3</span> Temporal coverage</h3>
+<p>1957 - present</p>
+</div>
+<div id="additional-comments-about-the-data-set" class="section level3" number="1.2.4">
+<h3><span class="header-section-number">1.2.4</span> Additional comments about the data set</h3>
+<p>The data format has recently changed from .BIL to .nc (netcdf) and now a single file contains all the rasters for one year (365 days), and sometimes for multiple variables also.</p>
+</div>
+</div>
+<div id="ecosystem-characteristic" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Ecosystem characteristic</h2>
+<div id="norwegian-standard" class="section level3" number="1.3.1">
+<h3><span class="header-section-number">1.3.1</span> Norwegian standard</h3>
+<p>These variables typically will fall under the <em>abiotiske egenskaper</em> class.</p>
+</div>
+<div id="seea-ea" class="section level3" number="1.3.2">
+<h3><span class="header-section-number">1.3.2</span> SEEA EA</h3>
+<p>In SEEA EA, these variables will typically fall under A1 - Physical state characteristics.</p>
+</div>
+</div>
+<div id="collinearities-with-other-indicators" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> Collinearities with other indicators</h2>
+<p>Climate variables are most likely to be correlated with each other (e.g. temperature and snow). Also, some climate variables are better classed as pressure indicators, and these might have a causal association with several condition indicators.</p>
+</div>
+<div id="reference-condition-and-values" class="section level2" number="1.5">
+<h2><span class="header-section-number">1.5</span> Reference condition and values</h2>
+<div id="reference-condition" class="section level3" number="1.5.1">
+<h3><span class="header-section-number">1.5.1</span> Reference condition</h3>
+<p>The reference condition for climate variables is defined as the normal period 1961-1990.</p>
+</div>
+<div id="reference-values-thresholds-for-defining-good-ecological-condition-minimum-andor-maximum-values" class="section level3" number="1.5.2">
+<h3><span class="header-section-number">1.5.2</span> Reference values, thresholds for defining <em>good ecological condition</em>, minimum and/or maximum values</h3>
+<ul>
+<li><p>Un-scaled indicator value = median value over 5 year periods (5 years being a pragmatic choice. It is long enough to smooth out a lot of inter-annual variation, and it’s long enough to enable estimating errors)</p></li>
+<li><p>Upper reference level (best possible condition) = median value from the reference period</p></li>
+<li><p>Thresholds for good ecosystem condition = 2 standard deviation units away from the upper reference level for the climate variable during the reference period.</p></li>
+<li><p>Lower reference values (two-directional) = 5 standard deviation units for the climate variable during the reference period (implies linear scaling).</p></li>
+</ul>
+<p>The choice to use 2 SD units as the threshold values is a subjective choice in many ways, and not founded in any empirical or known relationship between the indicators and ecosystem integrity. The value comes from the common practice of calling something <em>extreme weather</em> when it is outside 2 SD units of the current running average. So, if the indicator value today is &lt;0.6 it implies that the mean for that variable over the last year would have been referred to as <em>extreme</em> if it had occurred between 1961 and 1990. This is I think a conservative threshold, since one would/could call it <em>extreme</em> if only one year is outside the 2SD range, and having the mean of 5 years being outside this range is <em>really</em> extreme.</p>
+</div>
+</div>
+<div id="uncertainties" class="section level2" number="1.6">
+<h2><span class="header-section-number">1.6</span> Uncertainties</h2>
+<p>For the indicator map (1 x 1 km raster) there is no uncertainty associated with the indicator values. For aggregated indicator values (e.g. for regions), the uncertainty in the indicator value is calculated from the spatial variation in the indicator values via bootstrapping. This might, however, be changed later to the temporal variation between the five years of each period.</p>
+</div>
+<div id="references" class="section level2" number="1.7">
+<h2><span class="header-section-number">1.7</span> References</h2>
+<p><a href="https://senorge.no/" class="uri">https://senorge.no/</a></p>
+<p><em>rr and tm are being download from:</em> <a href="https://thredds.met.no/thredds/catalog/senorge/seNorge_2018/Archive/catalog.html" class="uri">https://thredds.met.no/thredds/catalog/senorge/seNorge_2018/Archive/catalog.html</a></p>
+<div id="additional-resources" class="section level3" number="1.7.1">
+<h3><span class="header-section-number">1.7.1</span> Additional resources</h3>
+<p><a href="https://r-spatial.github.io/stars/">Stars package</a></p>
+<p><a href="https://tmieno2.github.io/R-as-GIS-for-Economists/stars-basics.html">R as a GIS for economists</a> chapter 7</p>
+<p><hl/></p>
+</div>
+</div>
+<div id="analyses" class="section level2" number="1.8">
+<h2><span class="header-section-number">1.8</span> Analyses</h2>
+<div id="data-set" class="section level3" number="1.8.1">
+<h3><span class="header-section-number">1.8.1</span> Data set</h3>
+<p>The data is downloaded to a local NINA server, and updated regularly.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>path <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(dir <span class="sc">==</span> <span class="st">&quot;C:&quot;</span>, </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;R:/GeoSpatialData/Meteorology/Norway_SeNorge2018_v22.09/Original&quot;</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;/data/R/GeoSpatialData/Meteorology/Norway_SeNorge2018_v22.09/Original&quot;</span>)</span></code></pre></div>
+<p>This folder contains folder for the different parameters</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>(files <span class="ot">&lt;-</span> <span class="fu">list.files</span>(path))</span></code></pre></div>
+<pre><code>##  [1] &quot;age&quot;        &quot;fsw&quot;        &quot;gwb_eva&quot;    &quot;gwb_gwtcl&quot;  &quot;gwb_q&quot;      &quot;gwb_sssdev&quot;
+##  [7] &quot;gwb_sssrel&quot; &quot;lwc&quot;        &quot;qsw&quot;        &quot;rr_tm&quot;      &quot;sd&quot;         &quot;sdfsw&quot;     
+## [13] &quot;swe&quot;</code></pre>
+<p>We are interested in <em>tm</em>, which is temperatur in celcius. For some reason the same variable is called <em>tg</em> in the data itself.</p>
+<div id="regions" class="section level4" number="1.8.1.1">
+<h4><span class="header-section-number">1.8.1.1</span> Regions</h4>
+<p>Importing a shape file with the regional delineation.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>reg <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_read</span>(<span class="st">&quot;data/regions.shp&quot;</span>, <span class="at">options =</span> <span class="st">&quot;ENCODING=UTF8&quot;</span>)</span></code></pre></div>
+<pre><code>## options:        ENCODING=UTF8 
+## Reading layer `regions&#39; from data source 
+##   `/data/scratch/Matt_bookdown__debug/ecosystemCondition/data/regions.shp&#39; 
+##   using driver `ESRI Shapefile&#39;
+## Simple feature collection with 5 features and 2 fields
+## Geometry type: POLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -99551.21 ymin: 6426048 xmax: 1121941 ymax: 7962744
+## Projected CRS: ETRS89 / UTM zone 33N</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#st_crs(reg)</span></span></code></pre></div>
+<p>Outline of Norway</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>nor <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_read</span>(<span class="st">&quot;data/outlineOfNorway_EPSG25833.shp&quot;</span>)</span></code></pre></div>
+<pre><code>## Reading layer `outlineOfNorway_EPSG25833&#39; from data source 
+##   `/data/scratch/Matt_bookdown__debug/ecosystemCondition/data/outlineOfNorway_EPSG25833.shp&#39; 
+##   using driver `ESRI Shapefile&#39;
+## Simple feature collection with 1 feature and 2 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -113472.7 ymin: 6448359 xmax: 1114618 ymax: 7939917
+## Projected CRS: ETRS89 / UTM zone 33N</code></pre>
+<p>Remove marine areas from regions</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>reg <span class="ot">&lt;-</span> <span class="fu">st_intersection</span>(reg, nor)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(reg) <span class="sc">+</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">col=</span><span class="st">&quot;region&quot;</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-8"></span>
+<img src="medianSummerTemperature_files/figure-html/unnamed-chunk-8-1.png" alt="Five accounting areas (regions) in Norway." width="672" />
+<p class="caption">
+Figure 1.1: Five accounting areas (regions) in Norway.
+</p>
+</div>
+</div>
+<div id="ecosystem-map" class="section level4" number="1.8.1.2">
+<h4><span class="header-section-number">1.8.1.2</span> Ecosystem map</h4>
+<p>Coming soon ….</p>
+<p>The climate indicators need to be masked with ecosystem type maps. This step is part of this chapter.</p>
+</div>
+</div>
+<div id="conceptual-workflow" class="section level3" number="1.8.2">
+<h3><span class="header-section-number">1.8.2</span> Conceptual workflow</h3>
+<p>The general, the conceptual workflow is like this:</p>
+<ol style="list-style-type: decimal">
+<li><p>Collate variable data series</p>
+<ul>
+<li><p>Import .nc files (loop though year 1961-1990) and subset to the correct attribute</p></li>
+<li><p>Filter data by dates (optional) (<code>dplyr::filter</code>). <em>This means reading all 365 rasters into memory, and it is much quicker to filter out the correct rasters in the importing step above (see examples later in this chapter)</em></p></li>
+<li><p>Aggregate across time within a year (<code>stars::st_apply</code>). <em>This is the most time consuming operation in the workflow.</em></p></li>
+<li><p>Join all data into one data cube (<code>stars:c</code>)</p></li>
+</ul></li>
+<li><p>Calculate reference values</p>
+<ul>
+<li><p>Aggregate (<code>st_apply)</code> across reference years (<code>dplyr::filter</code>) to get median and sd values</p></li>
+<li><p>Join with existing data cube (<code>stars:c</code>)</p></li>
+</ul></li>
+<li><p>Calculate indicator values</p>
+<ul>
+<li>Normalize climate variable at the individual grid cell level using the three reference values (<code>mutate(across()))</code></li>
+</ul></li>
+<li><p>Mask by ecosystem type (<em>This could also be done in step one, but it doesn’t speed things up to set some cells to NA</em>)</p></li>
+<li><p>Aggregate in space (to accounting areas) (<em>zonal statistics</em>)</p>
+<ul>
+<li><p>Aggregate across 5 year time steps to smooth out random inter-annual variation and leave climate signal</p></li>
+<li><p>Intersect with accounting area polygons <code>exactextrar::exact_extract</code> and get mean/median and (spatial) sd. (<em>Alternatively, get temporal sd at the grid cell level in the step above.</em>)</p></li>
+</ul></li>
+<li><p>Make trend figure and spatially aggregated maps</p></li>
+</ol>
+</div>
+<div id="step-1---temporal-aggregation-within-a-year" class="section level3" number="1.8.3">
+<h3><span class="header-section-number">1.8.3</span> Step 1 - temporal aggregation within a year</h3>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>path <span class="ot">&lt;-</span> path <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(dir <span class="sc">==</span> <span class="st">&quot;C:&quot;</span>, </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;R:/&quot;</span>,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;/data/R/&quot;</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>path2 <span class="ot">&lt;-</span> <span class="fu">paste0</span>(path, <span class="st">&quot;GeoSpatialData/Meteorology/Norway_SeNorge2018_v22.09/Original/rr_tm/&quot;</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>myFiles <span class="ot">&lt;-</span> <span class="fu">list.files</span>(path2, <span class="at">pattern=</span><span class="st">&quot;.nc$&quot;</span>,<span class="at">full.names =</span> T)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co"># The last file (the last year) is incomplete and don&#39;t include all julian dates that we select below, so I will not include it:</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>myFiles <span class="ot">&lt;-</span> myFiles[<span class="sc">-</span><span class="fu">length</span>(myFiles)]</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>real_temp_summer <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co"># set up parallel cluster using 10 cores</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">&lt;-</span> <span class="fu">makeCluster</span>(10L)</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Get julian days after defining months</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">&lt;-</span> stars<span class="sc">::</span><span class="fu">read_ncdf</span>(<span class="fu">paste</span>(myFiles[<span class="dv">1</span>]), <span class="at">var=</span><span class="st">&quot;tg&quot;</span>)</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>start_month_num <span class="ot">&lt;-</span>  <span class="dv">6</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>end_month_num <span class="ot">&lt;-</span> <span class="dv">8</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>julian_start <span class="ot">&lt;-</span> <span class="fu">yday</span>(<span class="fu">st_get_dimension_values</span>(temp, <span class="st">&quot;time&quot;</span>)[<span class="dv">1</span>] <span class="sc">%m+%</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">months</span>(<span class="sc">+</span>start_month_num))</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>julian_end <span class="ot">&lt;-</span> <span class="fu">yday</span>(<span class="fu">st_get_dimension_values</span>(temp, <span class="st">&quot;time&quot;</span>)[<span class="dv">1</span>] <span class="sc">%m+%</span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">months</span>(<span class="sc">+</span>end_month_num))</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>step <span class="ot">&lt;-</span> julian_end<span class="sc">-</span>julian_start</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(myFiles)){</span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tic</span>(<span class="st">&quot;init&quot;</span>)</span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>  temp <span class="ot">&lt;-</span> stars<span class="sc">::</span><span class="fu">read_ncdf</span>(<span class="fu">paste</span>(myFiles[i]), <span class="at">var=</span><span class="st">&quot;tg&quot;</span>, <span class="at">proxy=</span>F,</span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>                           <span class="at">ncsub =</span> <span class="fu">cbind</span>(<span class="at">start =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, julian_start), </span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>                              <span class="at">count =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="cn">NA</span>, step)))</span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>  year_temp <span class="ot">&lt;-</span> <span class="fu">year</span>(<span class="fu">st_get_dimension_values</span>(temp, <span class="st">&quot;time&quot;</span>)[<span class="dv">1</span>])</span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(year_temp)</span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>  lookup <span class="ot">&lt;-</span> <span class="fu">setNames</span>(<span class="st">&quot;mean&quot;</span>, <span class="fu">paste0</span>(<span class="st">&quot;v_&quot;</span>, year_temp)) </span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Perhaps leave out the v_ to get a numeric vector instead, </span></span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>    <span class="co"># which is easier to subset</span></span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_crs</span>(temp) <span class="ot">&lt;-</span> <span class="dv">25833</span></span>
+<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">toc</span>()</span>
+<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tic</span>(<span class="st">&quot;filter and st_apply&quot;</span>)</span>
+<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a>  temp <span class="ot">&lt;-</span> temp <span class="sc">%&gt;%</span></span>
+<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a>    <span class="co">#filter(time %within% myInterval) %&gt;%</span></span>
+<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_apply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, mean, <span class="at">CLUSTER =</span> cl) <span class="sc">%&gt;%</span></span>
+<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rename</span>(<span class="fu">all_of</span>(lookup)) </span>
+<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">toc</span>()</span>
+<span id="cb11-49"><a href="#cb11-49" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-50"><a href="#cb11-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tic</span>(<span class="st">&quot;c()&quot;</span>)</span>
+<span id="cb11-51"><a href="#cb11-51" aria-hidden="true" tabindex="-1"></a>  real_temp_summer <span class="ot">&lt;-</span> <span class="fu">c</span>(temp, real_temp_summer)</span>
+<span id="cb11-52"><a href="#cb11-52" aria-hidden="true" tabindex="-1"></a>  <span class="co">#rm(temp)</span></span>
+<span id="cb11-53"><a href="#cb11-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">toc</span>()</span>
+<span id="cb11-54"><a href="#cb11-54" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb11-55"><a href="#cb11-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-56"><a href="#cb11-56" aria-hidden="true" tabindex="-1"></a><span class="fu">tic</span>(<span class="st">&quot;Merge&quot;</span>)</span>
+<span id="cb11-57"><a href="#cb11-57" aria-hidden="true" tabindex="-1"></a>real_temp_summer <span class="ot">&lt;-</span> real_temp_summer <span class="sc">%&gt;%</span></span>
+<span id="cb11-58"><a href="#cb11-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">merge</span>(<span class="at">name =</span> <span class="st">&quot;Year&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-59"><a href="#cb11-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setNames</span>(<span class="st">&quot;climate_variable&quot;</span>)</span>
+<span id="cb11-60"><a href="#cb11-60" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span>()</span>
+<span id="cb11-61"><a href="#cb11-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-62"><a href="#cb11-62" aria-hidden="true" tabindex="-1"></a><span class="fu">stopCluster</span>(cl)</span></code></pre></div>
+<p>This takes about 20 sec per file/year, or 22 min on total. That is not too bad. About 6000 rasters are read into memory. Here’s a test for the effect of splitting over more cores.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_stars</span>(real_temp_summer, <span class="st">&quot;/data/P-Prosjekter2/41201785_okologisk_tilstand_2022_2023/data/climate_indicators/aggregated_climate_time_series/real_temp_summer.tiff&quot;</span>)</span></code></pre></div>
+<p>Note that GTiff automatically renames the third dimension <em>band</em> and also renames the attribute. I can rename them.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>summer_median_temp <span class="ot">&lt;-</span> real_temp_summer <span class="sc">%&gt;%</span> </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_set_dimensions</span>(<span class="at">names =</span> <span class="fu">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>, <span class="st">&quot;v_YEAR&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setNames</span>(<span class="st">&quot;temperature&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>()<span class="sc">+</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_stars</span>(<span class="at">data =</span> summer_median_temp[,,,<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">11</span>,<span class="dv">66</span>)], <span class="at">downsample =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>(<span class="at">option =</span> <span class="st">&quot;D&quot;</span>) <span class="sc">+</span>  </span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_discrete</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>))<span class="sc">+</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>v_YEAR)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-13"></span>
+<img src="medianSummerTemperature_files/figure-html/unnamed-chunk-13-1.png" alt="Showing three random slices of the year dimension." width="672" />
+<p class="caption">
+Figure 1.2: Showing three random slices of the year dimension.
+</p>
+</div>
+</div>
+<div id="step-2---calculate-reference-values" class="section level3" number="1.8.4">
+<h3><span class="header-section-number">1.8.4</span> Step 2 - calculate reference values</h3>
+<p>We need to first to define a reference period and then to subset our data <code>summer_median_temp</code>.</p>
+<p>First we need to rename our dimension values and turn them back into dates.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>new_dims <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="fu">paste0</span>(</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">substr</span>(<span class="fu">st_get_dimension_values</span>(summer_median_temp, <span class="st">&quot;v_YEAR&quot;</span>), <span class="dv">3</span>, <span class="dv">6</span>), <span class="st">&quot;-01-01&quot;</span>))</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>summer_median_temp_ref <span class="ot">&lt;-</span> summer_median_temp <span class="sc">%&gt;%</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_set_dimensions</span>(<span class="st">&quot;v_YEAR&quot;</span>, <span class="at">values =</span> new_dims)</span></code></pre></div>
+<p>Then I can filter to leave only the reference period.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>summer_median_temp_ref <span class="ot">&lt;-</span> summer_median_temp_ref <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(v_YEAR <span class="sc">%within%</span> <span class="fu">interval</span>(<span class="st">&quot;1961-01-01&quot;</span>, <span class="st">&quot;1990-12-31&quot;</span>))</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">st_get_dimension_values</span>(summer_median_temp_ref, <span class="st">&quot;v_YEAR&quot;</span>)</span></code></pre></div>
+<pre><code>##  [1] &quot;1990-01-01&quot; &quot;1989-01-01&quot; &quot;1988-01-01&quot; &quot;1987-01-01&quot; &quot;1986-01-01&quot; &quot;1985-01-01&quot;
+##  [7] &quot;1984-01-01&quot; &quot;1983-01-01&quot; &quot;1982-01-01&quot; &quot;1981-01-01&quot; &quot;1980-01-01&quot; &quot;1979-01-01&quot;
+## [13] &quot;1978-01-01&quot; &quot;1977-01-01&quot; &quot;1976-01-01&quot; &quot;1975-01-01&quot; &quot;1974-01-01&quot; &quot;1973-01-01&quot;
+## [19] &quot;1972-01-01&quot; &quot;1971-01-01&quot; &quot;1970-01-01&quot; &quot;1969-01-01&quot; &quot;1968-01-01&quot; &quot;1967-01-01&quot;
+## [25] &quot;1966-01-01&quot; &quot;1965-01-01&quot; &quot;1964-01-01&quot; &quot;1963-01-01&quot; &quot;1962-01-01&quot; &quot;1961-01-01&quot;</code></pre>
+<p>And then we calculate the median and sd like above</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>median_sd <span class="ot">&lt;-</span> <span class="cf">function</span>(x) { <span class="fu">c</span>(<span class="at">median =</span> <span class="fu">median</span>(x), <span class="at">sd =</span> <span class="fu">sd</span>(x))}</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>({</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">&lt;-</span> <span class="fu">makeCluster</span>(10L)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>summer_median_temp_ref <span class="ot">&lt;-</span> summer_median_temp_ref <span class="sc">%&gt;%</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_apply</span>(<span class="fu">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>), </span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">FUN =</span>  median_sd,</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">CLUSTER =</span> cl)</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="fu">stopCluster</span>(cl)</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th>user</th>
+<th>system</th>
+<th>elapsed</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>9.624</td>
+<td>6.069</td>
+<td>20.903</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_stars</span>(summer_median_temp_ref, <span class="st">&quot;/data/P-Prosjekter2/41201785_okologisk_tilstand_2022_2023/data/climate_indicators/aggregated_climate_time_series/summer_median_temp_ref.tiff&quot;</span>)</span></code></pre></div>
+<p>Pivot and turn dimension into attributes, and rename attributes:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>summer_median_temp_ref_long <span class="ot">&lt;-</span> summer_median_temp_ref <span class="sc">%&gt;%</span> </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">split</span>(<span class="st">&quot;band&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setNames</span>(<span class="fu">c</span>(<span class="st">&quot;reference_upper&quot;</span>, <span class="st">&quot;sd&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_arrange</span>(</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(<span class="fu">st_downsample</span>(summer_median_temp_ref_long, <span class="dv">10</span>))<span class="sc">+</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_raster</span>(<span class="st">&quot;reference_upper&quot;</span>)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>,</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(<span class="fu">st_downsample</span>(summer_median_temp_ref_long, <span class="dv">10</span>))<span class="sc">+</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_raster</span>(<span class="st">&quot;sd&quot;</span>,</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">palette =</span> <span class="st">&quot;-viridis&quot;</span>)</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-21"></span>
+<img src="medianSummerTemperature_files/figure-html/unnamed-chunk-21-1.png" alt="Showing the upper reference levels and the standard deviation from actual data of median summer temperatures." width="672" />
+<p class="caption">
+Figure 1.3: Showing the upper reference levels and the standard deviation from actual data of median summer temperatures.
+</p>
+</div>
+<p>I need to combine the variables and the ref values in one data cube</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>y_var <span class="ot">&lt;-</span> summer_median_temp <span class="sc">%&gt;%</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">split</span>(<span class="st">&quot;v_YEAR&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(summer_median_temp_ref_long)</span></code></pre></div>
+</div>
+<div id="step-3---normalise-variable" class="section level3" number="1.8.5">
+<h3><span class="header-section-number">1.8.5</span> Step 3 - normalise variable</h3>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># select the columns to normalise</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>cols <span class="ot">&lt;-</span> <span class="fu">names</span>(y_var)[<span class="sc">!</span><span class="fu">names</span>(y_var) <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;reference_upper&quot;</span>, <span class="st">&quot;sd&quot;</span>) ]</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>cols_new <span class="ot">&lt;-</span> cols</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(cols_new) <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;v_&quot;</span>, <span class="st">&quot;i_&quot;</span>, cols)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The break point scaling is actually not needed here, since </span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co"># having the lower ref value to be 5 sd implies that the threshold is</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 sd in a linear scaling.</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>y_var_norm <span class="ot">&lt;-</span> y_var <span class="sc">%&gt;%</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">reference_low =</span> reference_upper <span class="sc">-</span> <span class="dv">5</span><span class="sc">*</span>sd ) <span class="sc">%&gt;%</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">reference_low2 =</span> reference_upper <span class="sc">+</span> <span class="dv">5</span><span class="sc">*</span>sd ) <span class="sc">%&gt;%</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">threshold_low =</span> reference_upper <span class="sc">-</span><span class="dv">2</span><span class="sc">*</span>sd ) <span class="sc">%&gt;%</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">threshold_high =</span> reference_upper <span class="sc">+</span><span class="dv">2</span><span class="sc">*</span>sd ) <span class="sc">%&gt;%</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">all_of</span>(cols), <span class="sc">~</span> </span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">if_else</span>(.x <span class="sc">&lt;</span> reference_upper,</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">if_else</span>(.x <span class="sc">&lt;</span> threshold_low, </span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>                                        (.x <span class="sc">-</span> reference_low) <span class="sc">/</span> (threshold_low <span class="sc">-</span> reference_low),</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>                                        (.x <span class="sc">-</span> threshold_low) <span class="sc">/</span> (reference_upper <span class="sc">-</span> threshold_low),</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>                                        ),</span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">if_else</span>(.x <span class="sc">&gt;</span> threshold_high, </span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>                                        (reference_low2 <span class="sc">-</span> .x) <span class="sc">/</span> (reference_low2 <span class="sc">-</span> threshold_high),</span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>                                        (threshold_high <span class="sc">-</span> .x) <span class="sc">/</span> (threshold_high <span class="sc">-</span> reference_upper),</span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>                                        )</span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>                ))) <span class="sc">%&gt;%</span></span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">all_of</span>(cols), <span class="sc">~</span> <span class="fu">if_else</span>(.x <span class="sc">&gt;</span> <span class="dv">1</span>, <span class="dv">1</span>, .x))) <span class="sc">%&gt;%</span></span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">all_of</span>(cols), <span class="sc">~</span> <span class="fu">if_else</span>(.x <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="dv">0</span>, .x))) <span class="sc">%&gt;%</span></span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="fu">all_of</span>(cols_new)) <span class="sc">%&gt;%</span></span>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="fu">select</span>(y_var, <span class="fu">all_of</span>(cols)))</span>
+<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th>user</th>
+<th>system</th>
+<th>elapsed</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>14.803</td>
+<td>2.717</td>
+<td>17.512</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>()</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(y_var_norm, <span class="st">&quot;/data/P-Prosjekter2/41201785_okologisk_tilstand_2022_2023/data/climate_indicators/aggregated_climate_time_series/summer_median_temp_normalised.RData&quot;</span>)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Tiff dont allow for multiple attributes:</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co">#write_stars(y_var_norm, &quot;/data/P-Prosjekter2/41201785_okologisk_tilstand_2022_2023/data/climate_indicators/aggregated_climate_time_series/summer_median_temp_normalised.tiff&quot;)</span></span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>lims <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">22</span>)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggarrange</span>(</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_stars</span>(<span class="at">data =</span> <span class="fu">st_downsample</span>(y_var_norm[<span class="st">&quot;v_1970&quot;</span>],<span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>(<span class="at">option =</span> <span class="st">&quot;D&quot;</span>,</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">limits =</span> lims) <span class="sc">+</span>  </span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_discrete</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>))</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>,</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_stars</span>(<span class="at">data =</span> <span class="fu">st_downsample</span>(y_var_norm[<span class="st">&quot;reference_upper&quot;</span>], <span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span></span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>(<span class="at">option =</span> <span class="st">&quot;D&quot;</span>,</span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>                       <span class="at">limits =</span> lims) <span class="sc">+</span>  </span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_discrete</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>))</span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>,</span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_stars</span>(<span class="at">data =</span> <span class="fu">st_downsample</span>(y_var_norm[<span class="st">&quot;reference_low&quot;</span>], <span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span></span>
+<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>(<span class="at">option =</span> <span class="st">&quot;D&quot;</span>,</span>
+<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a>                       <span class="at">limits =</span> lims) <span class="sc">+</span>  </span>
+<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_discrete</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>))</span>
+<span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a>,</span>
+<span id="cb27-31"><a href="#cb27-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-32"><a href="#cb27-32" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb27-33"><a href="#cb27-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_stars</span>(<span class="at">data =</span> <span class="fu">st_downsample</span>(y_var_norm[<span class="st">&quot;reference_low2&quot;</span>], <span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb27-34"><a href="#cb27-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span></span>
+<span id="cb27-35"><a href="#cb27-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb27-36"><a href="#cb27-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>(<span class="at">option =</span> <span class="st">&quot;D&quot;</span>,</span>
+<span id="cb27-37"><a href="#cb27-37" aria-hidden="true" tabindex="-1"></a>                       <span class="at">limits =</span> lims) <span class="sc">+</span>  </span>
+<span id="cb27-38"><a href="#cb27-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb27-39"><a href="#cb27-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_discrete</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>))</span>
+<span id="cb27-40"><a href="#cb27-40" aria-hidden="true" tabindex="-1"></a>,</span>
+<span id="cb27-41"><a href="#cb27-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-42"><a href="#cb27-42" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb27-43"><a href="#cb27-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_stars</span>(<span class="at">data =</span> <span class="fu">st_downsample</span>(y_var_norm[<span class="st">&quot;i_1970&quot;</span>],<span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb27-44"><a href="#cb27-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span></span>
+<span id="cb27-45"><a href="#cb27-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb27-46"><a href="#cb27-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>(<span class="at">option =</span> <span class="st">&quot;A&quot;</span>,</span>
+<span id="cb27-47"><a href="#cb27-47" aria-hidden="true" tabindex="-1"></a>                       <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="sc">+</span>  </span>
+<span id="cb27-48"><a href="#cb27-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb27-49"><a href="#cb27-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_discrete</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>))</span>
+<span id="cb27-50"><a href="#cb27-50" aria-hidden="true" tabindex="-1"></a>, <span class="at">ncol=</span><span class="dv">2</span>, <span class="at">nrow=</span><span class="dv">3</span>, <span class="at">align =</span> <span class="st">&quot;hv&quot;</span></span>
+<span id="cb27-51"><a href="#cb27-51" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-27"></span>
+<img src="medianSummerTemperature_files/figure-html/unnamed-chunk-27-1.png" alt="Example showing median summer tempretur in 1970, the upper and lwoer reference temperture, i.e. median and 5 SD units of the temperature between  1961-1990, and finally, the scaled indicator values." width="672" />
+<p class="caption">
+Figure 1.4: Example showing median summer tempretur in 1970, the upper and lwoer reference temperture, i.e. median and 5 SD units of the temperature between 1961-1990, and finally, the scaled indicator values.
+</p>
+</div>
+<p>The <em>real</em> indicator values should be means over 5 year periods. Calculating a running mean for all time steps is too time consuming. Therefore, the scaled, regional indicator values will be calculated for distinct time steps. The time series can perhaps still be presented with yearly resolution.</p>
+</div>
+<div id="step-4---mask-with-ecosystem-delineation-map" class="section level3" number="1.8.6">
+<h3><span class="header-section-number">1.8.6</span> Step 4 - Mask with ecosystem delineation map</h3>
+<p>This step we simply ignore for now. It should be relatively easy to do, when we have the maps.</p>
+</div>
+<div id="step-5---make-figures" class="section level3" number="1.8.7">
+<h3><span class="header-section-number">1.8.7</span> Step 5 - Make figures</h3>
+<p>To plot time series I first need to do a spatial aggregation.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>regional_means <span class="ot">&lt;-</span> <span class="fu">rast</span>(y_var_norm) <span class="sc">%&gt;%</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">exact_extract</span>(reg, <span class="at">fun =</span> <span class="st">&#39;mean&#39;</span>, <span class="at">append_cols =</span> <span class="st">&quot;region&quot;</span>, <span class="at">progress=</span>T) <span class="sc">%&gt;%</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setNames</span>(<span class="fu">c</span>(<span class="st">&quot;region&quot;</span>, <span class="fu">names</span>(y_var_norm)))</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<p>user; system; elapsed: 7.603; 3.071; 10.697</p>
+<p>I could also get the sd like this, if I wanted to base the indicator uncertainty on a measure of spatial variation:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>regional_sd <span class="ot">&lt;-</span> <span class="fu">rast</span>(y_var_norm) <span class="sc">%&gt;%</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">exact_extract</span>(reg, <span class="at">fun =</span> <span class="st">&#39;stdev&#39;</span>, <span class="at">append_cols =</span> <span class="st">&quot;region&quot;</span>, <span class="at">progress=</span>T) <span class="sc">%&gt;%</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setNames</span>(<span class="fu">c</span>(<span class="st">&quot;region&quot;</span>, <span class="fu">names</span>(y_var_norm)))</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<p>user; system; elapsed: 7.420; 2.921; 10.355</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(regional_means, <span class="st">&quot;temp/regional_means.rds&quot;</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(regional_sd, <span class="st">&quot;temp/regional_sd.rds&quot;</span>)</span></code></pre></div>
+<p>Reshape and plot</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>div <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;reference_upper&quot;</span>,</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;reference_low&quot;</span>,</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;reference_low2&quot;</span>,</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;threshold_low&quot;</span>,</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;threshold_high&quot;</span>,</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;sd&quot;</span>)</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">&lt;-</span> regional_means <span class="sc">%&gt;%</span></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(region, div)</span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>regional_means_long <span class="ot">&lt;-</span> regional_means <span class="sc">%&gt;%</span></span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span><span class="fu">all_of</span>(div)) <span class="sc">%&gt;%</span></span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">!</span>region) <span class="sc">%&gt;%</span></span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(name, <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;type&quot;</span>, <span class="st">&quot;year&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="co">#id_cols = region,</span></span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>              <span class="at">names_from =</span> type)  <span class="sc">%&gt;%</span></span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(temp, <span class="at">by=</span><span class="fu">join_by</span>(region)) <span class="sc">%&gt;%</span> </span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">diff =</span> v<span class="sc">-</span>reference_upper) <span class="sc">%&gt;%</span></span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">threshold_low_centered =</span> threshold_low<span class="sc">-</span>reference_upper) <span class="sc">%&gt;%</span></span>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">threshold_high_centered =</span> threshold_high<span class="sc">-</span>reference_upper)</span>
+<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a><span class="co">#Adding the spatial sd</span></span>
+<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a><span class="co">#(</span></span>
+<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a><span class="co">#regional_means_long &lt;- regional_sd %&gt;%</span></span>
+<span id="cb31-27"><a href="#cb31-27" aria-hidden="true" tabindex="-1"></a><span class="co">#  select(!all_of(div)) %&gt;%</span></span>
+<span id="cb31-28"><a href="#cb31-28" aria-hidden="true" tabindex="-1"></a><span class="co">#  pivot_longer(!region) %&gt;%</span></span>
+<span id="cb31-29"><a href="#cb31-29" aria-hidden="true" tabindex="-1"></a><span class="co">#  separate(name, into=c(&quot;type&quot;, &quot;year&quot;)) %&gt;%</span></span>
+<span id="cb31-30"><a href="#cb31-30" aria-hidden="true" tabindex="-1"></a><span class="co">#  pivot_wider(names_from = type) %&gt;%</span></span>
+<span id="cb31-31"><a href="#cb31-31" aria-hidden="true" tabindex="-1"></a><span class="co">#  rename(i_sd = i,</span></span>
+<span id="cb31-32"><a href="#cb31-32" aria-hidden="true" tabindex="-1"></a><span class="co">#         v_sd = v) %&gt;%</span></span>
+<span id="cb31-33"><a href="#cb31-33" aria-hidden="true" tabindex="-1"></a><span class="co">#  left_join(regional_means_long, by=join_by(region, year))</span></span>
+<span id="cb31-34"><a href="#cb31-34" aria-hidden="true" tabindex="-1"></a><span class="co">#)</span></span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>regOrder <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Østlandet&quot;</span>,<span class="st">&quot;Sørlandet&quot;</span>,<span class="st">&quot;Vestlandet&quot;</span>,<span class="st">&quot;Midt-Norge&quot;</span>,<span class="st">&quot;Nord-Norge&quot;</span>)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>regional_means_long <span class="sc">%&gt;%</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">col =</span> <span class="fu">if_else</span>(diff<span class="sc">&gt;</span><span class="dv">0</span>, <span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.numeric</span>(year), </span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> diff, <span class="at">fill =</span> col))<span class="sc">+</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>)<span class="sc">+</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> threshold_low_centered),</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">linetype=</span><span class="dv">2</span>)<span class="sc">+</span></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> threshold_high_centered),</span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">linetype=</span><span class="dv">2</span>)<span class="sc">+</span></span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="at">x =</span> <span class="dv">1961</span>, <span class="at">xend=</span><span class="dv">1990</span>,</span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>               <span class="at">y =</span> <span class="dv">0</span>, <span class="at">yend =</span> <span class="dv">0</span>,</span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>               <span class="at">linewidth=</span><span class="dv">2</span>)<span class="sc">+</span></span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_hue</span>(<span class="at">l=</span><span class="dv">70</span>, <span class="at">c=</span><span class="dv">60</span>)<span class="sc">+</span></span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">12</span>)<span class="sc">+</span></span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Sommertemperatur</span><span class="sc">\n</span><span class="st">avvik fra 1961-1990&quot;</span>)<span class="sc">+</span></span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;&quot;</span>)<span class="sc">+</span></span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill=</span><span class="st">&quot;none&quot;</span>)<span class="sc">+</span></span>
+<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>( .<span class="sc">~</span> <span class="fu">factor</span>(region, <span class="at">levels =</span> regOrder),</span>
+<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a>              <span class="at">ncol=</span><span class="dv">3</span>,</span>
+<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a>              <span class="at">scales =</span> <span class="st">&quot;free_y&quot;</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:summer-temp-time-series"></span>
+<img src="medianSummerTemperature_files/figure-html/summer-temp-time-series-1.png" alt="Times series for median summer temperature centered on the median value during the reference period. The reference period is indicated with a thick horizontal line. Dottet horisontal lines are 2 sd units for the reference period." width="672" />
+<p class="caption">
+Figure 1.5: Times series for median summer temperature centered on the median value during the reference period. The reference period is indicated with a thick horizontal line. Dottet horisontal lines are 2 sd units for the reference period.
+</p>
+</div>
+<p>Then we can take the mean and sd over the last 5 years and add to a spatial representation.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>i_aggregatedToPeriods <span class="ot">&lt;-</span> regional_means_long <span class="sc">%&gt;%</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.numeric</span>(year)) <span class="sc">%&gt;%</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">period =</span> <span class="fu">case_when</span>(</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>    year <span class="sc">%between%</span> <span class="fu">c</span>(<span class="dv">2018</span>, <span class="dv">2022</span>) <span class="sc">~</span> <span class="st">&quot;2018-2022&quot;</span>,</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>    year <span class="sc">%between%</span> <span class="fu">c</span>(<span class="dv">2013</span>, <span class="dv">2017</span>) <span class="sc">~</span> <span class="st">&quot;2013-2017&quot;</span>,</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>    year <span class="sc">%between%</span> <span class="fu">c</span>(<span class="dv">2008</span>, <span class="dv">2012</span>) <span class="sc">~</span> <span class="st">&quot;2008-2012&quot;</span>,</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>    year <span class="sc">%between%</span> <span class="fu">c</span>(<span class="dv">2003</span>, <span class="dv">2007</span>) <span class="sc">~</span> <span class="st">&quot;2003-2007&quot;</span>,</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">.default =</span> <span class="st">&quot;pre 2003&quot;</span></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">%&gt;%</span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">period_rank =</span> <span class="fu">case_when</span>(</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>   period <span class="sc">==</span> <span class="st">&quot;2018-2022&quot;</span> <span class="sc">~</span> <span class="dv">5</span>,</span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>   period <span class="sc">==</span> <span class="st">&quot;2013-2017&quot;</span> <span class="sc">~</span> <span class="dv">4</span>,</span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>   period <span class="sc">==</span> <span class="st">&quot;2008-2012&quot;</span> <span class="sc">~</span> <span class="dv">3</span>,</span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>   period <span class="sc">==</span> <span class="st">&quot;2003-2007&quot;</span> <span class="sc">~</span> <span class="dv">2</span>,</span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">.default =</span> <span class="dv">1</span></span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">%&gt;%</span></span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(region, period, period_rank) <span class="sc">%&gt;%</span></span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">indicator =</span> <span class="fu">mean</span>(i),</span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd =</span> <span class="fu">sd</span>(i)</span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>            <span class="co"># If I inluded a spatial measure for the uncertainty, here is how I would carry the errors:</span></span>
+<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>            <span class="co">#spatial_sd = sqrt(sum(i_sd^2))/length(i_sd)</span></span>
+<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## `summarise()` has grouped output by &#39;region&#39;, &#39;period&#39;. You can override using the
+## `.groups` argument.</code></pre>
+<pre><code>## # A tibble: 25 × 5
+## # Groups:   region, period [25]
+##    region     period    period_rank indicator     sd
+##    &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;
+##  1 Midt-Norge 2003-2007           2     0.427 0.139 
+##  2 Midt-Norge 2008-2012           3     0.573 0.0992
+##  3 Midt-Norge 2013-2017           4     0.536 0.212 
+##  4 Midt-Norge 2018-2022           5     0.607 0.179 
+##  5 Midt-Norge pre 2003            1     0.642 0.182 
+##  6 Nord-Norge 2003-2007           2     0.460 0.149 
+##  7 Nord-Norge 2008-2012           3     0.675 0.0602
+##  8 Nord-Norge 2013-2017           4     0.641 0.127 
+##  9 Nord-Norge 2018-2022           5     0.625 0.110 
+## 10 Nord-Norge pre 2003            1     0.625 0.194 
+## # ℹ 15 more rows</code></pre>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>labs <span class="ot">&lt;-</span> <span class="fu">unique</span>(i_aggregatedToPeriods<span class="sc">$</span>period[<span class="fu">order</span>(i_aggregatedToPeriods<span class="sc">$</span>period_rank)])</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>i_aggregatedToPeriods <span class="sc">%&gt;%</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> period_rank, </span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> indicator,</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">colour=</span>region))<span class="sc">+</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin=</span>indicator<span class="sc">-</span>sd, </span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>                    <span class="at">ymax=</span>indicator<span class="sc">+</span>sd), </span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>                    <span class="at">width=</span>.<span class="dv">2</span>,</span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>                 <span class="at">position=</span><span class="fu">position_dodge</span>(<span class="fl">0.2</span>)) <span class="sc">+</span></span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">12</span>)<span class="sc">+</span></span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> labs)<span class="sc">+</span></span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> <span class="st">&quot;indikatorverdi&quot;</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:summer-temp-time-periods"></span>
+<img src="medianSummerTemperature_files/figure-html/summer-temp-time-periods-1.png" alt="Scaled indicator values, aggregated over 5 year intervals. Errors represent temporal variation (standard errors) within regions and across 5 years." width="672" />
+<p class="caption">
+Figure 1.6: Scaled indicator values, aggregated over 5 year intervals. Errors represent temporal variation (standard errors) within regions and across 5 years.
+</p>
+</div>
+<p>Finally, I can add these values to the sp object with the accounting areas.</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>reg2 <span class="ot">&lt;-</span> reg <span class="sc">%&gt;%</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(i_aggregatedToPeriods[i_aggregatedToPeriods<span class="sc">$</span>period_rank<span class="sc">==</span><span class="dv">5</span>,], <span class="at">by=</span><span class="fu">join_by</span>(region))</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>myCol <span class="ot">&lt;-</span> <span class="st">&quot;RdYlGn&quot;</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>myCol2 <span class="ot">&lt;-</span> <span class="st">&quot;-RdYlGn&quot;</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>tm_main <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(reg2)<span class="sc">+</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">col=</span><span class="st">&quot;indicator&quot;</span>,</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">title=</span><span class="st">&quot;Indikator:</span><span class="sc">\n</span><span class="st">sommertemperatur&quot;</span>,</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> myCol,</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">style=</span><span class="st">&quot;fixed&quot;</span>,</span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,.<span class="dv">2</span>)) </span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>tm_inset <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(reg2)<span class="sc">+</span></span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">col=</span><span class="st">&quot;sd&quot;</span>,</span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>              <span class="at">title=</span><span class="st">&quot;SD&quot;</span>,</span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>              <span class="at">palette =</span> myCol2,</span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>              <span class="at">style=</span><span class="st">&quot;cont&quot;</span>)<span class="sc">+</span></span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(<span class="at">legend.format =</span> <span class="fu">list</span>(<span class="at">digits=</span><span class="dv">2</span>))</span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_arrange</span>(tm_main, </span>
+<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a>             tm_inset)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:wall-to-wall-summer-temp-indicator"></span>
+<img src="medianSummerTemperature_files/figure-html/wall-to-wall-summer-temp-indicator-1.png" alt="Summer tempreature indicator values for five accounting areas in Norway. SD is the spatial variation." width="672" />
+<p class="caption">
+Figure 1.7: Summer tempreature indicator values for five accounting areas in Norway. SD is the spatial variation.
+</p>
+</div>
+</div>
+</div>
+</div>
+  </main>
+
+  <div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page">
+      <h2>On this page</h2>
+      <div id="book-on-this-page"></div>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          <li><a id="book-source" href="#">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="#">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5">
+  <div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong></strong>" was written by . </p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+
+
+</body>
+
+</html>

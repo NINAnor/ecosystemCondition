@@ -98,7 +98,7 @@
 <h2>
 <span class="header-section-number">9.3</span> Analyses<a class="anchor" aria-label="anchor" href="#analyses-6"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb395"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb393"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Set up conditional file paths</span></span>
 <span><span class="va">dir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/substr.html">substr</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span>, <span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span></span>
 <span></span>
@@ -106,16 +106,16 @@
 <span>               <span class="st">"P:/41201785_okologisk_tilstand_2022_2023/data/"</span>,</span>
 <span>               <span class="st">"/data/P-Prosjekter2/41201785_okologisk_tilstand_2022_2023/data/"</span><span class="op">)</span></span></code></pre></div>
 <p>Import data</p>
-<div class="sourceCode" id="cb396"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb394"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#st_layers(paste0(pData, "Basisdata_0000_Norge_25833_StatistiskRutenett5km_FGDB.gdb"))</span></span>
 <span><span class="va">grid_5km</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html">read_sf</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">pData</span>, <span class="st">"Basisdata_0000_Norge_25833_StatistiskRutenett5km_FGDB.gdb"</span><span class="op">)</span><span class="op">)</span> </span></code></pre></div>
-<div class="sourceCode" id="cb397"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb395"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">tmap_mode</span><span class="op">(</span><span class="st">"view"</span><span class="op">)</span></span>
 <span><span class="fu">tm_shape</span><span class="op">(</span><span class="va">grid_5km</span><span class="op">$</span><span class="va">SHAPE</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu">tm_borders</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="images/masterGrid_screenShot.PNG" width="800"></div>
 <p>Confirming CRS is EPSG25833:</p>
-<div class="sourceCode" id="cb398"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb396"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">st_crs</span><span class="op">(</span><span class="va">grid_5km</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Coordinate Reference System:</span></span>
 <span><span class="co">#&gt;   User input: ETRS89 / UTM zone 33N </span></span>
@@ -175,7 +175,7 @@
 <span class="header-section-number">9.3.1</span> Make grid<a class="anchor" aria-label="anchor" href="#make-grid"><i class="fas fa-link"></i></a>
 </h3>
 <p>Use the bbox and split into 50 x 50 meter cells</p>
-<div class="sourceCode" id="cb399"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb397"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="va">masterGrid_50m</span> <span class="op">&lt;-</span> <span class="fu">st_as_stars</span><span class="op">(</span><span class="fu">st_bbox</span><span class="op">(</span><span class="va">grid_5km</span><span class="op">)</span>, dx <span class="op">=</span> <span class="fl">50</span>, dy <span class="op">=</span> <span class="fl">50</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; stars object with 2 dimensions and 1 attribute</span></span>
 <span><span class="co">#&gt; attribute(s), summary of first 1e+05 cells:</span></span>
@@ -187,7 +187,7 @@
 <span><span class="co">#&gt; y    1 30800 7965000   -50 ETRS89 / UTM zone 33N [y]</span></span></code></pre></div>
 <p>This file is 6GB.</p>
 <p>Number of cells, in millions, is:</p>
-<div class="sourceCode" id="cb400"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb398"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">masterGrid_50m</span><span class="op">)</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">masterGrid_50m</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fl">10</span><span class="op">^</span><span class="fl">6</span></span>
 <span><span class="co">#&gt;     x </span></span>
 <span><span class="co">#&gt; 754.6</span></span></code></pre></div>
@@ -197,14 +197,14 @@
 <h3>
 <span class="header-section-number">9.3.2</span> Eksport file (final product)<a class="anchor" aria-label="anchor" href="#eksport-file-final-product"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb401"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb399"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">stars</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/stars/reference/write_stars.html">write_stars</a></span><span class="op">(</span><span class="va">masterGrid_50m</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">pData</span>, <span class="st">"masterGrid_50m.tiff"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div id="test-import" class="section level3" number="9.3.3">
 <h3>
 <span class="header-section-number">9.3.3</span> Test import<a class="anchor" aria-label="anchor" href="#test-import"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb402"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb400"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">temp</span> <span class="op">&lt;-</span> <span class="fu">stars</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/stars/reference/read_stars.html">read_stars</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">pData</span>, <span class="st">"masterGrid_50m.tiff"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu">st_dimensions</span><span class="op">(</span><span class="va">temp</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   from    to  offset delta                refsys point x/y</span></span>

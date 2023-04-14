@@ -238,7 +238,7 @@
 <code class="sourceCode R"><span><span class="va">reg</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html">st_read</a></span><span class="op">(</span><span class="st">"data/regions.shp"</span>, options <span class="op">=</span> <span class="st">"ENCODING=UTF8"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; options:        ENCODING=UTF8 </span></span>
 <span><span class="co">#&gt; Reading layer `regions' from data source </span></span>
-<span><span class="co">#&gt;   `/data/Egenutvikling/41001581_egenutvikling_anders_kolstad/github/ecosystemCondition/data/regions.shp' </span></span>
+<span><span class="co">#&gt;   `/data/scratch/Matt_bookdown__debug/ecosystemCondition/data/regions.shp' </span></span>
 <span><span class="co">#&gt;   using driver `ESRI Shapefile'</span></span>
 <span><span class="co">#&gt; Simple feature collection with 5 features and 2 fields</span></span>
 <span><span class="co">#&gt; Geometry type: POLYGON</span></span>
@@ -250,7 +250,7 @@
 <div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">nor</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html">st_read</a></span><span class="op">(</span><span class="st">"data/outlineOfNorway_EPSG25833.shp"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Reading layer `outlineOfNorway_EPSG25833' from data source </span></span>
-<span><span class="co">#&gt;   `/data/Egenutvikling/41001581_egenutvikling_anders_kolstad/github/ecosystemCondition/data/outlineOfNorway_EPSG25833.shp' </span></span>
+<span><span class="co">#&gt;   `/data/scratch/Matt_bookdown__debug/ecosystemCondition/data/outlineOfNorway_EPSG25833.shp' </span></span>
 <span><span class="co">#&gt;   using driver `ESRI Shapefile'</span></span>
 <span><span class="co">#&gt; Simple feature collection with 1 feature and 2 fields</span></span>
 <span><span class="co">#&gt; Geometry type: MULTIPOLYGON</span></span>
@@ -736,7 +736,7 @@ Figure 2.3: Times series for median summer temperature centered on the median va
 <span><span class="co">#&gt;  8 Nord-Norge 2013-2017           4     0.641 0.127 </span></span>
 <span><span class="co">#&gt;  9 Nord-Norge 2018-2022           5     0.625 0.110 </span></span>
 <span><span class="co">#&gt; 10 Nord-Norge pre 2003            1     0.625 0.194 </span></span>
-<span><span class="co">#&gt; # … with 15 more rows</span></span></code></pre></div>
+<span><span class="co">#&gt; # ℹ 15 more rows</span></span></code></pre></div>
 <div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">labs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">i_aggregatedToPeriods</span><span class="op">$</span><span class="va">period</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">i_aggregatedToPeriods</span><span class="op">$</span><span class="va">period_rank</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
 <span></span>

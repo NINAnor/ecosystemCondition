@@ -6,15 +6,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 8 Homogeneous Impact Areas | Indicators for Ecosystem Condition in Norway</title>
 <meta name="author" content="Anders L. Kolstad">
-<meta name="description" content="Author and date: Anders Kolstad   8.1 Introduction This chapter documents the creation of a wall-to-wall map of homogeneous impact areas in Norway. The map is produced by binning values in the...">
+<meta name="description" content="Author and date: Anders L. Kolstad March 2023   8.1 Introduction This chapter documents the creation of a wall-to-wall map of homogeneous impact areas in Norway. The map is produced by binning...">
 <meta name="generator" content="bookdown 0.33 with bs4_book()">
 <meta property="og:title" content="Chapter 8 Homogeneous Impact Areas | Indicators for Ecosystem Condition in Norway">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://ninanor.github.io/ecosystemCondition/index.html/homogeneous-impact-areas.html">
-<meta property="og:description" content="Author and date: Anders Kolstad   8.1 Introduction This chapter documents the creation of a wall-to-wall map of homogeneous impact areas in Norway. The map is produced by binning values in the...">
+<meta property="og:description" content="Author and date: Anders L. Kolstad March 2023   8.1 Introduction This chapter documents the creation of a wall-to-wall map of homogeneous impact areas in Norway. The map is produced by binning...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 8 Homogeneous Impact Areas | Indicators for Ecosystem Condition in Norway">
-<meta name="twitter:description" content="Author and date: Anders Kolstad   8.1 Introduction This chapter documents the creation of a wall-to-wall map of homogeneous impact areas in Norway. The map is produced by binning values in the...">
+<meta name="twitter:description" content="Author and date: Anders L. Kolstad March 2023   8.1 Introduction This chapter documents the creation of a wall-to-wall map of homogeneous impact areas in Norway. The map is produced by binning...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -77,7 +77,8 @@
 </h1>
 <p><br></p>
 <p><em>Author and date:</em></p>
-<p>Anders Kolstad</p>
+<p>Anders L. Kolstad</p>
+<p>March 2023</p>
 <p><br></p>
 <!-- Load all your dependencies here -->
 <div id="introduction-5" class="section level2" number="8.1">
@@ -121,17 +122,17 @@ Norsk institutt for naturforskning.</p>
 <span class="header-section-number">8.3.1</span> Import data<a class="anchor" aria-label="anchor" href="#import-data"><i class="fas fa-link"></i></a>
 </h3>
 <p>The path must be conditional:</p>
-<div class="sourceCode" id="cb358"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb356"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/substr.html">substr</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span>, <span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb359"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb357"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">dir</span> <span class="op">==</span> <span class="st">"C:"</span>, </span>
 <span>        <span class="st">"R:/GeoSpatialData/Utility_governmentalServices/Norway_Infrastructure_Index/Original/Infrastrukturindeks_UTM33/infra_tiff.tif"</span>,</span>
 <span>        <span class="st">"/data/R/GeoSpatialData/Utility_governmentalServices/Norway_Infrastructure_Index/Original/Infrastrukturindeks_UTM33/infra_tiff.tif"</span><span class="op">)</span></span></code></pre></div>
 <p>Import a stars proxy (no data imported yet)</p>
-<div class="sourceCode" id="cb360"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb358"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">infra</span> <span class="op">&lt;-</span> <span class="fu">stars</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/stars/reference/read_stars.html">read_stars</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span></span></code></pre></div>
 <p>Print the coordinate reference system:</p>
-<div class="sourceCode" id="cb361"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb359"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">st_crs</span><span class="op">(</span><span class="va">infra</span><span class="op">)</span><span class="op">$</span><span class="va">input</span></span>
 <span><span class="co">#&gt; [1] "WGS_1984_UTM_Zone_33N"</span></span></code></pre></div>
 </div>
@@ -141,12 +142,12 @@ Norsk institutt for naturforskning.</p>
 </h3>
 <p>It’s easier to see what’s happening if we zoom in a bit.
 Lets get a boundary box around Trondheim.</p>
-<div class="sourceCode" id="cb362"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb360"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">myBB</span> <span class="op">&lt;-</span> <span class="fu">st_bbox</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>xmin<span class="op">=</span><span class="fl">260520.12</span>, xmax <span class="op">=</span> <span class="fl">278587.56</span>,</span>
 <span>                ymin <span class="op">=</span> <span class="fl">7032142.5</span>, ymax <span class="op">=</span> <span class="fl">7045245.27</span><span class="op">)</span>,</span>
 <span>                crs <span class="op">=</span> <span class="fu">st_crs</span><span class="op">(</span><span class="va">infra</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Cropping the raster to the bbox</p>
-<div class="sourceCode" id="cb363"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb361"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">infra_trd</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_crop.html">st_crop</a></span><span class="op">(</span><span class="va">infra</span>, <span class="va">myBB</span><span class="op">)</span></span></code></pre></div>
 <div id="get-osm-highways" class="section level4" number="8.3.2.1">
 <h4>
@@ -154,24 +155,24 @@ Lets get a boundary box around Trondheim.</p>
 </h4>
 <p>Lets download some base maps to help validate and contextualize the infrastructure index.</p>
 <p>Transform to lat long due to osm requirements</p>
-<div class="sourceCode" id="cb364"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb362"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">infra_trd_ll</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html">st_transform</a></span><span class="op">(</span><span class="va">infra_trd</span>, <span class="fl">4326</span><span class="op">)</span></span></code></pre></div>
 <p>Get the boundary box of the cropped raster</p>
-<div class="sourceCode" id="cb365"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb363"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">myBB_ll</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_bbox.html">st_bbox</a></span><span class="op">(</span><span class="va">infra_trd_ll</span><span class="op">)</span></span></code></pre></div>
 <p>Download highways using the above bbox.</p>
-<div class="sourceCode" id="cb366"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb364"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hw</span> <span class="op">&lt;-</span> </span>
 <span>  <span class="fu">osmplotr</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/osmplotr/reference/extract_osm_objects.html">extract_osm_objects</a></span><span class="op">(</span></span>
 <span>    bbox <span class="op">=</span> <span class="va">myBB_ll</span>,</span>
 <span>    key <span class="op">=</span> <span class="st">"highway"</span>,</span>
 <span>    sf <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code></pre></div>
 <p>Transforming highway data back into utm, although not strictly necessary.</p>
-<div class="sourceCode" id="cb367"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb365"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hw_utm</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html">st_transform</a></span><span class="op">(</span><span class="va">hw</span>, <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_crs.html">st_crs</a></span><span class="op">(</span><span class="va">infra_trd</span><span class="op">)</span><span class="op">)</span> </span></code></pre></div>
 <p>This object contains too many roads (about 30k).
 I’ll take out the unnamed roads.</p>
-<div class="sourceCode" id="cb368"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb366"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hw_utm</span> <span class="op">&lt;-</span> <span class="va">hw_utm</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">hw_utm</span><span class="op">$</span><span class="va">name</span><span class="op">)</span>,<span class="op">]</span></span></code></pre></div>
 </div>
 <div id="discretize" class="section level4" number="8.3.2.2">
@@ -179,7 +180,7 @@ I’ll take out the unnamed roads.</p>
 <span class="header-section-number">8.3.2.2</span> Discretize<a class="anchor" aria-label="anchor" href="#discretize"><i class="fas fa-link"></i></a>
 </h4>
 <p>Here I define a simplified categorical typology for the infrastructure index using four classes.</p>
-<div class="sourceCode" id="cb369"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb367"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">infra_trd</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"infrastructureIndex"</span></span>
 <span><span class="va">infra_trd_reclassed</span> <span class="op">&lt;-</span>  <span class="va">infra_trd</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">mutate</span><span class="op">(</span>infrastructureIndex <span class="op">=</span> <span class="fu">case_when</span><span class="op">(</span></span>
@@ -189,7 +190,7 @@ I’ll take out the unnamed roads.</p>
 <span>    <span class="va">infrastructureIndex</span> <span class="op">&gt;=</span> <span class="fl">12</span> <span class="op">~</span> <span class="fl">3</span></span>
 <span>  <span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Lets plot these two maps side by side</p>
-<div class="sourceCode" id="cb370"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb368"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">map_trd_reclassed</span> <span class="op">&lt;-</span> <span class="fu">tm_shape</span><span class="op">(</span><span class="va">infra_trd_reclassed</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu">tm_raster</span><span class="op">(</span>title<span class="op">=</span><span class="st">"Infrastructure Index"</span>,</span>
 <span>            <span class="co">#palette = "viridis",</span></span>
@@ -197,7 +198,7 @@ I’ll take out the unnamed roads.</p>
 <span>  <span class="fu">tm_layout</span><span class="op">(</span>legend.outside <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu">tm_shape</span><span class="op">(</span><span class="va">hw_utm</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu">tm_lines</span><span class="op">(</span>col<span class="op">=</span><span class="st">"white"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb371"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb369"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">map_trd</span> <span class="op">&lt;-</span> <span class="fu">tm_shape</span><span class="op">(</span><span class="va">infra_trd</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu">tm_raster</span><span class="op">(</span>title<span class="op">=</span><span class="st">"Infrastructure Index"</span>,</span>
 <span>            style<span class="op">=</span><span class="st">"cont"</span>,</span>
@@ -205,7 +206,7 @@ I’ll take out the unnamed roads.</p>
 <span>  <span class="fu">tm_layout</span><span class="op">(</span>legend.outside <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu">tm_shape</span><span class="op">(</span><span class="va">hw_utm</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu">tm_lines</span><span class="op">(</span>col<span class="op">=</span><span class="st">"white"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb372"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb370"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">tmap_arrange</span><span class="op">(</span><span class="va">map_trd</span>,</span>
 <span>             <span class="va">map_trd_reclassed</span>,</span>
 <span>             ncol<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
@@ -228,22 +229,22 @@ Note that there is still considerable human activity also there in the form of o
 </h4>
 <p>The resolution in this map is more than we need, and the size of the data implies that the next step, the vectorization, would take too long.
 We therefore aggregate, or reduce the resolution.</p>
-<div class="sourceCode" id="cb373"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb371"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dim</span> <span class="op">&lt;-</span> <span class="fu">st_dimensions</span><span class="op">(</span><span class="va">infra</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Resolution is"</span>, <span class="va">dim</span><span class="op">$</span><span class="va">x</span><span class="op">$</span><span class="va">delta</span>, <span class="st">"by"</span>, <span class="va">dim</span><span class="op">$</span><span class="va">x</span><span class="op">$</span><span class="va">delta</span>, <span class="st">"meters"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "Resolution is 100 by 100 meters"</span></span></code></pre></div>
-<div class="sourceCode" id="cb374"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb372"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">infra_trd_reclassed_agg</span> <span class="op">&lt;-</span> <span class="fu">st_warp</span><span class="op">(</span><span class="va">infra_trd_reclassed</span>, cellsize <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">1000</span><span class="op">)</span>, </span>
 <span>                                   crs <span class="op">=</span> <span class="fu">st_crs</span><span class="op">(</span><span class="va">infra_trd_reclassed</span><span class="op">)</span>, </span>
 <span>                                   use_gdal <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                                   method <span class="op">=</span> <span class="st">"average"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb375"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb373"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dim</span> <span class="op">&lt;-</span> <span class="fu">st_dimensions</span><span class="op">(</span><span class="va">infra_trd_reclassed_agg</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Resolution is"</span>, <span class="va">dim</span><span class="op">$</span><span class="va">x</span><span class="op">$</span><span class="va">delta</span>, <span class="st">"by"</span>, <span class="va">dim</span><span class="op">$</span><span class="va">x</span><span class="op">$</span><span class="va">delta</span>, <span class="st">"meters"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "Resolution is 1000 by 1000 meters"</span></span></code></pre></div>
 <p>Each cell is now the average of the aggregated cells, and hence the value is continuous again.
 Let’s make it discrete.</p>
-<div class="sourceCode" id="cb376"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb374"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">infra_trd_reclassed_agg</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"infrastructureIndex"</span></span>
 <span><span class="va">infra_trd_reclassed_agg</span> <span class="op">&lt;-</span>  <span class="va">infra_trd_reclassed_agg</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">mutate</span><span class="op">(</span>infrastructureIndex <span class="op">=</span> <span class="fu">case_when</span><span class="op">(</span></span>
@@ -252,7 +253,7 @@ Let’s make it discrete.</p>
 <span>    <span class="va">infrastructureIndex</span> <span class="op">&lt;</span> <span class="fl">12</span> <span class="op">~</span> <span class="fl">2</span>,</span>
 <span>    <span class="va">infrastructureIndex</span> <span class="op">&gt;=</span> <span class="fl">12</span> <span class="op">~</span> <span class="fl">3</span></span>
 <span>  <span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb377"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb375"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">tm_shape</span><span class="op">(</span><span class="va">infra_trd_reclassed_agg</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu">tm_raster</span><span class="op">(</span>title<span class="op">=</span><span class="st">"Infrastructure Index"</span>,</span>
 <span>            style<span class="op">=</span><span class="st">"cat"</span><span class="op">)</span><span class="op">+</span></span>
@@ -267,10 +268,10 @@ Figure 6.6: Infrastrcture index over Trondheim on a four-step discrete scale, ag
 </div>
 <p>This resolution is more than good enough for our purpose here.
 I see that the map extends a bit into the fjord. We want to cut away these areas. We can use a map of the outline of Norway to do this.</p>
-<div class="sourceCode" id="cb378"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb376"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">outline</span> <span class="op">&lt;-</span> <span class="fu">st_read</span><span class="op">(</span><span class="st">"data/outlineOfNorway_EPSG25833.shp"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Reading layer `outlineOfNorway_EPSG25833' from data source </span></span>
-<span><span class="co">#&gt;   `/data/Egenutvikling/41001581_egenutvikling_anders_kolstad/github/ecosystemCondition/data/outlineOfNorway_EPSG25833.shp' </span></span>
+<span><span class="co">#&gt;   `/data/scratch/Matt_bookdown__debug/ecosystemCondition/data/outlineOfNorway_EPSG25833.shp' </span></span>
 <span><span class="co">#&gt;   using driver `ESRI Shapefile'</span></span>
 <span><span class="co">#&gt; Simple feature collection with 1 feature and 2 fields</span></span>
 <span><span class="co">#&gt; Geometry type: MULTIPOLYGON</span></span>
@@ -278,13 +279,13 @@ I see that the map extends a bit into the fjord. We want to cut away these areas
 <span><span class="co">#&gt; Bounding box:  xmin: -113472.7 ymin: 6448359 xmax: 1114618 ymax: 7939917</span></span>
 <span><span class="co">#&gt; Projected CRS: ETRS89 / UTM zone 33N</span></span></code></pre></div>
 <p>The CRS needs to be identical</p>
-<div class="sourceCode" id="cb379"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb377"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">infra_trd_reclassed_agg</span> <span class="op">&lt;-</span> <span class="fu">st_transform</span><span class="op">(</span><span class="va">infra_trd_reclassed_agg</span>, <span class="fl">25833</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb380"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb378"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">infra_trd_reclassed_agg_terrestrial</span> <span class="op">&lt;-</span> <span class="fu">st_crop</span><span class="op">(</span><span class="va">infra_trd_reclassed_agg</span>, <span class="va">outline</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning in st_crop.stars(infra_trd_reclassed_agg, outline):</span></span>
 <span><span class="co">#&gt; crop only crops regular grids</span></span></code></pre></div>
-<div class="sourceCode" id="cb381"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb379"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">tm_shape</span><span class="op">(</span><span class="va">infra_trd_reclassed_agg_terrestrial</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu">tm_raster</span><span class="op">(</span>title<span class="op">=</span><span class="st">"Infrastructure Index"</span>,</span>
 <span>            style<span class="op">=</span><span class="st">"cat"</span><span class="op">)</span><span class="op">+</span></span>
@@ -307,7 +308,7 @@ Figure 8.1: Infrastrcture index over Trondheim on a four-step discrete scale, ag
 <h3>
 <span class="header-section-number">8.3.3</span> Aggregate the entire map to 1x1 km<a class="anchor" aria-label="anchor" href="#aggregate-the-entire-map-to-1x1-km"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb382"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb380"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># runtime about 30 sec</span></span>
 <span><span class="va">infra_agg</span> <span class="op">&lt;-</span> <span class="fu">st_warp</span><span class="op">(</span><span class="va">infra</span>, cellsize <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">1000</span><span class="op">)</span>, </span>
 <span>                                   crs <span class="op">=</span> <span class="fu">st_crs</span><span class="op">(</span><span class="va">infra</span><span class="op">)</span>, </span>
@@ -321,7 +322,7 @@ Figure 8.1: Infrastrcture index over Trondheim on a four-step discrete scale, ag
 <span class="header-section-number">8.3.4</span> Cut out marine areas<a class="anchor" aria-label="anchor" href="#cut-out-marine-areas"><i class="fas fa-link"></i></a>
 </h3>
 <p>I see that the map extends a bit into the fjord. We want to cut away these areas. We can use a map of the outline of Norway to do this.</p>
-<div class="sourceCode" id="cb383"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb381"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">infra_agg_terrestrial</span> <span class="op">&lt;-</span> <span class="fu">st_crop</span><span class="op">(</span><span class="va">infra_agg</span>, <span class="va">outline</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">infra_agg_terrestrial</span>, <span class="st">"P:/41201785_okologisk_tilstand_2022_2023/data/cache/infra_agg_terrestrial.rds"</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -329,7 +330,7 @@ Figure 8.1: Infrastrcture index over Trondheim on a four-step discrete scale, ag
 <h3>
 <span class="header-section-number">8.3.5</span> Discretize the entire map<a class="anchor" aria-label="anchor" href="#discretize-the-entire-map"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb384"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb382"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">infra_agg_terrestrial</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"infrastructureIndex"</span></span>
 <span></span>
 <span><span class="va">infra_agg_discrete</span> <span class="op">&lt;-</span> <span class="va">infra_agg_terrestrial</span> <span class="op">%&gt;%</span></span>
@@ -350,7 +351,7 @@ This makes it a quite big data object.
 The reason is that there is no really good way to burn polygon data on to raster grid cells after the disuse of the <a href="https://rspatial.org/raster">raster</a> package.
 It was not straight forward then either.
 But calculating intersections between polygons is very fast and easy.</p>
-<div class="sourceCode" id="cb385"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb383"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">infra_agg_discrete_vect</span> <span class="op">&lt;-</span> </span>
 <span>  <span class="fu">eaTools</span><span class="fu">::</span><span class="fu"><a href="https://ninanor.github.io/eaTools/reference/ea_homogeneous_area.html">ea_homogeneous_area</a></span><span class="op">(</span><span class="va">infra_agg_discrete</span>, </span>
 <span>                                groups <span class="op">=</span> <span class="va">infrastructureIndex</span><span class="op">)</span></span>
@@ -361,7 +362,7 @@ But calculating intersections between polygons is very fast and easy.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">infra_agg_discrete_vect</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">path</span>, <span class="st">"infra_agg_discrete_vect.rds"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Let’s plot this now.
 First, lets crop it to reduce computation time.</p>
-<div class="sourceCode" id="cb386"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb384"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">myBB</span> <span class="op">&lt;-</span> <span class="fu">st_bbox</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>xmin<span class="op">=</span><span class="fl">260520.12</span>, xmax <span class="op">=</span> <span class="fl">278587.56</span>,</span>
 <span>                ymin <span class="op">=</span> <span class="fl">7032142.5</span>, ymax <span class="op">=</span> <span class="fl">7045245.27</span><span class="op">)</span>,</span>
 <span>                crs <span class="op">=</span> <span class="fu">st_crs</span><span class="op">(</span><span class="va">infra_agg_discrete_vect</span><span class="op">)</span><span class="op">)</span></span>
@@ -369,7 +370,7 @@ First, lets crop it to reduce computation time.</p>
 <span><span class="va">infra_agg_discrete_vect_trd</span> <span class="op">&lt;-</span> <span class="fu">st_crop</span><span class="op">(</span><span class="va">infra_agg_discrete_vect</span>, <span class="va">myBB</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning: attribute variables are assumed to be spatially</span></span>
 <span><span class="co">#&gt; constant throughout all geometries</span></span></code></pre></div>
-<div class="sourceCode" id="cb387"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb385"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">tm_shape</span><span class="op">(</span><span class="va">infra_agg_discrete_vect_trd</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu">tm_polygons</span><span class="op">(</span>col<span class="op">=</span><span class="st">"infrastructureIndex"</span>,</span>
 <span>              style <span class="op">=</span> <span class="st">"cat"</span><span class="op">)</span><span class="op">+</span></span>
@@ -389,23 +390,23 @@ Figure 8.2: A vectorized version of the Infrastructure index over Trondheim on a
 <h2>
 <span class="header-section-number">8.4</span> Check national distribution<a class="anchor" aria-label="anchor" href="#check-national-distribution"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb388"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb386"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">regions</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html">read_sf</a></span><span class="op">(</span><span class="st">"data/regions.shp"</span>, options <span class="op">=</span> <span class="st">"ENCODING=UTF8"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">regions</span><span class="op">$</span><span class="va">region</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "Nord-Norge" "Midt-Norge" "Østlandet"  "Vestlandet"</span></span>
 <span><span class="co">#&gt; [5] "Sørlandet"</span></span></code></pre></div>
-<div class="sourceCode" id="cb389"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb387"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">st_crs</span><span class="op">(</span><span class="va">infra_agg_discrete_vect</span><span class="op">)</span> <span class="op">==</span> <span class="fu">st_crs</span><span class="op">(</span><span class="va">regions</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] TRUE</span></span></code></pre></div>
 <p>Since the two layers are completely overlapping, we can get the intersections</p>
-<div class="sourceCode" id="cb390"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb388"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">infra_stats</span> <span class="op">&lt;-</span> <span class="fu">eaTools</span><span class="fu">::</span><span class="fu"><a href="https://ninanor.github.io/eaTools/reference/ea_homogeneous_area.html">ea_homogeneous_area</a></span><span class="op">(</span><span class="va">infra_agg_discrete_vect</span>,</span>
 <span>                             <span class="va">regions</span>,</span>
 <span>                             keep1 <span class="op">=</span> <span class="st">"infrastructureIndex"</span>,</span>
 <span>                             keep2 <span class="op">=</span> <span class="st">"region"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">infra_stats</span>, <span class="st">"P:/41201785_okologisk_tilstand_2022_2023/data/cache/infra_stats.rds"</span><span class="op">)</span></span></code></pre></div>
 <p>Let’s calculate the areas of these polygons and compare the HIF in the five regions.</p>
-<div class="sourceCode" id="cb391"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb389"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">infra_stats</span><span class="op">$</span><span class="va">area_km2</span> <span class="op">&lt;-</span> <span class="fu">units</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/units/man/drop_units.html">drop_units</a></span><span class="op">(</span><span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_measures.html">st_area</a></span><span class="op">(</span><span class="va">infra_stats</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">infra_stats</span><span class="op">$</span><span class="va">area_km2</span> <span class="op">&lt;-</span> <span class="va">infra_stats</span><span class="op">$</span><span class="va">area_km2</span><span class="op">/</span><span class="fl">1000</span></span>
 <span></span>
@@ -437,20 +438,20 @@ Figure 1.23: Stacked barplot showing the distribution of human impact factor acr
 </div>
 <p>This distribution looks reasonable. The relative proportions are similar in the five regions, but <em>Østlandet</em> and <em>Sørlandet</em> have more infrastructure in general.</p>
 <p>Here are the numbers behind the figure above.</p>
-<div class="sourceCode" id="cb392"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb390"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">temp</span><span class="op">$</span><span class="va">area_km2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">temp</span><span class="op">$</span><span class="va">area_km2</span>,<span class="fl">0</span><span class="op">)</span></span>
 <span><span class="fu">DT</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/DT/man/datatable.html">datatable</a></span><span class="op">(</span><span class="va">temp</span><span class="op">)</span></span></code></pre></div>
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-13801a37fb86de16f462" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-13801a37fb86de16f462">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"],["Midt-Norge","Midt-Norge","Midt-Norge","Midt-Norge","Nord-Norge","Nord-Norge","Nord-Norge","Nord-Norge","Sørlandet","Sørlandet","Sørlandet","Sørlandet","Vestlandet","Vestlandet","Vestlandet","Vestlandet","Østlandet","Østlandet","Østlandet","Østlandet"],[0,1,2,3,0,1,2,3,0,1,2,3,0,1,2,3,0,1,2,3],[31390,8661,4604,2005,63009,5979,2417,1504,15199,24127,5731,3257,30533,6988,3683,2258,17242,22154,9760,3295]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>region<\/th>\n      <th>infrastructureIndex<\/th>\n      <th>area_km2<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[2,3]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-455005c904f23d79d516" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-455005c904f23d79d516">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"],["Midt-Norge","Midt-Norge","Midt-Norge","Midt-Norge","Nord-Norge","Nord-Norge","Nord-Norge","Nord-Norge","Sørlandet","Sørlandet","Sørlandet","Sørlandet","Vestlandet","Vestlandet","Vestlandet","Vestlandet","Østlandet","Østlandet","Østlandet","Østlandet"],[0,1,2,3,0,1,2,3,0,1,2,3,0,1,2,3,0,1,2,3],[31390,8661,4604,2005,63009,5979,2417,1504,15199,24127,5731,3257,30533,6988,3683,2258,17242,22154,9760,3295]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>region<\/th>\n      <th>infrastructureIndex<\/th>\n      <th>area_km2<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[2,3]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="export" class="section level2" number="8.5">
 <h2>
 <span class="header-section-number">8.5</span> Export<a class="anchor" aria-label="anchor" href="#export"><i class="fas fa-link"></i></a>
 </h2>
 <p>I will write this data to the NINA P server.</p>
-<div class="sourceCode" id="cb393"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb391"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">infra_agg_discrete_vect</span>, <span class="st">"P:/41201785_okologisk_tilstand_2022_2023/data/infrastrukturindeks/homogeneous_impact_areas.rds"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb394"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb392"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">HIA_returned</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"P:/41201785_okologisk_tilstand_2022_2023/data/infrastrukturindeks/homogeneous_impact_areas.rds"</span><span class="op">)</span></span></code></pre></div>
 
 </div>

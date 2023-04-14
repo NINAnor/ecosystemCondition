@@ -57,7 +57,7 @@ fig:unnamed-chunk-67
 fig:unnamed-chunk-72
 fig:unnamed-chunk-76
 fig:unnamed-chunk-78
-fig:unnamed-chunk-6
+fig:unnamed-chunk-5
 fig:unnamed-chunk-9
 fig:unnamed-chunk-12
 fig:unnamed-chunk-17
@@ -73,7 +73,6 @@ fig:unnamed-chunk-77
 fig:unnamed-chunk-82
 fig:unnamed-chunk-26
 fig:test-2
-fig:unnamed-chunk-5
 fig:unnamed-chunk-36
 fig:withMasking
 fig:unnamed-chunk-39

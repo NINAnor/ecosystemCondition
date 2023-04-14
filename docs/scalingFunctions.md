@@ -2,9 +2,9 @@
 
 
 
-Author. Anders L. Kolstad
+Anders L. Kolstad
 
-Date: 2023-03-24
+March 2023
 
 **Superseeded :** *The functionality explained here is moved over to the [eaTools](https://github.com/NINAnor/eaTools) package. Please see the documentation there for updated examples.*
 

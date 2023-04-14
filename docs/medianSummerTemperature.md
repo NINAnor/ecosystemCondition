@@ -159,7 +159,7 @@ Importing a shape file with the regional delineation.
 reg <- sf::st_read("data/regions.shp", options = "ENCODING=UTF8")
 #> options:        ENCODING=UTF8 
 #> Reading layer `regions' from data source 
-#>   `/data/Egenutvikling/41001581_egenutvikling_anders_kolstad/github/ecosystemCondition/data/regions.shp' 
+#>   `/data/scratch/Matt_bookdown__debug/ecosystemCondition/data/regions.shp' 
 #>   using driver `ESRI Shapefile'
 #> Simple feature collection with 5 features and 2 fields
 #> Geometry type: POLYGON
@@ -175,7 +175,7 @@ Outline of Norway
 ```r
 nor <- sf::st_read("data/outlineOfNorway_EPSG25833.shp")
 #> Reading layer `outlineOfNorway_EPSG25833' from data source 
-#>   `/data/Egenutvikling/41001581_egenutvikling_anders_kolstad/github/ecosystemCondition/data/outlineOfNorway_EPSG25833.shp' 
+#>   `/data/scratch/Matt_bookdown__debug/ecosystemCondition/data/outlineOfNorway_EPSG25833.shp' 
 #>   using driver `ESRI Shapefile'
 #> Simple feature collection with 1 feature and 2 fields
 #> Geometry type: MULTIPOLYGON
@@ -722,7 +722,7 @@ i_aggregatedToPeriods <- regional_means_long %>%
 #>  8 Nord-Norge 2013-2017           4     0.641 0.127 
 #>  9 Nord-Norge 2018-2022           5     0.625 0.110 
 #> 10 Nord-Norge pre 2003            1     0.625 0.194 
-#> # … with 15 more rows
+#> # ℹ 15 more rows
 ```
 
 

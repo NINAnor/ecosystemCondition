@@ -139,8 +139,8 @@ DT::datatable(senorgelayers)
 <div class="figure">
 
 ```{=html}
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-c169842b975e1f2e876a" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-c169842b975e1f2e876a">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16"],["sdfsw","fsw","sd","age","swe","#swepr","#swepr","qsw","lwc","gwb_q","gwb_eva","gwb_gwtcl","gwb_sssdev","gwb_sssrel","tm","rr"],["16","8","16","8","16","no longer included","16","8","8","16","8","8","16","16","16","16"],[65535,255,65535,255,65535,null,65535,255,255,65535,255,255,32767,65535,65535,65535],[65534,254,null,254,null,null,null,254,254,null,null,null,null,null,null,null],["fresh snow depth","fresh snow","snow depth","snow age","snow water equivalent",null,"snow water equivalent percentage","snow melt","free water content in snow","runoff","evapotranspiration","ground water condition","water capacity of the soil","current water saturation of the soil","temperature","precipitation"],["mm","mm (water equivalent)","mm","number of days since last snowfall","1/10 mm (water equivalent)",null,"1/10 %","mm (water equivalent)","1/10 % free water in the snow layer","1/10 mm","1/10 mm","24h percentile of the normal period","mm in relation to maximum value of the normal period","% of the maximum value of the normal period","celsius","mm"],["Nysnødybde","Nysnø","Snødybde","Snøens alder","Snømengde",null,"Prosentandel swe","Snøsmelting","Snøtilstand","Avrenning","Fordamping","Grunnvannstilstand","Jordas vannkapasitet","Vannmetting i jord","Temperatur","Nedbør"],["Verdier i fil i 16bit integer verdier som angir mm snødybde.","Verdier angir mm vannekvivalent.","Verdier angir mm snødybde.","Verdiene angir antall dager siden siste snøfall.","Verdiene angir 1/10mm vannekvivalent. Altså en verdi på 102 er 10.2 mm vann.",null,"Veldig uklar beskrivelse gitt av NVE. Må sjekkes!","Verdiene angir mm vannekvivalent.","Verdien angir i prosent hvor mye fritt vann det er i snøpakka. Oppgitt i 1/10 %. En verdi på 45 er altså 4.5%.","Angir avrenning i 1/10mm vann. En verdi på 34 er altså 3.4 mm.","Angir fordampning i 1/10 mm vann.","Verdien angir hvilken døgnpercentilene i normalperioden som verdien tilhører. Verdiene er her 5, 25, 50, 75 og 95.","Verdien angir lagerkapasiteten (i mm) i forhold til maxverdien registrert i 30 årsperioden (1981-2010). Negativ verdi betyr altså at dagens vannlager verdi er over maxverdien.","Dagens vannlager verdi i prosent av den samme maksimale verdien som brukes i gwb_ssdev. En verdi over 100 angir altså at maksverdien er overskredet.","Verdien angir grader i Celsius (re-skalert fra tiendels Kelvin, der en verdi på 2811 er (2811-2731)/10 = 8.0 C.","Verdien angir nedbør i mm (re-skalert fra tiendels mm)."],["gt_Meteorology_Norway_seNorge_FreshSnowDepth_days","gt_Meteorology_Norway_seNorge_FreshSnow_days","gt_Meteorology_Norway_seNorge_SnowDepth_days","gt_Meteorology_Norway_seNorge_SnowAge_days","gt_Meteorology_Norway_seNorge_SnowAmount_days",null,"gt_Meteorology_Norway_seNorge_SnowAmountPercentage_days","gt_Meteorology_Norway_seNorge_SnowMelt_days","gt_Meteorology_Norway_seNorge_SnowFreeWaterContent_days","gt_Meteorology_Norway_seNorge_Runoff_days","gt_Meteorology_Norway_seNorge_Evapotranspiration_days","gt_Meteorology_Norway_seNorge_GroundWaterCondition_days","gt_Meteorology_Norway_seNorge_WaterCapacitySoil_days","gt_Meteorology_Norway_seNorge_WaterSaturationSoil_days","gt_Meteorology_Norway_seNorge_Temperature_days","gt_Meteorology_Norway_seNorge_Precipitation_days"],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,"celsius","precipitation_daily"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>abbrev<\/th>\n      <th>bit<\/th>\n      <th>nodata<\/th>\n      <th>bare_ground<\/th>\n      <th>name<\/th>\n      <th>unit<\/th>\n      <th>navn<\/th>\n      <th>beskrivelse<\/th>\n      <th>grass_mapset<\/th>\n      <th>color_table<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-966f4d4ccb564a13ae22" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-966f4d4ccb564a13ae22">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16"],["sdfsw","fsw","sd","age","swe","#swepr","#swepr","qsw","lwc","gwb_q","gwb_eva","gwb_gwtcl","gwb_sssdev","gwb_sssrel","tm","rr"],["16","8","16","8","16","no longer included","16","8","8","16","8","8","16","16","16","16"],[65535,255,65535,255,65535,null,65535,255,255,65535,255,255,32767,65535,65535,65535],[65534,254,null,254,null,null,null,254,254,null,null,null,null,null,null,null],["fresh snow depth","fresh snow","snow depth","snow age","snow water equivalent",null,"snow water equivalent percentage","snow melt","free water content in snow","runoff","evapotranspiration","ground water condition","water capacity of the soil","current water saturation of the soil","temperature","precipitation"],["mm","mm (water equivalent)","mm","number of days since last snowfall","1/10 mm (water equivalent)",null,"1/10 %","mm (water equivalent)","1/10 % free water in the snow layer","1/10 mm","1/10 mm","24h percentile of the normal period","mm in relation to maximum value of the normal period","% of the maximum value of the normal period","celsius","mm"],["Nysnødybde","Nysnø","Snødybde","Snøens alder","Snømengde",null,"Prosentandel swe","Snøsmelting","Snøtilstand","Avrenning","Fordamping","Grunnvannstilstand","Jordas vannkapasitet","Vannmetting i jord","Temperatur","Nedbør"],["Verdier i fil i 16bit integer verdier som angir mm snødybde.","Verdier angir mm vannekvivalent.","Verdier angir mm snødybde.","Verdiene angir antall dager siden siste snøfall.","Verdiene angir 1/10mm vannekvivalent. Altså en verdi på 102 er 10.2 mm vann.",null,"Veldig uklar beskrivelse gitt av NVE. Må sjekkes!","Verdiene angir mm vannekvivalent.","Verdien angir i prosent hvor mye fritt vann det er i snøpakka. Oppgitt i 1/10 %. En verdi på 45 er altså 4.5%.","Angir avrenning i 1/10mm vann. En verdi på 34 er altså 3.4 mm.","Angir fordampning i 1/10 mm vann.","Verdien angir hvilken døgnpercentilene i normalperioden som verdien tilhører. Verdiene er her 5, 25, 50, 75 og 95.","Verdien angir lagerkapasiteten (i mm) i forhold til maxverdien registrert i 30 årsperioden (1981-2010). Negativ verdi betyr altså at dagens vannlager verdi er over maxverdien.","Dagens vannlager verdi i prosent av den samme maksimale verdien som brukes i gwb_ssdev. En verdi over 100 angir altså at maksverdien er overskredet.","Verdien angir grader i Celsius (re-skalert fra tiendels Kelvin, der en verdi på 2811 er (2811-2731)/10 = 8.0 C.","Verdien angir nedbør i mm (re-skalert fra tiendels mm)."],["gt_Meteorology_Norway_seNorge_FreshSnowDepth_days","gt_Meteorology_Norway_seNorge_FreshSnow_days","gt_Meteorology_Norway_seNorge_SnowDepth_days","gt_Meteorology_Norway_seNorge_SnowAge_days","gt_Meteorology_Norway_seNorge_SnowAmount_days",null,"gt_Meteorology_Norway_seNorge_SnowAmountPercentage_days","gt_Meteorology_Norway_seNorge_SnowMelt_days","gt_Meteorology_Norway_seNorge_SnowFreeWaterContent_days","gt_Meteorology_Norway_seNorge_Runoff_days","gt_Meteorology_Norway_seNorge_Evapotranspiration_days","gt_Meteorology_Norway_seNorge_GroundWaterCondition_days","gt_Meteorology_Norway_seNorge_WaterCapacitySoil_days","gt_Meteorology_Norway_seNorge_WaterSaturationSoil_days","gt_Meteorology_Norway_seNorge_Temperature_days","gt_Meteorology_Norway_seNorge_Precipitation_days"],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,"celsius","precipitation_daily"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>abbrev<\/th>\n      <th>bit<\/th>\n      <th>nodata<\/th>\n      <th>bare_ground<\/th>\n      <th>name<\/th>\n      <th>unit<\/th>\n      <th>navn<\/th>\n      <th>beskrivelse<\/th>\n      <th>grass_mapset<\/th>\n      <th>color_table<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ```
 
 <p class="caption">(\#fig:unnamed-chunk-5)Table explaining the available climate parameters in the data set.</p>
@@ -369,7 +369,7 @@ Importing a shape file with the regional delineation.
 reg <- sf::st_read("data/regions.shp", options = "ENCODING=UTF8")
 #> options:        ENCODING=UTF8 
 #> Reading layer `regions' from data source 
-#>   `/data/Egenutvikling/41001581_egenutvikling_anders_kolstad/github/ecosystemCondition/data/regions.shp' 
+#>   `/data/scratch/Matt_bookdown__debug/ecosystemCondition/data/regions.shp' 
 #>   using driver `ESRI Shapefile'
 #> Simple feature collection with 5 features and 2 fields
 #> Geometry type: POLYGON
@@ -385,7 +385,7 @@ Outline of Norway
 ```r
 nor <- sf::st_read("data/outlineOfNorway_EPSG25833.shp")
 #> Reading layer `outlineOfNorway_EPSG25833' from data source 
-#>   `/data/Egenutvikling/41001581_egenutvikling_anders_kolstad/github/ecosystemCondition/data/outlineOfNorway_EPSG25833.shp' 
+#>   `/data/scratch/Matt_bookdown__debug/ecosystemCondition/data/outlineOfNorway_EPSG25833.shp' 
 #>   using driver `ESRI Shapefile'
 #> Simple feature collection with 1 feature and 2 fields
 #> Geometry type: MULTIPOLYGON
@@ -673,7 +673,7 @@ summerTemp_fullSeries <- summerTemp_fullSeries %>%
   setNames("Attribute_A")
 })
 #>    user  system elapsed 
-#>   0.133   0.004   0.142
+#>   0.134   0.003   0.148
 ```
 
 And this is the result.
@@ -1327,24 +1327,24 @@ regional_means_long <- regional_sd %>%
   left_join(regional_means_long, by=join_by(region, year))
 )
 #> # A tibble: 330 × 15
-#>    region     year   i_sd  v_sd     i     v refere…¹ refer…²
-#>    <chr>      <chr> <dbl> <dbl> <dbl> <dbl>    <dbl>   <dbl>
-#>  1 Nord-Norge 2022  0.246  1.90 0.523  11.5     10.2    4.21
-#>  2 Nord-Norge 2021  0.255  1.65 0.672  10.8     10.2    4.21
-#>  3 Nord-Norge 2020  0.143  1.82 0.784  10.3     10.2    4.21
-#>  4 Nord-Norge 2019  0.290  1.77 0.623  10.8     10.2    4.21
-#>  5 Nord-Norge 2018  0.344  1.64 0.523  12.5     10.2    4.21
-#>  6 Nord-Norge 2017  0.145  1.79 0.794  10.1     10.2    4.21
-#>  7 Nord-Norge 2016  0.175  1.74 0.705  10.8     10.2    4.21
-#>  8 Nord-Norge 2015  0.198  1.61 0.682  10.6     10.2    4.21
-#>  9 Nord-Norge 2014  0.297  1.65 0.545  13.1     10.2    4.21
-#> 10 Nord-Norge 2013  0.202  1.65 0.479  11.4     10.2    4.21
-#> # … with 320 more rows, 7 more variables:
+#>    region     year   i_sd  v_sd     i     v reference_upper
+#>    <chr>      <chr> <dbl> <dbl> <dbl> <dbl>           <dbl>
+#>  1 Nord-Norge 2022  0.246  1.90 0.523  11.5            10.2
+#>  2 Nord-Norge 2021  0.255  1.65 0.672  10.8            10.2
+#>  3 Nord-Norge 2020  0.143  1.82 0.784  10.3            10.2
+#>  4 Nord-Norge 2019  0.290  1.77 0.623  10.8            10.2
+#>  5 Nord-Norge 2018  0.344  1.64 0.523  12.5            10.2
+#>  6 Nord-Norge 2017  0.145  1.79 0.794  10.1            10.2
+#>  7 Nord-Norge 2016  0.175  1.74 0.705  10.8            10.2
+#>  8 Nord-Norge 2015  0.198  1.61 0.682  10.6            10.2
+#>  9 Nord-Norge 2014  0.297  1.65 0.545  13.1            10.2
+#> 10 Nord-Norge 2013  0.202  1.65 0.479  11.4            10.2
+#> # ℹ 320 more rows
+#> # ℹ 8 more variables: reference_low <dbl>,
 #> #   reference_low2 <dbl>, threshold_low <dbl>,
 #> #   threshold_high <dbl>, sd <dbl>, diff <dbl>,
 #> #   threshold_low_centered <dbl>,
-#> #   threshold_high_centered <dbl>, and abbreviated variable
-#> #   names ¹​reference_upper, ²​reference_low
+#> #   threshold_high_centered <dbl>
 ```
 
 
@@ -1424,7 +1424,7 @@ i_aggregatedToPeriods <- regional_means_long %>%
 #>  8 Nord-Norge 2013-2017           4     0.641     0.0937
 #>  9 Nord-Norge 2018-2022           5     0.625     0.118 
 #> 10 Nord-Norge pre 2003            1     0.625     0.0266
-#> # … with 15 more rows
+#> # ℹ 15 more rows
 ```
 
 
