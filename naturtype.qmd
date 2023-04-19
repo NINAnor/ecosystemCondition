@@ -2,7 +2,7 @@
 
 # Nature types {#naturtype}
 
-**On the application of the nature type dataset**
+**On the application of the nature type data set**
 
 *Data exploration and an analyses of thematic coverage*
 
@@ -25,9 +25,12 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-Author: Anders L. Kolstad
+Author: 
 
-Date: `r Sys.Date()`
+Anders L. Kolstad
+
+March 2023
+
 
 <br />
 
@@ -40,14 +43,19 @@ The first part of this analysis is simply to get an overview of the data, making
 
 ## Import data and general summary statistics
 ```{r import_nin_data, results="hide"}
+dir <- substr(getwd(), 1,2)
+
 # local path
 #path <- "data/R:/GeoSpatialData/Habitats_biotopes/Norway_Miljodirektoratet_Naturtyper_nin/Original/Natur_Naturtyper_NiN_norge_med_svalbard_25833.gdb"
-
-# server path
-path <- "/data/P-Prosjekter2/41201785_okologisk_tilstand_2022_2023/data/Natur_Naturtyper_NiN_norge_med_svalbard_25833.gdb"
-
 # temporary path 
 #path <- "/data/Egenutvikling/41001581_egenutvikling_anders_kolstad/data/Natur_Naturtyper_NiN_norge_med_svalbard_25833.g#db"
+
+# server path pre 2022 data
+#path <- "/data/P-Prosjekter2/41201785_okologisk_tilstand_2022_2023/data/Natur_Naturtyper_NiN_norge_med_svalbard_25833.gdb"
+path <- ifelse(dir == "C:", 
+               "R:/GeoSpatialData/Habitats_biotopes/Norway_Miljodirektoratet_Naturtyper_nin/Original/Naturtyper_nin_0000_norge_25833_FILEGDB/Naturtyper_nin_0000_norge_25833_FILEGDB.gdb",
+               "/data/R/GeoSpatialData/Habitats_biotopes/Norway_Miljodirektoratet_Naturtyper_nin/Original/Naturtyper_nin_0000_norge_25833_FILEGDB/Naturtyper_nin_0000_norge_25833_FILEGDB.gdb")
+
 dat <- sf::st_read(dsn = path)
 
 ```
@@ -57,7 +65,7 @@ Fix non-valid polygons:
 dat <- sf::st_make_valid(dat)
 ```
 
-The dataset has 95k polygons, each with 36 variables:
+The data set has 117k polygons, each with 37 variables:
 ```{r}
 dim(dat)
 ```
@@ -79,17 +87,10 @@ Calculating the area for each polygon/locality
 dat$area <- sf::st_area(dat)
 summary(dat$area)
 ```
-The smallest polygons are 20 m2, and the biggest is 8.5 km2.
+The smallest polygons are 20 m2, and the biggest is 15.8 km2.
 
-The largest polygon is a 
-```{r, echo=F}
-dat$naturtype[dat$area == max(dat$area)]
-```
+The largest polygon is a `r dat$naturtype[dat$area == max(dat$area)]`, and the smallest polygon is a `r dat$naturtype[dat$area == min(dat$area)]`.
 
-The smallest polygon is a 
-```{r, echo=F}
-dat$naturtype[dat$area == min(dat$area)]
-```
 
 Sum of mapped area divided by Norwegian mainland area:
 ```{r}
@@ -97,7 +98,7 @@ Sum of mapped area divided by Norwegian mainland area:
 nor <- sf::read_sf("data/outlineOfNorway_EPSG25833.shp")
 sum(dat$area)/sf::st_area(nor)
 ```
-About 0.5% of Norway has been mapped (note that a bigger area than this has been surveyed, but only a small fraction is delineated). It is therefore essential that these 0.5% are representative.
+About 0.6% of Norway has been mapped (note that a bigger area than this has been surveyed, but only a small fraction is delineated). It is therefore essential that these 0.5% are representative.
 
 ## Temporal trend
 ```{r}
@@ -122,12 +123,19 @@ ggplot(area_year)+
   labs(x = "Year", y = "Total mapped area (km/2)")
 ```
 
-The rate of nature type mapping is strongly positive last three years. There are some differences in the field mapping instructions between the years. I will need to decide whether to include all years, or to perhaps exclude the first year.
+There are some differences in the field mapping instructions between the years. I will need to decide whether to include all years, or to perhaps exclude the first year.
 
 
 ## Condition
 A quick overview of the condition scores 
 ```{r, fig.cap="The overal distribution of condition scores"}
+dat <- dat %>%
+  mutate(tilstand =  recode(tilstand, 
+                            "sværtRedusert" = "1 - Svært redusert",
+                            "dårlig" = "2 - Dårlig",
+                            "moderat" = "3 - Moderat",
+                            "god" = "4 - God"))
+
 barplot(tapply(dat$area/10^6, factor(dat$tilstand), sum))
 ```
 
@@ -160,9 +168,9 @@ barplot(table(dat$naturtype[dat$tilstand==""]),
 
 ```
 
-There are only six nature types (if you exclude those that are not mapped) that don't have a condition score.
+There are only seven nature types (if you exclude those that are not mapped) that don't have a condition score.
 
-`Snøleieblokkmark` and `rabbeblokkmark` do not have a protocol for assessing condition status. `Leirskredgrop`, `leirravine` and `grotte` were nature types in 2018 (not mapped in 2021), and was similarly not assessed for condition scores. `Isinnfrysingsmark` is assessed for condition now, but not in 2018. We can therefore exclude these localities from our data set:
+`Snøleieblokkmark` and `rabbeblokkmark` do not have a protocol for assessing condition status. `Leirskredgrop`, `leirravine` and `grotte` were nature types in 2018 (not mapped in 2021), and was similarly not assessed for condition scores. `Isinnfrysingsmark` is assessed for condition now, but not in 2018. `Snøleieberg` is new in 2022 and is only mapped for area. We can therefore exclude these localities from our data set:
 ```{r}
 dat_rm <- dat
 dat <- dat_rm[dat_rm$tilstand!="",]
@@ -188,12 +196,12 @@ Mosaic localities occur in many main ecosystems (and many nature types therein).
 ```{r}
 # Fix duplicated `hovedøkosystem`
 #unique(dat$hovedøkosystem)
-dat$hovedøkosystem[dat$hovedøkosystem=="Naturlig åpne områder i lavlandet"] <- "Naturlig åpne områder under skoggrensa"
+dat$hovedøkosystem[dat$hovedøkosystem=="naturligÅpneOmråderILavlandet"] <- "naturligÅpneOmråderUnderSkoggrensa"
 ```
 
 ```{r, fig.cap="Distribution of mosaic nature types across hovedøkosystem"}
 par(mar=c(5,20,1,1))
-barplot(table(dat$hovedøkosystem[dat$mosaikk=="Ja"]),
+barplot(table(dat$hovedøkosystem[dat$mosaikk=="ja"]),
         horiz = T, las=2,
         xlab="Number of mosaic localities")
 ```
@@ -205,42 +213,44 @@ Some conclusion here could be that
 
 
 ## NiN types across main ecosystems
-The NiN main types can be extracted from the column `ninkartleggingsenheter`. This is the mapping NiN mapping units recorded in the field. The NiN main type makes up the first part of this mapping unit code. The variable is oddly concatenated. Let's tease it apart.
+The NiN main types can be extracted from the column `ninKartleggingsenheter`. These are NiN mapping units recorded in the field. The NiN main type makes up the first part of this mapping unit code. The variable is oddly concatenated. Let's tease it apart.
 
 ```{r, fig.cap="The number of NiN main types within one locality should normally be one, except for mosaic localities."}
-#dat$ninkartleggingsenheter[1:10]
-dat$ninkartleggingsenheter2 <- gsub("NA_", dat$ninkartleggingsenheter, replacement = "")
-#dat$ninkartleggingsenheter2[1:30]
-dat$ninkartleggingsenheter2 <- str_replace_all(dat$ninkartleggingsenheter2, ".[CE].[\\d]{1,}", replacement = "")
-#dat$ninkartleggingsenheter2[1:30]
-dat$ninkartleggingsenheter2 <- str_replace_all(dat$ninkartleggingsenheter2, "-.", replacement = "")
+#dat$ninKartleggingsenheter  [1:10]
+# remove NA prefix:
+dat$ninKartleggingsenheter2 <- gsub("NA_", dat$ninKartleggingsenheter, replacement = "")
+#dat$ninKartleggingsenheter2[1:30]
+
+dat$ninKartleggingsenheter2 <- str_replace_all(dat$ninKartleggingsenheter2, ".[CE].[\\d]{1,}", replacement = "")
+#dat$ninKartleggingsenheter2[1:30]
+dat$ninKartleggingsenheter2 <- str_replace_all(dat$ninKartleggingsenheter2, "-.", replacement = "")
 uni <- function(x){paste(unique(unlist(strsplit(x, ","))), collapse = ",")}
-dat$ninkartleggingsenheter3 <- lapply(dat$ninkartleggingsenheter2, uni)
+dat$ninKartleggingsenheter3 <- lapply(dat$ninKartleggingsenheter2, uni)
 n_uni <- function(x){length(unique(unlist(strsplit(x, ","))))}
-dat$n_ninkartleggingsenheter <- lapply(dat$ninkartleggingsenheter2, n_uni)
-dat$n_ninkartleggingsenheter <- as.numeric(dat$n_ninkartleggingsenheter) 
+dat$n_ninKartleggingsenheter <- lapply(dat$ninKartleggingsenheter2, n_uni)
+dat$n_ninKartleggingsenheter <- as.numeric(dat$n_ninKartleggingsenheter) 
 
 par(mfrow=c(1,3))
-barplot(table(dat$n_ninkartleggingsenheter),
+barplot(table(dat$n_ninKartleggingsenheter),
         xlab = "Number of NiN main types",
         ylab = "Number of localities")
-barplot(table(dat$n_ninkartleggingsenheter[dat$mosaikk=="Nei"]),
+barplot(table(dat$n_ninKartleggingsenheter[dat$mosaikk=="nei"]),
         xlab = "Number of NiN main types\n(Mosaic localities excluded)")
-barplot(table(dat$n_ninkartleggingsenheter[dat$mosaikk=="Ja"]),
+barplot(table(dat$n_ninKartleggingsenheter[dat$mosaikk=="ja"]),
         xlab = "Number of NiN main types\n(Mosaic localities only)")
 
 ```
 
-Mosaic localities (right pane) have a much higher likelihood of including multiple NiN main types, but it also occurs in non-mosaic localities (about 8000 cases). Most, if not all, nature types are defined within a single NiN main type, so we need to see whats going on there.
+Mosaic localities (right pane) have a much higher likelihood of including multiple NiN main types, but it also occurs in non-mosaic localities (over 10 000 cases). Most, if not all, nature types are defined within a single NiN main type, so we need to see whats going on there.
 
 First I need to melt the data frame in order to tally the number of NiN min types within each `hovedøkosystem`.
 ```{r}
-dat_melt <- tidyr::separate_rows(dat, ninkartleggingsenheter3)
+dat_melt <- tidyr::separate_rows(dat, ninKartleggingsenheter3)
 ```
 
 ```{r, fig.cap="Figure showing the number of localities for each NiN main type. One locality can have more than one NiN main type. Mosaic localities are excluded in this figure."}
-ggplot(dat_melt[dat_melt$mosaikk!="Ja",])+
-  geom_bar(aes(x = ninkartleggingsenheter3))+
+ggplot(dat_melt[dat_melt$mosaikk!="ja",])+
+  geom_bar(aes(x = ninKartleggingsenheter3))+
   coord_flip()+
   theme_bw(base_size = 12)+
   facet_wrap("hovedøkosystem",
@@ -248,37 +258,37 @@ ggplot(dat_melt[dat_melt$mosaikk!="Ja",])+
 
 ```
 
-There is a lot of miss-match between NiN main types and *hovedøkosystem*. 
-Taking one example: T2 (åpen grunnledt mark) is not found in mountains, but there is one case where this occurs. If I view that case
+This is a messy figure, but the point is, there is a lot of miss-match between NiN main types and *hovedøkosystem*. Taking one example: T2 (åpen grunnledt mark) is not found in mountains, but there is one case where this occurs. If I view that case
 
 ```{r, eval= FALSE}
-View(dat_melt[dat_melt$mosaikk!="Ja" & dat_melt$hovedøkosystem=="Fjell" & dat_melt$ninkartleggingsenheter3=="T2",])
+View(dat_melt[dat_melt$mosaikk!="Ja" & dat_melt$hovedøkosystem=="Fjell" & dat_melt$ninKartleggingsenheter3=="T2",])
 ```
 
-.. and find the online fact sheet for that locality, I see that it is actually NOT a mosaic. It is a nature type called *Kalkfattig og intermediær fjellhei, leside og tundra* which is defined as strictly T3, but the field surveyor has recorded lots of NiN mapping units (and hence, main NiN types) in addition. This is a mistake. Online I can see that the locality is 50% T3, but this information is not in the data set that we have available. Miljødirektoratet could consider adding this information to the downloadable dataset. The order of the NiN types in the `ninkartleggingsenheter` column is not reflecting the commonness of the types ether. 
+.. and find the online fact sheet for that locality, I see that it is actually NOT a mosaic. It is a nature type called *Kalkfattig og intermediær fjellhei, leside og tundra* which is defined as strictly T3, but the field surveyor has recorded lots of NiN mapping units (and hence, main NiN types) in addition. This is a mistake. Online I can see that the locality is 50% T3, but this information is not in the data set that we have available. Miljødirektoratet could consider adding this information to the downloadable dataset. The order of the NiN types in the `ninKartleggingsenheter` column is not reflecting the commonness of the types ether. 
 
-If there was a way to extract the defining NiN type from the `naturtype` column, that would be nice. Miljødirektoratet may consider adding this as well. If we exclude all localities that are not mosaics, but that have multiple NiN main types, we first need to know if there are not any `naturtype` which allow for multiple NiN main types.
+If there was a way to extract the defining NiN type from the `naturtype` column, that would be nice. Miljødirektoratet may consider adding this as well. If we exclude all localities that are not mosaics, but that have multiple NiN main types (no, we're not going to do that, here at least), we first need to know if there are not any `naturtype` which allow for multiple NiN main types.
 
-As this next figure show, these cases are not restricted to mapping year, and hence to any changes in the field protocol. Rather this phenomenon is increasing in commonness.
+As this next figure show, these cases are not restricted to mapping year, and hence to any changes in the field protocol.
 ```{r, fig.cap="Temporal trend in the recording of non-mosaic localities that are recorded as consisting of multiple NiN mapping units from different NiN main types."}
 par(mar=c(2,6,2,2))
-temp <- dat[dat$n_ninkartleggingsenheter>1 & dat$mosaikk!="Ja",]
+temp <- dat[dat$n_ninKartleggingsenheter>1 & dat$mosaikk!="ja",]
 barplot(table(temp$kartleggingsår), ylab="Number of localities with more than one NiN main type\n(mosaic localitie excluded) ")
 ```
 
 Lets look at the most common nature types that are recorded this way.
-```{r, fig.cap="The ten most common nature types and the number of localities with with multiple NiN main types"}
-temp2 <- as.data.frame(table(temp$naturtype, temp$n_ninkartleggingsenheter))
+```{r multipleNiN, fig.cap="The ten most common nature types and the number of localities with with multiple NiN main types"}
+temp2 <- as.data.frame(table(temp$naturtype, temp$n_ninKartleggingsenheter))
 temp2 <- temp2[base::order(temp2$Freq, decreasing = T),][1:10,]
 par(mar=c(8,20,1,1))
 barplot(temp2$Freq, names.arg = temp2$Var1, las=2,
         horiz = T, xlab = "Number of localities with >1 NiN main type")
 ```
 
-'Hule eiker' is a special case because these are recorded as points and not polygons, and they can be found in any NiN main type and any *hovedøkosystem*. 
+'Hule eiker' is a special case because these are recorded as points and not polygons, and they can be found in any NiN main type and any *hovedøkosystem*.
+
 ```{r, ="Table of the first 5 cases of Hule eiker, showing that this nature type can be found in several NiN main types and hovedøkosystem"}
 DT::datatable(
-  dat[dat$naturtype=="Hule eiker",][1:5,c("naturtype", "hovedøkosystem", "ninkartleggingsenheter")])
+  dat[dat$naturtype=="Hule eiker",][1:5,c("naturtype", "hovedøkosystem", "ninKartleggingsenheter")])
 
 ```
 
@@ -295,11 +305,13 @@ The NiN main types need to be added manually to the nature types, as the field r
 
 I will start by excluding all but the three target ecosystems.
 ```{r}
-target <- c("Semi-naturlig mark","Våtmark","Naturlig åpne områder under skoggrensa")
+target <- c("semi-naturligMark",
+            "våtmark",
+            "naturligÅpneOmråderUnderSkoggrensa")
 dat <- dat[dat$hovedøkosystem %in% target,]
 ```
 
-I will also exclude `Hule eiker`, as this nature type is not easy to tie to a single main ecosystem
+I will also exclude `Hule eiker`, as this nature type is not easy to tie to a single main ecosystem. _In some other scenarios, one might wish to keep hule eiker depending on the main ecosystem that it was recorded to in the field._
 
 ```{r}
 dat <- dat[dat$naturtype != "Hule eiker",]
@@ -335,7 +347,9 @@ ntypDF <- data.frame(
 )
 ```
 
-We have 66 nature types to consider. Some of the wetland types can actually be excluded because of the way we limited this ecosystem to mean *open* wetland.
+We have `r nrow(ntypDF)` nature types to consider. 
+
+Some of the wetland types can actually be excluded because of the way we limited this ecosystem to mean *open* wetland:
 
 ```{r}
 excl_nt <- c("Kalkrik myr- og sumpskogsmark",
@@ -353,8 +367,8 @@ excl_nt <- c("Kalkrik myr- og sumpskogsmark",
              "Rik vierstrandskog",
              "Varmekjær kildelauvskog"
              )
-`%!in%` <- Negate(`%in%`)
-ntypDF <- ntypDF[ntypDF$Nature_type %!in% excl_nt,]
+ntypDF$Nature_type <- trimws(ntypDF$Nature_type)
+ntypDF <- ntypDF[!ntypDF$Nature_type %in% excl_nt,]
 ```
 
 ```{r, fig.cap="List of nature types showing the years when that nature type was mapped." }
@@ -370,12 +384,19 @@ ntypDF2 <- ntypDF[ntypDF$Year != "2018" &
                   ,]
 ```
 
+This removed `r nrow(ntypDF) - nrow(ntypDF2)` nature types.
 
 Next I want to add the NiN main types. I need to look at the definition of each nature type and get the NiN code from there. I could also extract the NiN sub types (grunntyper), but it would become too messy. Therefor I will create a second column with a textual/categorical description of the degree of thematic coverage.
 
 I will look at the definitions of the nature type in the first and last year when that type was mapped, but not for the years in between.
 
 ### Add NiN main type and degree of representativity
+```{r}
+#remove trailing white spaces
+ntypDF2$Nature_type <- trimws(ntypDF2$Nature_type)
+```
+
+
 ```{r}
 ntypDF2$hovedgruppe[ntypDF2$Nature_type == "Aktiv skredmark"                                    ] <- "T17 | all (if including sub-types)"
 ntypDF2$hovedgruppe[ntypDF2$Nature_type == "Åpen flomfastmark"                                  ] <- "T18 | all"
@@ -442,14 +463,14 @@ ntypDF2 <- ntypDF2 %>%
 Preparing the data:
 ```{r}
 #Exclude non-relevant forest wetland types
-dat2 <- dat[dat$naturtype %!in% excl_nt,]
+dat2 <- dat[!dat$naturtype %in% excl_nt,]
 
 # Melt data
-dat2L <- tidyr::separate_rows(dat2, ninbeskrivelsesvariabler, sep=",")
+dat2L <- tidyr::separate_rows(dat2, ninBeskrivelsesvariable, sep=",")
 
 # Split the code and the value into separate columns
 dat2L <- tidyr::separate(dat2L, 
-                              col = ninbeskrivelsesvariabler,
+                              col = ninBeskrivelsesvariable,
                               into = c("NiN_variable_code", "NiN_variable_value"),
                               sep = "_",
                               remove=F
@@ -560,7 +581,7 @@ A common condition/pressure variable in semi-natural nature types.
 
 Overview of cases where the value is set as *X*.
 ```{r}
-temp <- dat2L[dat2L$ninbeskrivelsesvariabler == "7JB-BA_X",]
+temp <- dat2L[dat2L$ninBeskrivelsesvariable == "7JB-BA_X",]
 table(temp$kartleggingsår, temp$naturtype)
 ```
 These are just a few cases, mostly from 2018. OK to treat as NA.
@@ -568,7 +589,7 @@ These are just a few cases, mostly from 2018. OK to treat as NA.
 ### 7JB-BT (Beitetrykk)
 Similar variable to the above.
 ```{r}
-temp <- dat2L[dat2L$ninbeskrivelsesvariabler == "7JB-BT_X",]
+temp <- dat2L[dat2L$ninBeskrivelsesvariable == "7JB-BT_X",]
 table(temp$kartleggingsår, temp$naturtype)
 ```
 OK to treat X's as NA's.
@@ -576,7 +597,7 @@ OK to treat X's as NA's.
 ### 7JB-GJ (Gjødsling)
 Similar variable to the two above.
 ```{r}
-temp <- dat2L[dat2L$ninbeskrivelsesvariabler == "7JB-BT_X",]
+temp <- dat2L[dat2L$ninBeskrivelsesvariable == "7JB-BT_X",]
 table(temp$kartleggingsår, temp$naturtype)
 ```
 OK to treat as X's NA's.
@@ -617,10 +638,10 @@ exclude <- c(exclude,
 I will nonetheless explore this variable a bit more since this variable has been suggested previously as a condition variable.
 NiN defines the possible values for these as numeric between 0 and 4 (shifted to become 1-5 in the data set), but there are 998 cases where it has been given then value *X*.
 ```{r}
-temp <- dat2L[dat2L$ninbeskrivelsesvariabler == "7JB-KU-BY_X" |
-                     dat2L$ninbeskrivelsesvariabler == "7JB-KU-DE_X" |
-                dat2L$ninbeskrivelsesvariabler == "7JB-KU-MO_X" |
-                     dat2L$ninbeskrivelsesvariabler == "7JB-KU-PI_X",]
+temp <- dat2L[dat2L$ninBeskrivelsesvariable == "7JB-KU-BY_X" |
+                     dat2L$ninBeskrivelsesvariable == "7JB-KU-DE_X" |
+                dat2L$ninBeskrivelsesvariable == "7JB-KU-MO_X" |
+                     dat2L$ninBeskrivelsesvariable == "7JB-KU-PI_X",]
 table(temp$kartleggingsår, temp$naturtype)
 ```
 
@@ -667,7 +688,7 @@ exclude <- c(exclude,
 ### 7VR-RI (Reguleringsintensitet)
 This variable is defined as numeric between 1-5. There are, however, quite a few cases where it is X.
 ```{r}
-temp <- dat2L[dat2L$ninbeskrivelsesvariabler == "7VR-RI_X",]
+temp <- dat2L[dat2L$ninBeskrivelsesvariable == "7VR-RI_X",]
 table(temp$kartleggingsår, temp$naturtype)
 ```
 I cannot explain these, but in any case, this variable is not a good indicator for condition as it rather represents a pressure/driver. So OK to treat as NA's.
@@ -785,11 +806,11 @@ exclude <- c(exclude,
 dat2L2 <- dat2L[!is.na(dat2L$NiN_variable_value),]
 
 # Exclude selected NiN variables 
-dat2L2 <- dat2L2[dat2L2$NiN_variable_code %!in% exclude,]
+dat2L2 <- dat2L2[!dat2L2$NiN_variable_code %in% exclude,]
 ```
 Now we are now down to `r length(unique(dat2L2$NiN_variable_code))` possible condition variables.
 
-`dat2L2` includes only the three target ecosystems. Hule eiker are excluded. Mosaics are included. Several non-relevant NiN variables are excluded. The localities are duplicated in as many rows as there are NiN variables for that locality.
+`dat2L2` includes only the three target ecosystems. Hule eiker are excluded. Mosaics are included. Several non-relevant NiN variables are excluded (forested wetlands). The localities are duplicated in as many rows as there are NiN variables for that locality.
 
 ## Combine Naturetypes, NiN variables and  NiN main types
 
@@ -822,7 +843,7 @@ This data set contains the nature types that were only mapped in 2018 or 2019, a
 ntyp_vars_wide <- ntyp_vars_wide[ntyp_vars_wide$Nature_type %in% ntypDF2$Nature_type]
 ```
 
-Combine datasets
+Combine data sets
 ```{r}
 ntyp_fill <- cbind(ntypDF2, ntyp_vars_wide[,-1][match(ntypDF2$Nature_type, ntyp_vars_wide$Nature_type)])
 ```
@@ -934,39 +955,39 @@ wetland <- c(
 
 ```
 
-Adding the non-mapped open types
+Adding these non-mapped open types
 ```{r}
-open[open %!in% ntyp_fill$NiN_mainType]
+open[!open %in% ntyp_fill$NiN_mainType]
 ```
 
 ```{r}
 ntyp_fill2 <- ntyp_fill %>%
-  add_row(NiN_mainType = "T6", Ecosystem = "Naturlig åpne områder under skoggrensa", NiN_mainTypeCoverage = "Not mapped", km2 = 0) %>%
-  add_row(NiN_mainType = "T11", Ecosystem = "Naturlig åpne områder under skoggrensa", NiN_mainTypeCoverage = "Not mapped", km2 = 0) %>%
-  add_row(NiN_mainType = "T13", Ecosystem = "Naturlig åpne områder under skoggrensa", NiN_mainTypeCoverage = "Not mapped", km2 = 0) %>%
-  add_row(NiN_mainType = "T16", Ecosystem = "Naturlig åpne områder under skoggrensa", NiN_mainTypeCoverage = "Not mapped", km2 = 0) %>%
-  add_row(NiN_mainType = "T23", Ecosystem = "Naturlig åpne områder under skoggrensa", NiN_mainTypeCoverage = "Not mapped", km2 = 0) %>%
-  add_row(NiN_mainType = "T24", Ecosystem = "Naturlig åpne områder under skoggrensa", NiN_mainTypeCoverage = "Not mapped", km2 = 0) %>%
-  add_row(NiN_mainType = "T25", Ecosystem = "Naturlig åpne områder under skoggrensa", NiN_mainTypeCoverage = "Not mapped", km2 = 0) %>%
-  add_row(NiN_mainType = "T26", Ecosystem = "Naturlig åpne områder under skoggrensa", NiN_mainTypeCoverage = "Not mapped", km2 = 0) %>%
-  add_row(NiN_mainType = "T27", Ecosystem = "Naturlig åpne områder under skoggrensa", NiN_mainTypeCoverage = "Not mapped", km2 = 0) 
+  add_row(NiN_mainType = "T6",  Ecosystem = "naturligÅpneOmråderUnderSkoggrensa", NiN_mainTypeCoverage = "Not mapped", km2 = 0) %>%
+  add_row(NiN_mainType = "T11", Ecosystem = "naturligÅpneOmråderUnderSkoggrensa", NiN_mainTypeCoverage = "Not mapped", km2 = 0) %>%
+  add_row(NiN_mainType = "T13", Ecosystem = "naturligÅpneOmråderUnderSkoggrensa", NiN_mainTypeCoverage = "Not mapped", km2 = 0) %>%
+  add_row(NiN_mainType = "T16", Ecosystem = "naturligÅpneOmråderUnderSkoggrensa", NiN_mainTypeCoverage = "Not mapped", km2 = 0) %>%
+  add_row(NiN_mainType = "T23", Ecosystem = "naturligÅpneOmråderUnderSkoggrensa", NiN_mainTypeCoverage = "Not mapped", km2 = 0) %>%
+  add_row(NiN_mainType = "T24", Ecosystem = "naturligÅpneOmråderUnderSkoggrensa", NiN_mainTypeCoverage = "Not mapped", km2 = 0) %>%
+  add_row(NiN_mainType = "T25", Ecosystem = "naturligÅpneOmråderUnderSkoggrensa", NiN_mainTypeCoverage = "Not mapped", km2 = 0) %>%
+  add_row(NiN_mainType = "T26", Ecosystem = "naturligÅpneOmråderUnderSkoggrensa", NiN_mainTypeCoverage = "Not mapped", km2 = 0) %>%
+  add_row(NiN_mainType = "T27", Ecosystem = "naturligÅpneOmråderUnderSkoggrensa", NiN_mainTypeCoverage = "Not mapped", km2 = 0) 
 
 ```
 
 
 Adding the non-mapped semi-natural types
 ```{r}
-semi[semi %!in% ntyp_fill$NiN_mainType]
+semi[!semi %in% ntyp_fill$NiN_mainType]
 ```
 ```{r}
 ntyp_fill2 <- ntyp_fill2 %>%
-  add_row(NiN_mainType = "T40", Ecosystem = "Semi-naturlig mark", NiN_mainTypeCoverage = "Not mapped", km2 = 0)
+  add_row(NiN_mainType = "T40", Ecosystem = "semi-naturligMark", NiN_mainTypeCoverage = "Not mapped", km2 = 0)
 ```
 
 
 Adding the non-mapped wetland types
 ```{r}
-wetland[wetland %!in% ntyp_fill$NiN_mainType]
+wetland[!wetland %in% ntyp_fill$NiN_mainType]
 ```
 V6 is *Våtsnøleie*, and my guess is that it *is* mapped, but grouped with the alpine ecosystem. I'll therefore not add it in here, but mention it in the figure caption below.
 
@@ -1026,6 +1047,7 @@ ntyp_fill2 %>%
          NiN_mainTypeCoverage,
          count)%>%
   ungroup() %>%
+  mutate(count = replace_na(count, 0)) %>%
   mutate(NiN_mainType = fct_reorder(NiN_mainType, count)) %>%
   ggplot(aes(x = NiN_mainType,
              y = count,
@@ -1046,17 +1068,17 @@ ntyp_fill2 %>%
 ```
 
 
-From the figure above I take that *Naturlig åpne områder* is very poorly represented in general as there are many NiN main types that are completely missing from the dataset. The three most common types by area, however, have complete thematic coverage (if excluding the year 2018 and including all sub-types). I will need to investigate especially if there are some NiN variables for the nature types mapping T18 Åpen flomfastmark, T12 Strandeng and T21 Sanddynemark which we can use. 
+From the figure above I take that *Naturlig åpne områder* is very poorly represented in general as there are many NiN main types that are completely missing from the data set. The three most common types by area, however, have complete thematic coverage (if excluding the year 2018 and including all sub-types). I will need to investigate especially if there are some NiN variables for the nature types mapping T18 Åpen flomfastmark, T12 Strandeng and T21 Sanddynemark which we can use. 
 
-For *Semi-naturlig mark* we have quite good thematic coverage for the three main types (by area). The other three types probably makes up a considerably smaller area, but note that T33 has some coverage, and is classes as *all (-2018)*. Of the three main ecosystems, semi-naturlig mark dominates clearly in ters of area and in terms of number of localities. 
+For *Semi-naturlig mark* we have quite good thematic coverage for the three main types (by area). The other three types probably makes up a considerably smaller area, but note that T33 has some coverage, and is classes as *all (-2018)*. Of the three main ecosystems, semi-naturlig mark dominates clearly in terms of area and in terms of number of localities. 
 
-For *Våtmark* we have good thematic coverage for V3 nedbørsmyr and V9 semi-naturlig myr, but for V1 åpen jordvassmyr only calcareous localities are mapped and assessed. A question is then whether, for a given NiN variable, that calcareous localities can be representative for all mires (poor and rich) or if this will introduce too much bias in one way or another. Another important bias for this main ecosystem is related to the lower size limit for mapping units (MMU), which is quite big for V3. We need to think about whether small bogs are more or less prone to different pressures compared to big bogs.
+For *Våtmark* we have good thematic coverage for V3 nedbørsmyr and _V9 semi-naturlig myr_, but for _V1 åpen jordvassmyr_ only calcareous localities are mapped and assessed. A question is then whether, for a given NiN variable, that calcareous localities can be representative for all mires (poor and rich) or if this will introduce too much bias in one way or another. Another important bias for this main ecosystem is related to the lower size limit for mapping units (MMU), which is quite big for V3. We need to think about whether small bogs are more or less prone to different pressures compared to big bogs.
 
 ### Commonness of NiN variables
 
-I want to see how common the different NiN variables are, and if we can use this to select core variables (kjernevariabler).
+I want to see how common the different NiN variables are, and if we can use this to select core variables \(_kjernevariabler_\).
 
-First I will get the total area mappe per main ecosystem
+First I will get the total area mapped per main ecosystem
 ```{r}
 areaSum <- ntyp_fill2 %>%
   group_by(Ecosystem) %>%
@@ -1120,7 +1142,7 @@ For *Våtmark*, 7GR-Gi is the most common variables, but this is a pressure vari
 
 
 ## Tables
-Here are some output tables with numbers the numbers underlying the above figures. 
+Here are some output tables with the numbers underlying the above figures. 
 
 ```{r, fig.cap= "List of 45 nature types additionam data, including the proportion of localities for which there is data for each of the NiN variables."}
 DT::datatable(ntyp_fill2,
@@ -1147,17 +1169,17 @@ DT::datatable(
     pageLength = 10))
 ```
 
-## Export data
-Exporting the table with the summary statistics and other information that I compled for each nature type in the three main ecosystems. This can be merged with the main dataset in order to subset according to a specific research question. 
+## Export data {#exp-natureType-summary}
+Exporting the table with the summary statistics and other information that I compiled for each nature type in the three main ecosystems. This can be merged with the main data set in order to subset according to a specific research question. 
 
 ```{r, eval = F}
 saveRDS(ntyp_fill2, "data/naturetypes/natureType_summary.rds")
 ```
 
 
-Note also that the main dataset still contains some localities where there is a mis-match between the nature type definition and the NiN mapping uits recorded in the field. Each researcher should decide to include or exclude these. 
+Note also that the main data set still contains some localities where there is a mis-match between the nature type definition and the NiN mapping uits recorded in the field. Each researcher should decide to include or exclude these. 
 
-The main data set also includes mosaic localities, that are less suitable to use as ground trouth data for remote sensing methods.
+The main data set also includes mosaic localities, that are less suitable to use as ground truth data for remote sensing methods.
 
 
 
@@ -1166,28 +1188,23 @@ Here is a deeper look into the causes for why some localities are recorded with 
 
 Lets have a look at how the NiN main types (recorded in the field) cover the different *hovedøkosystem* when we exclude *Hule eiker* and all localities that have more than one NiN main type.
 ```{r}
-dat_red <- dat_melt[dat_melt$n_ninkartleggingsenheter==1 & 
+dat_red <- dat_melt[dat_melt$n_ninKartleggingsenheter==1 & 
                       dat_melt$naturtype != "Hule eiker" &
-                      dat_melt$mosaikk == "Nei",]
+                      dat_melt$mosaikk == "nei",]
 ```
 
 
 Let's focus in on our three targeted ecosystems.
 ```{r}
 dat_red_tally <- stats::aggregate(data = dat_red,
-                                  area~hovedøkosystem+ninkartleggingsenheter3, FUN = length)
+                                  area~hovedøkosystem+ninKartleggingsenheter3, FUN = length)
 names(dat_red_tally)[3] <- "count"
 ```
 
-```{r}
-target <- c("Semi-naturlig mark",
-            "Våtmark",
-            "Naturlig åpne områder under skoggrensa")
-```
 
 ```{r, fig.cap="Number of localities for each combination of main ecosystem and NiN main type"}
 ggplot(dat_red_tally[dat_red_tally$hovedøkosystem %in% target,],
-       aes(x = ninkartleggingsenheter3,
+       aes(x = ninKartleggingsenheter3,
                y = count))+
   geom_bar(
            fill="grey",
@@ -1207,8 +1224,8 @@ ggplot(dat_red_tally[dat_red_tally$hovedøkosystem %in% target,],
 
 Still some weird cases which I will look at in turn below, trying to understand how they came to be recorded in this way.
 
-#### Naturlig åpne områder under skoggrensa
-Listing the NiN main types recorded for nature types belonging to *Naturlig åpne områder under skoggrensa*, but which clearly don't belong there:
+#### naturligÅpneOmråderUnderSkoggrensa
+Listing the NiN main types recorded for nature types belonging to *naturligÅpneOmråderUnderSkoggrensa*, but which clearly don't belong there:
 
 * V10 (semi-naturlig våteng)
     + One case of Åpen flomfastmark wrongly associated with V10 whan it should be T18.
@@ -1237,9 +1254,9 @@ Listing the remaining NiN main types:
 ```{r}
 `%!in%` <- Negate(`%in%`)
 dat_red2 <- dat_red[
-  dat_red$hovedøkosystem!="Naturlig åpne områder under skoggrensa" |
-  dat_red$hovedøkosystem=="Naturlig åpne områder under skoggrensa" & 
-    dat_red$ninkartleggingsenheter3 %!in% c("T30", "T32", "T33", "V10"),]
+  dat_red$hovedøkosystem!="naturligÅpneOmråderUnderSkoggrensa" |
+  dat_red$hovedøkosystem=="naturligÅpneOmråderUnderSkoggrensa" & 
+    dat_red$ninKartleggingsenheter3 %!in% c("T30", "T32", "T33", "V10"),]
 ```
 
 This resulted in deleting `r nrow(dat_red) - nrow(dat_red2)`m localities.
@@ -1270,8 +1287,8 @@ Listing the remaining NiN-main types:
 
 ```{r}
 dat_red3 <- dat_red2[
-  dat_red2$hovedøkosystem!="Semi-naturlig mark" |
-  dat_red2$hovedøkosystem=="Semi-naturlig mark" & dat_red2$ninkartleggingsenheter3 %!in% c("V9", "T4", "T35", "T3", "T12", "T1"),]
+  dat_red2$hovedøkosystem!="semi-naturligMark" |
+  dat_red2$hovedøkosystem=="semi-naturligMark" & dat_red2$ninKartleggingsenheter3 %!in% c("V9", "T4", "T35", "T3", "T12", "T1"),]
 ```
 
 This resulted in the deletion of `r nrow(dat_red2) - nrow(dat_red3)` localities.
@@ -1295,9 +1312,9 @@ Våtmark doesn't distinguish between semi-natural and natural, so all V-types ar
 
 ```{r}
 dat_red4 <- dat_red3[
-  dat_red3$hovedøkosystem!="Våtmark" |
-  dat_red3$hovedøkosystem=="Våtmark" & dat_red3$ninkartleggingsenheter3 %!in% c("T4", "T30", "T31", "T32", "V11", "V12", "V13"),]
+  dat_red3$hovedøkosystem!="våtmark" |
+  dat_red3$hovedøkosystem=="våtmark" & dat_red3$ninKartleggingsenheter3 %!in% c("T4", "T30", "T31", "T32", "V11", "V12", "V13"),]
 ```
 This resulted in the deletion of `r nrow(dat_red3) - nrow(dat_red4)` localities.
 
-
+In total `r nrow(dat_red) - nrow(dat_red4)` localities, or `r round( (nrow(dat_red) - nrow(dat_red4)) / nrow(dat_red) * 100, 1)`% of localities, have a field-recorded NiN main that don't match the definition of the nature type. I see this as a symptom of a bigger problem with data validation.

@@ -1,7 +1,21 @@
+---
+title: "Indicators for Ecosystem Condition in Norway"
+author: "Anders L. Kolstad"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+url: https://ninanor.github.io/ecosystemCondition/index.html
+#cover-image: images/Picture1.png
+description: |
+  This is a site for documenting the analyses related to the development and design of ecosystem condition indicators.
+biblio-style: apalike
+csl: chicago-fullnote-bibliography.csl
+---
 
 # About <img src="images/hexSticker_EC.png" align="right" height="139"/> {.unnumbered}
 
-On this site you may view the nitty gritty details for how certain indicators for ecosystem condition for Norway has been calculated.
+On this site you may view the details for how certain indicators for ecosystem condition for Norway have been calculated.
 
 The web page is made to document the work related to a R&D project to develop indicators for ecosystem condition for three main ecosystems in Norway: wetlands, open areas below the forest line, and semi-natural land. These indicators are not yet used in real assessments, and may represent unfinished work pending future data availability. In addition, we may chose to also present some analyses documenting indicators that *are* used in existing assessments of ecosystem condition.
 
@@ -63,3 +77,14 @@ The rest of the workflow is as follows.
 -   Anders or someone else in the project wil conduct a rapid code review, making sure the code is reproducible, interpretable and that it renders locally on the R Studio server.
 -   When approved, the reviewer will make a copy of the DRAFT\_ file, removing the DRAFT\_ part of the name, as well as the YML header, and as well as updating the rmd_files part of \_bookdown.yml. (For an example of such a file, see `breareal.Rmd`.)
 -   To update the web site (this web site), an admin user needs to pull down the repo to R Studio server, compile the book there (Ctr+Shift+B), commit and push to main. The html version of the book will be in the `docs` folder.
+
+## Citation {.unnumbered}
+
+To cite this book please use the following citation:
+
+Kolstad, A.L., Topper, J. Grainger, M.J., Sandvik, H. Indicators for Ecosystem Condition in Norway. https://ninanor.github.io/ecosystemCondition/index.html.doi [TBA]
+
+## License {.unnumbered}
+
+The book is licensed under a [CC By 4.0 licence](https://creativecommons.org/licenses/by/4.0/) which means that you can share and adapt the material
+for any purpose. However, you must give appropriate credit, provide a link to the license, and indicate if changes were made. You can not add additional restrictions on the material even when adapted. 

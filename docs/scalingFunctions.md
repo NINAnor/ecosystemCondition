@@ -4,11 +4,11 @@
 
 Author. Anders L. Kolstad
 
-Date: 2022-11-15
+Date: 2023-04-14
 
+**Superseeded :** *The functionality explained here is moved over to the [eaTools](https://github.com/NINAnor/eaTools) package. Please see the documentation there for updated examples.*
 
 Indicator for ecological condition may be scaled against a reference value to become normalised and hence comparable. In SEEA EA, un-scaled or raw indicators are not called indicators at all, but simply referred to as variables, and I will use this distinction here. Scaling variables against reference conditions can be done in many ways. Here are some examples, for inspiration.
-
 
 
 ```r
@@ -16,6 +16,7 @@ set.seed(123)
 ```
 
 Define plotting aesthetics
+
 
 ```r
 low <- "red"
@@ -27,8 +28,8 @@ myAlpha <- .7
 myShape <- 21
 ```
 
-
 Create random raw data for two variables
+
 
 ```r
 dat <- data.frame(variable1 = rnorm(50, 10, 4), 
@@ -47,6 +48,11 @@ ggplot(temp,
            fill = stat(x)))+
   ridge+
   scale_fill_gradient(low = low, high = high)
+#> Warning: `stat(x)` was deprecated in ggplot2 3.4.0.
+#> ℹ Please use `after_stat(x)` instead.
+#> This warning is displayed once every 8 hours.
+#> Call `lifecycle::last_lifecycle_warnings()` to see where
+#> this warning was generated.
 #> Picking joint bandwidth of 1.22
 ```
 
@@ -59,8 +65,6 @@ Lets say that the reference condition for `variable1` to equal 16, and for varia
 dat$referenceHigh1 <- 16
 dat$referenceHigh2 <- 35
 ```
-
-
 
 ## Linear, with a natural zero
 
@@ -80,7 +84,6 @@ dat$indicator2[dat$indicator2>1] <- 1
 temp <- melt(setDT(dat),
              measure.vars = c("indicator1", "indicator2"))
 ```
-
 
 
 ```r
@@ -107,11 +110,18 @@ ggplot(dat)+
   xlab("Variable values")+
   
   scale_fill_gradient("Indicator values", low = low, high = high)
+#> Warning: Using `size` aesthetic for lines was deprecated in ggplot2
+#> 3.4.0.
+#> ℹ Please use `linewidth` instead.
+#> This warning is displayed once every 8 hours.
+#> Call `lifecycle::last_lifecycle_warnings()` to see where
+#> this warning was generated.
 ```
 
 <img src="scalingFunctions_files/figure-html/unnamed-chunk-8-1.png" width="672" />
 
 To reverse what is good and what is bad condition: change the sign and add one.
+
 
 ```r
 ggplot(dat)+
@@ -136,7 +146,9 @@ ggplot(dat)+
 The two indicators become more comparable now that they are normalised. At least this is true around the reference value. But perhaps a variable value around 25 for `variable2` is actually quite bad. In the above example I have assumed that the value zero is the worst possible value, but that may not always be the case.
 
 ## Linear, with defined lower limit
+
 We can also say that the worst possible condition for these variables is not zero, but for example say that it is 5 for `variable1` and 28 for `variable2`.
+
 
 ```r
 dat$referenceLow1 <- 5
@@ -144,6 +156,7 @@ dat$referenceLow2 <- 28
 ```
 
 We can then normalise the data between these two reference values.
+
 
 ```r
 dat$indicator1_LowHigh <- (dat$variable1-dat$referenceLow1)/(dat$referenceHigh1 - dat$referenceLow1)
@@ -190,9 +203,8 @@ ggplot(dat)+
 
 <img src="scalingFunctions_files/figure-html/unnamed-chunk-12-1.png" width="672" />
 
-
-
 ## Break point scaling
+
 We can also define a threshold for good ecological condition. Lets for example say that for `variable1`, ecosystem function really declines when the variable shows values below 9.
 
 
@@ -200,8 +212,8 @@ We can also define a threshold for good ecological condition. Lets for example s
 dat$thr1 <- 9
 ```
 
-
 Then we can normalise again, using what I refer to as break point normalisation. For the maths, see [here](https://stats.stackexchange.com/questions/281162/scale-a-number-between-a-range).
+
 
 ```r
 dat$indicator1_breakPoint <- ifelse(
@@ -213,7 +225,6 @@ dat$indicator1_breakPoint <- ifelse(
 dat$indicator1_breakPoint[dat$indicator1_breakPoint<0] <- 0
 dat$indicator1_breakPoint[dat$indicator1_breakPoint>1] <- 1
 ```
-
 
 
 ```r
@@ -249,8 +260,7 @@ The solid lines point to the indicator value where the variable equals the thres
 
 ## Two-sided indicator
 
-An indicator may have an optimum value somewhere in the middle of its range, rather than a max or min value. You can then define a two-sided indicator.
-Lets say that `variable2` is optimal when its at a level of 30, and values either lower or high are both bad.
+An indicator may have an optimum value somewhere in the middle of its range, rather than a max or min value. You can then define a two-sided indicator. Lets say that `variable2` is optimal when its at a level of 30, and values either lower or high are both bad.
 
 
 ```r
@@ -269,8 +279,6 @@ dat$indicator2_twoSided <- ifelse(
 dat$indicator2_twoSided[dat$indicator2_twoSided<0] <- 0
 dat$indicator2_twoSided[dat$indicator2_twoSided>1] <- 1
 ```
-
-
 
 
 ```r
@@ -300,6 +308,7 @@ ggplot(dat)+
 <img src="scalingFunctions_files/figure-html/unnamed-chunk-18-1.png" width="672" />
 
 ## Sigmoid transformation
+
 There are many other, non-linear ways to normalise an indicator. The correct choice for scaling function varies between indicators and depends on the nature of the indicator and what it represents, but also on the uncertainty around the reference values. Personally, I think the sigmoid function often makes a lot a sense. It is less sensitive to changes around the min and max reference values. A slight deviation from the reference condition should perhaps not often not be described as a true reduction in condition. This is true for example when reference communities (ecosystems defined as having, or representing, good condition) themselves show variation in the variable values, yet the reference value is fixed. A linear scaling will in these cases lead to what is referred to as underestimation biaz (making thing look worse than they really are).
 
 The equation for the sigmoid transformation that I use here comes from [Oliver at al. (2021)](https://www.sciencedirect.com/science/article/pii/S1470160X21000066); Eq. 1, Supplemetary Information S2.
@@ -311,10 +320,10 @@ dat$indicator1_sigmoid <- 100.68*(1-exp(-5*(dat$indicator1_LowHigh)^2.5))/100
 
 Finding the transformed indicator value when the variable equals the threshold
 
+
 ```r
 sigmoid_thr <- 100.68*(1-exp(-5*((dat$thr1[1]-dat$referenceLow1[1])/(dat$referenceHigh1[1]-dat$referenceLow1[1]))^2.5))/100
 ```
-
 
 
 ```r
@@ -353,6 +362,7 @@ The solid helperlines point to the indicator value where the variable value equa
 
 Also plotted against the linearly normalised indicator values:
 
+
 ```r
 ggplot(dat)+
   geom_point(
@@ -381,7 +391,8 @@ The dotted helper lines selve as visual guides to judge how different a scaled i
 
 ### Accounting for the threshold value
 
-We can account for the  threshold for good ecological condition when applying sigmoid transformation like this
+We can account for the threshold for good ecological condition when applying sigmoid transformation like this
+
 
 ```r
 dat$indicator1_sigmoid_thr <- ifelse(
@@ -435,8 +446,8 @@ ggplot(dat)+
 
 The grey circles and horizonal line correspons to the sigmoid transformation without any adjustment for the threshold value.
 
-
 ## Exponential functoins
+
 Here are two examples of exponential transformation that can also be used:
 
 
@@ -444,7 +455,6 @@ Here are two examples of exponential transformation that can also be used:
 dat$indicator1_expConvex <- dat$indicator1_LowHigh^0.5
 dat$indicator1_expConcave <- dat$indicator1_LowHigh^2
 ```
-
 
 
 ```r

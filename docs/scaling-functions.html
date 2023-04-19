@@ -4,24 +4,26 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 5 Scaling functions | Indicators for Ecosystem Condition in Norway</title>
+<title>Chapter 7 Scaling functions | Indicators for Ecosystem Condition in Norway</title>
 <meta name="author" content="Anders L. Kolstad">
-<meta name="description" content="Author. Anders L. Kolstad Date: 2022-11-15 Indicator for ecological condition may be scaled against a reference value to become normalised and hence comparable. In SEEA EA, un-scaled or raw...">
-<meta name="generator" content="bookdown 0.27 with bs4_book()">
-<meta property="og:title" content="Chapter 5 Scaling functions | Indicators for Ecosystem Condition in Norway">
+<meta name="description" content="Author. Anders L. Kolstad Date: 2023-04-14 Superseeded : The functionality explained here is moved over to the eaTools package. Please see the documentation there for updated examples. Indicator...">
+<meta name="generator" content="bookdown 0.33 with bs4_book()">
+<meta property="og:title" content="Chapter 7 Scaling functions | Indicators for Ecosystem Condition in Norway">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://ninanor.github.io/ecosystemCondition/index.html/scaling-functions.html">
-<meta property="og:description" content="Author. Anders L. Kolstad Date: 2022-11-15 Indicator for ecological condition may be scaled against a reference value to become normalised and hence comparable. In SEEA EA, un-scaled or raw...">
+<meta property="og:image" content="https://ninanor.github.io/ecosystemCondition/index.html/images/Picture1.png">
+<meta property="og:description" content="Author. Anders L. Kolstad Date: 2023-04-14 Superseeded : The functionality explained here is moved over to the eaTools package. Please see the documentation there for updated examples. Indicator...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 5 Scaling functions | Indicators for Ecosystem Condition in Norway">
-<meta name="twitter:description" content="Author. Anders L. Kolstad Date: 2022-11-15 Indicator for ecological condition may be scaled against a reference value to become normalised and hence comparable. In SEEA EA, un-scaled or raw...">
+<meta name="twitter:title" content="Chapter 7 Scaling functions | Indicators for Ecosystem Condition in Norway">
+<meta name="twitter:description" content="Author. Anders L. Kolstad Date: 2023-04-14 Superseeded : The functionality explained here is moved over to the eaTools package. Please see the documentation there for updated examples. Indicator...">
+<meta name="twitter:image" content="https://ninanor.github.io/ecosystemCondition/index.html/images/Picture1.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="libs/datatables-binding-0.20/datatables.js"></script><link href="libs/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
-<link href="libs/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet">
-<script src="libs/dt-core-1.11.3/js/jquery.dataTables.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.1/htmlwidgets.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="libs/datatables-binding-0.27/datatables.js"></script><link href="libs/dt-core-1.12.1/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="libs/dt-core-1.12.1/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="libs/dt-core-1.12.1/js/jquery.dataTables.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
 <script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -48,17 +50,22 @@
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html">About</a></li>
+<li><a class="" href="index.html">About </a></li>
 <li><a class="" href="overview-of-indicators.html">Overview of indicators</a></li>
+<li class="book-part">INDICATORS</li>
+<li><a class="" href="slitasje-og-kj%C3%B8respor.html"><span class="header-section-number">1</span> Slitasje og kjørespor</a></li>
+<li><a class="" href="median-summer-temp.html"><span class="header-section-number">2</span> Median Summer Temperature</a></li>
+<li><a class="" href="alien-species.html"><span class="header-section-number">3</span> Alien species</a></li>
 <li class="book-part">INDICATORS FROM THE ALPINE ASSESSMENT</li>
-<li><a class="" href="areal-av-isbreer.html"><span class="header-section-number">1</span> Areal av isbreer</a></li>
-<li class="book-part">SEMI NATURAL ECOSYSTEMS</li>
-<li><a class="" href="deprecated-areal-uten-d%C3%B8d-eller-skadet-r%C3%B8sslyng-i-kystlynghei.html"><span class="header-section-number">2</span> DEPRECATED: Areal uten død eller skadet røsslyng i kystlynghei</a></li>
-<li class="book-part">INDICATORS FOR WETLANDS</li>
-<li><a class="" href="test1.html"><span class="header-section-number">3</span> This is an indicator</a></li>
+<li><a class="" href="areal-av-isbreer.html"><span class="header-section-number">4</span> Areal av isbreer</a></li>
+<li class="book-part">DEPRECATED</li>
+<li><a class="" href="areal-uten-d%C3%B8d-eller-skadet-r%C3%B8sslyng-i-kystlynghei.html"><span class="header-section-number">5</span> Areal uten død eller skadet røsslyng i kystlynghei</a></li>
 <li class="book-part">GENERAL TOPICS</li>
-<li><a class="" href="naturtype.html"><span class="header-section-number">4</span> Nature types</a></li>
-<li><a class="active" href="scaling-functions.html"><span class="header-section-number">5</span> Scaling functions</a></li>
+<li><a class="" href="naturtype.html"><span class="header-section-number">6</span> Nature types</a></li>
+<li><a class="active" href="scaling-functions.html"><span class="header-section-number">7</span> Scaling functions</a></li>
+<li><a class="" href="homogeneous-impact-areas.html"><span class="header-section-number">8</span> Homogeneous Impact Areas</a></li>
+<li><a class="" href="master-grid.html"><span class="header-section-number">9</span> Master grid</a></li>
+<li><a class="" href="climate-indicators-explained.html"><span class="header-section-number">10</span> Climate indicators explained</a></li>
 </ul>
 
         <div class="book-extra">
@@ -66,415 +73,426 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="scaling-functions" class="section level1" number="5">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="scaling-functions" class="section level1" number="7">
 <h1>
-<span class="header-section-number">5</span> Scaling functions<a class="anchor" aria-label="anchor" href="#scaling-functions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7</span> Scaling functions<a class="anchor" aria-label="anchor" href="#scaling-functions"><i class="fas fa-link"></i></a>
 </h1>
 <p>Author. Anders L. Kolstad</p>
-<p>Date: 2022-11-15</p>
+<p>Date: 2023-04-14</p>
+<p><strong>Superseeded :</strong> <em>The functionality explained here is moved over to the <a href="https://github.com/NINAnor/eaTools">eaTools</a> package. Please see the documentation there for updated examples.</em></p>
 <p>Indicator for ecological condition may be scaled against a reference value to become normalised and hence comparable. In SEEA EA, un-scaled or raw indicators are not called indicators at all, but simply referred to as variables, and I will use this distinction here. Scaling variables against reference conditions can be done in many ways. Here are some examples, for inspiration.</p>
-<div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb334"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span></code></pre></div>
 <p>Define plotting aesthetics</p>
-<div class="sourceCode" id="cb148"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">low</span> <span class="op">&lt;-</span> <span class="st">"red"</span>
-<span class="va">high</span> <span class="op">&lt;-</span> <span class="st">"green"</span>
-<span class="va">ridge</span> <span class="op">&lt;-</span> <span class="fu">geom_density_ridges_gradient</span><span class="op">(</span>scale <span class="op">=</span> <span class="fl">3</span>, size <span class="op">=</span> <span class="fl">.3</span><span class="op">)</span>
-<span class="va">myColour</span> <span class="op">&lt;-</span> <span class="st">"black"</span>
-<span class="va">mySize</span> <span class="op">&lt;-</span> <span class="fl">10</span>
-<span class="va">myAlpha</span> <span class="op">&lt;-</span> <span class="fl">.7</span>
-<span class="va">myShape</span> <span class="op">&lt;-</span> <span class="fl">21</span></code></pre></div>
+<div class="sourceCode" id="cb335"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">low</span> <span class="op">&lt;-</span> <span class="st">"red"</span></span>
+<span><span class="va">high</span> <span class="op">&lt;-</span> <span class="st">"green"</span></span>
+<span><span class="va">ridge</span> <span class="op">&lt;-</span> <span class="fu">geom_density_ridges_gradient</span><span class="op">(</span>scale <span class="op">=</span> <span class="fl">3</span>, size <span class="op">=</span> <span class="fl">.3</span><span class="op">)</span></span>
+<span><span class="va">myColour</span> <span class="op">&lt;-</span> <span class="st">"black"</span></span>
+<span><span class="va">mySize</span> <span class="op">&lt;-</span> <span class="fl">10</span></span>
+<span><span class="va">myAlpha</span> <span class="op">&lt;-</span> <span class="fl">.7</span></span>
+<span><span class="va">myShape</span> <span class="op">&lt;-</span> <span class="fl">21</span></span></code></pre></div>
 <p>Create random raw data for two variables</p>
-<div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>variable1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">10</span>, <span class="fl">4</span><span class="op">)</span>, 
-                  variable2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">30</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>
-
-<span class="va">temp</span> <span class="op">&lt;-</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/melt.data.table.html">melt</a></span><span class="op">(</span><span class="fu">setDT</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Warning in melt.data.table(setDT(dat)): id.vars and</span>
-<span class="co">#&gt; measure.vars are internally guessed when both are 'NULL'.</span>
-<span class="co">#&gt; All non-numeric/integer/logical type columns are considered</span>
-<span class="co">#&gt; id.vars, which in this case are columns []. Consider</span>
-<span class="co">#&gt; providing at least one of 'id' or 'measure' vars in future.</span>
-
-<span class="fu">ggplot</span><span class="op">(</span><span class="va">temp</span>,
-       <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">value</span>,
-           y <span class="op">=</span> <span class="va">variable</span>,
-           fill <span class="op">=</span> <span class="fu">stat</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
-  <span class="va">ridge</span><span class="op">+</span>
-  <span class="fu">scale_fill_gradient</span><span class="op">(</span>low <span class="op">=</span> <span class="va">low</span>, high <span class="op">=</span> <span class="va">high</span><span class="op">)</span>
-<span class="co">#&gt; Picking joint bandwidth of 1.22</span></code></pre></div>
+<div class="sourceCode" id="cb336"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>variable1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">10</span>, <span class="fl">4</span><span class="op">)</span>, </span>
+<span>                  variable2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">30</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">temp</span> <span class="op">&lt;-</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/melt.data.table.html">melt</a></span><span class="op">(</span><span class="fu">setDT</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning in melt.data.table(setDT(dat)): id.vars and</span></span>
+<span><span class="co">#&gt; measure.vars are internally guessed when both are 'NULL'.</span></span>
+<span><span class="co">#&gt; All non-numeric/integer/logical type columns are considered</span></span>
+<span><span class="co">#&gt; id.vars, which in this case are columns []. Consider</span></span>
+<span><span class="co">#&gt; providing at least one of 'id' or 'measure' vars in future.</span></span>
+<span></span>
+<span><span class="fu">ggplot</span><span class="op">(</span><span class="va">temp</span>,</span>
+<span>       <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">value</span>,</span>
+<span>           y <span class="op">=</span> <span class="va">variable</span>,</span>
+<span>           fill <span class="op">=</span> <span class="fu">stat</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="va">ridge</span><span class="op">+</span></span>
+<span>  <span class="fu">scale_fill_gradient</span><span class="op">(</span>low <span class="op">=</span> <span class="va">low</span>, high <span class="op">=</span> <span class="va">high</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: `stat(x)` was deprecated in ggplot2 3.4.0.</span></span>
+<span><span class="co">#&gt; ℹ Please use `after_stat(x)` instead.</span></span>
+<span><span class="co">#&gt; This warning is displayed once every 8 hours.</span></span>
+<span><span class="co">#&gt; Call `lifecycle::last_lifecycle_warnings()` to see where</span></span>
+<span><span class="co">#&gt; this warning was generated.</span></span>
+<span><span class="co">#&gt; Picking joint bandwidth of 1.22</span></span></code></pre></div>
 <div class="inline-figure"><img src="scalingFunctions_files/figure-html/unnamed-chunk-4-1.png" width="672"></div>
 <p>Lets say that the reference condition for <code>variable1</code> to equal 16, and for variable 2 its 35</p>
-<div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dat</span><span class="op">$</span><span class="va">referenceHigh1</span> <span class="op">&lt;-</span> <span class="fl">16</span>
-<span class="va">dat</span><span class="op">$</span><span class="va">referenceHigh2</span> <span class="op">&lt;-</span> <span class="fl">35</span></code></pre></div>
-<div id="linear-with-a-natural-zero" class="section level2" number="5.1">
+<div class="sourceCode" id="cb337"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dat</span><span class="op">$</span><span class="va">referenceHigh1</span> <span class="op">&lt;-</span> <span class="fl">16</span></span>
+<span><span class="va">dat</span><span class="op">$</span><span class="va">referenceHigh2</span> <span class="op">&lt;-</span> <span class="fl">35</span></span></code></pre></div>
+<div id="linear-with-a-natural-zero" class="section level2" number="7.1">
 <h2>
-<span class="header-section-number">5.1</span> Linear, with a natural zero<a class="anchor" aria-label="anchor" href="#linear-with-a-natural-zero"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.1</span> Linear, with a natural zero<a class="anchor" aria-label="anchor" href="#linear-with-a-natural-zero"><i class="fas fa-link"></i></a>
 </h2>
 <p>We can scale our variable linearly, saying that all values above 12 represents ‘perfect’ condition. We also assume that the value zero is the worst possible condition for this variable. To do this we divide by the reference value, and truncate values above it.</p>
-<div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dat</span><span class="op">$</span><span class="va">indicator1</span> <span class="op">&lt;-</span> <span class="va">dat</span><span class="op">$</span><span class="va">variable1</span><span class="op">/</span><span class="va">dat</span><span class="op">$</span><span class="va">referenceHigh1</span>
-<span class="va">dat</span><span class="op">$</span><span class="va">indicator1</span><span class="op">[</span><span class="va">dat</span><span class="op">$</span><span class="va">indicator1</span><span class="op">&gt;</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span>
-
-<span class="va">dat</span><span class="op">$</span><span class="va">indicator2</span> <span class="op">&lt;-</span> <span class="va">dat</span><span class="op">$</span><span class="va">variable2</span><span class="op">/</span><span class="va">dat</span><span class="op">$</span><span class="va">referenceHigh2</span>
-<span class="va">dat</span><span class="op">$</span><span class="va">indicator2</span><span class="op">[</span><span class="va">dat</span><span class="op">$</span><span class="va">indicator2</span><span class="op">&gt;</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></code></pre></div>
-<div class="sourceCode" id="cb152"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">temp</span> <span class="op">&lt;-</span> <span class="fu">melt</span><span class="op">(</span><span class="fu">setDT</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span>,
-             measure.vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"indicator1"</span>, <span class="st">"indicator2"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span><span class="op">+</span>
-  <span class="fu">geom_point</span><span class="op">(</span>
-    <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">variable1</span>, y <span class="op">=</span> <span class="va">indicator1</span>, fill <span class="op">=</span> <span class="va">indicator1</span><span class="op">)</span>,
-             colour <span class="op">=</span> <span class="va">myColour</span>,
-             size   <span class="op">=</span> <span class="va">mySize</span>,
-             alpha  <span class="op">=</span> <span class="va">myAlpha</span>,
-             shape  <span class="op">=</span> <span class="va">myShape</span><span class="op">)</span><span class="op">+</span>
-  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">dat</span><span class="op">$</span><span class="va">referenceHigh1</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,
-             linetype <span class="op">=</span> <span class="st">"dashed"</span>,
-             size <span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">+</span>
-  
-  <span class="fu">geom_point</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">variable2</span>, y <span class="op">=</span> <span class="va">indicator2</span>, fill <span class="op">=</span> <span class="va">indicator2</span><span class="op">)</span>,
-             colour <span class="op">=</span> <span class="va">myColour</span>,
-             size   <span class="op">=</span> <span class="va">mySize</span>,
-             alpha  <span class="op">=</span> <span class="va">myAlpha</span>,
-             shape  <span class="op">=</span> <span class="va">myShape</span><span class="op">)</span><span class="op">+</span>
-  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">dat</span><span class="op">$</span><span class="va">referenceHigh2</span>,
-             linetype <span class="op">=</span> <span class="st">"dashed"</span>,
-             size <span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">+</span>
-  <span class="fu">ylab</span><span class="op">(</span><span class="st">"Indicator values"</span><span class="op">)</span><span class="op">+</span>
-  <span class="fu">xlab</span><span class="op">(</span><span class="st">"Variable values"</span><span class="op">)</span><span class="op">+</span>
-  
-  <span class="fu">scale_fill_gradient</span><span class="op">(</span><span class="st">"Indicator values"</span>, low <span class="op">=</span> <span class="va">low</span>, high <span class="op">=</span> <span class="va">high</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb338"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dat</span><span class="op">$</span><span class="va">indicator1</span> <span class="op">&lt;-</span> <span class="va">dat</span><span class="op">$</span><span class="va">variable1</span><span class="op">/</span><span class="va">dat</span><span class="op">$</span><span class="va">referenceHigh1</span></span>
+<span><span class="va">dat</span><span class="op">$</span><span class="va">indicator1</span><span class="op">[</span><span class="va">dat</span><span class="op">$</span><span class="va">indicator1</span><span class="op">&gt;</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
+<span></span>
+<span><span class="va">dat</span><span class="op">$</span><span class="va">indicator2</span> <span class="op">&lt;-</span> <span class="va">dat</span><span class="op">$</span><span class="va">variable2</span><span class="op">/</span><span class="va">dat</span><span class="op">$</span><span class="va">referenceHigh2</span></span>
+<span><span class="va">dat</span><span class="op">$</span><span class="va">indicator2</span><span class="op">[</span><span class="va">dat</span><span class="op">$</span><span class="va">indicator2</span><span class="op">&gt;</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span></code></pre></div>
+<div class="sourceCode" id="cb339"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">temp</span> <span class="op">&lt;-</span> <span class="fu">melt</span><span class="op">(</span><span class="fu">setDT</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span>,</span>
+<span>             measure.vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"indicator1"</span>, <span class="st">"indicator2"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb340"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">ggplot</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_point</span><span class="op">(</span></span>
+<span>    <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">variable1</span>, y <span class="op">=</span> <span class="va">indicator1</span>, fill <span class="op">=</span> <span class="va">indicator1</span><span class="op">)</span>,</span>
+<span>             colour <span class="op">=</span> <span class="va">myColour</span>,</span>
+<span>             size   <span class="op">=</span> <span class="va">mySize</span>,</span>
+<span>             alpha  <span class="op">=</span> <span class="va">myAlpha</span>,</span>
+<span>             shape  <span class="op">=</span> <span class="va">myShape</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">dat</span><span class="op">$</span><span class="va">referenceHigh1</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,</span>
+<span>             linetype <span class="op">=</span> <span class="st">"dashed"</span>,</span>
+<span>             size <span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">+</span></span>
+<span>  </span>
+<span>  <span class="fu">geom_point</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">variable2</span>, y <span class="op">=</span> <span class="va">indicator2</span>, fill <span class="op">=</span> <span class="va">indicator2</span><span class="op">)</span>,</span>
+<span>             colour <span class="op">=</span> <span class="va">myColour</span>,</span>
+<span>             size   <span class="op">=</span> <span class="va">mySize</span>,</span>
+<span>             alpha  <span class="op">=</span> <span class="va">myAlpha</span>,</span>
+<span>             shape  <span class="op">=</span> <span class="va">myShape</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">dat</span><span class="op">$</span><span class="va">referenceHigh2</span>,</span>
+<span>             linetype <span class="op">=</span> <span class="st">"dashed"</span>,</span>
+<span>             size <span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">ylab</span><span class="op">(</span><span class="st">"Indicator values"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">xlab</span><span class="op">(</span><span class="st">"Variable values"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  </span>
+<span>  <span class="fu">scale_fill_gradient</span><span class="op">(</span><span class="st">"Indicator values"</span>, low <span class="op">=</span> <span class="va">low</span>, high <span class="op">=</span> <span class="va">high</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: Using `size` aesthetic for lines was deprecated in ggplot2</span></span>
+<span><span class="co">#&gt; 3.4.0.</span></span>
+<span><span class="co">#&gt; ℹ Please use `linewidth` instead.</span></span>
+<span><span class="co">#&gt; This warning is displayed once every 8 hours.</span></span>
+<span><span class="co">#&gt; Call `lifecycle::last_lifecycle_warnings()` to see where</span></span>
+<span><span class="co">#&gt; this warning was generated.</span></span></code></pre></div>
 <div class="inline-figure"><img src="scalingFunctions_files/figure-html/unnamed-chunk-8-1.png" width="672"></div>
 <p>To reverse what is good and what is bad condition: change the sign and add one.</p>
-<div class="sourceCode" id="cb154"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span><span class="op">+</span>
-  <span class="fu">geom_point</span><span class="op">(</span>
-    <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">variable1</span>, y <span class="op">=</span> <span class="va">indicator1</span><span class="op">*</span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">+</span><span class="fl">1</span>, fill <span class="op">=</span> <span class="va">indicator1</span><span class="op">*</span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span>,
-             colour <span class="op">=</span> <span class="va">myColour</span>,
-             size   <span class="op">=</span> <span class="va">mySize</span>,
-             alpha  <span class="op">=</span> <span class="va">myAlpha</span>,
-             shape  <span class="op">=</span> <span class="va">myShape</span><span class="op">)</span><span class="op">+</span>
-  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">dat</span><span class="op">$</span><span class="va">referenceHigh1</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,
-             linetype <span class="op">=</span> <span class="st">"dashed"</span>,
-             size <span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">+</span>
-  
-  <span class="fu">ylab</span><span class="op">(</span><span class="st">"Indicator values"</span><span class="op">)</span><span class="op">+</span>
-  <span class="fu">xlab</span><span class="op">(</span><span class="st">"Variable values"</span><span class="op">)</span><span class="op">+</span>
-  
-  <span class="fu">scale_fill_gradient</span><span class="op">(</span><span class="st">"Indicator values"</span>, low <span class="op">=</span> <span class="va">low</span>, high <span class="op">=</span> <span class="va">high</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb341"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">ggplot</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_point</span><span class="op">(</span></span>
+<span>    <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">variable1</span>, y <span class="op">=</span> <span class="va">indicator1</span><span class="op">*</span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">+</span><span class="fl">1</span>, fill <span class="op">=</span> <span class="va">indicator1</span><span class="op">*</span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span>,</span>
+<span>             colour <span class="op">=</span> <span class="va">myColour</span>,</span>
+<span>             size   <span class="op">=</span> <span class="va">mySize</span>,</span>
+<span>             alpha  <span class="op">=</span> <span class="va">myAlpha</span>,</span>
+<span>             shape  <span class="op">=</span> <span class="va">myShape</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">dat</span><span class="op">$</span><span class="va">referenceHigh1</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,</span>
+<span>             linetype <span class="op">=</span> <span class="st">"dashed"</span>,</span>
+<span>             size <span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">+</span></span>
+<span>  </span>
+<span>  <span class="fu">ylab</span><span class="op">(</span><span class="st">"Indicator values"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">xlab</span><span class="op">(</span><span class="st">"Variable values"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  </span>
+<span>  <span class="fu">scale_fill_gradient</span><span class="op">(</span><span class="st">"Indicator values"</span>, low <span class="op">=</span> <span class="va">low</span>, high <span class="op">=</span> <span class="va">high</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="scalingFunctions_files/figure-html/unnamed-chunk-9-1.png" width="672"></div>
 <p>The two indicators become more comparable now that they are normalised. At least this is true around the reference value. But perhaps a variable value around 25 for <code>variable2</code> is actually quite bad. In the above example I have assumed that the value zero is the worst possible value, but that may not always be the case.</p>
 </div>
-<div id="linear-with-defined-lower-limit" class="section level2" number="5.2">
+<div id="linear-with-defined-lower-limit" class="section level2" number="7.2">
 <h2>
-<span class="header-section-number">5.2</span> Linear, with defined lower limit<a class="anchor" aria-label="anchor" href="#linear-with-defined-lower-limit"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.2</span> Linear, with defined lower limit<a class="anchor" aria-label="anchor" href="#linear-with-defined-lower-limit"><i class="fas fa-link"></i></a>
 </h2>
 <p>We can also say that the worst possible condition for these variables is not zero, but for example say that it is 5 for <code>variable1</code> and 28 for <code>variable2</code>.</p>
-<div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dat</span><span class="op">$</span><span class="va">referenceLow1</span> <span class="op">&lt;-</span> <span class="fl">5</span>
-<span class="va">dat</span><span class="op">$</span><span class="va">referenceLow2</span> <span class="op">&lt;-</span> <span class="fl">28</span></code></pre></div>
+<div class="sourceCode" id="cb342"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dat</span><span class="op">$</span><span class="va">referenceLow1</span> <span class="op">&lt;-</span> <span class="fl">5</span></span>
+<span><span class="va">dat</span><span class="op">$</span><span class="va">referenceLow2</span> <span class="op">&lt;-</span> <span class="fl">28</span></span></code></pre></div>
 <p>We can then normalise the data between these two reference values.</p>
-<div class="sourceCode" id="cb156"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dat</span><span class="op">$</span><span class="va">indicator1_LowHigh</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">variable1</span><span class="op">-</span><span class="va">dat</span><span class="op">$</span><span class="va">referenceLow1</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">referenceHigh1</span> <span class="op">-</span> <span class="va">dat</span><span class="op">$</span><span class="va">referenceLow1</span><span class="op">)</span>
-<span class="va">dat</span><span class="op">$</span><span class="va">indicator1_LowHigh</span><span class="op">[</span><span class="va">dat</span><span class="op">$</span><span class="va">indicator1_LowHigh</span> <span class="op">&lt;</span><span class="fl">0</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span>
-<span class="va">dat</span><span class="op">$</span><span class="va">indicator1_LowHigh</span><span class="op">[</span><span class="va">dat</span><span class="op">$</span><span class="va">indicator1_LowHigh</span> <span class="op">&gt;</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span>
-
-<span class="va">dat</span><span class="op">$</span><span class="va">indicator2_LowHigh</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">variable2</span><span class="op">-</span><span class="va">dat</span><span class="op">$</span><span class="va">referenceLow2</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">referenceHigh2</span> <span class="op">-</span> <span class="va">dat</span><span class="op">$</span><span class="va">referenceLow2</span><span class="op">)</span>
-<span class="va">dat</span><span class="op">$</span><span class="va">indicator2_LowHigh</span><span class="op">[</span><span class="va">dat</span><span class="op">$</span><span class="va">indicator2_LowHigh</span> <span class="op">&lt;</span><span class="fl">0</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span>
-<span class="va">dat</span><span class="op">$</span><span class="va">indicator2_LowHigh</span><span class="op">[</span><span class="va">dat</span><span class="op">$</span><span class="va">indicator2_LowHigh</span> <span class="op">&gt;</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></code></pre></div>
-<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span><span class="op">+</span>
-  <span class="fu">geom_point</span><span class="op">(</span>
-    <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">variable1</span>, y <span class="op">=</span> <span class="va">indicator1_LowHigh</span>, fill <span class="op">=</span> <span class="va">indicator1_LowHigh</span><span class="op">)</span>,
-             colour <span class="op">=</span> <span class="va">myColour</span>,
-             size   <span class="op">=</span> <span class="va">mySize</span>,
-             alpha  <span class="op">=</span> <span class="va">myAlpha</span>,
-             shape  <span class="op">=</span> <span class="va">myShape</span><span class="op">)</span><span class="op">+</span>
-  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">16</span>,
-             linetype <span class="op">=</span> <span class="st">"dashed"</span>,
-             size <span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">+</span>
-  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">5</span>,
-             linetype <span class="op">=</span> <span class="st">"dashed"</span>,
-             size <span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">+</span>
-  
-  <span class="fu">geom_point</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">variable2</span>, y <span class="op">=</span> <span class="va">indicator2_LowHigh</span>, fill <span class="op">=</span> <span class="va">indicator2_LowHigh</span><span class="op">)</span>,
-             colour <span class="op">=</span> <span class="va">myColour</span>,
-             size   <span class="op">=</span> <span class="va">mySize</span>,
-             alpha  <span class="op">=</span> <span class="va">myAlpha</span>,
-             shape  <span class="op">=</span> <span class="va">myShape</span><span class="op">)</span><span class="op">+</span>
-  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">35</span>,
-             linetype <span class="op">=</span> <span class="st">"dashed"</span>,
-             size <span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">+</span>
-  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">28</span>,
-             linetype <span class="op">=</span> <span class="st">"dashed"</span>,
-             size <span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">+</span>
-  <span class="fu">ylab</span><span class="op">(</span><span class="st">"Indicator values"</span><span class="op">)</span><span class="op">+</span>
-  <span class="fu">xlab</span><span class="op">(</span><span class="st">"Variable values"</span><span class="op">)</span><span class="op">+</span>
-  
-  <span class="fu">scale_fill_gradient</span><span class="op">(</span><span class="st">"Indicator values"</span>, low <span class="op">=</span> <span class="va">low</span>, high <span class="op">=</span> <span class="va">high</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb343"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dat</span><span class="op">$</span><span class="va">indicator1_LowHigh</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">variable1</span><span class="op">-</span><span class="va">dat</span><span class="op">$</span><span class="va">referenceLow1</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">referenceHigh1</span> <span class="op">-</span> <span class="va">dat</span><span class="op">$</span><span class="va">referenceLow1</span><span class="op">)</span></span>
+<span><span class="va">dat</span><span class="op">$</span><span class="va">indicator1_LowHigh</span><span class="op">[</span><span class="va">dat</span><span class="op">$</span><span class="va">indicator1_LowHigh</span> <span class="op">&lt;</span><span class="fl">0</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
+<span><span class="va">dat</span><span class="op">$</span><span class="va">indicator1_LowHigh</span><span class="op">[</span><span class="va">dat</span><span class="op">$</span><span class="va">indicator1_LowHigh</span> <span class="op">&gt;</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
+<span></span>
+<span><span class="va">dat</span><span class="op">$</span><span class="va">indicator2_LowHigh</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">variable2</span><span class="op">-</span><span class="va">dat</span><span class="op">$</span><span class="va">referenceLow2</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">referenceHigh2</span> <span class="op">-</span> <span class="va">dat</span><span class="op">$</span><span class="va">referenceLow2</span><span class="op">)</span></span>
+<span><span class="va">dat</span><span class="op">$</span><span class="va">indicator2_LowHigh</span><span class="op">[</span><span class="va">dat</span><span class="op">$</span><span class="va">indicator2_LowHigh</span> <span class="op">&lt;</span><span class="fl">0</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
+<span><span class="va">dat</span><span class="op">$</span><span class="va">indicator2_LowHigh</span><span class="op">[</span><span class="va">dat</span><span class="op">$</span><span class="va">indicator2_LowHigh</span> <span class="op">&gt;</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span></code></pre></div>
+<div class="sourceCode" id="cb344"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">ggplot</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_point</span><span class="op">(</span></span>
+<span>    <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">variable1</span>, y <span class="op">=</span> <span class="va">indicator1_LowHigh</span>, fill <span class="op">=</span> <span class="va">indicator1_LowHigh</span><span class="op">)</span>,</span>
+<span>             colour <span class="op">=</span> <span class="va">myColour</span>,</span>
+<span>             size   <span class="op">=</span> <span class="va">mySize</span>,</span>
+<span>             alpha  <span class="op">=</span> <span class="va">myAlpha</span>,</span>
+<span>             shape  <span class="op">=</span> <span class="va">myShape</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">16</span>,</span>
+<span>             linetype <span class="op">=</span> <span class="st">"dashed"</span>,</span>
+<span>             size <span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>             linetype <span class="op">=</span> <span class="st">"dashed"</span>,</span>
+<span>             size <span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">+</span></span>
+<span>  </span>
+<span>  <span class="fu">geom_point</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">variable2</span>, y <span class="op">=</span> <span class="va">indicator2_LowHigh</span>, fill <span class="op">=</span> <span class="va">indicator2_LowHigh</span><span class="op">)</span>,</span>
+<span>             colour <span class="op">=</span> <span class="va">myColour</span>,</span>
+<span>             size   <span class="op">=</span> <span class="va">mySize</span>,</span>
+<span>             alpha  <span class="op">=</span> <span class="va">myAlpha</span>,</span>
+<span>             shape  <span class="op">=</span> <span class="va">myShape</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">35</span>,</span>
+<span>             linetype <span class="op">=</span> <span class="st">"dashed"</span>,</span>
+<span>             size <span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">28</span>,</span>
+<span>             linetype <span class="op">=</span> <span class="st">"dashed"</span>,</span>
+<span>             size <span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">ylab</span><span class="op">(</span><span class="st">"Indicator values"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">xlab</span><span class="op">(</span><span class="st">"Variable values"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  </span>
+<span>  <span class="fu">scale_fill_gradient</span><span class="op">(</span><span class="st">"Indicator values"</span>, low <span class="op">=</span> <span class="va">low</span>, high <span class="op">=</span> <span class="va">high</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="scalingFunctions_files/figure-html/unnamed-chunk-12-1.png" width="672"></div>
 </div>
-<div id="break-point-scaling" class="section level2" number="5.3">
+<div id="break-point-scaling" class="section level2" number="7.3">
 <h2>
-<span class="header-section-number">5.3</span> Break point scaling<a class="anchor" aria-label="anchor" href="#break-point-scaling"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.3</span> Break point scaling<a class="anchor" aria-label="anchor" href="#break-point-scaling"><i class="fas fa-link"></i></a>
 </h2>
 <p>We can also define a threshold for good ecological condition. Lets for example say that for <code>variable1</code>, ecosystem function really declines when the variable shows values below 9.</p>
-<div class="sourceCode" id="cb158"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dat</span><span class="op">$</span><span class="va">thr1</span> <span class="op">&lt;-</span> <span class="fl">9</span></code></pre></div>
+<div class="sourceCode" id="cb345"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dat</span><span class="op">$</span><span class="va">thr1</span> <span class="op">&lt;-</span> <span class="fl">9</span></span></code></pre></div>
 <p>Then we can normalise again, using what I refer to as break point normalisation. For the maths, see <a href="https://stats.stackexchange.com/questions/281162/scale-a-number-between-a-range">here</a>.</p>
-<div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dat</span><span class="op">$</span><span class="va">indicator1_breakPoint</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span>
-  <span class="va">dat</span><span class="op">$</span><span class="va">variable1</span> <span class="op">&lt;</span> <span class="va">dat</span><span class="op">$</span><span class="va">thr1</span>,
-    <span class="op">(</span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">variable1</span><span class="op">-</span><span class="va">dat</span><span class="op">$</span><span class="va">referenceLow1</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">thr1</span> <span class="op">-</span> <span class="va">dat</span><span class="op">$</span><span class="va">referenceLow1</span><span class="op">)</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="fl">0.6</span><span class="op">-</span><span class="fl">0</span><span class="op">)</span><span class="op">+</span><span class="fl">0</span>,
-    <span class="op">(</span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">variable1</span><span class="op">-</span><span class="va">dat</span><span class="op">$</span><span class="va">thr1</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">referenceHigh1</span> <span class="op">-</span> <span class="va">dat</span><span class="op">$</span><span class="va">thr1</span><span class="op">)</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="fl">0.6</span><span class="op">)</span><span class="op">+</span><span class="fl">0.6</span>
-  <span class="op">)</span>
-
-<span class="va">dat</span><span class="op">$</span><span class="va">indicator1_breakPoint</span><span class="op">[</span><span class="va">dat</span><span class="op">$</span><span class="va">indicator1_breakPoint</span><span class="op">&lt;</span><span class="fl">0</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span>
-<span class="va">dat</span><span class="op">$</span><span class="va">indicator1_breakPoint</span><span class="op">[</span><span class="va">dat</span><span class="op">$</span><span class="va">indicator1_breakPoint</span><span class="op">&gt;</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></code></pre></div>
-<div class="sourceCode" id="cb160"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span><span class="op">+</span>
-  <span class="fu">geom_point</span><span class="op">(</span>
-    <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">variable1</span>, y <span class="op">=</span> <span class="va">indicator1_breakPoint</span>, fill <span class="op">=</span> <span class="va">indicator1_breakPoint</span><span class="op">)</span>,
-             colour <span class="op">=</span> <span class="va">myColour</span>,
-             size   <span class="op">=</span> <span class="va">mySize</span>,
-             alpha  <span class="op">=</span> <span class="va">myAlpha</span>,
-             shape  <span class="op">=</span> <span class="va">myShape</span><span class="op">)</span><span class="op">+</span>
-  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">dat</span><span class="op">$</span><span class="va">referenceHigh1</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,
-             linetype <span class="op">=</span> <span class="st">"dashed"</span>,
-             size <span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">+</span>
-  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">dat</span><span class="op">$</span><span class="va">referenceLow1</span>,
-             linetype <span class="op">=</span> <span class="st">"dashed"</span>,
-             size <span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">+</span>
-  <span class="fu">geom_segment</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">thr1</span>, y <span class="op">=</span> <span class="fl">0</span>, xend <span class="op">=</span> <span class="va">thr1</span>, yend <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span>,
-               linetype<span class="op">=</span><span class="st">"solid"</span>,
-               size<span class="op">=</span><span class="fl">1.5</span><span class="op">)</span><span class="op">+</span>
-  <span class="fu">geom_segment</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="fl">0</span>, y <span class="op">=</span> <span class="fl">0.6</span>, xend <span class="op">=</span> <span class="va">thr1</span>, yend <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span>,
-               linetype<span class="op">=</span><span class="st">"solid"</span>,
-               size<span class="op">=</span><span class="fl">1.5</span><span class="op">)</span><span class="op">+</span>
-  
-  <span class="fu">ylab</span><span class="op">(</span><span class="st">"Indicator values"</span><span class="op">)</span><span class="op">+</span>
-  <span class="fu">xlab</span><span class="op">(</span><span class="st">"Variable values"</span><span class="op">)</span><span class="op">+</span>
-  
-  <span class="fu">scale_fill_gradient</span><span class="op">(</span><span class="st">"Indicator values"</span>, low <span class="op">=</span> <span class="va">low</span>, high <span class="op">=</span> <span class="va">high</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb346"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dat</span><span class="op">$</span><span class="va">indicator1_breakPoint</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span></span>
+<span>  <span class="va">dat</span><span class="op">$</span><span class="va">variable1</span> <span class="op">&lt;</span> <span class="va">dat</span><span class="op">$</span><span class="va">thr1</span>,</span>
+<span>    <span class="op">(</span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">variable1</span><span class="op">-</span><span class="va">dat</span><span class="op">$</span><span class="va">referenceLow1</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">thr1</span> <span class="op">-</span> <span class="va">dat</span><span class="op">$</span><span class="va">referenceLow1</span><span class="op">)</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="fl">0.6</span><span class="op">-</span><span class="fl">0</span><span class="op">)</span><span class="op">+</span><span class="fl">0</span>,</span>
+<span>    <span class="op">(</span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">variable1</span><span class="op">-</span><span class="va">dat</span><span class="op">$</span><span class="va">thr1</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">referenceHigh1</span> <span class="op">-</span> <span class="va">dat</span><span class="op">$</span><span class="va">thr1</span><span class="op">)</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="fl">0.6</span><span class="op">)</span><span class="op">+</span><span class="fl">0.6</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="va">dat</span><span class="op">$</span><span class="va">indicator1_breakPoint</span><span class="op">[</span><span class="va">dat</span><span class="op">$</span><span class="va">indicator1_breakPoint</span><span class="op">&lt;</span><span class="fl">0</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
+<span><span class="va">dat</span><span class="op">$</span><span class="va">indicator1_breakPoint</span><span class="op">[</span><span class="va">dat</span><span class="op">$</span><span class="va">indicator1_breakPoint</span><span class="op">&gt;</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span></code></pre></div>
+<div class="sourceCode" id="cb347"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">ggplot</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_point</span><span class="op">(</span></span>
+<span>    <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">variable1</span>, y <span class="op">=</span> <span class="va">indicator1_breakPoint</span>, fill <span class="op">=</span> <span class="va">indicator1_breakPoint</span><span class="op">)</span>,</span>
+<span>             colour <span class="op">=</span> <span class="va">myColour</span>,</span>
+<span>             size   <span class="op">=</span> <span class="va">mySize</span>,</span>
+<span>             alpha  <span class="op">=</span> <span class="va">myAlpha</span>,</span>
+<span>             shape  <span class="op">=</span> <span class="va">myShape</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">dat</span><span class="op">$</span><span class="va">referenceHigh1</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,</span>
+<span>             linetype <span class="op">=</span> <span class="st">"dashed"</span>,</span>
+<span>             size <span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">dat</span><span class="op">$</span><span class="va">referenceLow1</span>,</span>
+<span>             linetype <span class="op">=</span> <span class="st">"dashed"</span>,</span>
+<span>             size <span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_segment</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">thr1</span>, y <span class="op">=</span> <span class="fl">0</span>, xend <span class="op">=</span> <span class="va">thr1</span>, yend <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span>,</span>
+<span>               linetype<span class="op">=</span><span class="st">"solid"</span>,</span>
+<span>               size<span class="op">=</span><span class="fl">1.5</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_segment</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="fl">0</span>, y <span class="op">=</span> <span class="fl">0.6</span>, xend <span class="op">=</span> <span class="va">thr1</span>, yend <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span>,</span>
+<span>               linetype<span class="op">=</span><span class="st">"solid"</span>,</span>
+<span>               size<span class="op">=</span><span class="fl">1.5</span><span class="op">)</span><span class="op">+</span></span>
+<span>  </span>
+<span>  <span class="fu">ylab</span><span class="op">(</span><span class="st">"Indicator values"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">xlab</span><span class="op">(</span><span class="st">"Variable values"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  </span>
+<span>  <span class="fu">scale_fill_gradient</span><span class="op">(</span><span class="st">"Indicator values"</span>, low <span class="op">=</span> <span class="va">low</span>, high <span class="op">=</span> <span class="va">high</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="scalingFunctions_files/figure-html/unnamed-chunk-15-1.png" width="672"></div>
 <p>The solid lines point to the indicator value where the variable equals the threshold value.</p>
 </div>
-<div id="two-sided-indicator" class="section level2" number="5.4">
+<div id="two-sided-indicator" class="section level2" number="7.4">
 <h2>
-<span class="header-section-number">5.4</span> Two-sided indicator<a class="anchor" aria-label="anchor" href="#two-sided-indicator"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.4</span> Two-sided indicator<a class="anchor" aria-label="anchor" href="#two-sided-indicator"><i class="fas fa-link"></i></a>
 </h2>
-<p>An indicator may have an optimum value somewhere in the middle of its range, rather than a max or min value. You can then define a two-sided indicator.
-Lets say that <code>variable2</code> is optimal when its at a level of 30, and values either lower or high are both bad.</p>
-<div class="sourceCode" id="cb161"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dat</span><span class="op">$</span><span class="va">referenceMid2</span> <span class="op">&lt;-</span> <span class="fl">30</span></code></pre></div>
-<div class="sourceCode" id="cb162"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dat</span><span class="op">$</span><span class="va">indicator2_twoSided</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span>
-  <span class="va">dat</span><span class="op">$</span><span class="va">variable2</span><span class="op">&lt;</span><span class="va">dat</span><span class="op">$</span><span class="va">referenceMid2</span>,
-    <span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">variable2</span><span class="op">-</span><span class="va">dat</span><span class="op">$</span><span class="va">referenceLow2</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">referenceMid2</span><span class="op">-</span><span class="va">dat</span><span class="op">$</span><span class="va">referenceLow2</span><span class="op">)</span>,
-    <span class="op">(</span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">variable2</span><span class="op">-</span><span class="va">dat</span><span class="op">$</span><span class="va">referenceMid2</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">referenceHigh2</span><span class="op">-</span><span class="va">dat</span><span class="op">$</span><span class="va">referenceMid2</span><span class="op">)</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">+</span><span class="fl">1</span>
-  <span class="op">)</span>
-
-<span class="co"># truncating</span>
-<span class="va">dat</span><span class="op">$</span><span class="va">indicator2_twoSided</span><span class="op">[</span><span class="va">dat</span><span class="op">$</span><span class="va">indicator2_twoSided</span><span class="op">&lt;</span><span class="fl">0</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span>
-<span class="va">dat</span><span class="op">$</span><span class="va">indicator2_twoSided</span><span class="op">[</span><span class="va">dat</span><span class="op">$</span><span class="va">indicator2_twoSided</span><span class="op">&gt;</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></code></pre></div>
-<div class="sourceCode" id="cb163"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span><span class="op">+</span>
-  <span class="fu">geom_point</span><span class="op">(</span>
-    <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">variable2</span>, y <span class="op">=</span> <span class="va">indicator2_twoSided</span>, fill <span class="op">=</span> <span class="va">indicator2_twoSided</span><span class="op">)</span>,
-             colour <span class="op">=</span> <span class="va">myColour</span>,
-             size   <span class="op">=</span> <span class="va">mySize</span>,
-             alpha  <span class="op">=</span> <span class="va">myAlpha</span>,
-             shape  <span class="op">=</span> <span class="va">myShape</span><span class="op">)</span><span class="op">+</span>
-  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">dat</span><span class="op">$</span><span class="va">referenceMid2</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,
-             linetype <span class="op">=</span> <span class="st">"dashed"</span>,
-             size <span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">+</span>
-  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">dat</span><span class="op">$</span><span class="va">referenceLow2</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,
-             linetype <span class="op">=</span> <span class="st">"dashed"</span>,
-             size <span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">+</span>
-  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">dat</span><span class="op">$</span><span class="va">referenceHigh2</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,
-             linetype <span class="op">=</span> <span class="st">"dashed"</span>,
-             size <span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">+</span>
- 
-  <span class="fu">ylab</span><span class="op">(</span><span class="st">"Indicator values"</span><span class="op">)</span><span class="op">+</span>
-  <span class="fu">xlab</span><span class="op">(</span><span class="st">"Variable values"</span><span class="op">)</span><span class="op">+</span>
-  
-  <span class="fu">scale_fill_gradient</span><span class="op">(</span><span class="st">"Indicator values"</span>, low <span class="op">=</span> <span class="va">low</span>, high <span class="op">=</span> <span class="va">high</span><span class="op">)</span></code></pre></div>
+<p>An indicator may have an optimum value somewhere in the middle of its range, rather than a max or min value. You can then define a two-sided indicator. Lets say that <code>variable2</code> is optimal when its at a level of 30, and values either lower or high are both bad.</p>
+<div class="sourceCode" id="cb348"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dat</span><span class="op">$</span><span class="va">referenceMid2</span> <span class="op">&lt;-</span> <span class="fl">30</span></span></code></pre></div>
+<div class="sourceCode" id="cb349"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dat</span><span class="op">$</span><span class="va">indicator2_twoSided</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span></span>
+<span>  <span class="va">dat</span><span class="op">$</span><span class="va">variable2</span><span class="op">&lt;</span><span class="va">dat</span><span class="op">$</span><span class="va">referenceMid2</span>,</span>
+<span>    <span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">variable2</span><span class="op">-</span><span class="va">dat</span><span class="op">$</span><span class="va">referenceLow2</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">referenceMid2</span><span class="op">-</span><span class="va">dat</span><span class="op">$</span><span class="va">referenceLow2</span><span class="op">)</span>,</span>
+<span>    <span class="op">(</span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">variable2</span><span class="op">-</span><span class="va">dat</span><span class="op">$</span><span class="va">referenceMid2</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">referenceHigh2</span><span class="op">-</span><span class="va">dat</span><span class="op">$</span><span class="va">referenceMid2</span><span class="op">)</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">+</span><span class="fl">1</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="co"># truncating</span></span>
+<span><span class="va">dat</span><span class="op">$</span><span class="va">indicator2_twoSided</span><span class="op">[</span><span class="va">dat</span><span class="op">$</span><span class="va">indicator2_twoSided</span><span class="op">&lt;</span><span class="fl">0</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
+<span><span class="va">dat</span><span class="op">$</span><span class="va">indicator2_twoSided</span><span class="op">[</span><span class="va">dat</span><span class="op">$</span><span class="va">indicator2_twoSided</span><span class="op">&gt;</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span></code></pre></div>
+<div class="sourceCode" id="cb350"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">ggplot</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_point</span><span class="op">(</span></span>
+<span>    <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">variable2</span>, y <span class="op">=</span> <span class="va">indicator2_twoSided</span>, fill <span class="op">=</span> <span class="va">indicator2_twoSided</span><span class="op">)</span>,</span>
+<span>             colour <span class="op">=</span> <span class="va">myColour</span>,</span>
+<span>             size   <span class="op">=</span> <span class="va">mySize</span>,</span>
+<span>             alpha  <span class="op">=</span> <span class="va">myAlpha</span>,</span>
+<span>             shape  <span class="op">=</span> <span class="va">myShape</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">dat</span><span class="op">$</span><span class="va">referenceMid2</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,</span>
+<span>             linetype <span class="op">=</span> <span class="st">"dashed"</span>,</span>
+<span>             size <span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">dat</span><span class="op">$</span><span class="va">referenceLow2</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,</span>
+<span>             linetype <span class="op">=</span> <span class="st">"dashed"</span>,</span>
+<span>             size <span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">dat</span><span class="op">$</span><span class="va">referenceHigh2</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,</span>
+<span>             linetype <span class="op">=</span> <span class="st">"dashed"</span>,</span>
+<span>             size <span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">+</span></span>
+<span> </span>
+<span>  <span class="fu">ylab</span><span class="op">(</span><span class="st">"Indicator values"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">xlab</span><span class="op">(</span><span class="st">"Variable values"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  </span>
+<span>  <span class="fu">scale_fill_gradient</span><span class="op">(</span><span class="st">"Indicator values"</span>, low <span class="op">=</span> <span class="va">low</span>, high <span class="op">=</span> <span class="va">high</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="scalingFunctions_files/figure-html/unnamed-chunk-18-1.png" width="672"></div>
 </div>
-<div id="sigmoid-transformation" class="section level2" number="5.5">
+<div id="sigmoid-transformation" class="section level2" number="7.5">
 <h2>
-<span class="header-section-number">5.5</span> Sigmoid transformation<a class="anchor" aria-label="anchor" href="#sigmoid-transformation"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.5</span> Sigmoid transformation<a class="anchor" aria-label="anchor" href="#sigmoid-transformation"><i class="fas fa-link"></i></a>
 </h2>
 <p>There are many other, non-linear ways to normalise an indicator. The correct choice for scaling function varies between indicators and depends on the nature of the indicator and what it represents, but also on the uncertainty around the reference values. Personally, I think the sigmoid function often makes a lot a sense. It is less sensitive to changes around the min and max reference values. A slight deviation from the reference condition should perhaps not often not be described as a true reduction in condition. This is true for example when reference communities (ecosystems defined as having, or representing, good condition) themselves show variation in the variable values, yet the reference value is fixed. A linear scaling will in these cases lead to what is referred to as underestimation biaz (making thing look worse than they really are).</p>
 <p>The equation for the sigmoid transformation that I use here comes from <a href="https://www.sciencedirect.com/science/article/pii/S1470160X21000066">Oliver at al. (2021)</a>; Eq. 1, Supplemetary Information S2.</p>
-<div class="sourceCode" id="cb164"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dat</span><span class="op">$</span><span class="va">indicator1_sigmoid</span> <span class="op">&lt;-</span> <span class="fl">100.68</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span><span class="op">*</span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">indicator1_LowHigh</span><span class="op">)</span><span class="op">^</span><span class="fl">2.5</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fl">100</span></code></pre></div>
+<div class="sourceCode" id="cb351"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dat</span><span class="op">$</span><span class="va">indicator1_sigmoid</span> <span class="op">&lt;-</span> <span class="fl">100.68</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span><span class="op">*</span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">indicator1_LowHigh</span><span class="op">)</span><span class="op">^</span><span class="fl">2.5</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fl">100</span></span></code></pre></div>
 <p>Finding the transformed indicator value when the variable equals the threshold</p>
-<div class="sourceCode" id="cb165"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">sigmoid_thr</span> <span class="op">&lt;-</span> <span class="fl">100.68</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span><span class="op">*</span><span class="op">(</span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">thr1</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">-</span><span class="va">dat</span><span class="op">$</span><span class="va">referenceLow1</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">referenceHigh1</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">-</span><span class="va">dat</span><span class="op">$</span><span class="va">referenceLow1</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="fl">2.5</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fl">100</span></code></pre></div>
-<div class="sourceCode" id="cb166"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span><span class="op">+</span>
-  <span class="fu">geom_point</span><span class="op">(</span>
-    <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">variable1</span>, y <span class="op">=</span> <span class="va">indicator1_sigmoid</span>, fill <span class="op">=</span> <span class="va">indicator1_sigmoid</span><span class="op">)</span>,
-             colour <span class="op">=</span> <span class="va">myColour</span>,
-             size   <span class="op">=</span> <span class="va">mySize</span>,
-             alpha  <span class="op">=</span> <span class="va">myAlpha</span>,
-             shape  <span class="op">=</span> <span class="va">myShape</span><span class="op">)</span><span class="op">+</span>
-  
-  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">dat</span><span class="op">$</span><span class="va">referenceLow1</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,
-             linetype <span class="op">=</span> <span class="st">"dashed"</span>,
-             size <span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">+</span>
-  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">dat</span><span class="op">$</span><span class="va">referenceHigh1</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,
-             linetype <span class="op">=</span> <span class="st">"dashed"</span>,
-             size <span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">+</span>
-  
-  <span class="fu">geom_segment</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">thr1</span>, y <span class="op">=</span> <span class="fl">0</span>, xend <span class="op">=</span> <span class="va">thr1</span>, yend <span class="op">=</span> <span class="va">sigmoid_thr</span><span class="op">)</span>,
-               linetype<span class="op">=</span><span class="st">"solid"</span>,
-               size<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">+</span>
-  <span class="fu">geom_segment</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="fl">0</span>, y <span class="op">=</span> <span class="va">sigmoid_thr</span>, xend <span class="op">=</span> <span class="va">thr1</span>, yend <span class="op">=</span> <span class="va">sigmoid_thr</span><span class="op">)</span>,
-               linetype<span class="op">=</span><span class="st">"solid"</span>,
-               size<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">+</span>
-  
-  
-  <span class="fu">ylab</span><span class="op">(</span><span class="st">"Indicator values"</span><span class="op">)</span><span class="op">+</span>
-  <span class="fu">xlab</span><span class="op">(</span><span class="st">"Variable values"</span><span class="op">)</span><span class="op">+</span>
-  
-  <span class="fu">scale_fill_gradient</span><span class="op">(</span><span class="st">"Indicator values"</span>, low <span class="op">=</span> <span class="va">low</span>, high <span class="op">=</span> <span class="va">high</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb352"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">sigmoid_thr</span> <span class="op">&lt;-</span> <span class="fl">100.68</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span><span class="op">*</span><span class="op">(</span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">thr1</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">-</span><span class="va">dat</span><span class="op">$</span><span class="va">referenceLow1</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">referenceHigh1</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">-</span><span class="va">dat</span><span class="op">$</span><span class="va">referenceLow1</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="fl">2.5</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fl">100</span></span></code></pre></div>
+<div class="sourceCode" id="cb353"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">ggplot</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_point</span><span class="op">(</span></span>
+<span>    <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">variable1</span>, y <span class="op">=</span> <span class="va">indicator1_sigmoid</span>, fill <span class="op">=</span> <span class="va">indicator1_sigmoid</span><span class="op">)</span>,</span>
+<span>             colour <span class="op">=</span> <span class="va">myColour</span>,</span>
+<span>             size   <span class="op">=</span> <span class="va">mySize</span>,</span>
+<span>             alpha  <span class="op">=</span> <span class="va">myAlpha</span>,</span>
+<span>             shape  <span class="op">=</span> <span class="va">myShape</span><span class="op">)</span><span class="op">+</span></span>
+<span>  </span>
+<span>  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">dat</span><span class="op">$</span><span class="va">referenceLow1</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,</span>
+<span>             linetype <span class="op">=</span> <span class="st">"dashed"</span>,</span>
+<span>             size <span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">dat</span><span class="op">$</span><span class="va">referenceHigh1</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,</span>
+<span>             linetype <span class="op">=</span> <span class="st">"dashed"</span>,</span>
+<span>             size <span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">+</span></span>
+<span>  </span>
+<span>  <span class="fu">geom_segment</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">thr1</span>, y <span class="op">=</span> <span class="fl">0</span>, xend <span class="op">=</span> <span class="va">thr1</span>, yend <span class="op">=</span> <span class="va">sigmoid_thr</span><span class="op">)</span>,</span>
+<span>               linetype<span class="op">=</span><span class="st">"solid"</span>,</span>
+<span>               size<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_segment</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="fl">0</span>, y <span class="op">=</span> <span class="va">sigmoid_thr</span>, xend <span class="op">=</span> <span class="va">thr1</span>, yend <span class="op">=</span> <span class="va">sigmoid_thr</span><span class="op">)</span>,</span>
+<span>               linetype<span class="op">=</span><span class="st">"solid"</span>,</span>
+<span>               size<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">+</span></span>
+<span>  </span>
+<span>  </span>
+<span>  <span class="fu">ylab</span><span class="op">(</span><span class="st">"Indicator values"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">xlab</span><span class="op">(</span><span class="st">"Variable values"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  </span>
+<span>  <span class="fu">scale_fill_gradient</span><span class="op">(</span><span class="st">"Indicator values"</span>, low <span class="op">=</span> <span class="va">low</span>, high <span class="op">=</span> <span class="va">high</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="scalingFunctions_files/figure-html/unnamed-chunk-21-1.png" width="672"></div>
 <p>The solid helperlines point to the indicator value where the variable value equals the threshold. Later we will shift the values so that the indicator value becomes 0.6 at this point.</p>
 <p>Also plotted against the linearly normalised indicator values:</p>
-<div class="sourceCode" id="cb167"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span><span class="op">+</span>
-  <span class="fu">geom_point</span><span class="op">(</span>
-    <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">indicator1_LowHigh</span>, y <span class="op">=</span> <span class="va">indicator1_sigmoid</span>, fill <span class="op">=</span> <span class="va">indicator1_sigmoid</span><span class="op">)</span>,
-             colour <span class="op">=</span> <span class="va">myColour</span>,
-             size   <span class="op">=</span> <span class="va">mySize</span>,
-             alpha  <span class="op">=</span> <span class="va">myAlpha</span>,
-             shape  <span class="op">=</span> <span class="va">myShape</span><span class="op">)</span><span class="op">+</span>
-  
-  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">0.6</span>,
-             linetype <span class="op">=</span> <span class="st">"dashed"</span>,
-             size <span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">+</span>
-   <span class="fu">geom_hline</span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">0.6</span>,
-             linetype <span class="op">=</span> <span class="st">"dashed"</span>,
-             size <span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">+</span>
-  
-  <span class="fu">ylab</span><span class="op">(</span><span class="st">"Sigmoid-transformed\nIndicator values"</span><span class="op">)</span><span class="op">+</span>
-  <span class="fu">xlab</span><span class="op">(</span><span class="st">"Linear indicatior values"</span><span class="op">)</span><span class="op">+</span>
-  
-  <span class="fu">scale_fill_gradient</span><span class="op">(</span><span class="st">"Indicator values"</span>, low <span class="op">=</span> <span class="va">low</span>, high <span class="op">=</span> <span class="va">high</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb354"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">ggplot</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_point</span><span class="op">(</span></span>
+<span>    <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">indicator1_LowHigh</span>, y <span class="op">=</span> <span class="va">indicator1_sigmoid</span>, fill <span class="op">=</span> <span class="va">indicator1_sigmoid</span><span class="op">)</span>,</span>
+<span>             colour <span class="op">=</span> <span class="va">myColour</span>,</span>
+<span>             size   <span class="op">=</span> <span class="va">mySize</span>,</span>
+<span>             alpha  <span class="op">=</span> <span class="va">myAlpha</span>,</span>
+<span>             shape  <span class="op">=</span> <span class="va">myShape</span><span class="op">)</span><span class="op">+</span></span>
+<span>  </span>
+<span>  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">0.6</span>,</span>
+<span>             linetype <span class="op">=</span> <span class="st">"dashed"</span>,</span>
+<span>             size <span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">+</span></span>
+<span>   <span class="fu">geom_hline</span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">0.6</span>,</span>
+<span>             linetype <span class="op">=</span> <span class="st">"dashed"</span>,</span>
+<span>             size <span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">+</span></span>
+<span>  </span>
+<span>  <span class="fu">ylab</span><span class="op">(</span><span class="st">"Sigmoid-transformed\nIndicator values"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">xlab</span><span class="op">(</span><span class="st">"Linear indicatior values"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  </span>
+<span>  <span class="fu">scale_fill_gradient</span><span class="op">(</span><span class="st">"Indicator values"</span>, low <span class="op">=</span> <span class="va">low</span>, high <span class="op">=</span> <span class="va">high</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="scalingFunctions_files/figure-html/unnamed-chunk-22-1.png" width="672"></div>
 <p>The dotted helper lines selve as visual guides to judge how different a scaled indicator value of 0.6 is for the two approaches.</p>
-<div id="accounting-for-the-threshold-value" class="section level3" number="5.5.1">
+<div id="accounting-for-the-threshold-value" class="section level3" number="7.5.1">
 <h3>
-<span class="header-section-number">5.5.1</span> Accounting for the threshold value<a class="anchor" aria-label="anchor" href="#accounting-for-the-threshold-value"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.5.1</span> Accounting for the threshold value<a class="anchor" aria-label="anchor" href="#accounting-for-the-threshold-value"><i class="fas fa-link"></i></a>
 </h3>
 <p>We can account for the threshold for good ecological condition when applying sigmoid transformation like this</p>
-<div class="sourceCode" id="cb168"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dat</span><span class="op">$</span><span class="va">indicator1_sigmoid_thr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span>
-  <span class="va">dat</span><span class="op">$</span><span class="va">variable1</span><span class="op">&lt;</span><span class="va">dat</span><span class="op">$</span><span class="va">thr1</span>,
-    <span class="op">(</span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">indicator1_sigmoid</span><span class="op">-</span><span class="fl">0</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="va">sigmoid_thr</span><span class="op">-</span><span class="fl">0</span><span class="op">)</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="fl">0.6</span><span class="op">-</span><span class="fl">0</span><span class="op">)</span><span class="op">+</span><span class="fl">0</span>,
-    <span class="op">(</span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">indicator1_sigmoid</span><span class="op">-</span><span class="va">sigmoid_thr</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">sigmoid_thr</span><span class="op">)</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="fl">0.6</span><span class="op">)</span><span class="op">+</span><span class="fl">0.6</span>
-  <span class="op">)</span>
-<span class="fu">ggplot</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span><span class="op">+</span>
-  <span class="fu">geom_point</span><span class="op">(</span>
-    <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">variable1</span>, y <span class="op">=</span> <span class="va">indicator1_sigmoid</span><span class="op">)</span>,
-             fill   <span class="op">=</span> <span class="st">"grey"</span>, 
-             colour <span class="op">=</span> <span class="va">myColour</span>,
-             size   <span class="op">=</span> <span class="fl">5</span>,
-             alpha  <span class="op">=</span> <span class="va">myAlpha</span>,
-             shape  <span class="op">=</span> <span class="va">myShape</span><span class="op">)</span><span class="op">+</span>
-  
-  <span class="fu">geom_point</span><span class="op">(</span>
-    <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">variable1</span>, y <span class="op">=</span> <span class="va">indicator1_sigmoid_thr</span>, fill <span class="op">=</span> <span class="va">indicator1_sigmoid_thr</span><span class="op">)</span>,
-             colour <span class="op">=</span> <span class="va">myColour</span>,
-             size   <span class="op">=</span> <span class="va">mySize</span>,
-             alpha  <span class="op">=</span> <span class="va">myAlpha</span>,
-             shape  <span class="op">=</span> <span class="va">myShape</span><span class="op">)</span><span class="op">+</span>
-  
-  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">dat</span><span class="op">$</span><span class="va">referenceLow1</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,
-             linetype <span class="op">=</span> <span class="st">"dashed"</span>,
-             size <span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">+</span>
-  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">dat</span><span class="op">$</span><span class="va">referenceHigh1</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,
-             linetype <span class="op">=</span> <span class="st">"dashed"</span>,
-             size <span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">+</span>
-  
-  <span class="fu">geom_segment</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="fl">0</span>, y <span class="op">=</span> <span class="va">sigmoid_thr</span>, xend <span class="op">=</span> <span class="va">thr1</span>, yend <span class="op">=</span> <span class="va">sigmoid_thr</span><span class="op">)</span>,
-               linetype<span class="op">=</span><span class="st">"solid"</span>,
-               colour <span class="op">=</span> <span class="st">"grey"</span>,
-               size<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">+</span>
-  
-  <span class="fu">geom_segment</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">thr1</span>, y <span class="op">=</span> <span class="fl">0</span>, xend <span class="op">=</span> <span class="va">thr1</span>, yend <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span>,
-               linetype<span class="op">=</span><span class="st">"solid"</span>,
-               size<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">+</span>
-  <span class="fu">geom_segment</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="fl">0</span>, y <span class="op">=</span> <span class="fl">0.6</span>, xend <span class="op">=</span> <span class="va">thr1</span>, yend <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span>,
-               linetype<span class="op">=</span><span class="st">"solid"</span>,
-               size<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">+</span>
-  
-  
-  <span class="fu">ylab</span><span class="op">(</span><span class="st">"Indicator values"</span><span class="op">)</span><span class="op">+</span>
-  <span class="fu">xlab</span><span class="op">(</span><span class="st">"Variable values"</span><span class="op">)</span><span class="op">+</span>
-  
-  <span class="fu">scale_fill_gradient</span><span class="op">(</span><span class="st">"Indicator values"</span>, low <span class="op">=</span> <span class="va">low</span>, high <span class="op">=</span> <span class="va">high</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb355"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dat</span><span class="op">$</span><span class="va">indicator1_sigmoid_thr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span></span>
+<span>  <span class="va">dat</span><span class="op">$</span><span class="va">variable1</span><span class="op">&lt;</span><span class="va">dat</span><span class="op">$</span><span class="va">thr1</span>,</span>
+<span>    <span class="op">(</span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">indicator1_sigmoid</span><span class="op">-</span><span class="fl">0</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="va">sigmoid_thr</span><span class="op">-</span><span class="fl">0</span><span class="op">)</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="fl">0.6</span><span class="op">-</span><span class="fl">0</span><span class="op">)</span><span class="op">+</span><span class="fl">0</span>,</span>
+<span>    <span class="op">(</span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">indicator1_sigmoid</span><span class="op">-</span><span class="va">sigmoid_thr</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">sigmoid_thr</span><span class="op">)</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="fl">0.6</span><span class="op">)</span><span class="op">+</span><span class="fl">0.6</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="fu">ggplot</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_point</span><span class="op">(</span></span>
+<span>    <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">variable1</span>, y <span class="op">=</span> <span class="va">indicator1_sigmoid</span><span class="op">)</span>,</span>
+<span>             fill   <span class="op">=</span> <span class="st">"grey"</span>, </span>
+<span>             colour <span class="op">=</span> <span class="va">myColour</span>,</span>
+<span>             size   <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>             alpha  <span class="op">=</span> <span class="va">myAlpha</span>,</span>
+<span>             shape  <span class="op">=</span> <span class="va">myShape</span><span class="op">)</span><span class="op">+</span></span>
+<span>  </span>
+<span>  <span class="fu">geom_point</span><span class="op">(</span></span>
+<span>    <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">variable1</span>, y <span class="op">=</span> <span class="va">indicator1_sigmoid_thr</span>, fill <span class="op">=</span> <span class="va">indicator1_sigmoid_thr</span><span class="op">)</span>,</span>
+<span>             colour <span class="op">=</span> <span class="va">myColour</span>,</span>
+<span>             size   <span class="op">=</span> <span class="va">mySize</span>,</span>
+<span>             alpha  <span class="op">=</span> <span class="va">myAlpha</span>,</span>
+<span>             shape  <span class="op">=</span> <span class="va">myShape</span><span class="op">)</span><span class="op">+</span></span>
+<span>  </span>
+<span>  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">dat</span><span class="op">$</span><span class="va">referenceLow1</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,</span>
+<span>             linetype <span class="op">=</span> <span class="st">"dashed"</span>,</span>
+<span>             size <span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">dat</span><span class="op">$</span><span class="va">referenceHigh1</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,</span>
+<span>             linetype <span class="op">=</span> <span class="st">"dashed"</span>,</span>
+<span>             size <span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">+</span></span>
+<span>  </span>
+<span>  <span class="fu">geom_segment</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="fl">0</span>, y <span class="op">=</span> <span class="va">sigmoid_thr</span>, xend <span class="op">=</span> <span class="va">thr1</span>, yend <span class="op">=</span> <span class="va">sigmoid_thr</span><span class="op">)</span>,</span>
+<span>               linetype<span class="op">=</span><span class="st">"solid"</span>,</span>
+<span>               colour <span class="op">=</span> <span class="st">"grey"</span>,</span>
+<span>               size<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">+</span></span>
+<span>  </span>
+<span>  <span class="fu">geom_segment</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">thr1</span>, y <span class="op">=</span> <span class="fl">0</span>, xend <span class="op">=</span> <span class="va">thr1</span>, yend <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span>,</span>
+<span>               linetype<span class="op">=</span><span class="st">"solid"</span>,</span>
+<span>               size<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_segment</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="fl">0</span>, y <span class="op">=</span> <span class="fl">0.6</span>, xend <span class="op">=</span> <span class="va">thr1</span>, yend <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span>,</span>
+<span>               linetype<span class="op">=</span><span class="st">"solid"</span>,</span>
+<span>               size<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">+</span></span>
+<span>  </span>
+<span>  </span>
+<span>  <span class="fu">ylab</span><span class="op">(</span><span class="st">"Indicator values"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">xlab</span><span class="op">(</span><span class="st">"Variable values"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  </span>
+<span>  <span class="fu">scale_fill_gradient</span><span class="op">(</span><span class="st">"Indicator values"</span>, low <span class="op">=</span> <span class="va">low</span>, high <span class="op">=</span> <span class="va">high</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="scalingFunctions_files/figure-html/unnamed-chunk-23-1.png" width="672"></div>
 <p>The grey circles and horizonal line correspons to the sigmoid transformation without any adjustment for the threshold value.</p>
 </div>
 </div>
-<div id="exponential-functoins" class="section level2" number="5.6">
+<div id="exponential-functoins" class="section level2" number="7.6">
 <h2>
-<span class="header-section-number">5.6</span> Exponential functoins<a class="anchor" aria-label="anchor" href="#exponential-functoins"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.6</span> Exponential functoins<a class="anchor" aria-label="anchor" href="#exponential-functoins"><i class="fas fa-link"></i></a>
 </h2>
 <p>Here are two examples of exponential transformation that can also be used:</p>
-<div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dat</span><span class="op">$</span><span class="va">indicator1_expConvex</span> <span class="op">&lt;-</span> <span class="va">dat</span><span class="op">$</span><span class="va">indicator1_LowHigh</span><span class="op">^</span><span class="fl">0.5</span>
-<span class="va">dat</span><span class="op">$</span><span class="va">indicator1_expConcave</span> <span class="op">&lt;-</span> <span class="va">dat</span><span class="op">$</span><span class="va">indicator1_LowHigh</span><span class="op">^</span><span class="fl">2</span></code></pre></div>
-<div class="sourceCode" id="cb170"><pre class="downlit sourceCode r">
-<code class="sourceCode R">
-<span class="fu">ggplot</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span><span class="op">+</span>
-  <span class="fu">geom_point</span><span class="op">(</span>
-    <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">variable1</span>, y <span class="op">=</span> <span class="va">indicator1_expConvex</span>, fill <span class="op">=</span> <span class="va">indicator1_expConvex</span><span class="op">)</span>,
-             colour <span class="op">=</span> <span class="va">myColour</span>,
-             size   <span class="op">=</span> <span class="va">mySize</span>,
-             alpha  <span class="op">=</span> <span class="va">myAlpha</span>,
-             shape  <span class="op">=</span> <span class="va">myShape</span><span class="op">)</span><span class="op">+</span>
-  <span class="fu">geom_point</span><span class="op">(</span>
-    <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">variable1</span>, y <span class="op">=</span> <span class="va">indicator1_expConcave</span>, fill <span class="op">=</span> <span class="va">indicator1_expConcave</span><span class="op">)</span>,
-             colour <span class="op">=</span> <span class="va">myColour</span>,
-             size   <span class="op">=</span> <span class="va">mySize</span>,
-             alpha  <span class="op">=</span> <span class="va">myAlpha</span>,
-             shape  <span class="op">=</span> <span class="va">myShape</span><span class="op">)</span><span class="op">+</span>
-  
-  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">dat</span><span class="op">$</span><span class="va">referenceLow1</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,
-             linetype <span class="op">=</span> <span class="st">"dashed"</span>,
-             size <span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">+</span>
-  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">dat</span><span class="op">$</span><span class="va">referenceHigh1</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,
-             linetype <span class="op">=</span> <span class="st">"dashed"</span>,
-             size <span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">+</span>
-  <span class="fu">ylab</span><span class="op">(</span><span class="st">"Indicator values"</span><span class="op">)</span><span class="op">+</span>
-  <span class="fu">xlab</span><span class="op">(</span><span class="st">"Variable values"</span><span class="op">)</span><span class="op">+</span>
-  
-  <span class="fu">scale_fill_gradient</span><span class="op">(</span><span class="st">"Indicator values"</span>, low <span class="op">=</span> <span class="va">low</span>, high <span class="op">=</span> <span class="va">high</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb356"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dat</span><span class="op">$</span><span class="va">indicator1_expConvex</span> <span class="op">&lt;-</span> <span class="va">dat</span><span class="op">$</span><span class="va">indicator1_LowHigh</span><span class="op">^</span><span class="fl">0.5</span></span>
+<span><span class="va">dat</span><span class="op">$</span><span class="va">indicator1_expConcave</span> <span class="op">&lt;-</span> <span class="va">dat</span><span class="op">$</span><span class="va">indicator1_LowHigh</span><span class="op">^</span><span class="fl">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb357"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="fu">ggplot</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_point</span><span class="op">(</span></span>
+<span>    <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">variable1</span>, y <span class="op">=</span> <span class="va">indicator1_expConvex</span>, fill <span class="op">=</span> <span class="va">indicator1_expConvex</span><span class="op">)</span>,</span>
+<span>             colour <span class="op">=</span> <span class="va">myColour</span>,</span>
+<span>             size   <span class="op">=</span> <span class="va">mySize</span>,</span>
+<span>             alpha  <span class="op">=</span> <span class="va">myAlpha</span>,</span>
+<span>             shape  <span class="op">=</span> <span class="va">myShape</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_point</span><span class="op">(</span></span>
+<span>    <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">variable1</span>, y <span class="op">=</span> <span class="va">indicator1_expConcave</span>, fill <span class="op">=</span> <span class="va">indicator1_expConcave</span><span class="op">)</span>,</span>
+<span>             colour <span class="op">=</span> <span class="va">myColour</span>,</span>
+<span>             size   <span class="op">=</span> <span class="va">mySize</span>,</span>
+<span>             alpha  <span class="op">=</span> <span class="va">myAlpha</span>,</span>
+<span>             shape  <span class="op">=</span> <span class="va">myShape</span><span class="op">)</span><span class="op">+</span></span>
+<span>  </span>
+<span>  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">dat</span><span class="op">$</span><span class="va">referenceLow1</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,</span>
+<span>             linetype <span class="op">=</span> <span class="st">"dashed"</span>,</span>
+<span>             size <span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">dat</span><span class="op">$</span><span class="va">referenceHigh1</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,</span>
+<span>             linetype <span class="op">=</span> <span class="st">"dashed"</span>,</span>
+<span>             size <span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">ylab</span><span class="op">(</span><span class="st">"Indicator values"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">xlab</span><span class="op">(</span><span class="st">"Variable values"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  </span>
+<span>  <span class="fu">scale_fill_gradient</span><span class="op">(</span><span class="st">"Indicator values"</span>, low <span class="op">=</span> <span class="va">low</span>, high <span class="op">=</span> <span class="va">high</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="scalingFunctions_files/figure-html/unnamed-chunk-25-1.png" width="672"></div>
 
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="naturtype.html"><span class="header-section-number">4</span> Nature types</a></div>
-<div class="empty"></div>
+<div class="prev"><a href="naturtype.html"><span class="header-section-number">6</span> Nature types</a></div>
+<div class="next"><a href="homogeneous-impact-areas.html"><span class="header-section-number">8</span> Homogeneous Impact Areas</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#scaling-functions"><span class="header-section-number">5</span> Scaling functions</a></li>
-<li><a class="nav-link" href="#linear-with-a-natural-zero"><span class="header-section-number">5.1</span> Linear, with a natural zero</a></li>
-<li><a class="nav-link" href="#linear-with-defined-lower-limit"><span class="header-section-number">5.2</span> Linear, with defined lower limit</a></li>
-<li><a class="nav-link" href="#break-point-scaling"><span class="header-section-number">5.3</span> Break point scaling</a></li>
-<li><a class="nav-link" href="#two-sided-indicator"><span class="header-section-number">5.4</span> Two-sided indicator</a></li>
+<li><a class="nav-link" href="#scaling-functions"><span class="header-section-number">7</span> Scaling functions</a></li>
+<li><a class="nav-link" href="#linear-with-a-natural-zero"><span class="header-section-number">7.1</span> Linear, with a natural zero</a></li>
+<li><a class="nav-link" href="#linear-with-defined-lower-limit"><span class="header-section-number">7.2</span> Linear, with defined lower limit</a></li>
+<li><a class="nav-link" href="#break-point-scaling"><span class="header-section-number">7.3</span> Break point scaling</a></li>
+<li><a class="nav-link" href="#two-sided-indicator"><span class="header-section-number">7.4</span> Two-sided indicator</a></li>
 <li>
-<a class="nav-link" href="#sigmoid-transformation"><span class="header-section-number">5.5</span> Sigmoid transformation</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#accounting-for-the-threshold-value"><span class="header-section-number">5.5.1</span> Accounting for the threshold value</a></li></ul>
+<a class="nav-link" href="#sigmoid-transformation"><span class="header-section-number">7.5</span> Sigmoid transformation</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#accounting-for-the-threshold-value"><span class="header-section-number">7.5.1</span> Accounting for the threshold value</a></li></ul>
 </li>
-<li><a class="nav-link" href="#exponential-functoins"><span class="header-section-number">5.6</span> Exponential functoins</a></li>
+<li><a class="nav-link" href="#exponential-functoins"><span class="header-section-number">7.6</span> Exponential functoins</a></li>
 </ul>
 
       <div class="book-extra">
@@ -492,7 +510,7 @@ Lets say that <code>variable2</code> is optimal when its at a level of 30, and v
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Indicators for Ecosystem Condition in Norway</strong>" was written by Anders L. Kolstad. It was last built on 2022-11-15.</p>
+    <p>"<strong>Indicators for Ecosystem Condition in Norway</strong>" was written by Anders L. Kolstad. It was last built on 2023-04-14.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
@@ -500,6 +518,34 @@ Lets say that <code>variable2</code> is optimal when its at a level of 30, and v
   </div>
 
 </div></div>
-</footer>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
 </body>
 </html>

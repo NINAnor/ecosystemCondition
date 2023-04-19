@@ -1,6 +1,6 @@
-# (PART\*) SEMI NATURAL ECOSYSTEMS{-}
+# (PART\*) DEPRECATED{-}
 
-# DEPRECATED: Areal uten død eller skadet røsslyng i kystlynghei
+# Areal uten død eller skadet røsslyng i kystlynghei
 
 <br />
 

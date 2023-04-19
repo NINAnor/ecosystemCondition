@@ -12,7 +12,7 @@ Anders Kolstad
 
 
 ```
-#> [1] "2022-11-15"
+#> [1] "2023-04-14"
 ```
 
 
@@ -222,7 +222,7 @@ Importing a shape file with the regional delineation.
 ```r
 reg <- st_read("data/regions.shp")
 #> Reading layer `regions' from data source 
-#>   `/data/Egenutvikling/41001581_egenutvikling_anders_kolstad/github/ecosystemCondition/data/regions.shp' 
+#>   `/data/scratch/Matt_bookdown__debug/ecosystemCondition/data/regions.shp' 
 #>   using driver `ESRI Shapefile'
 #> Simple feature collection with 5 features and 2 fields
 #> Geometry type: POLYGON
@@ -235,9 +235,21 @@ st_crs(reg)
 #>   wkt:
 #> PROJCRS["ETRS89 / UTM zone 33N",
 #>     BASEGEOGCRS["ETRS89",
-#>         DATUM["European Terrestrial Reference System 1989",
+#>         ENSEMBLE["European Terrestrial Reference System 1989 ensemble",
+#>             MEMBER["European Terrestrial Reference Frame 1989"],
+#>             MEMBER["European Terrestrial Reference Frame 1990"],
+#>             MEMBER["European Terrestrial Reference Frame 1991"],
+#>             MEMBER["European Terrestrial Reference Frame 1992"],
+#>             MEMBER["European Terrestrial Reference Frame 1993"],
+#>             MEMBER["European Terrestrial Reference Frame 1994"],
+#>             MEMBER["European Terrestrial Reference Frame 1996"],
+#>             MEMBER["European Terrestrial Reference Frame 1997"],
+#>             MEMBER["European Terrestrial Reference Frame 2000"],
+#>             MEMBER["European Terrestrial Reference Frame 2005"],
+#>             MEMBER["European Terrestrial Reference Frame 2014"],
 #>             ELLIPSOID["GRS 1980",6378137,298.257222101,
-#>                 LENGTHUNIT["metre",1]]],
+#>                 LENGTHUNIT["metre",1]],
+#>             ENSEMBLEACCURACY[0.1]],
 #>         PRIMEM["Greenwich",0,
 #>             ANGLEUNIT["degree",0.0174532925199433]],
 #>         ID["EPSG",4258]],
@@ -267,9 +279,9 @@ st_crs(reg)
 #>             ORDER[2],
 #>             LENGTHUNIT["metre",1]],
 #>     USAGE[
-#>         SCOPE["unknown"],
-#>         AREA["Europe - 12°E to 18°E and ETRS89 by country"],
-#>         BBOX[46.4,12,84.01,18.01]],
+#>         SCOPE["Engineering survey, topographic mapping."],
+#>         AREA["Europe between 12°E and 18°E: Austria; Denmark - offshore and offshore; Germany - onshore and offshore; Norway including Svalbard - onshore and offshore."],
+#>         BBOX[46.4,12,84.42,18]],
 #>     ID["EPSG",25833]]
 ```
 
@@ -612,10 +624,10 @@ knitr::kable(exp[,1:5])
 
 |region     |       v_2019|     sd_2019|   reference|    i_2019|geometry                       |
 |:----------|------------:|-----------:|-----------:|---------:|:------------------------------|
-|Nord-Norge |  928.5326204| 13.92798931| 1409.196007| 0.6589095|MULTIPOLYGON (((353306.9 72... |
-|Midt-Norge |   69.8685069|  1.04802760|  173.436069| 0.4028488|MULTIPOLYGON (((148486.5 69... |
-|Østlandet  |  251.3490789|  3.77023618|  365.357472| 0.6879538|MULTIPOLYGON (((236682.8 66... |
-|Vestlandet | 1077.9902876| 16.16985431| 1372.939792| 0.7851694|MULTIPOLYGON (((880.5802 64... |
-|Sørlandet  |    0.7033655|  0.01055048|    3.739583|        NA|MULTIPOLYGON (((-4601.286 6... |
+|Nord-Norge |  928.5326204| 13.92798931| 1409.196007| 0.6589095|MULTIPOLYGON (((353978.3 72... |
+|Midt-Norge |   69.8685069|  1.04802760|  173.436069| 0.4028488|MULTIPOLYGON (((148280.6 69... |
+|Østlandet  |  251.3490789|  3.77023618|  365.357472| 0.6879538|MULTIPOLYGON (((236668.3 66... |
+|Vestlandet | 1077.9902876| 16.16985431| 1372.939792| 0.7851694|MULTIPOLYGON (((875.0099 64... |
+|Sørlandet  |    0.7033655|  0.01055048|    3.739583|        NA|MULTIPOLYGON (((-4329.09 64... |
 
 

@@ -42,11 +42,8 @@ Notice the degree of annotation.
 <br />
 
 _Author and date:_
-<!-- Write your name here -->
+<!-- Write your name, month and year -->
 
-```{r}
-Sys.Date()
-```
 
 <br />
 
@@ -107,15 +104,15 @@ knitr::kable(metaData)
 ### Norwegain standard
 <!-- Text here -->
 
-### <!-- Text here -->
+### SEEA EA (UN standard)
 <!-- Text here. Note that there are two parallell systems for defining ecosystem properties - one Norwegian and one international (SEEA EA). See man/SEEA EA examples.pdf for help -->
 
 ## Collinearities with other indicators
 <!-- Text here -->
 
-## Reference state and values
-### Reference state
-<!-- Text here -->
+## Reference condition and values
+### Reference condition
+<!-- Text here. Note that the reference condition is defined in Fagsystemet for økologisk tilstand and it is the same for all indicators and ecosystems. So you can give a short and generic answer here. -->
 
 
 ### Reference values, thresholds for defining _good ecological condition_, minimum and/or maximum values

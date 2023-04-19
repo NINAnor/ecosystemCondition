@@ -1,6 +1,6 @@
-# (PART\*) SEMI NATURAL ECOSYSTEMS{-}
+# (PART\*) DEPRECATED{-}
 
-# DEPRECATED: Areal uten død eller skadet røsslyng i kystlynghei
+# Areal uten død eller skadet røsslyng i kystlynghei
 
 <br />
 
@@ -9,7 +9,7 @@ Anders L. Kolstad
 
 
 ```
-#> [1] "2022-11-15"
+#> [1] "2023-04-14"
 ```
 
 <br />

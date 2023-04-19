@@ -6,6 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Anders L. Kolstad">
+<meta name="dcterms.date" content="2023-04-14">
+<meta name="description" content="This is a site for documenting the analyses related to the development and design of ecosystem condition indicators.">
 
 <title>ecosystemCondition</title>
 <style>
@@ -157,7 +160,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">About <img src="images/hexSticker_EC.png" align="right" height="139"></a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Indicators for Ecosystem Condition in Norway</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -167,7 +170,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./breareal.html" class="sidebar-item-text sidebar-link">(PART*) INDICATORS FROM THE ALPINE ASSESSMENT</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./rosslyng.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">(PART*) DEPRECATED{-}</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./indicatorTest.html" class="sidebar-item-text sidebar-link">(PART*) INDICATORS FOR WETLANDS</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./naturtype.html" class="sidebar-item-text sidebar-link">(PART*) GENERAL TOPICS</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./scalingFunctions.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Scaling functions</span></a>
   </div>
 </li>
     </ul>
@@ -184,6 +207,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#eatools" id="toc-eatools" class="nav-link" data-scroll-target="#eatools">eaTools <img src="images/eaTools-logo.png" align="right" height="139"></a></li>
   <li><a href="#community-review" id="toc-community-review" class="nav-link" data-scroll-target="#community-review">Community review</a></li>
   <li><a href="#author-guidelines" id="toc-author-guidelines" class="nav-link" data-scroll-target="#author-guidelines">Author guidelines</a></li>
+  <li><a href="#citation" id="toc-citation" class="nav-link" data-scroll-target="#citation">Citation</a></li>
+  <li><a href="#license" id="toc-license" class="nav-link" data-scroll-target="#license">License</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -196,11 +221,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1 class="title d-none d-lg-block">ecosystemCondition</h1>
 </div>
 
+<div>
+  <div class="description">
+    <p>This is a site for documenting the analyses related to the development and design of ecosystem condition indicators.</p>
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Anders L. Kolstad </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 14, 2023</p>
+    </div>
+  </div>
   
     
   </div>
@@ -210,7 +252,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <section id="about" class="level1 unnumbered">
 <h1 class="unnumbered">About <img src="images/hexSticker_EC.png" align="right" height="139"></h1>
-<p>On this site you may view the nitty gritty details for how certain indicators for ecosystem condition for Norway has been calculated.</p>
+<p>On this site you may view the details for how certain indicators for ecosystem condition for Norway have been calculated.</p>
 <p>The web page is made to document the work related to a R&amp;D project to develop indicators for ecosystem condition for three main ecosystems in Norway: wetlands, open areas below the forest line, and semi-natural land. These indicators are not yet used in real assessments, and may represent unfinished work pending future data availability. In addition, we may chose to also present some analyses documenting indicators that <em>are</em> used in existing assessments of ecosystem condition.</p>
 <section id="eatools" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="eatools">eaTools <img src="images/eaTools-logo.png" align="right" height="139"></h2>
@@ -275,6 +317,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>When approved, the reviewer will make a copy of the DRAFT_ file, removing the DRAFT_ part of the name, as well as the YML header, and as well as updating the rmd_files part of _bookdown.yml. (For an example of such a file, see <code>breareal.Rmd</code>.)</li>
 <li>To update the web site (this web site), an admin user needs to pull down the repo to R Studio server, compile the book there (Ctr+Shift+B), commit and push to main. The html version of the book will be in the <code>docs</code> folder.</li>
 </ul>
+</section>
+<section id="citation" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="citation">Citation</h2>
+<p>To cite this book please use the following citation:</p>
+<p>Kolstad, A.L., Topper, J. Grainger, M.J., Sandvik, H. Indicators for Ecosystem Condition in Norway. https://ninanor.github.io/ecosystemCondition/index.html.doi [TBA]</p>
+</section>
+<section id="license" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="license">License</h2>
+<p>The book is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/">CC By 4.0 licence</a> which means that you can share and adapt the material for any purpose. However, you must give appropriate credit, provide a link to the license, and indicate if changes were made. You can not add additional restrictions on the material even when adapted.</p>
 
 
 </section>

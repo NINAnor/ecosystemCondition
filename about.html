@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>About  | index.knit</title>
+
+  
+   
+   <meta name="generator" content="placeholder" />
+  <meta property="og:title" content="About  | index.knit" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="About  | index.knit" />
+  
+  
+  
+  <!-- JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script>
+    <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet" />
+    <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script>
+    <script src="libs/bs3compat-0.3.1/transition.js"></script>
+    <script src="libs/bs3compat-0.3.1/tabs.js"></script>
+    <script src="libs/bs3compat-0.3.1/bs3compat.js"></script>
+    <link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet" />
+    <script src="libs/bs4_book-1.0.0/bs4_book.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script>
+
+  <!-- CSS -->
+  <style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+      <link rel="stylesheet" href="style.css" />
+  
+</head>
+
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book">
+    <a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title=""></a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+      </form>
+
+      <nav aria-label="Table of contents">
+        <h2>Table of contents</h2>
+        <div id="book-toc"></div>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="#">View book source <i class="fab fa-github"></i></a></li></p>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="col-sm-12 col-md-9 col-lg-7" id="content">
+<!--bookdown:title:end-->
+<!--bookdown:title:start-->
+<div id="about" class="section level1 unnumbered">
+<h1>About <img src="images/hexSticker_EC.png" align="right" height="139"/></h1>
+<p>On this site you may view the nitty gritty details for how certain indicators for ecosystem condition for Norway has been calculated.</p>
+<p>The web page is made to document the work related to a R&amp;D project to develop indicators for ecosystem condition for three main ecosystems in Norway: wetlands, open areas below the forest line, and semi-natural land. These indicators are not yet used in real assessments, and may represent unfinished work pending future data availability. In addition, we may chose to also present some analyses documenting indicators that <em>are</em> used in existing assessments of ecosystem condition.</p>
+<div id="eatools" class="section level2 unnumbered">
+<h2>eaTools <img src="images/eaTools-logo.png" align="right" height="139"/></h2>
+<p><code>eaTools</code> is an R package aimed at solving common tasks in GIS oriented ecosystem accounting, especially ecosystem condition accounting. We will use functions from this package, such as this function to normalise condition variables seen in Figure <a href="#fig:eaTools-example">1</a>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#devtools::install_github(&quot;NINAnor/eaTools&quot;)</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(eaTools)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Import example data</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;ex_polygons&quot;</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the questionmark to readabout the example data sets or to view the  function documentation </span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#?ex_polygons</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>eaTools<span class="sc">::</span><span class="fu">ea_normalise</span>(<span class="at">data =</span> ex_polygons,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">vector =</span> <span class="st">&quot;condition_variable_2&quot;</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">upper_reference_level =</span> <span class="dv">7</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>             <span class="at">scaling_function =</span> <span class="st">&quot;sigmoid&quot;</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>             <span class="at">plot =</span> T)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:eaTools-example"></span>
+<img src="index_files/figure-html/eaTools-example-1.png" alt="A normalised condition variable is called an indicator. This indicator had been transformed with a sigmoid function." width="672" />
+<p class="caption">
+Figure 1: A normalised condition variable is called an indicator. This indicator had been transformed with a sigmoid function.
+</p>
+</div>
+<p>See the <a href="https://ninanor.github.io/eaTools/index.html">package documentation</a>, especially under <em>Articles</em> for more information and examples of use.</p>
+</div>
+<div id="community-review" class="section level2 unnumbered">
+<h2>Community review</h2>
+<p>We want our work to be transparent and credible. Therefor we encourage all types of feedback on the analyses of the indicators for ecological condition that you can read about on this web site. To submit your comments, please to to <a href="https://github.com/NINAnor/ecosystemCondition/issues"><em>this github repository</em></a> and open a new <em>issue</em> and we will answer them there.</p>
+<p><img src="images/newIssue.PNG" width="600"/></p>
+</div>
+<div id="author-guidelines" class="section level2 unnumbered">
+<h2>Author guidelines</h2>
+<p>This project uses a type of standardised reporting where reproducible workflows (typically code) for calculating each indicator is presented on separate webpages within a shared website. The website is built from the GitHub repo using seperate RMarkdown files for each chapter. These files must be in English. The process of authoring and sharing/distributing these Rmarkdown-files is explained below.</p>
+<p>It is highly encouraged that the indicators are delivered as georeferenced maps, hereafter called indicator maps, and not a simple tables. There is a common structure that all indicator maps should follow. The indicator maps can be vector formats raster formats. For vector data, .Rdata or .rds files can be used, as for example shape files do not allow field names (i.e. column names) that are as long as the ones we use. All georeferenced data should use EPSG:25833 - ETRS89 / UTM zone 33N.</p>
+<p>Indicator maps should have the highest possible spatial resolution possible but weighing this against the need for spatial representativity. For example, you may need to aggregate x number of data points to get an average which is stable and representative for a given region. There is no need to spatially aggregate indicator maps any further, for example to produce a national estimate.</p>
+<p>The indicator values, reference values ect should be mapped to the following columns (vector data) or bands (raster data):</p>
+<ul>
+<li><code>v_YYYY</code> for variable value (i.e. un-scaled or raw indicator values) for year YYYY.</li>
+<li><code>sd_YYYY</code> for the standard deviation associated with v_YYYY. Other measures for uncertainty is currently not supported.</li>
+<li><code>referance_high</code> for the reference value, i.e. the value of the variable <em>v</em> under reference conditions. This value cannot vary between years.</li>
+<li><code>referance_low</code> for the lower limit reference value, i.e. the worst possible value of the variable <em>v</em>. This value cannot vary between years. If missing, this value is assumed to be zero.</li>
+<li><code>thr</code> for the threshold value defining <em>good condition</em> for variable <em>v</em>. If missing, this value will default to 0.6.</li>
+<li><code>i_YYYY</code> for the indicator value at year YYYY. This value depends on all the above values, but also the scaling function (.e. linear, exponential, two-sided, ect.). The scaling function needs to be presented in other documentation.</li>
+</ul>
+<p>The rest of the workflow is as follows.</p>
+<ul>
+<li>Obtain a <em>go ahead</em> signal from the coordination group to make sure you are free to start your work</li>
+<li>Read the <a href="template.Rmd"><code>template.Rmd</code></a> file. Make a copy of it and store it, in the same (root) folder as <code>DRAFT_myIndicator.Rmd</code>. (For an example, see <code>DRAFT_breareal.Rmd</code>). Finish your documentation and analyses there.
+<ul>
+<li>You can load data from internal NINA servers, from web hosts, of store smaller data set under <code>data</code>. The <code>data</code> folder also contains some supporting data sets that you may want to use, such as a delineation of the five regions used in the ecosystem assessment (<code>data/regions.shp</code>), and an outline of Norway (<code>outlineOfNorway_EPSG25833.shp</code>).</li>
+<li>To preview you rmarkdown file as html in R, type <code>rmarkdown::render('DRAFT_myIndicator.Rmd', output_format = "html_document", output_dir = "temp")</code> in the console (the knitr shortcuts don’t work as expected inside bookdown projects).</li>
+<li>When filling out the template.Rmd file with your own work, try not to change the headers too much.</li>
+<li>Final result from the analyses should be written to the <code>indicators</code> folder. The preferred output is georeferenced data (rasters or shape files), and these should be placed under <code>indators/indicatorMaps</code>. Non-georeferenced data, like data tables, can be stored under <code>indicators</code>.</li>
+</ul></li>
+<li>Make a pull request to the main <a href="https://github.com/NINAnor/ecosystemCondition"><em>GitHub repository</em></a> to submit your file. If you are not comfortable using GitHub, contac Anders to rrange sending the files via email.</li>
+<li>Anders or someone else in the project wil conduct a rapid code review, making sure the code is reproducible, interpretable and that it renders locally on the R Studio server.</li>
+<li>When approved, the reviewer will make a copy of the DRAFT_ file, removing the DRAFT_ part of the name, as well as the YML header, and as well as updating the rmd_files part of _bookdown.yml. (For an example of such a file, see <code>breareal.Rmd</code>.)</li>
+<li>To update the web site (this web site), an admin user needs to pull down the repo to R Studio server, compile the book there (Ctr+Shift+B), commit and push to main. The html version of the book will be in the <code>docs</code> folder.</li>
+</ul>
+</div>
+</div>
+  </main>
+
+  <div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page">
+      <h2>On this page</h2>
+      <div id="book-on-this-page"></div>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          <li><a id="book-source" href="#">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="#">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5">
+  <div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong></strong>" was written by . </p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+
+
+</body>
+
+</html>

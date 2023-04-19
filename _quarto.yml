@@ -1,15 +1,22 @@
 project: 
   type: book
 book:
-  title: "ecosystemCondition"
+  title: "Indicators for Ecosystem Condition in Norway"
   chapters: 
     - index.qmd
     - overview.qmd
+    - slitasje.qmd
+    - medianSummerTemperature.qmd
+    - alien_species.qmd
     - breareal.qmd
     - rosslyng.qmd
-    - indicatorTest.qmd
     - naturtype.qmd
     - scalingFunctions.qmd
+    - homogeneous_impact_areas.qmd
+    - master_grid.qmd
+    - climate_indicators_explained.qmd
+
+output_dir: "docs"
     
     
 bibliography: book.bib

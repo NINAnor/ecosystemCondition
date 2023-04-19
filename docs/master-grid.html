@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 9 Master grid | Indicators for Ecosystem Condition in Norway</title>
+<meta name="author" content="Anders L. Kolstad">
+<meta name="description" content="Author: Anders L. Kolstad March 2023   9.1 Introduction This chapter describes the making of a master raster grid for all of mainland Norway. This grid is used to align all ecosystem and indicator...">
+<meta name="generator" content="bookdown 0.33 with bs4_book()">
+<meta property="og:title" content="Chapter 9 Master grid | Indicators for Ecosystem Condition in Norway">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://ninanor.github.io/ecosystemCondition/index.html/master-grid.html">
+<meta property="og:image" content="https://ninanor.github.io/ecosystemCondition/index.html/images/Picture1.png">
+<meta property="og:description" content="Author: Anders L. Kolstad March 2023   9.1 Introduction This chapter describes the making of a master raster grid for all of mainland Norway. This grid is used to align all ecosystem and indicator...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 9 Master grid | Indicators for Ecosystem Condition in Norway">
+<meta name="twitter:description" content="Author: Anders L. Kolstad March 2023   9.1 Introduction This chapter describes the making of a master raster grid for all of mainland Norway. This grid is used to align all ecosystem and indicator...">
+<meta name="twitter:image" content="https://ninanor.github.io/ecosystemCondition/index.html/images/Picture1.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.1/htmlwidgets.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="libs/datatables-binding-0.27/datatables.js"></script><link href="libs/dt-core-1.12.1/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="libs/dt-core-1.12.1/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="libs/dt-core-1.12.1/js/jquery.dataTables.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Indicators for Ecosystem Condition in Norway</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">About </a></li>
+<li><a class="" href="overview-of-indicators.html">Overview of indicators</a></li>
+<li class="book-part">INDICATORS</li>
+<li><a class="" href="slitasje-og-kj%C3%B8respor.html"><span class="header-section-number">1</span> Slitasje og kjørespor</a></li>
+<li><a class="" href="median-summer-temp.html"><span class="header-section-number">2</span> Median Summer Temperature</a></li>
+<li><a class="" href="alien-species.html"><span class="header-section-number">3</span> Alien species</a></li>
+<li class="book-part">INDICATORS FROM THE ALPINE ASSESSMENT</li>
+<li><a class="" href="areal-av-isbreer.html"><span class="header-section-number">4</span> Areal av isbreer</a></li>
+<li class="book-part">DEPRECATED</li>
+<li><a class="" href="areal-uten-d%C3%B8d-eller-skadet-r%C3%B8sslyng-i-kystlynghei.html"><span class="header-section-number">5</span> Areal uten død eller skadet røsslyng i kystlynghei</a></li>
+<li class="book-part">GENERAL TOPICS</li>
+<li><a class="" href="naturtype.html"><span class="header-section-number">6</span> Nature types</a></li>
+<li><a class="" href="scaling-functions.html"><span class="header-section-number">7</span> Scaling functions</a></li>
+<li><a class="" href="homogeneous-impact-areas.html"><span class="header-section-number">8</span> Homogeneous Impact Areas</a></li>
+<li><a class="active" href="master-grid.html"><span class="header-section-number">9</span> Master grid</a></li>
+<li><a class="" href="climate-indicators-explained.html"><span class="header-section-number">10</span> Climate indicators explained</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/NINAnor/ecosystemCondition">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="master-grid" class="section level1" number="9">
+<h1>
+<span class="header-section-number">9</span> Master grid<a class="anchor" aria-label="anchor" href="#master-grid"><i class="fas fa-link"></i></a>
+</h1>
+<p><br></p>
+<p><em>Author:</em></p>
+<p>Anders L. Kolstad</p>
+<p>March 2023</p>
+<p><br></p>
+<!-- Load all you dependencies here -->
+<div id="introduction-6" class="section level2" number="9.1">
+<h2>
+<span class="header-section-number">9.1</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction-6"><i class="fas fa-link"></i></a>
+</h2>
+<p>This chapter describes the making of a master raster grid for all of mainland Norway. This grid is used to align all ecosystem and indicator maps so that it becomes possible to do easy resamping, masking and aggregating.</p>
+<p><em>To do</em> : I plan to add examples how to use this master grid on real data.</p>
+</div>
+<div id="about-the-underlying-data-5" class="section level2" number="9.2">
+<h2>
+<span class="header-section-number">9.2</span> About the underlying data<a class="anchor" aria-label="anchor" href="#about-the-underlying-data-5"><i class="fas fa-link"></i></a>
+</h2>
+<p>I will use the <a href="https://kartkatalog.geonorge.no/metadata/statistisk-rutenett-5000m/32ac0653-d95c-446c-8558-bf9b79f4934e">statistical grid from Norway (5x5km)</a> and resample this to a higher resolution of 50 x 50 meters.</p>
+</div>
+<div id="analyses-6" class="section level2" number="9.3">
+<h2>
+<span class="header-section-number">9.3</span> Analyses<a class="anchor" aria-label="anchor" href="#analyses-6"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb395"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Set up conditional file paths</span></span>
+<span><span class="va">dir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/substr.html">substr</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span>, <span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">pData</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">dir</span> <span class="op">==</span> <span class="st">"C:"</span>, </span>
+<span>               <span class="st">"P:/41201785_okologisk_tilstand_2022_2023/data/"</span>,</span>
+<span>               <span class="st">"/data/P-Prosjekter2/41201785_okologisk_tilstand_2022_2023/data/"</span><span class="op">)</span></span></code></pre></div>
+<p>Import data</p>
+<div class="sourceCode" id="cb396"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#st_layers(paste0(pData, "Basisdata_0000_Norge_25833_StatistiskRutenett5km_FGDB.gdb"))</span></span>
+<span><span class="va">grid_5km</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html">read_sf</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">pData</span>, <span class="st">"Basisdata_0000_Norge_25833_StatistiskRutenett5km_FGDB.gdb"</span><span class="op">)</span><span class="op">)</span> </span></code></pre></div>
+<div class="sourceCode" id="cb397"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">tmap_mode</span><span class="op">(</span><span class="st">"view"</span><span class="op">)</span></span>
+<span><span class="fu">tm_shape</span><span class="op">(</span><span class="va">grid_5km</span><span class="op">$</span><span class="va">SHAPE</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">tm_borders</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="images/masterGrid_screenShot.PNG" width="800"></div>
+<p>Confirming CRS is EPSG25833:</p>
+<div class="sourceCode" id="cb398"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">st_crs</span><span class="op">(</span><span class="va">grid_5km</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Coordinate Reference System:</span></span>
+<span><span class="co">#&gt;   User input: ETRS89 / UTM zone 33N </span></span>
+<span><span class="co">#&gt;   wkt:</span></span>
+<span><span class="co">#&gt; PROJCRS["ETRS89 / UTM zone 33N",</span></span>
+<span><span class="co">#&gt;     BASEGEOGCRS["ETRS89",</span></span>
+<span><span class="co">#&gt;         ENSEMBLE["European Terrestrial Reference System 1989 ensemble",</span></span>
+<span><span class="co">#&gt;             MEMBER["European Terrestrial Reference Frame 1989"],</span></span>
+<span><span class="co">#&gt;             MEMBER["European Terrestrial Reference Frame 1990"],</span></span>
+<span><span class="co">#&gt;             MEMBER["European Terrestrial Reference Frame 1991"],</span></span>
+<span><span class="co">#&gt;             MEMBER["European Terrestrial Reference Frame 1992"],</span></span>
+<span><span class="co">#&gt;             MEMBER["European Terrestrial Reference Frame 1993"],</span></span>
+<span><span class="co">#&gt;             MEMBER["European Terrestrial Reference Frame 1994"],</span></span>
+<span><span class="co">#&gt;             MEMBER["European Terrestrial Reference Frame 1996"],</span></span>
+<span><span class="co">#&gt;             MEMBER["European Terrestrial Reference Frame 1997"],</span></span>
+<span><span class="co">#&gt;             MEMBER["European Terrestrial Reference Frame 2000"],</span></span>
+<span><span class="co">#&gt;             MEMBER["European Terrestrial Reference Frame 2005"],</span></span>
+<span><span class="co">#&gt;             MEMBER["European Terrestrial Reference Frame 2014"],</span></span>
+<span><span class="co">#&gt;             ELLIPSOID["GRS 1980",6378137,298.257222101,</span></span>
+<span><span class="co">#&gt;                 LENGTHUNIT["metre",1]],</span></span>
+<span><span class="co">#&gt;             ENSEMBLEACCURACY[0.1]],</span></span>
+<span><span class="co">#&gt;         PRIMEM["Greenwich",0,</span></span>
+<span><span class="co">#&gt;             ANGLEUNIT["degree",0.0174532925199433]],</span></span>
+<span><span class="co">#&gt;         ID["EPSG",4258]],</span></span>
+<span><span class="co">#&gt;     CONVERSION["UTM zone 33N",</span></span>
+<span><span class="co">#&gt;         METHOD["Transverse Mercator",</span></span>
+<span><span class="co">#&gt;             ID["EPSG",9807]],</span></span>
+<span><span class="co">#&gt;         PARAMETER["Latitude of natural origin",0,</span></span>
+<span><span class="co">#&gt;             ANGLEUNIT["degree",0.0174532925199433],</span></span>
+<span><span class="co">#&gt;             ID["EPSG",8801]],</span></span>
+<span><span class="co">#&gt;         PARAMETER["Longitude of natural origin",15,</span></span>
+<span><span class="co">#&gt;             ANGLEUNIT["degree",0.0174532925199433],</span></span>
+<span><span class="co">#&gt;             ID["EPSG",8802]],</span></span>
+<span><span class="co">#&gt;         PARAMETER["Scale factor at natural origin",0.9996,</span></span>
+<span><span class="co">#&gt;             SCALEUNIT["unity",1],</span></span>
+<span><span class="co">#&gt;             ID["EPSG",8805]],</span></span>
+<span><span class="co">#&gt;         PARAMETER["False easting",500000,</span></span>
+<span><span class="co">#&gt;             LENGTHUNIT["metre",1],</span></span>
+<span><span class="co">#&gt;             ID["EPSG",8806]],</span></span>
+<span><span class="co">#&gt;         PARAMETER["False northing",0,</span></span>
+<span><span class="co">#&gt;             LENGTHUNIT["metre",1],</span></span>
+<span><span class="co">#&gt;             ID["EPSG",8807]]],</span></span>
+<span><span class="co">#&gt;     CS[Cartesian,2],</span></span>
+<span><span class="co">#&gt;         AXIS["(E)",east,</span></span>
+<span><span class="co">#&gt;             ORDER[1],</span></span>
+<span><span class="co">#&gt;             LENGTHUNIT["metre",1]],</span></span>
+<span><span class="co">#&gt;         AXIS["(N)",north,</span></span>
+<span><span class="co">#&gt;             ORDER[2],</span></span>
+<span><span class="co">#&gt;             LENGTHUNIT["metre",1]],</span></span>
+<span><span class="co">#&gt;     USAGE[</span></span>
+<span><span class="co">#&gt;         SCOPE["Engineering survey, topographic mapping."],</span></span>
+<span><span class="co">#&gt;         AREA["Europe between 12°E and 18°E: Austria; Denmark - offshore and offshore; Germany - onshore and offshore; Norway including Svalbard - onshore and offshore."],</span></span>
+<span><span class="co">#&gt;         BBOX[46.4,12,84.42,18]],</span></span>
+<span><span class="co">#&gt;     ID["EPSG",25833]]</span></span></code></pre></div>
+<div id="make-grid" class="section level3" number="9.3.1">
+<h3>
+<span class="header-section-number">9.3.1</span> Make grid<a class="anchor" aria-label="anchor" href="#make-grid"><i class="fas fa-link"></i></a>
+</h3>
+<p>Use the bbox and split into 50 x 50 meter cells</p>
+<div class="sourceCode" id="cb399"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">masterGrid_50m</span> <span class="op">&lt;-</span> <span class="fu">st_as_stars</span><span class="op">(</span><span class="fu">st_bbox</span><span class="op">(</span><span class="va">grid_5km</span><span class="op">)</span>, dx <span class="op">=</span> <span class="fl">50</span>, dy <span class="op">=</span> <span class="fl">50</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; stars object with 2 dimensions and 1 attribute</span></span>
+<span><span class="co">#&gt; attribute(s), summary of first 1e+05 cells:</span></span>
+<span><span class="co">#&gt;         Min. 1st Qu. Median Mean 3rd Qu. Max.</span></span>
+<span><span class="co">#&gt; values     0       0      0    0       0    0</span></span>
+<span><span class="co">#&gt; dimension(s):</span></span>
+<span><span class="co">#&gt;   from    to  offset delta                refsys x/y</span></span>
+<span><span class="co">#&gt; x    1 24500  -1e+05    50 ETRS89 / UTM zone 33N [x]</span></span>
+<span><span class="co">#&gt; y    1 30800 7965000   -50 ETRS89 / UTM zone 33N [y]</span></span></code></pre></div>
+<p>This file is 6GB.</p>
+<p>Number of cells, in millions, is:</p>
+<div class="sourceCode" id="cb400"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">masterGrid_50m</span><span class="op">)</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">masterGrid_50m</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fl">10</span><span class="op">^</span><span class="fl">6</span></span>
+<span><span class="co">#&gt;     x </span></span>
+<span><span class="co">#&gt; 754.6</span></span></code></pre></div>
+<p>So, quite a lot. For the area accounts we might consider using 10x10m.</p>
+</div>
+<div id="eksport-file-final-product" class="section level3" number="9.3.2">
+<h3>
+<span class="header-section-number">9.3.2</span> Eksport file (final product)<a class="anchor" aria-label="anchor" href="#eksport-file-final-product"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb401"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">stars</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/stars/reference/write_stars.html">write_stars</a></span><span class="op">(</span><span class="va">masterGrid_50m</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">pData</span>, <span class="st">"masterGrid_50m.tiff"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="test-import" class="section level3" number="9.3.3">
+<h3>
+<span class="header-section-number">9.3.3</span> Test import<a class="anchor" aria-label="anchor" href="#test-import"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb402"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">temp</span> <span class="op">&lt;-</span> <span class="fu">stars</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/stars/reference/read_stars.html">read_stars</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">pData</span>, <span class="st">"masterGrid_50m.tiff"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">st_dimensions</span><span class="op">(</span><span class="va">temp</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   from    to  offset delta                refsys point x/y</span></span>
+<span><span class="co">#&gt; x    1 24500  -1e+05    50 ETRS89 / UTM zone 33N FALSE [x]</span></span>
+<span><span class="co">#&gt; y    1 30800 7965000   -50 ETRS89 / UTM zone 33N FALSE [y]</span></span></code></pre></div>
+
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="homogeneous-impact-areas.html"><span class="header-section-number">8</span> Homogeneous Impact Areas</a></div>
+<div class="next"><a href="climate-indicators-explained.html"><span class="header-section-number">10</span> Climate indicators explained</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#master-grid"><span class="header-section-number">9</span> Master grid</a></li>
+<li><a class="nav-link" href="#introduction-6"><span class="header-section-number">9.1</span> Introduction</a></li>
+<li><a class="nav-link" href="#about-the-underlying-data-5"><span class="header-section-number">9.2</span> About the underlying data</a></li>
+<li>
+<a class="nav-link" href="#analyses-6"><span class="header-section-number">9.3</span> Analyses</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#make-grid"><span class="header-section-number">9.3.1</span> Make grid</a></li>
+<li><a class="nav-link" href="#eksport-file-final-product"><span class="header-section-number">9.3.2</span> Eksport file (final product)</a></li>
+<li><a class="nav-link" href="#test-import"><span class="header-section-number">9.3.3</span> Test import</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/NINAnor/ecosystemCondition/blob/master/master_grid.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/NINAnor/ecosystemCondition/edit/master/master_grid.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Indicators for Ecosystem Condition in Norway</strong>" was written by Anders L. Kolstad. It was last built on 2023-04-14.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

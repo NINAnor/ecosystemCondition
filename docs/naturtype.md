@@ -2,7 +2,7 @@
 
 # Nature types {#naturtype}
 
-**On the application of the nature type dataset**
+**On the application of the nature type data set**
 
 *Data exploration and an analyses of thematic coverage*
 
@@ -11,9 +11,12 @@
 
 
 
-Author: Anders L. Kolstad
+Author: 
 
-Date: 2022-11-15
+Anders L. Kolstad
+
+March 2023
+
 
 <br />
 
@@ -27,14 +30,19 @@ The first part of this analysis is simply to get an overview of the data, making
 ## Import data and general summary statistics
 
 ```r
+dir <- substr(getwd(), 1,2)
+
 # local path
 #path <- "data/R:/GeoSpatialData/Habitats_biotopes/Norway_Miljodirektoratet_Naturtyper_nin/Original/Natur_Naturtyper_NiN_norge_med_svalbard_25833.gdb"
-
-# server path
-path <- "/data/P-Prosjekter2/41201785_okologisk_tilstand_2022_2023/data/Natur_Naturtyper_NiN_norge_med_svalbard_25833.gdb"
-
 # temporary path 
 #path <- "/data/Egenutvikling/41001581_egenutvikling_anders_kolstad/data/Natur_Naturtyper_NiN_norge_med_svalbard_25833.g#db"
+
+# server path pre 2022 data
+#path <- "/data/P-Prosjekter2/41201785_okologisk_tilstand_2022_2023/data/Natur_Naturtyper_NiN_norge_med_svalbard_25833.gdb"
+path <- ifelse(dir == "C:", 
+               "R:/GeoSpatialData/Habitats_biotopes/Norway_Miljodirektoratet_Naturtyper_nin/Original/Naturtyper_nin_0000_norge_25833_FILEGDB/Naturtyper_nin_0000_norge_25833_FILEGDB.gdb",
+               "/data/R/GeoSpatialData/Habitats_biotopes/Norway_Miljodirektoratet_Naturtyper_nin/Original/Naturtyper_nin_0000_norge_25833_FILEGDB/Naturtyper_nin_0000_norge_25833_FILEGDB.gdb")
+
 dat <- sf::st_read(dsn = path)
 ```
 
@@ -44,11 +52,11 @@ Fix non-valid polygons:
 dat <- sf::st_make_valid(dat)
 ```
 
-The dataset has 95k polygons, each with 36 variables:
+The data set has 117k polygons, each with 37 variables:
 
 ```r
 dim(dat)
-#> [1] 95469    36
+#> [1] 117427     37
 ```
 
 It therefore takes a little minute to render a plot, but this is the code to do it:
@@ -69,22 +77,13 @@ Calculating the area for each polygon/locality
 ```r
 dat$area <- sf::st_area(dat)
 summary(dat$area)
-#>    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-#>      20     722    2891   17677    9026 8532702
+#>     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+#>       20      700     2810    17153     8674 15794178
 ```
-The smallest polygons are 20 m2, and the biggest is 8.5 km2.
+The smallest polygons are 20 m2, and the biggest is 15.8 km2.
 
-The largest polygon is a 
+The largest polygon is a Kalkfattig og intermediær fjellhei, leside og tundra , and the smallest polygon is a Sørlig kaldkilde.
 
-```
-#> [1] "Boreal hei"
-```
-
-The smallest polygon is a 
-
-```
-#> [1] "Sørlig kaldkilde"
-```
 
 Sum of mapped area divided by Norwegian mainland area:
 
@@ -92,9 +91,9 @@ Sum of mapped area divided by Norwegian mainland area:
 #Import outline of mainland Norway
 nor <- sf::read_sf("data/outlineOfNorway_EPSG25833.shp")
 sum(dat$area)/sf::st_area(nor)
-#> 0.005181438 [1]
+#> 0.006184274 [1]
 ```
-About 0.5% of Norway has been mapped (note that a bigger area than this has been surveyed, but only a small fraction is delineated). It is therefore essential that these 0.5% are representative.
+About 0.6% of Norway has been mapped (note that a bigger area than this has been surveyed, but only a small fraction is delineated). It is therefore essential that these 0.5% are representative.
 
 ## Temporal trend
 
@@ -120,26 +119,39 @@ ggplot(area_year)+
            size = 1.2)+
   theme_bw(base_size = 12)+
   labs(x = "Year", y = "Total mapped area (km/2)")
+#> Warning: Using `size` aesthetic for lines was deprecated in ggplot2
+#> 3.4.0.
+#> ℹ Please use `linewidth` instead.
+#> This warning is displayed once every 8 hours.
+#> Call `lifecycle::last_lifecycle_warnings()` to see where
+#> this warning was generated.
 ```
 
 <div class="figure">
-<img src="naturtype_files/figure-html/unnamed-chunk-11-1.png" alt="Temproal trend in nature type mapping using Miljødirektoratets Instruks" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-11)Temproal trend in nature type mapping using Miljødirektoratets Instruks</p>
+<img src="naturtype_files/figure-html/unnamed-chunk-9-1.png" alt="Temproal trend in nature type mapping using Miljødirektoratets Instruks" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-9)Temproal trend in nature type mapping using Miljødirektoratets Instruks</p>
 </div>
 
-The rate of nature type mapping is strongly positive last three years. There are some differences in the field mapping instructions between the years. I will need to decide whether to include all years, or to perhaps exclude the first year.
+There are some differences in the field mapping instructions between the years. I will need to decide whether to include all years, or to perhaps exclude the first year.
 
 
 ## Condition
 A quick overview of the condition scores 
 
 ```r
+dat <- dat %>%
+  mutate(tilstand =  recode(tilstand, 
+                            "sværtRedusert" = "1 - Svært redusert",
+                            "dårlig" = "2 - Dårlig",
+                            "moderat" = "3 - Moderat",
+                            "god" = "4 - God"))
+
 barplot(tapply(dat$area/10^6, factor(dat$tilstand), sum))
 ```
 
 <div class="figure">
-<img src="naturtype_files/figure-html/unnamed-chunk-12-1.png" alt="The overal distribution of condition scores" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-12)The overal distribution of condition scores</p>
+<img src="naturtype_files/figure-html/unnamed-chunk-10-1.png" alt="The overal distribution of condition scores" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-10)The overal distribution of condition scores</p>
 </div>
 
 Most sites/polygons are in either good or moderately good condition. I'm not sure what the first class represents. It seems like some polygons don't have a condition score. Looking at just the data set, and also the online *faktaark* for some of these localities, does not give the answer:
@@ -157,8 +169,8 @@ barplot(table(dat$kartleggingsår[dat$tilstand==""]),
 ```
 
 <div class="figure">
-<img src="naturtype_files/figure-html/unnamed-chunk-14-1.png" alt="Temporal trend in localities without condition scores." width="672" />
-<p class="caption">(\#fig:unnamed-chunk-14)Temporal trend in localities without condition scores.</p>
+<img src="naturtype_files/figure-html/unnamed-chunk-12-1.png" alt="Temporal trend in localities without condition scores." width="672" />
+<p class="caption">(\#fig:unnamed-chunk-12)Temporal trend in localities without condition scores.</p>
 </div>
 
 
@@ -170,8 +182,8 @@ barplot(table(dat$hovedøkosystem[dat$tilstand==""]),
 ```
 
 <div class="figure">
-<img src="naturtype_files/figure-html/unnamed-chunk-15-1.png" alt="Main ecosystems with localities missing condition scores." width="672" />
-<p class="caption">(\#fig:unnamed-chunk-15)Main ecosystems with localities missing condition scores.</p>
+<img src="naturtype_files/figure-html/unnamed-chunk-13-1.png" alt="Main ecosystems with localities missing condition scores." width="672" />
+<p class="caption">(\#fig:unnamed-chunk-13)Main ecosystems with localities missing condition scores.</p>
 </div>
 
 These cases are restricted to two main ecosystems, and one class where the main ecosystem is not recorded. Looking at some of those cases it is clear that they are not relevant for our work here, I and I don't know why they are in the data set to begin with.
@@ -184,20 +196,20 @@ barplot(table(dat$naturtype[dat$tilstand==""]),
 ```
 
 <div class="figure">
-<img src="naturtype_files/figure-html/unnamed-chunk-16-1.png" alt="Nature types with localities missing condition scores." width="672" />
-<p class="caption">(\#fig:unnamed-chunk-16)Nature types with localities missing condition scores.</p>
+<img src="naturtype_files/figure-html/unnamed-chunk-14-1.png" alt="Nature types with localities missing condition scores." width="672" />
+<p class="caption">(\#fig:unnamed-chunk-14)Nature types with localities missing condition scores.</p>
 </div>
 
-There are only six nature types (if you exclude those that are not mapped) that don't have a condition score.
+There are only seven nature types (if you exclude those that are not mapped) that don't have a condition score.
 
-`Snøleieblokkmark` and `rabbeblokkmark` do not have a protocol for assessing condition status. `Leirskredgrop`, `leirravine` and `grotte` were nature types in 2018 (not mapped in 2021), and was similarly not assessed for condition scores. `Isinnfrysingsmark` is assessed for condition now, but not in 2018. We can therefore exclude these localities from our data set:
+`Snøleieblokkmark` and `rabbeblokkmark` do not have a protocol for assessing condition status. `Leirskredgrop`, `leirravine` and `grotte` were nature types in 2018 (not mapped in 2021), and was similarly not assessed for condition scores. `Isinnfrysingsmark` is assessed for condition now, but not in 2018. `Snøleieberg` is new in 2022 and is only mapped for area. We can therefore exclude these localities from our data set:
 
 ```r
 dat_rm <- dat
 dat <- dat_rm[dat_rm$tilstand!="",]
 ```
 
-This resulted in the deletion of 270 rows, or 0.28 % of the data.
+This resulted in the deletion of 370 rows, or 0.32 % of the data.
 
 
 
@@ -214,28 +226,28 @@ barplot(table(dat$mosaikk),
 ```
 
 <div class="figure">
-<img src="naturtype_files/figure-html/unnamed-chunk-19-1.png" alt="The number of mosaic localities is relatively small." width="672" />
-<p class="caption">(\#fig:unnamed-chunk-19)The number of mosaic localities is relatively small.</p>
+<img src="naturtype_files/figure-html/unnamed-chunk-17-1.png" alt="The number of mosaic localities is relatively small." width="672" />
+<p class="caption">(\#fig:unnamed-chunk-17)The number of mosaic localities is relatively small.</p>
 </div>
 Mosaic localities occur in many main ecosystems (and many nature types therein). 
 
 ```r
 # Fix duplicated `hovedøkosystem`
 #unique(dat$hovedøkosystem)
-dat$hovedøkosystem[dat$hovedøkosystem=="Naturlig åpne områder i lavlandet"] <- "Naturlig åpne områder under skoggrensa"
+dat$hovedøkosystem[dat$hovedøkosystem=="naturligÅpneOmråderILavlandet"] <- "naturligÅpneOmråderUnderSkoggrensa"
 ```
 
 
 ```r
 par(mar=c(5,20,1,1))
-barplot(table(dat$hovedøkosystem[dat$mosaikk=="Ja"]),
+barplot(table(dat$hovedøkosystem[dat$mosaikk=="ja"]),
         horiz = T, las=2,
         xlab="Number of mosaic localities")
 ```
 
 <div class="figure">
-<img src="naturtype_files/figure-html/unnamed-chunk-21-1.png" alt="Distribution of mosaic nature types across hovedøkosystem" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-21)Distribution of mosaic nature types across hovedøkosystem</p>
+<img src="naturtype_files/figure-html/unnamed-chunk-19-1.png" alt="Distribution of mosaic nature types across hovedøkosystem" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-19)Distribution of mosaic nature types across hovedøkosystem</p>
 </div>
 
 Some conclusion here could be that
@@ -245,49 +257,51 @@ Some conclusion here could be that
 
 
 ## NiN types across main ecosystems
-The NiN main types can be extracted from the column `ninkartleggingsenheter`. This is the mapping NiN mapping units recorded in the field. The NiN main type makes up the first part of this mapping unit code. The variable is oddly concatenated. Let's tease it apart.
+The NiN main types can be extracted from the column `ninKartleggingsenheter`. These are NiN mapping units recorded in the field. The NiN main type makes up the first part of this mapping unit code. The variable is oddly concatenated. Let's tease it apart.
 
 
 ```r
-#dat$ninkartleggingsenheter[1:10]
-dat$ninkartleggingsenheter2 <- gsub("NA_", dat$ninkartleggingsenheter, replacement = "")
-#dat$ninkartleggingsenheter2[1:30]
-dat$ninkartleggingsenheter2 <- str_replace_all(dat$ninkartleggingsenheter2, ".[CE].[\\d]{1,}", replacement = "")
-#dat$ninkartleggingsenheter2[1:30]
-dat$ninkartleggingsenheter2 <- str_replace_all(dat$ninkartleggingsenheter2, "-.", replacement = "")
+#dat$ninKartleggingsenheter  [1:10]
+# remove NA prefix:
+dat$ninKartleggingsenheter2 <- gsub("NA_", dat$ninKartleggingsenheter, replacement = "")
+#dat$ninKartleggingsenheter2[1:30]
+
+dat$ninKartleggingsenheter2 <- str_replace_all(dat$ninKartleggingsenheter2, ".[CE].[\\d]{1,}", replacement = "")
+#dat$ninKartleggingsenheter2[1:30]
+dat$ninKartleggingsenheter2 <- str_replace_all(dat$ninKartleggingsenheter2, "-.", replacement = "")
 uni <- function(x){paste(unique(unlist(strsplit(x, ","))), collapse = ",")}
-dat$ninkartleggingsenheter3 <- lapply(dat$ninkartleggingsenheter2, uni)
+dat$ninKartleggingsenheter3 <- lapply(dat$ninKartleggingsenheter2, uni)
 n_uni <- function(x){length(unique(unlist(strsplit(x, ","))))}
-dat$n_ninkartleggingsenheter <- lapply(dat$ninkartleggingsenheter2, n_uni)
-dat$n_ninkartleggingsenheter <- as.numeric(dat$n_ninkartleggingsenheter) 
+dat$n_ninKartleggingsenheter <- lapply(dat$ninKartleggingsenheter2, n_uni)
+dat$n_ninKartleggingsenheter <- as.numeric(dat$n_ninKartleggingsenheter) 
 
 par(mfrow=c(1,3))
-barplot(table(dat$n_ninkartleggingsenheter),
+barplot(table(dat$n_ninKartleggingsenheter),
         xlab = "Number of NiN main types",
         ylab = "Number of localities")
-barplot(table(dat$n_ninkartleggingsenheter[dat$mosaikk=="Nei"]),
+barplot(table(dat$n_ninKartleggingsenheter[dat$mosaikk=="nei"]),
         xlab = "Number of NiN main types\n(Mosaic localities excluded)")
-barplot(table(dat$n_ninkartleggingsenheter[dat$mosaikk=="Ja"]),
+barplot(table(dat$n_ninKartleggingsenheter[dat$mosaikk=="ja"]),
         xlab = "Number of NiN main types\n(Mosaic localities only)")
 ```
 
 <div class="figure">
-<img src="naturtype_files/figure-html/unnamed-chunk-22-1.png" alt="The number of NiN main types within one locality should normally be one, except for mosaic localities." width="672" />
-<p class="caption">(\#fig:unnamed-chunk-22)The number of NiN main types within one locality should normally be one, except for mosaic localities.</p>
+<img src="naturtype_files/figure-html/unnamed-chunk-20-1.png" alt="The number of NiN main types within one locality should normally be one, except for mosaic localities." width="672" />
+<p class="caption">(\#fig:unnamed-chunk-20)The number of NiN main types within one locality should normally be one, except for mosaic localities.</p>
 </div>
 
-Mosaic localities (right pane) have a much higher likelihood of including multiple NiN main types, but it also occurs in non-mosaic localities (about 8000 cases). Most, if not all, nature types are defined within a single NiN main type, so we need to see whats going on there.
+Mosaic localities (right pane) have a much higher likelihood of including multiple NiN main types, but it also occurs in non-mosaic localities (over 10 000 cases). Most, if not all, nature types are defined within a single NiN main type, so we need to see whats going on there.
 
 First I need to melt the data frame in order to tally the number of NiN min types within each `hovedøkosystem`.
 
 ```r
-dat_melt <- tidyr::separate_rows(dat, ninkartleggingsenheter3)
+dat_melt <- tidyr::separate_rows(dat, ninKartleggingsenheter3)
 ```
 
 
 ```r
-ggplot(dat_melt[dat_melt$mosaikk!="Ja",])+
-  geom_bar(aes(x = ninkartleggingsenheter3))+
+ggplot(dat_melt[dat_melt$mosaikk!="ja",])+
+  geom_bar(aes(x = ninKartleggingsenheter3))+
   coord_flip()+
   theme_bw(base_size = 12)+
   facet_wrap("hovedøkosystem",
@@ -295,39 +309,38 @@ ggplot(dat_melt[dat_melt$mosaikk!="Ja",])+
 ```
 
 <div class="figure">
-<img src="naturtype_files/figure-html/unnamed-chunk-24-1.png" alt="Figure showing the number of localities for each NiN main type. One locality can have more than one NiN main type. Mosaic localities are excluded in this figure." width="672" />
-<p class="caption">(\#fig:unnamed-chunk-24)Figure showing the number of localities for each NiN main type. One locality can have more than one NiN main type. Mosaic localities are excluded in this figure.</p>
+<img src="naturtype_files/figure-html/unnamed-chunk-22-1.png" alt="Figure showing the number of localities for each NiN main type. One locality can have more than one NiN main type. Mosaic localities are excluded in this figure." width="672" />
+<p class="caption">(\#fig:unnamed-chunk-22)Figure showing the number of localities for each NiN main type. One locality can have more than one NiN main type. Mosaic localities are excluded in this figure.</p>
 </div>
 
-There is a lot of miss-match between NiN main types and *hovedøkosystem*. 
-Taking one example: T2 (åpen grunnledt mark) is not found in mountains, but there is one case where this occurs. If I view that case
+This is a messy figure, but the point is, there is a lot of miss-match between NiN main types and *hovedøkosystem*. Taking one example: T2 (åpen grunnledt mark) is not found in mountains, but there is one case where this occurs. If I view that case
 
 
 ```r
-View(dat_melt[dat_melt$mosaikk!="Ja" & dat_melt$hovedøkosystem=="Fjell" & dat_melt$ninkartleggingsenheter3=="T2",])
+View(dat_melt[dat_melt$mosaikk!="Ja" & dat_melt$hovedøkosystem=="Fjell" & dat_melt$ninKartleggingsenheter3=="T2",])
 ```
 
-.. and find the online fact sheet for that locality, I see that it is actually NOT a mosaic. It is a nature type called *Kalkfattig og intermediær fjellhei, leside og tundra* which is defined as strictly T3, but the field surveyor has recorded lots of NiN mapping units (and hence, main NiN types) in addition. This is a mistake. Online I can see that the locality is 50% T3, but this information is not in the data set that we have available. Miljødirektoratet could consider adding this information to the downloadable dataset. The order of the NiN types in the `ninkartleggingsenheter` column is not reflecting the commonness of the types ether. 
+.. and find the online fact sheet for that locality, I see that it is actually NOT a mosaic. It is a nature type called *Kalkfattig og intermediær fjellhei, leside og tundra* which is defined as strictly T3, but the field surveyor has recorded lots of NiN mapping units (and hence, main NiN types) in addition. This is a mistake. Online I can see that the locality is 50% T3, but this information is not in the data set that we have available. Miljødirektoratet could consider adding this information to the downloadable dataset. The order of the NiN types in the `ninKartleggingsenheter` column is not reflecting the commonness of the types ether. 
 
-If there was a way to extract the defining NiN type from the `naturtype` column, that would be nice. Miljødirektoratet may consider adding this as well. If we exclude all localities that are not mosaics, but that have multiple NiN main types, we first need to know if there are not any `naturtype` which allow for multiple NiN main types.
+If there was a way to extract the defining NiN type from the `naturtype` column, that would be nice. Miljødirektoratet may consider adding this as well. If we exclude all localities that are not mosaics, but that have multiple NiN main types (no, we're not going to do that, here at least), we first need to know if there are not any `naturtype` which allow for multiple NiN main types.
 
-As this next figure show, these cases are not restricted to mapping year, and hence to any changes in the field protocol. Rather this phenomenon is increasing in commonness.
+As this next figure show, these cases are not restricted to mapping year, and hence to any changes in the field protocol.
 
 ```r
 par(mar=c(2,6,2,2))
-temp <- dat[dat$n_ninkartleggingsenheter>1 & dat$mosaikk!="Ja",]
+temp <- dat[dat$n_ninKartleggingsenheter>1 & dat$mosaikk!="ja",]
 barplot(table(temp$kartleggingsår), ylab="Number of localities with more than one NiN main type\n(mosaic localitie excluded) ")
 ```
 
 <div class="figure">
-<img src="naturtype_files/figure-html/unnamed-chunk-26-1.png" alt="Temporal trend in the recording of non-mosaic localities that are recorded as consisting of multiple NiN mapping units from different NiN main types." width="672" />
-<p class="caption">(\#fig:unnamed-chunk-26)Temporal trend in the recording of non-mosaic localities that are recorded as consisting of multiple NiN mapping units from different NiN main types.</p>
+<img src="naturtype_files/figure-html/unnamed-chunk-24-1.png" alt="Temporal trend in the recording of non-mosaic localities that are recorded as consisting of multiple NiN mapping units from different NiN main types." width="672" />
+<p class="caption">(\#fig:unnamed-chunk-24)Temporal trend in the recording of non-mosaic localities that are recorded as consisting of multiple NiN mapping units from different NiN main types.</p>
 </div>
 
 Lets look at the most common nature types that are recorded this way.
 
 ```r
-temp2 <- as.data.frame(table(temp$naturtype, temp$n_ninkartleggingsenheter))
+temp2 <- as.data.frame(table(temp$naturtype, temp$n_ninKartleggingsenheter))
 temp2 <- temp2[base::order(temp2$Freq, decreasing = T),][1:10,]
 par(mar=c(8,20,1,1))
 barplot(temp2$Freq, names.arg = temp2$Var1, las=2,
@@ -335,20 +348,21 @@ barplot(temp2$Freq, names.arg = temp2$Var1, las=2,
 ```
 
 <div class="figure">
-<img src="naturtype_files/figure-html/unnamed-chunk-27-1.png" alt="The ten most common nature types and the number of localities with with multiple NiN main types" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-27)The ten most common nature types and the number of localities with with multiple NiN main types</p>
+<img src="naturtype_files/figure-html/multipleNiN-1.png" alt="The ten most common nature types and the number of localities with with multiple NiN main types" width="672" />
+<p class="caption">(\#fig:multipleNiN)The ten most common nature types and the number of localities with with multiple NiN main types</p>
 </div>
 
-'Hule eiker' is a special case because these are recorded as points and not polygons, and they can be found in any NiN main type and any *hovedøkosystem*. 
+'Hule eiker' is a special case because these are recorded as points and not polygons, and they can be found in any NiN main type and any *hovedøkosystem*.
+
 
 ```r
 DT::datatable(
-  dat[dat$naturtype=="Hule eiker",][1:5,c("naturtype", "hovedøkosystem", "ninkartleggingsenheter")])
+  dat[dat$naturtype=="Hule eiker",][1:5,c("naturtype", "hovedøkosystem", "ninKartleggingsenheter")])
 ```
 
 ```{=html}
-<div id="htmlwidget-e8c860e57eab1171144d" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-e8c860e57eab1171144d">{"x":{"filter":"none","vertical":false,"data":[["3","8","19","33","38"],["Hule eiker","Hule eiker","Hule eiker","Hule eiker","Hule eiker"],["Semi-naturlig mark","Skog","Skog","Semi-naturlig mark","Skog"],["NA_T4-C-3","NA_T43-C-1","NA_T35-C-2,NA_T4-C-7","NA_T4-C-2","NA_T4-C-7"],[{"type":"MultiPolygon","coordinates":[[[[257373.1209,6576294.7663],[257373.089,6576293.79],[257372.9932,6576292.8179],[257372.8341,6576291.8541],[257372.6123,6576290.9029],[257372.3288,6576289.9681],[257371.9847,6576289.0539],[257371.5816,6576288.1642],[257371.1211,6576287.3027],[257370.6053,6576286.4732],[257370.0363,6576285.6793],[257369.4166,6576284.9242],[257368.7489,6576284.2112],[257368.036,6576283.5435],[257367.2809,6576282.9238],[257366.4869,6576282.3549],[257365.6574,6576281.8391],[257364.796,6576281.3786],[257363.9062,6576280.9755],[257362.992,6576280.6314],[257362.0573,6576280.3478],[257361.106,6576280.126],[257360.1423,6576279.9669],[257359.1702,6576279.8712],[257358.1939,6576279.8392],[257357.2176,6576279.8712],[257356.2455,6576279.9669],[257355.2818,6576280.126],[257354.3305,6576280.3478],[257353.3957,6576280.6314],[257352.4816,6576280.9755],[257351.5918,6576281.3786],[257350.7304,6576281.8391],[257349.9009,6576282.3549],[257349.1069,6576282.9238],[257348.3518,6576283.5435],[257347.6389,6576284.2112],[257346.9711,6576284.9242],[257346.3515,6576285.6793],[257345.7825,6576286.4732],[257345.2667,6576287.3027],[257344.8062,6576288.1642],[257344.4031,6576289.0539],[257344.059,6576289.9681],[257343.7755,6576290.9029],[257343.5537,6576291.8541],[257343.3945,6576292.8179],[257343.2988,6576293.79],[257343.2668,6576294.7663],[257343.2988,6576295.7425],[257343.3945,6576296.7146],[257343.5537,6576297.6784],[257343.7755,6576298.6297],[257344.059,6576299.5644],[257344.4031,6576300.4786],[257344.8062,6576301.3683],[257345.2667,6576302.2298],[257345.7825,6576303.0593],[257346.3515,6576303.8533],[257346.9711,6576304.6084],[257347.6389,6576305.3213],[257348.3518,6576305.989],[257349.1069,6576306.6087],[257349.9009,6576307.1777],[257350.7304,6576307.6935],[257351.5918,6576308.1539],[257352.4816,6576308.5571],[257353.3957,6576308.9011],[257354.3305,6576309.1847],[257355.2818,6576309.4065],[257356.2455,6576309.5656],[257357.2176,6576309.6614],[257358.1939,6576309.6933],[257359.1702,6576309.6614],[257360.1423,6576309.5656],[257361.106,6576309.4065],[257362.0573,6576309.1847],[257362.992,6576308.9011],[257363.9062,6576308.5571],[257364.796,6576308.1539],[257365.6574,6576307.6935],[257366.4869,6576307.1777],[257367.2809,6576306.6087],[257368.036,6576305.989],[257368.7489,6576305.3213],[257369.4166,6576304.6084],[257370.0363,6576303.8533],[257370.6053,6576303.0593],[257371.1211,6576302.2298],[257371.5816,6576301.3683],[257371.9847,6576300.4786],[257372.3288,6576299.5644],[257372.6123,6576298.6297],[257372.8341,6576297.6784],[257372.9932,6576296.7146],[257373.089,6576295.7425],[257373.1209,6576294.7663]]]]},{"type":"MultiPolygon","coordinates":[[[[230205.4737,6612351.6694],[230205.4418,6612350.6931],[230205.346,6612349.721],[230205.1869,6612348.7573],[230204.9651,6612347.806],[230204.6815,6612346.8713],[230204.3375,6612345.9571],[230203.9343,6612345.0673],[230203.4739,6612344.2059],[230202.9581,6612343.3764],[230202.3891,6612342.5824],[230201.7694,6612341.8273],[230201.1017,6612341.1144],[230200.3888,6612340.4467],[230199.6337,6612339.827],[230198.8397,6612339.258],[230198.0102,6612338.7422],[230197.1487,6612338.2817],[230196.259,6612337.8786],[230195.3448,6612337.5345],[230194.4101,6612337.251],[230193.4588,6612337.0292],[230192.495,6612336.8701],[230191.5229,6612336.7743],[230190.5467,6612336.7424],[230189.5704,6612336.7743],[230188.5983,6612336.8701],[230187.6345,6612337.0292],[230186.6833,6612337.251],[230185.7485,6612337.5345],[230184.8343,6612337.8786],[230183.9446,6612338.2817],[230183.0831,6612338.7422],[230182.2536,6612339.258],[230181.4597,6612339.827],[230180.7046,6612340.4467],[230179.9917,6612341.1144],[230179.3239,6612341.8273],[230178.7042,6612342.5824],[230178.1353,6612343.3764],[230177.6195,6612344.2059],[230177.159,6612345.0673],[230176.7559,6612345.9571],[230176.4118,6612346.8713],[230176.1282,6612347.806],[230175.9064,6612348.7573],[230175.7473,6612349.721],[230175.6516,6612350.6931],[230175.6196,6612351.6694],[230175.6516,6612352.6457],[230175.7473,6612353.6178],[230175.9064,6612354.5815],[230176.1282,6612355.5328],[230176.4118,6612356.4676],[230176.7559,6612357.3817],[230177.159,6612358.2715],[230177.6195,6612359.1329],[230178.1353,6612359.9624],[230178.7042,6612360.7564],[230179.3239,6612361.5115],[230179.9917,6612362.2244],[230180.7046,6612362.8922],[230181.4597,6612363.5118],[230182.2536,6612364.0808],[230183.0831,6612364.5966],[230183.9446,6612365.0571],[230184.8343,6612365.4602],[230185.7485,6612365.8043],[230186.6833,6612366.0878],[230187.6345,6612366.3096],[230188.5983,6612366.4688],[230189.5704,6612366.5645],[230190.5467,6612366.5965],[230191.5229,6612366.5645],[230192.495,6612366.4688],[230193.4588,6612366.3096],[230194.4101,6612366.0878],[230195.3448,6612365.8043],[230196.259,6612365.4602],[230197.1487,6612365.0571],[230198.0102,6612364.5966],[230198.8397,6612364.0808],[230199.6337,6612363.5118],[230200.3888,6612362.8922],[230201.1017,6612362.2244],[230201.7694,6612361.5115],[230202.3891,6612360.7564],[230202.9581,6612359.9624],[230203.4739,6612359.1329],[230203.9343,6612358.2715],[230204.3375,6612357.3817],[230204.6815,6612356.4676],[230204.9651,6612355.5328],[230205.1869,6612354.5815],[230205.346,6612353.6178],[230205.4418,6612352.6457],[230205.4737,6612351.6694]]]]},{"type":"MultiPolygon","coordinates":[[[[234886.4963,6595819.1304],[234886.4644,6595818.1541],[234886.3686,6595817.1821],[234886.2095,6595816.2183],[234885.9877,6595815.267],[234885.7041,6595814.3323],[234885.3601,6595813.4181],[234884.9569,6595812.5284],[234884.4965,6595811.6669],[234883.9807,6595810.8374],[234883.4117,6595810.0434],[234882.792,6595809.2883],[234882.1243,6595808.5754],[234881.4114,6595807.9077],[234880.6563,6595807.288],[234879.8623,6595806.719],[234879.0328,6595806.2032],[234878.1713,6595805.7428],[234877.2816,6595805.3396],[234876.3674,6595804.9955],[234875.4327,6595804.712],[234874.4814,6595804.4902],[234873.5176,6595804.3311],[234872.5455,6595804.2353],[234871.5693,6595804.2034],[234870.593,6595804.2353],[234869.6209,6595804.3311],[234868.6571,6595804.4902],[234867.7059,6595804.712],[234866.7711,6595804.9955],[234865.8569,6595805.3396],[234864.9672,6595805.7428],[234864.1057,6595806.2032],[234863.2762,6595806.719],[234862.4822,6595807.288],[234861.7272,6595807.9077],[234861.0142,6595808.5754],[234860.3465,6595809.2883],[234859.7268,6595810.0434],[234859.1579,6595810.8374],[234858.6421,6595811.6669],[234858.1816,6595812.5284],[234857.7785,6595813.4181],[234857.4344,6595814.3323],[234857.1508,6595815.267],[234856.929,6595816.2183],[234856.7699,6595817.1821],[234856.6742,6595818.1541],[234856.6422,6595819.1304],[234856.6742,6595820.1067],[234856.7699,6595821.0788],[234856.929,6595822.0425],[234857.1508,6595822.9938],[234857.4344,6595823.9286],[234857.7785,6595824.8428],[234858.1816,6595825.7325],[234858.6421,6595826.594],[234859.1579,6595827.4235],[234859.7268,6595828.2174],[234860.3465,6595828.9725],[234861.0142,6595829.6854],[234861.7272,6595830.3532],[234862.4822,6595830.9729],[234863.2762,6595831.5418],[234864.1057,6595832.0576],[234864.9672,6595832.5181],[234865.8569,6595832.9212],[234866.7711,6595833.2653],[234867.7059,6595833.5489],[234868.6571,6595833.7707],[234869.6209,6595833.9298],[234870.593,6595834.0255],[234871.5693,6595834.0575],[234872.5455,6595834.0255],[234873.5176,6595833.9298],[234874.4814,6595833.7707],[234875.4327,6595833.5489],[234876.3674,6595833.2653],[234877.2816,6595832.9212],[234878.1713,6595832.5181],[234879.0328,6595832.0576],[234879.8623,6595831.5418],[234880.6563,6595830.9729],[234881.4114,6595830.3532],[234882.1243,6595829.6854],[234882.792,6595828.9725],[234883.4117,6595828.2174],[234883.9807,6595827.4235],[234884.4965,6595826.594],[234884.9569,6595825.7325],[234885.3601,6595824.8428],[234885.7041,6595823.9286],[234885.9877,6595822.9938],[234886.2095,6595822.0425],[234886.3686,6595821.0788],[234886.4644,6595820.1067],[234886.4963,6595819.1304]]]]},{"type":"MultiPolygon","coordinates":[[[[246942.6116,6656594.3792],[246942.5796,6656593.403],[246942.4839,6656592.4309],[246942.3248,6656591.4671],[246942.1029,6656590.5158],[246941.8194,6656589.5811],[246941.4753,6656588.6669],[246941.0722,6656587.7772],[246940.6117,6656586.9157],[246940.0959,6656586.0862],[246939.5269,6656585.2922],[246938.9073,6656584.5372],[246938.2395,6656583.8242],[246937.5266,6656583.1565],[246936.7715,6656582.5368],[246935.9775,6656581.9679],[246935.148,6656581.452],[246934.2866,6656580.9916],[246933.3969,6656580.5884],[246932.4827,6656580.2444],[246931.5479,6656579.9608],[246930.5966,6656579.739],[246929.6329,6656579.5799],[246928.6608,6656579.4842],[246927.6845,6656579.4522],[246926.7082,6656579.4842],[246925.7361,6656579.5799],[246924.7724,6656579.739],[246923.8211,6656579.9608],[246922.8864,6656580.2444],[246921.9722,6656580.5884],[246921.0825,6656580.9916],[246920.221,6656581.452],[246919.3915,6656581.9679],[246918.5975,6656582.5368],[246917.8424,6656583.1565],[246917.1295,6656583.8242],[246916.4618,6656584.5372],[246915.8421,6656585.2922],[246915.2731,6656586.0862],[246914.7573,6656586.9157],[246914.2969,6656587.7772],[246913.8937,6656588.6669],[246913.5496,6656589.5811],[246913.2661,6656590.5158],[246913.0443,6656591.4671],[246912.8852,6656592.4309],[246912.7894,6656593.403],[246912.7575,6656594.3792],[246912.7894,6656595.3555],[246912.8852,6656596.3276],[246913.0443,6656597.2914],[246913.2661,6656598.2427],[246913.5496,6656599.1774],[246913.8937,6656600.0916],[246914.2969,6656600.9813],[246914.7573,6656601.8428],[246915.2731,6656602.6723],[246915.8421,6656603.4663],[246916.4618,6656604.2213],[246917.1295,6656604.9343],[246917.8424,6656605.602],[246918.5975,6656606.2217],[246919.3915,6656606.7906],[246920.221,6656607.3065],[246921.0825,6656607.7669],[246921.9722,6656608.17],[246922.8864,6656608.5141],[246923.8211,6656608.7977],[246924.7724,6656609.0195],[246925.7361,6656609.1786],[246926.7082,6656609.2743],[246927.6845,6656609.3063],[246928.6608,6656609.2743],[246929.6329,6656609.1786],[246930.5966,6656609.0195],[246931.5479,6656608.7977],[246932.4827,6656608.5141],[246933.3969,6656608.17],[246934.2866,6656607.7669],[246935.148,6656607.3065],[246935.9775,6656606.7906],[246936.7715,6656606.2217],[246937.5266,6656605.602],[246938.2395,6656604.9343],[246938.9073,6656604.2213],[246939.5269,6656603.4663],[246940.0959,6656602.6723],[246940.6117,6656601.8428],[246941.0722,6656600.9813],[246941.4753,6656600.0916],[246941.8194,6656599.1774],[246942.1029,6656598.2427],[246942.3248,6656597.2914],[246942.4839,6656596.3276],[246942.5796,6656595.3555],[246942.6116,6656594.3792]]]]},{"type":"MultiPolygon","coordinates":[[[[34307.7715999996,6459711.1272],[34307.7396999998,6459710.151],[34307.6438999996,6459709.1789],[34307.4847999997,6459708.2151],[34307.2630000003,6459707.2638],[34306.9793999996,6459706.3291],[34306.6354,6459705.4149],[34306.2322000004,6459704.5252],[34305.7718000002,6459703.6637],[34305.2560000001,6459702.8342],[34304.6869999999,6459702.0402],[34304.0673000002,6459701.2852],[34303.3996000001,6459700.5722],[34302.6867000004,6459699.9045],[34301.9315999998,6459699.2848],[34301.1376,6459698.7159],[34300.3081,6459698.2],[34299.4466000004,6459697.7396],[34298.5569000002,6459697.3364],[34297.6426999997,6459696.9924],[34296.7079999996,6459696.7088],[34295.7566999998,6459696.487],[34294.7928999998,6459696.3279],[34293.8207999999,6459696.2322],[34292.8446000004,6459696.2002],[34291.8683000002,6459696.2322],[34290.8962000003,6459696.3279],[34289.9324000003,6459696.487],[34288.9812000003,6459696.7088],[34288.0464000003,6459696.9924],[34287.1321999999,6459697.3364],[34286.2424999997,6459697.7396],[34285.3810000001,6459698.2],[34284.5515000001,6459698.7159],[34283.7576000001,6459699.2848],[34283.0025000004,6459699.9045],[34282.2895,6459700.5722],[34281.6217999998,6459701.2852],[34281.0021000002,6459702.0402],[34280.4331999999,6459702.8342],[34279.9173999997,6459703.6637],[34279.4568999996,6459704.5252],[34279.0537999999,6459705.4149],[34278.7096999995,6459706.3291],[34278.4260999998,6459707.2638],[34278.2043000003,6459708.2151],[34278.0451999996,6459709.1789],[34277.9495000001,6459710.151],[34277.9175000004,6459711.1272],[34277.9495000001,6459712.1035],[34278.0451999996,6459713.0756],[34278.2043000003,6459714.0394],[34278.4260999998,6459714.9907],[34278.7096999995,6459715.9254],[34279.0537999999,6459716.8396],[34279.4568999996,6459717.7293],[34279.9173999997,6459718.5908],[34280.4331999999,6459719.4203],[34281.0021000002,6459720.2143],[34281.6217999998,6459720.9693],[34282.2895,6459721.6823],[34283.0025000004,6459722.35],[34283.7576000001,6459722.9697],[34284.5515000001,6459723.5386],[34285.3810000001,6459724.0545],[34286.2424999997,6459724.5149],[34287.1321999999,6459724.918],[34288.0464000003,6459725.2621],[34288.9812000003,6459725.5457],[34289.9324000003,6459725.7675],[34290.8962000003,6459725.9266],[34291.8683000002,6459726.0223],[34292.8446000004,6459726.0543],[34293.8207999999,6459726.0223],[34294.7928999998,6459725.9266],[34295.7566999998,6459725.7675],[34296.7079999996,6459725.5457],[34297.6426999997,6459725.2621],[34298.5569000002,6459724.918],[34299.4466000004,6459724.5149],[34300.3081,6459724.0545],[34301.1376,6459723.5386],[34301.9315999998,6459722.9697],[34302.6867000004,6459722.35],[34303.3996000001,6459721.6823],[34304.0673000002,6459720.9693],[34304.6869999999,6459720.2143],[34305.2560000001,6459719.4203],[34305.7718000002,6459718.5908],[34306.2322000004,6459717.7293],[34306.6354,6459716.8396],[34306.9793999996,6459715.9254],[34307.2630000003,6459714.9907],[34307.4847999997,6459714.0394],[34307.6438999996,6459713.0756],[34307.7396999998,6459712.1035],[34307.7715999996,6459711.1272]]]]}]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>naturtype<\/th>\n      <th>hovedøkosystem<\/th>\n      <th>ninkartleggingsenheter<\/th>\n      <th>SHAPE<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"order":[],"autoWidth":false,"orderClasses":false,"columnDefs":[{"orderable":false,"targets":0}]}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-dad35d744b3400f5f934" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-dad35d744b3400f5f934">{"x":{"filter":"none","vertical":false,"data":[["30","35","108","109","110"],["Hule eiker","Hule eiker","Hule eiker","Hule eiker","Hule eiker"],["semi-naturligMark","skog","skog","skog","skog"],["NA_T4-C-2","NA_T37-C-2,NA_T35-C-1","NA_T4-C-6,NA_T44-C-1","NA_T4-C-10,NA_T44-C-1","NA_T4-C-6"],[{"type":"Polygon","coordinates":[[[293447.5702,6554104.6838],[293447.5382,6554103.7075],[293447.4425,6554102.7354],[293447.2833,6554101.7717],[293447.0615,6554100.8204],[293446.778,6554099.8857],[293446.4339,6554098.9715],[293446.0308,6554098.0817],[293445.5703,6554097.2203],[293445.0545,6554096.3908],[293444.4855,6554095.5968],[293443.8659,6554094.8417],[293443.1981,6554094.1288],[293442.4852,6554093.461],[293441.7301,6554092.8414],[293440.9361,6554092.2724],[293440.1066,6554091.7566],[293439.2452,6554091.2961],[293438.3554,6554090.893],[293437.4413,6554090.5489],[293436.5065,6554090.2654],[293435.5552,6554090.0436],[293434.5915,6554089.8845],[293433.6194,6554089.7887],[293432.6431,6554089.7567],[293431.6668,6554089.7887],[293430.6947,6554089.8845],[293429.731,6554090.0436],[293428.7797,6554090.2654],[293427.845,6554090.5489],[293426.9308,6554090.893],[293426.041,6554091.2961],[293425.1796,6554091.7566],[293424.3501,6554092.2724],[293423.5561,6554092.8414],[293422.801,6554093.461],[293422.0881,6554094.1288],[293421.4204,6554094.8417],[293420.8007,6554095.5968],[293420.2317,6554096.3908],[293419.7159,6554097.2203],[293419.2554,6554098.0817],[293418.8523,6554098.9715],[293418.5082,6554099.8857],[293418.2247,6554100.8204],[293418.0029,6554101.7717],[293417.8438,6554102.7354],[293417.748,6554103.7075],[293417.7161,6554104.6838],[293417.748,6554105.6601],[293417.8438,6554106.6322],[293418.0029,6554107.5959],[293418.2247,6554108.5472],[293418.5082,6554109.4819],[293418.8523,6554110.3961],[293419.2554,6554111.2859],[293419.7159,6554112.1473],[293420.2317,6554112.9768],[293420.8007,6554113.7708],[293421.4204,6554114.5259],[293422.0881,6554115.2388],[293422.801,6554115.9066],[293423.5561,6554116.5262],[293424.3501,6554117.0952],[293425.1796,6554117.611],[293426.041,6554118.0715],[293426.9308,6554118.4746],[293427.845,6554118.8187],[293428.7797,6554119.1022],[293429.731,6554119.324],[293430.6947,6554119.4832],[293431.6668,6554119.5789],[293432.6431,6554119.6109],[293433.6194,6554119.5789],[293434.5915,6554119.4832],[293435.5552,6554119.324],[293436.5065,6554119.1022],[293437.4413,6554118.8187],[293438.3554,6554118.4746],[293439.2452,6554118.0715],[293440.1066,6554117.611],[293440.9361,6554117.0952],[293441.7301,6554116.5262],[293442.4852,6554115.9066],[293443.1981,6554115.2388],[293443.8659,6554114.5259],[293443.9651,6554114.405],[293444.0363,6554114.329],[293444.6559,6554113.5739],[293445.2249,6554112.7799],[293445.7407,6554111.9504],[293446.2012,6554111.089],[293446.3077,6554110.8539],[293446.2244,6554110.8585],[293446.4339,6554110.3961],[293446.778,6554109.4819],[293447.0615,6554108.5472],[293447.2833,6554107.5959],[293447.4425,6554106.6322],[293447.5382,6554105.6601],[293447.5702,6554104.6838]]]},{"type":"Polygon","coordinates":[[[54460.4755999995,6457415.3689],[54460.4436999997,6457414.3926],[54460.3479000004,6457413.4205],[54460.1887999997,6457412.4568],[54459.9670000002,6457411.5055],[54459.6835000003,6457410.5707],[54459.3393999999,6457409.6566],[54458.9362000003,6457408.7668],[54458.4758000001,6457407.9054],[54457.96,6457407.0759],[54457.3909999998,6457406.2819],[54456.7713000001,6457405.5268],[54456.1036,6457404.8139],[54455.3907000003,6457404.1461],[54454.6355999997,6457403.5265],[54453.8415999999,6457402.9575],[54453.0120999999,6457402.4417],[54452.1506000003,6457401.9812],[54451.2609000001,6457401.5781],[54450.3466999996,6457401.234],[54449.4119999995,6457400.9505],[54448.4606999997,6457400.7287],[54447.4968999997,6457400.5695],[54446.5248999996,6457400.4738],[54445.5486000003,6457400.4418],[54444.5723000001,6457400.4738],[54443.6002000002,6457400.5695],[54442.6365,6457400.7287],[54441.6852000002,6457400.9505],[54440.7504000003,6457401.234],[54439.8361999998,6457401.5781],[54438.9464999996,6457401.9812],[54438.0850999998,6457402.4417],[54437.2555999998,6457402.9575],[54436.4616,6457403.5265],[54435.7065000003,6457404.1461],[54434.9935999997,6457404.8139],[54434.3257999998,6457405.5268],[54433.7061000001,6457406.2819],[54433.1371999998,6457407.0759],[54432.6213999996,6457407.9054],[54432.1608999996,6457408.7668],[54431.7577999998,6457409.6566],[54431.4137000004,6457410.5707],[54431.1301999995,6457411.5055],[54430.9083000002,6457412.4568],[54430.7492000004,6457413.4205],[54430.6535,6457414.3926],[54430.6215000004,6457415.3689],[54430.6535,6457416.3452],[54430.7492000004,6457417.3173],[54430.9083000002,6457418.281],[54431.1301999995,6457419.2323],[54431.4137000004,6457420.167],[54431.7577999998,6457421.0812],[54432.1608999996,6457421.971],[54432.6213999996,6457422.8324],[54433.1371999998,6457423.6619],[54433.7061000001,6457424.4559],[54434.3257999998,6457425.211],[54434.9935999997,6457425.9239],[54435.7065000003,6457426.5916],[54436.4616,6457427.2113],[54437.2555999998,6457427.7803],[54438.0850999998,6457428.2961],[54438.9464999996,6457428.7566],[54439.8361999998,6457429.1597],[54440.7504000003,6457429.5038],[54441.6852000002,6457429.7873],[54442.6365,6457430.0091],[54443.6002000002,6457430.1682],[54444.5723000001,6457430.264],[54445.5486000003,6457430.2959],[54446.5248999996,6457430.264],[54447.4968999997,6457430.1682],[54448.4606999997,6457430.0091],[54449.4119999995,6457429.7873],[54450.3466999996,6457429.5038],[54451.2609000001,6457429.1597],[54452.1506000003,6457428.7566],[54453.0120999999,6457428.2961],[54453.8415999999,6457427.7803],[54454.6355999997,6457427.2113],[54455.3907000003,6457426.5916],[54456.1036,6457425.9239],[54456.7713000001,6457425.211],[54457.3909999998,6457424.4559],[54457.96,6457423.6619],[54458.4758000001,6457422.8324],[54458.9362000003,6457421.971],[54459.3393999999,6457421.0812],[54459.6835000003,6457420.167],[54459.9670000002,6457419.2323],[54460.1887999997,6457418.281],[54460.3479000004,6457417.3173],[54460.4436999997,6457416.3452],[54460.4755999995,6457415.3689]]]},{"type":"Polygon","coordinates":[[[279113.4302,6564090.2734],[279113.3982,6564089.2971],[279113.3025,6564088.3251],[279113.1434,6564087.3613],[279112.9216,6564086.41],[279112.638,6564085.4753],[279112.294,6564084.5611],[279111.8908,6564083.6714],[279111.4304,6564082.8099],[279110.9145,6564081.9804],[279110.3456,6564081.1864],[279109.7259,6564080.4313],[279109.0582,6564079.7184],[279108.3452,6564079.0507],[279107.5902,6564078.431],[279106.7962,6564077.862],[279105.9667,6564077.3462],[279105.1052,6564076.8858],[279104.2155,6564076.4826],[279103.3013,6564076.1385],[279102.3666,6564075.855],[279101.4153,6564075.6332],[279100.4515,6564075.4741],[279099.4794,6564075.3783],[279098.5032,6564075.3464],[279097.5269,6564075.3783],[279096.5548,6564075.4741],[279095.591,6564075.6332],[279094.6397,6564075.855],[279093.705,6564076.1385],[279092.7908,6564076.4826],[279091.9011,6564076.8858],[279091.0396,6564077.3462],[279090.2101,6564077.862],[279089.4161,6564078.431],[279088.6611,6564079.0507],[279087.9481,6564079.7184],[279087.2804,6564080.4313],[279086.6607,6564081.1864],[279086.0918,6564081.9804],[279085.5759,6564082.8099],[279085.1155,6564083.6714],[279084.7124,6564084.5611],[279084.3683,6564085.4753],[279084.0847,6564086.41],[279083.8629,6564087.3613],[279083.7038,6564088.3251],[279083.6081,6564089.2971],[279083.5761,6564090.2734],[279083.6081,6564091.2497],[279083.7038,6564092.2218],[279083.8629,6564093.1855],[279084.0847,6564094.1368],[279084.3683,6564095.0716],[279084.7124,6564095.9858],[279085.1155,6564096.8755],[279085.5759,6564097.7369],[279086.0918,6564098.5664],[279086.6607,6564099.3604],[279087.2804,6564100.1155],[279087.9481,6564100.8284],[279088.6611,6564101.4962],[279089.4161,6564102.1158],[279090.2101,6564102.6848],[279091.0396,6564103.2006],[279091.9011,6564103.6611],[279092.7908,6564104.0642],[279093.705,6564104.4083],[279094.6397,6564104.6918],[279095.591,6564104.9137],[279096.5548,6564105.0728],[279097.5269,6564105.1685],[279098.5032,6564105.2005],[279099.4794,6564105.1685],[279100.4515,6564105.0728],[279101.4153,6564104.9137],[279102.3666,6564104.6918],[279103.3013,6564104.4083],[279104.2155,6564104.0642],[279105.1052,6564103.6611],[279105.9667,6564103.2006],[279106.7962,6564102.6848],[279107.5902,6564102.1158],[279108.3452,6564101.4962],[279109.0582,6564100.8284],[279109.7259,6564100.1155],[279110.3456,6564099.3604],[279110.9145,6564098.5664],[279111.4304,6564097.7369],[279111.8908,6564096.8755],[279112.294,6564095.9858],[279112.638,6564095.0716],[279112.9216,6564094.1368],[279113.1434,6564093.1855],[279113.3025,6564092.2218],[279113.3982,6564091.2497],[279113.4302,6564090.2734]]]},{"type":"Polygon","coordinates":[[[279073.1685,6564122.7994],[279073.1365,6564121.8231],[279073.0408,6564120.851],[279072.8816,6564119.8873],[279072.6598,6564118.936],[279072.3763,6564118.0013],[279072.0322,6564117.0871],[279071.6291,6564116.1973],[279071.1686,6564115.3359],[279070.6528,6564114.5064],[279070.0838,6564113.7124],[279069.4642,6564112.9573],[279068.7964,6564112.2444],[279068.0835,6564111.5766],[279067.3284,6564110.957],[279066.5344,6564110.388],[279065.7049,6564109.8722],[279064.8435,6564109.4117],[279063.9537,6564109.0086],[279063.0396,6564108.6645],[279062.1048,6564108.381],[279061.1535,6564108.1592],[279060.1898,6564108],[279059.2177,6564107.9043],[279058.2414,6564107.8723],[279057.2651,6564107.9043],[279056.293,6564108],[279055.3293,6564108.1592],[279054.378,6564108.381],[279053.4433,6564108.6645],[279052.5291,6564109.0086],[279051.6393,6564109.4117],[279050.7779,6564109.8722],[279049.9484,6564110.388],[279049.1544,6564110.957],[279048.3993,6564111.5766],[279047.6864,6564112.2444],[279047.0187,6564112.9573],[279046.399,6564113.7124],[279045.83,6564114.5064],[279045.3142,6564115.3359],[279044.8537,6564116.1973],[279044.4506,6564117.0871],[279044.1065,6564118.0013],[279043.823,6564118.936],[279043.6012,6564119.8873],[279043.4421,6564120.851],[279043.3463,6564121.8231],[279043.3144,6564122.7994],[279043.3463,6564123.7757],[279043.4421,6564124.7478],[279043.6012,6564125.7115],[279043.823,6564126.6628],[279044.1065,6564127.5975],[279044.4506,6564128.5117],[279044.8537,6564129.4015],[279045.3142,6564130.2629],[279045.83,6564131.0924],[279046.399,6564131.8864],[279047.0187,6564132.6415],[279047.6864,6564133.3544],[279048.3993,6564134.0221],[279049.1544,6564134.6418],[279049.9484,6564135.2108],[279050.7779,6564135.7266],[279051.6393,6564136.1871],[279052.5291,6564136.5902],[279053.4433,6564136.9343],[279054.378,6564137.2178],[279055.3293,6564137.4396],[279056.293,6564137.5987],[279057.2651,6564137.6945],[279058.2414,6564137.7264],[279059.2177,6564137.6945],[279060.1898,6564137.5987],[279061.1535,6564137.4396],[279062.1048,6564137.2178],[279063.0396,6564136.9343],[279063.9537,6564136.5902],[279064.8435,6564136.1871],[279065.7049,6564135.7266],[279066.5344,6564135.2108],[279067.3284,6564134.6418],[279068.0835,6564134.0221],[279068.7964,6564133.3544],[279069.4642,6564132.6415],[279070.0838,6564131.8864],[279070.6528,6564131.0924],[279071.1686,6564130.2629],[279071.6291,6564129.4015],[279072.0322,6564128.5117],[279072.3763,6564127.5975],[279072.6598,6564126.6628],[279072.8816,6564125.7115],[279073.0408,6564124.7478],[279073.1365,6564123.7757],[279073.1685,6564122.7994]]]},{"type":"Polygon","coordinates":[[[282601.5632,6566337.7197],[282601.5313,6566336.7434],[282601.4355,6566335.7713],[282601.2764,6566334.8076],[282601.0546,6566333.8563],[282600.7711,6566332.9215],[282600.427,6566332.0073],[282600.0238,6566331.1176],[282599.5634,6566330.2562],[282599.0476,6566329.4267],[282598.4786,6566328.6327],[282597.8589,6566327.8776],[282597.1912,6566327.1647],[282596.4783,6566326.4969],[282595.7232,6566325.8773],[282594.9292,6566325.3083],[282594.0997,6566324.7925],[282593.2382,6566324.332],[282592.3485,6566323.9289],[282591.4343,6566323.5848],[282590.4996,6566323.3013],[282589.5483,6566323.0794],[282588.5845,6566322.9203],[282587.6125,6566322.8246],[282586.6362,6566322.7926],[282585.6599,6566322.8246],[282584.6878,6566322.9203],[282583.7241,6566323.0794],[282582.7728,6566323.3013],[282581.838,6566323.5848],[282580.9238,6566323.9289],[282580.0341,6566324.332],[282579.1726,6566324.7925],[282578.3431,6566325.3083],[282577.5492,6566325.8773],[282576.7941,6566326.4969],[282576.0812,6566327.1647],[282575.4134,6566327.8776],[282574.7937,6566328.6327],[282574.2248,6566329.4267],[282573.709,6566330.2562],[282573.2485,6566331.1176],[282572.8454,6566332.0073],[282572.5013,6566332.9215],[282572.2177,6566333.8563],[282571.9959,6566334.8076],[282571.8368,6566335.7713],[282571.7411,6566336.7434],[282571.7091,6566337.7197],[282571.7411,6566338.696],[282571.8368,6566339.6681],[282571.9959,6566340.6318],[282572.2177,6566341.5831],[282572.5013,6566342.5178],[282572.8454,6566343.432],[282573.2485,6566344.3217],[282573.709,6566345.1832],[282574.2248,6566346.0127],[282574.7937,6566346.8067],[282575.4134,6566347.5618],[282576.0812,6566348.2747],[282576.7941,6566348.9424],[282577.5492,6566349.5621],[282578.3431,6566350.1311],[282579.1726,6566350.6469],[282580.0341,6566351.1073],[282580.9238,6566351.5105],[282581.838,6566351.8546],[282582.7728,6566352.1381],[282583.7241,6566352.3599],[282584.6878,6566352.519],[282585.6599,6566352.6148],[282586.6362,6566352.6467],[282587.6125,6566352.6148],[282588.5845,6566352.519],[282589.5483,6566352.3599],[282590.4996,6566352.1381],[282591.4343,6566351.8546],[282592.3485,6566351.5105],[282593.2382,6566351.1073],[282594.0997,6566350.6469],[282594.9292,6566350.1311],[282595.7232,6566349.5621],[282596.4783,6566348.9424],[282597.1912,6566348.2747],[282597.8589,6566347.5618],[282598.4786,6566346.8067],[282599.0476,6566346.0127],[282599.5634,6566345.1832],[282600.0238,6566344.3217],[282600.427,6566343.432],[282600.7711,6566342.5178],[282601.0546,6566341.5831],[282601.2764,6566340.6318],[282601.4355,6566339.6681],[282601.5313,6566338.696],[282601.5632,6566337.7197]]]}]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>naturtype<\/th>\n      <th>hovedøkosystem<\/th>\n      <th>ninKartleggingsenheter<\/th>\n      <th>SHAPE<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ```
 
 *Kystlynghei* often occurs as a mosaic, but figure \@ref(fig:multipleNiN) has excluded the mosaic localities, and then *kystlynghei* is strictly defined to T34.
@@ -365,11 +379,13 @@ The NiN main types need to be added manually to the nature types, as the field r
 I will start by excluding all but the three target ecosystems.
 
 ```r
-target <- c("Semi-naturlig mark","Våtmark","Naturlig åpne områder under skoggrensa")
+target <- c("semi-naturligMark",
+            "våtmark",
+            "naturligÅpneOmråderUnderSkoggrensa")
 dat <- dat[dat$hovedøkosystem %in% target,]
 ```
 
-I will also exclude `Hule eiker`, as this nature type is not easy to tie to a single main ecosystem
+I will also exclude `Hule eiker`, as this nature type is not easy to tie to a single main ecosystem. _In some other scenarios, one might wish to keep hule eiker depending on the main ecosystem that it was recorded to in the field._
 
 
 ```r
@@ -410,7 +426,9 @@ ntypDF <- data.frame(
 )
 ```
 
-We have 66 nature types to consider. Some of the wetland types can actually be excluded because of the way we limited this ecosystem to mean *open* wetland.
+We have 69 nature types to consider. 
+
+Some of the wetland types can actually be excluded because of the way we limited this ecosystem to mean *open* wetland:
 
 
 ```r
@@ -429,8 +447,8 @@ excl_nt <- c("Kalkrik myr- og sumpskogsmark",
              "Rik vierstrandskog",
              "Varmekjær kildelauvskog"
              )
-`%!in%` <- Negate(`%in%`)
-ntypDF <- ntypDF[ntypDF$Nature_type %!in% excl_nt,]
+ntypDF$Nature_type <- trimws(ntypDF$Nature_type)
+ntypDF <- ntypDF[!ntypDF$Nature_type %in% excl_nt,]
 ```
 
 
@@ -441,11 +459,11 @@ DT::datatable(ntypDF)
 <div class="figure">
 
 ```{=html}
-<div id="htmlwidget-7cf1e78c5cb11e86c47d" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-7cf1e78c5cb11e86c47d">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","23","25","28","29","30","31","33","34","35","36","38","39","40","41","42","43","44","45","46","47","48","50","51","52","53","54","58","59","60","62","63","65","66"],["Slåttemark","Kystlynghei","Naturbeitemark","Slåttemyr","Boreal hei","Åpen myrflate i boreonemoral til nordboreal sone","Semi-naturlig eng","Platåhøymyr","Strandeng","Hagemark","Semi-naturlig våteng","Eksentrisk høymyr","Rik åpen jordvannsmyr i mellomboreal sone","Sørlig slåttemyr","Terrengdekkende myr","Semi-naturlig myr","Åpen flomfastmark","Svært tørkeutsatt sørlig kalkberg","Flommyr, myrkant og myrskogsmark","Isinnfrysingsmark","Eng-aktig sterkt endret fastmark","Høgereligende og nordlig nedbørsmyr","Øyblandingsmyr","Semi-naturlig strandeng","Lauveng","Kalkrik helofyttsump","Kalkrik åpen jordvannsmyr i boreonemoral til nordboreal sone","Sørlig nedbørsmyr","Rik åpen sørlig jordvannsmyr","Fossepåvirket berg","Aktiv skredmark","Palsmyr","Silt og leirskred","Nakent tørkeutsatt kalkberg","Sørlig kaldkilde","Kystnedbørsmyr","Åpen grunnlendt kalkrik mark i boreonemoral sone","Kaldkilde under skoggrensa","Sørlig etablert sanddynemark","Atlantisk høymyr","Rik åpen jordvannsmyr i nordboreal og lavalpin sone","Sanddynemark","Åpen grunnlendt kalkrik mark i sørboreal sone","Fuglefjell-eng og fugletopp","Fosseberg","Kanthøymyr","Sentrisk høgmyr","Tørt kalkrikt berg i kontinentale områder","Fosse-eng","Sørlig strandeng","Øvre sandstrand uten pionervegetasjon","Konsentrisk høymyr","Åpen myrflate i lavalpin sone"],["2018, 2019, 2020, 2021","2018, 2019, 2020, 2021","2018, 2019, 2020, 2021","2018, 2019, 2020, 2021","2018, 2019, 2020, 2021","2018","2018, 2019, 2020, 2021","2019, 2020, 2021","2018, 2019, 2020, 2021","2018, 2019, 2020, 2021","2018, 2019, 2020, 2021","2019, 2020, 2021","2019, 2020, 2021","2019, 2020, 2021","2019, 2020, 2021","2019, 2020, 2021","2018, 2019, 2020, 2021","2019, 2020, 2021","2018","2018, 2019, 2020, 2021","2018, 2019, 2020, 2021","2019, 2020, 2021","2019, 2020, 2021","2018, 2019, 2020, 2021","2019, 2020","2019, 2020, 2021","2018","2019, 2020, 2021","2018, 2019, 2020, 2021","2019, 2020, 2021","2019, 2020, 2021","2021","2019, 2020, 2021","2018, 2019, 2020, 2021","2018, 2019, 2020, 2021","2018","2018, 2019, 2020, 2021","2018","2018, 2019, 2020, 2021","2019, 2020, 2021","2018, 2019, 2020, 2021","2018, 2019, 2020, 2021","2019, 2020, 2021","2019, 2020, 2021","2021","2019, 2020, 2021","2018","2019","2019, 2020","2018","2019, 2020, 2021","2019, 2020","2018"],["Semi-naturlig mark","Semi-naturlig mark","Semi-naturlig mark","Våtmark","Semi-naturlig mark","Våtmark","Semi-naturlig mark","Våtmark","Naturlig åpne områder under skoggrensa","Semi-naturlig mark","Våtmark","Våtmark","Våtmark","Våtmark","Våtmark","Våtmark","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Våtmark","Naturlig åpne områder under skoggrensa","Semi-naturlig mark","Våtmark","Våtmark","Semi-naturlig mark","Semi-naturlig mark","Våtmark","Våtmark","Våtmark","Våtmark","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Våtmark","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Våtmark","Våtmark","Naturlig åpne områder under skoggrensa","Våtmark","Naturlig åpne områder under skoggrensa","Våtmark","Våtmark","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Våtmark","Våtmark","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Våtmark","Våtmark"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Nature_type<\/th>\n      <th>Year<\/th>\n      <th>Ecosystem<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"order":[],"autoWidth":false,"orderClasses":false,"columnDefs":[{"orderable":false,"targets":0}]}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-718c7c92c0562ef297d7" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-718c7c92c0562ef297d7">{"x":{"filter":"none","vertical":false,"data":[["1","3","4","5","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","27","28","30","31","32","33","36","37","38","39","40","41","43","44","46","47","49","50","52","53","55","56","57","58","59","60","61","63","64","65","66","68","69"],["Flommyr, myrkant og myrskogsmark","Slåttemyr","Hagemark","Naturbeitemark","Semi-naturlig eng","Eng-aktig sterkt endret fastmark","Sørlig kaldkilde","Åpen flomfastmark","Høgereligende og nordlig nedbørsmyr","Øyblandingsmyr","Strandeng","Nakent tørkeutsatt kalkberg","Kystlynghei","Sørlig slåttemyr","Konsentrisk høymyr","Boreal hei","Semi-naturlig våteng","Slåttemark","Sanddynemark","Semi-naturlig strandeng","Kalkrik åpen jordvannsmyr i boreonemoral til nordboreal sone","Åpen myrflate i boreonemoral til nordboreal sone","Kaldkilde under skoggrensa","Sentrisk høgmyr","Rik åpen jordvannsmyr i mellomboreal sone","Sørlig nedbørsmyr","Atlantisk høymyr","Terrengdekkende myr","Åpen grunnlendt kalkrik mark i boreonemoral sone","Rik åpen sørlig jordvannsmyr","Aktiv skredmark","Semi-naturlig myr","Kystnedbørsmyr","Silt og leirskred","Eksentrisk høymyr","Øvre sandstrand uten pionervegetasjon","Kalkrik helofyttsump","Fuglefjell-eng og fugletopp","Isinnfrysingsmark","Sørlig strandeng","Åpen grunnlendt kalkrik mark i sørboreal sone","Sørlig etablert sanddynemark","Rik åpen jordvannsmyr i nordboreal og lavalpin sone","Rik åpen jordvannsmyr i nordboreal og lavalpin sone","Fossepåvirket berg","Fosse-eng","Svært tørkeutsatt sørlig kalkberg","Lauveng","Kanthøymyr","Platåhøymyr","Rik åpen sørlig jordvannsmyr","Palsmyr","Nakent tørkeutsatt kalkberg","Tørt kalkrikt berg i kontinentale områder","Åpen myrflate i lavalpin sone","Fosseberg"],["2018","2018, 2019, 2020, 2021, 2022","2018, 2019, 2020, 2021, 2022","2018, 2019, 2020, 2021, 2022","2018, 2019, 2020, 2021, 2022","2018, 2019, 2020, 2021, 2022","2018, 2019, 2020, 2021, 2022","2018, 2019, 2020, 2021, 2022","2019, 2020, 2021, 2022","2019, 2020, 2021, 2022","2018, 2019, 2020, 2021, 2022","2019, 2020, 2021, 2022","2018, 2019, 2020, 2021, 2022","2019, 2020, 2021, 2022","2019, 2020, 2022","2018, 2019, 2020, 2021, 2022","2018, 2019, 2020, 2021, 2022","2018, 2019, 2020, 2021, 2022","2018, 2019, 2020, 2021, 2022","2018, 2019, 2020, 2021, 2022","2018","2018","2018","2018","2019, 2020, 2021, 2022","2019, 2020, 2021, 2022","2019, 2020, 2021, 2022","2019, 2020, 2021, 2022","2018, 2019, 2020, 2021, 2022","2018, 2019, 2020, 2021, 2022","2019, 2020, 2021, 2022","2019, 2020, 2021, 2022","2018","2019, 2020, 2021, 2022","2019, 2020, 2021, 2022","2019, 2020, 2021, 2022","2019, 2020, 2021, 2022","2019, 2020, 2021, 2022","2018, 2019, 2020, 2021, 2022","2018","2019, 2020, 2021","2018, 2019, 2020, 2021, 2022","2018","2019, 2020, 2021, 2022","2019, 2020, 2021, 2022","2019, 2020, 2022","2019, 2020, 2021, 2022","2019, 2020, 2022","2019, 2020, 2021, 2022","2019, 2020, 2021, 2022","2018","2021, 2022","2018","2019","2018","2021, 2022"],["våtmark","våtmark","semi-naturligMark","semi-naturligMark","semi-naturligMark","semi-naturligMark","våtmark","naturligÅpneOmråderUnderSkoggrensa","våtmark","våtmark","naturligÅpneOmråderUnderSkoggrensa","naturligÅpneOmråderUnderSkoggrensa","semi-naturligMark","våtmark","våtmark","semi-naturligMark","våtmark","semi-naturligMark","naturligÅpneOmråderUnderSkoggrensa","semi-naturligMark","våtmark","våtmark","våtmark","våtmark","våtmark","våtmark","våtmark","våtmark","naturligÅpneOmråderUnderSkoggrensa","våtmark","naturligÅpneOmråderUnderSkoggrensa","våtmark","våtmark","naturligÅpneOmråderUnderSkoggrensa","våtmark","naturligÅpneOmråderUnderSkoggrensa","våtmark","naturligÅpneOmråderUnderSkoggrensa","naturligÅpneOmråderUnderSkoggrensa","naturligÅpneOmråderUnderSkoggrensa","naturligÅpneOmråderUnderSkoggrensa","naturligÅpneOmråderUnderSkoggrensa","våtmark","våtmark","naturligÅpneOmråderUnderSkoggrensa","naturligÅpneOmråderUnderSkoggrensa","naturligÅpneOmråderUnderSkoggrensa","semi-naturligMark","våtmark","våtmark","våtmark","våtmark","naturligÅpneOmråderUnderSkoggrensa","naturligÅpneOmråderUnderSkoggrensa","våtmark","naturligÅpneOmråderUnderSkoggrensa"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Nature_type<\/th>\n      <th>Year<\/th>\n      <th>Ecosystem<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ```
 
-<p class="caption">(\#fig:unnamed-chunk-35)List of nature types showing the years when that nature type was mapped.</p>
+<p class="caption">(\#fig:unnamed-chunk-32)List of nature types showing the years when that nature type was mapped.</p>
 </div>
 
 I will also now exclude nature types that were only mapped in 2018 and/or 2019 and not after that. These nature types will not only not get more data in the future, but also they were mapped in a time when the methodology was quite unstable. 
@@ -458,12 +476,20 @@ ntypDF2 <- ntypDF[ntypDF$Year != "2018" &
                   ,]
 ```
 
+This removed 12 nature types.
 
 Next I want to add the NiN main types. I need to look at the definition of each nature type and get the NiN code from there. I could also extract the NiN sub types (grunntyper), but it would become too messy. Therefor I will create a second column with a textual/categorical description of the degree of thematic coverage.
 
 I will look at the definitions of the nature type in the first and last year when that type was mapped, but not for the years in between.
 
 ### Add NiN main type and degree of representativity
+
+```r
+#remove trailing white spaces
+ntypDF2$Nature_type <- trimws(ntypDF2$Nature_type)
+```
+
+
 
 ```r
 ntypDF2$hovedgruppe[ntypDF2$Nature_type == "Aktiv skredmark"                                    ] <- "T17 | all (if including sub-types)"
@@ -532,20 +558,20 @@ Preparing the data:
 
 ```r
 #Exclude non-relevant forest wetland types
-dat2 <- dat[dat$naturtype %!in% excl_nt,]
+dat2 <- dat[!dat$naturtype %in% excl_nt,]
 
 # Melt data
-dat2L <- tidyr::separate_rows(dat2, ninbeskrivelsesvariabler, sep=",")
+dat2L <- tidyr::separate_rows(dat2, ninBeskrivelsesvariable, sep=",")
 
 # Split the code and the value into separate columns
 dat2L <- tidyr::separate(dat2L, 
-                              col = ninbeskrivelsesvariabler,
+                              col = ninBeskrivelsesvariable,
                               into = c("NiN_variable_code", "NiN_variable_value"),
                               sep = "_",
                               remove=F
                               )
-#> Warning: Expected 2 pieces. Missing pieces filled with `NA`
-#> in 1 rows [319462].
+#> Warning: Expected 2 pieces. Missing pieces filled with `NA` in 1
+#> rows [189800].
 # One NA produced here, but I check it, and it's fine.
 
 # Convert values to numeric. This causes some NA's which I will go through below
@@ -558,35 +584,37 @@ Here are all the NiN variable codes:
 ```r
 unique(sort(dat2L$NiN_variable_code))
 #>  [1] "1AG-A-0"   "1AG-A-E"   "1AG-A-G"   "1AG-B"    
-#>  [5] "1AG-C"     "1AR-C-L"   "3TO-BØ"    "3TO-HA"   
-#>  [9] "3TO-HE"    "3TO-HK"    "3TO-HN"    "3TO-HP"   
-#> [13] "3TO-PA"    "3TO-TE"    "4DL-S-0"   "4DL-SS-0" 
-#> [17] "4TG-BL"    "4TG-EL"    "4TG-GF"    "4TL-BS"   
-#> [21] "4TL-HE"    "4TL-HL"    "4TL-RB"    "4TL-SB"   
-#> [25] "5AB-0"     "5AB-DO-TT" "5BY-0"     "6SE"      
-#> [29] "6SO"       "7FA"       "7GR-GI"    "7JB-BA"   
-#> [33] "7JB-BT"    "7JB-GJ"    "7JB-HT-SL" "7JB-HT-ST"
-#> [37] "7JB-KU-BY" "7JB-KU-DE" "7JB-KU-MO" "7JB-KU-PI"
-#> [41] "7RA-BH"    "7RA-SJ"    "7SD-0"     "7SD-NS"   
-#> [45] "7SE"       "7TK"       "7VR-RI"    "LKMKI"    
-#> [49] "LKMSP"     "PRAK"      "PRAM"      "PRH"      
-#> [53] "PRHA"      "PRHT"      "PRKA"      "PRKU"     
-#> [57] "PRMY"      "PRRL-CR"   "PRRL-DD"   "PRRL-EN"  
-#> [61] "PRRL-NT"   "PRRL-VU"   "PRSE-KA"   "PRSE-PA"  
-#> [65] "PRSE-SH"   "PRSL"      "PRTK"      "PRTO"     
-#> [69] "PRVS"
+#>  [5] "1AG-C"     "1AR-A-E"   "1AR-C-L"   "3TO-BØ"   
+#>  [9] "3TO-HA"    "3TO-HE"    "3TO-HK"    "3TO-HN"   
+#> [13] "3TO-HP"    "3TO-PA"    "3TO-TE"    "4DL-S-0"  
+#> [17] "4DL-SS-0"  "4TG-BL"    "4TG-EL"    "4TG-GF"   
+#> [21] "4TL-BS"    "4TL-HE"    "4TL-HL"    "4TL-RB"   
+#> [25] "4TL-SB"    "4TS-TS"    "5AB-0"     "5AB-DO-TT"
+#> [29] "5BY-0"     "6SE"       "6SO"       "7FA"      
+#> [33] "7GR-GI"    "7JB-BA"    "7JB-BT"    "7JB-GJ"   
+#> [37] "7JB-HT-SL" "7JB-HT-ST" "7JB-KU-BY" "7JB-KU-DE"
+#> [41] "7JB-KU-MO" "7JB-KU-PI" "7RA-BH"    "7RA-SJ"   
+#> [45] "7SD-0"     "7SD-NS"    "7SE"       "7SN-BE"   
+#> [49] "7TK"       "7VR-RE"    "7VR-RI"    "LKMKI"    
+#> [53] "LKMSP"     "PRAK"      "PRAM"      "PRH"      
+#> [57] "PRHA"      "PRHT"      "PRKA"      "PRKU"     
+#> [61] "PRMY"      "PRRL-CR"   "PRRL-DD"   "PRRL-EN"  
+#> [65] "PRRL-NT"   "PRRL-VU"   "PRSE-KA"   "PRSE-PA"  
+#> [69] "PRSE-SH"   "PRSL"      "PRTK"      "PRTO"     
+#> [73] "PRVS"
 ```
 
 Converting NiN_variable_value to numeric also introduced NA's for these categories: 
 
 ```r
 sort(unique(dat2L$NiN_variable_code[is.na(dat2L$NiN_variable_value)]))
-#>  [1] "4DL-S-0"   "4DL-SS-0"  "5AB-0"     "5BY-0"    
-#>  [5] "7FA"       "7GR-GI"    "7JB-BA"    "7JB-BT"   
-#>  [9] "7JB-GJ"    "7JB-KU-BY" "7JB-KU-DE" "7JB-KU-MO"
-#> [13] "7JB-KU-PI" "7RA-SJ"    "7SD-0"     "7SD-NS"   
-#> [17] "7SE"       "7TK"       "7VR-RI"    "LKMKI"    
-#> [21] "LKMSP"     "PRH"       "PRVS"
+#>  [1] "4DL-S-0"   "4DL-SS-0"  "4TL-HL"    "5AB-0"    
+#>  [5] "5BY-0"     "7FA"       "7GR-GI"    "7JB-BA"   
+#>  [9] "7JB-BT"    "7JB-GJ"    "7JB-KU-BY" "7JB-KU-DE"
+#> [13] "7JB-KU-MO" "7JB-KU-PI" "7RA-SJ"    "7SD-0"    
+#> [17] "7SD-NS"    "7SE"       "7SN-BE"    "7TK"      
+#> [21] "7VR-RE"    "7VR-RI"    "LKMKI"     "LKMSP"    
+#> [25] "PRH"       "PRVS"
 ```
 When I now go through the variable codes separately I will also judge if these NA's are real, or if they for example should be coded as zeros or something. I will exclude variables that are part of the biodiversity assessment of the localities, since these are not assessed for localities that have a very poor condition (this bias is not possible to correct).
 
@@ -685,7 +713,7 @@ A common condition/pressure variable in semi-natural nature types.
 Overview of cases where the value is set as *X*.
 
 ```r
-temp <- dat2L[dat2L$ninbeskrivelsesvariabler == "7JB-BA_X",]
+temp <- dat2L[dat2L$ninBeskrivelsesvariable == "7JB-BA_X",]
 table(temp$kartleggingsår, temp$naturtype)
 #>       
 #>        Eng-aktig sterkt endret fastmark Hagemark
@@ -709,7 +737,7 @@ These are just a few cases, mostly from 2018. OK to treat as NA.
 Similar variable to the above.
 
 ```r
-temp <- dat2L[dat2L$ninbeskrivelsesvariabler == "7JB-BT_X",]
+temp <- dat2L[dat2L$ninBeskrivelsesvariable == "7JB-BT_X",]
 table(temp$kartleggingsår, temp$naturtype)
 #>       
 #>        Åpen flomfastmark Kystlynghei Sanddynemark
@@ -723,7 +751,7 @@ OK to treat X's as NA's.
 Similar variable to the two above.
 
 ```r
-temp <- dat2L[dat2L$ninbeskrivelsesvariabler == "7JB-BT_X",]
+temp <- dat2L[dat2L$ninBeskrivelsesvariable == "7JB-BT_X",]
 table(temp$kartleggingsår, temp$naturtype)
 #>       
 #>        Åpen flomfastmark Kystlynghei Sanddynemark
@@ -747,6 +775,7 @@ table(temp$kartleggingsår, temp$naturtype)
 #>        Lauveng
 #>   2019      14
 #>   2020       8
+#>   2022       2
 ```
 This is so marginal that I will exclude these already now.
 
@@ -777,10 +806,10 @@ I will nonetheless explore this variable a bit more since this variable has been
 NiN defines the possible values for these as numeric between 0 and 4 (shifted to become 1-5 in the data set), but there are 998 cases where it has been given then value *X*.
 
 ```r
-temp <- dat2L[dat2L$ninbeskrivelsesvariabler == "7JB-KU-BY_X" |
-                     dat2L$ninbeskrivelsesvariabler == "7JB-KU-DE_X" |
-                dat2L$ninbeskrivelsesvariabler == "7JB-KU-MO_X" |
-                     dat2L$ninbeskrivelsesvariabler == "7JB-KU-PI_X",]
+temp <- dat2L[dat2L$ninBeskrivelsesvariable == "7JB-KU-BY_X" |
+                     dat2L$ninBeskrivelsesvariable == "7JB-KU-DE_X" |
+                dat2L$ninBeskrivelsesvariable == "7JB-KU-MO_X" |
+                     dat2L$ninBeskrivelsesvariable == "7JB-KU-PI_X",]
 table(temp$kartleggingsår, temp$naturtype)
 #>       
 #>        Kystlynghei
@@ -788,6 +817,7 @@ table(temp$kartleggingsår, temp$naturtype)
 #>   2019         132
 #>   2020          21
 #>   2021         326
+#>   2022           7
 ```
 
 The reason could be that this variable is used in the biodiversity assessment, which is not performed if the condition is *very poor*, but the following table shows that the localities where this variable has been given the value X is spread across all condition scores: 
@@ -795,8 +825,10 @@ The reason could be that this variable is used in the biodiversity assessment, w
 ```r
 table(temp$tilstand)
 #> 
-#>         Dårlig            God        Moderat Svært redusert 
-#>            181             72            727              9
+#> 1 - Svært redusert         2 - Dårlig        3 - Moderat 
+#>                  9                181                733 
+#>            4 - God 
+#>                 73
 ```
 
 We can also make a note that a big proportion of the total number of localities of *Kystlynghei* had very poor (svært redusert) condition, and therefore this variable 7JB-KU was not recorded in a large proportion of the localities.
@@ -807,11 +839,11 @@ barplot(table(KU$tilstand))
 ```
 
 <div class="figure">
-<img src="naturtype_files/figure-html/unnamed-chunk-56-1.png" alt="The distribution of condition scores for Kystlynghei." width="672" />
-<p class="caption">(\#fig:unnamed-chunk-56)The distribution of condition scores for Kystlynghei.</p>
+<img src="naturtype_files/figure-html/unnamed-chunk-54-1.png" alt="The distribution of condition scores for Kystlynghei." width="672" />
+<p class="caption">(\#fig:unnamed-chunk-54)The distribution of condition scores for Kystlynghei.</p>
 </div>
 
-The percentage of localities with very poor condition is 23%.
+The percentage of localities with very poor condition is 0%.
 
 Each *kystlynghei* locality should have values for all four parameters (7BA-BY/DE/MO/PI), but if we look at some cases in more detail, to understand why some of these values have been set as X (probably means they were left blank), for example like this:
 
@@ -846,13 +878,14 @@ exclude <- c(exclude,
 This variable is defined as numeric between 1-5. There are, however, quite a few cases where it is X.
 
 ```r
-temp <- dat2L[dat2L$ninbeskrivelsesvariabler == "7VR-RI_X",]
+temp <- dat2L[dat2L$ninBeskrivelsesvariable == "7VR-RI_X",]
 table(temp$kartleggingsår, temp$naturtype)
 #>       
 #>        Åpen flomfastmark
 #>   2019                96
 #>   2020                 1
 #>   2021                11
+#>   2022                 1
 ```
 I cannot explain these, but in any case, this variable is not a good indicator for condition as it rather represents a pressure/driver. So OK to treat as NA's.
 
@@ -971,11 +1004,11 @@ exclude <- c(exclude,
 dat2L2 <- dat2L[!is.na(dat2L$NiN_variable_value),]
 
 # Exclude selected NiN variables 
-dat2L2 <- dat2L2[dat2L2$NiN_variable_code %!in% exclude,]
+dat2L2 <- dat2L2[!dat2L2$NiN_variable_code %in% exclude,]
 ```
-Now we are now down to 20 possible condition variables.
+Now we are now down to 24 possible condition variables.
 
-`dat2L2` includes only the three target ecosystems. Hule eiker are excluded. Mosaics are included. Several non-relevant NiN variables are excluded. The localities are duplicated in as many rows as there are NiN variables for that locality.
+`dat2L2` includes only the three target ecosystems. Hule eiker are excluded. Mosaics are included. Several non-relevant NiN variables are excluded (forested wetlands). The localities are duplicated in as many rows as there are NiN variables for that locality.
 
 ## Combine Naturetypes, NiN variables and  NiN main types
 
@@ -988,17 +1021,17 @@ head(ntyp_vars)
 #>                                          Nature_type
 #> 3   Åpen grunnlendt kalkrik mark i boreonemoral sone
 #> 16                                          Hagemark
-#> 28                                    Naturbeitemark
-#> 69                                          Hagemark
-#> 79                                           Lauveng
-#> 144                                Semi-naturlig myr
+#> 29                                    Naturbeitemark
+#> 73                                          Hagemark
+#> 83                                           Lauveng
+#> 156                                Semi-naturlig myr
 #>     NiN_variable_code NiN_variable_count
 #> 3             1AG-A-0                 41
 #> 16            1AG-A-0                348
-#> 28            1AG-A-0                  1
-#> 69            1AG-A-E               1445
-#> 79            1AG-A-E                 11
-#> 144           1AG-A-G                693
+#> 29            1AG-A-0                  1
+#> 73            1AG-A-E               1706
+#> 83            1AG-A-E                 12
+#> 156           1AG-A-G                792
 ```
 
 Add a column for the total number of localities for each nature type and get the percentage of localities where each NiN main type has been recorded.
@@ -1026,7 +1059,7 @@ This data set contains the nature types that were only mapped in 2018 or 2019, a
 ntyp_vars_wide <- ntyp_vars_wide[ntyp_vars_wide$Nature_type %in% ntypDF2$Nature_type]
 ```
 
-Combine datasets
+Combine data sets
 
 ```r
 ntyp_fill <- cbind(ntypDF2, ntyp_vars_wide[,-1][match(ntypDF2$Nature_type, ntyp_vars_wide$Nature_type)])
@@ -1093,8 +1126,8 @@ egg::ggarrange(gg_area, gg_locs,
 ```
 
 <div class="figure">
-<img src="naturtype_files/figure-html/unnamed-chunk-68-1.png" alt="The total mapped area for nature types associated with three selected main ecosystems" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-68)The total mapped area for nature types associated with three selected main ecosystems</p>
+<img src="naturtype_files/figure-html/unnamed-chunk-66-1.png" alt="The total mapped area for nature types associated with three selected main ecosystems" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-66)The total mapped area for nature types associated with three selected main ecosystems</p>
 </div>
 
 ### Area of localities per NiN main type
@@ -1145,45 +1178,45 @@ wetland <- c(
 )
 ```
 
-Adding the non-mapped open types
+Adding these non-mapped open types
 
 ```r
-open[open %!in% ntyp_fill$NiN_mainType]
+open[!open %in% ntyp_fill$NiN_mainType]
 #> [1] "T6"  "T11" "T13" "T16" "T23" "T24" "T25" "T26" "T27"
 ```
 
 
 ```r
 ntyp_fill2 <- ntyp_fill %>%
-  add_row(NiN_mainType = "T6", Ecosystem = "Naturlig åpne områder under skoggrensa", NiN_mainTypeCoverage = "Not mapped", km2 = 0) %>%
-  add_row(NiN_mainType = "T11", Ecosystem = "Naturlig åpne områder under skoggrensa", NiN_mainTypeCoverage = "Not mapped", km2 = 0) %>%
-  add_row(NiN_mainType = "T13", Ecosystem = "Naturlig åpne områder under skoggrensa", NiN_mainTypeCoverage = "Not mapped", km2 = 0) %>%
-  add_row(NiN_mainType = "T16", Ecosystem = "Naturlig åpne områder under skoggrensa", NiN_mainTypeCoverage = "Not mapped", km2 = 0) %>%
-  add_row(NiN_mainType = "T23", Ecosystem = "Naturlig åpne områder under skoggrensa", NiN_mainTypeCoverage = "Not mapped", km2 = 0) %>%
-  add_row(NiN_mainType = "T24", Ecosystem = "Naturlig åpne områder under skoggrensa", NiN_mainTypeCoverage = "Not mapped", km2 = 0) %>%
-  add_row(NiN_mainType = "T25", Ecosystem = "Naturlig åpne områder under skoggrensa", NiN_mainTypeCoverage = "Not mapped", km2 = 0) %>%
-  add_row(NiN_mainType = "T26", Ecosystem = "Naturlig åpne områder under skoggrensa", NiN_mainTypeCoverage = "Not mapped", km2 = 0) %>%
-  add_row(NiN_mainType = "T27", Ecosystem = "Naturlig åpne områder under skoggrensa", NiN_mainTypeCoverage = "Not mapped", km2 = 0) 
+  add_row(NiN_mainType = "T6",  Ecosystem = "naturligÅpneOmråderUnderSkoggrensa", NiN_mainTypeCoverage = "Not mapped", km2 = 0) %>%
+  add_row(NiN_mainType = "T11", Ecosystem = "naturligÅpneOmråderUnderSkoggrensa", NiN_mainTypeCoverage = "Not mapped", km2 = 0) %>%
+  add_row(NiN_mainType = "T13", Ecosystem = "naturligÅpneOmråderUnderSkoggrensa", NiN_mainTypeCoverage = "Not mapped", km2 = 0) %>%
+  add_row(NiN_mainType = "T16", Ecosystem = "naturligÅpneOmråderUnderSkoggrensa", NiN_mainTypeCoverage = "Not mapped", km2 = 0) %>%
+  add_row(NiN_mainType = "T23", Ecosystem = "naturligÅpneOmråderUnderSkoggrensa", NiN_mainTypeCoverage = "Not mapped", km2 = 0) %>%
+  add_row(NiN_mainType = "T24", Ecosystem = "naturligÅpneOmråderUnderSkoggrensa", NiN_mainTypeCoverage = "Not mapped", km2 = 0) %>%
+  add_row(NiN_mainType = "T25", Ecosystem = "naturligÅpneOmråderUnderSkoggrensa", NiN_mainTypeCoverage = "Not mapped", km2 = 0) %>%
+  add_row(NiN_mainType = "T26", Ecosystem = "naturligÅpneOmråderUnderSkoggrensa", NiN_mainTypeCoverage = "Not mapped", km2 = 0) %>%
+  add_row(NiN_mainType = "T27", Ecosystem = "naturligÅpneOmråderUnderSkoggrensa", NiN_mainTypeCoverage = "Not mapped", km2 = 0) 
 ```
 
 
 Adding the non-mapped semi-natural types
 
 ```r
-semi[semi %!in% ntyp_fill$NiN_mainType]
+semi[!semi %in% ntyp_fill$NiN_mainType]
 #> [1] "T40"
 ```
 
 ```r
 ntyp_fill2 <- ntyp_fill2 %>%
-  add_row(NiN_mainType = "T40", Ecosystem = "Semi-naturlig mark", NiN_mainTypeCoverage = "Not mapped", km2 = 0)
+  add_row(NiN_mainType = "T40", Ecosystem = "semi-naturligMark", NiN_mainTypeCoverage = "Not mapped", km2 = 0)
 ```
 
 
 Adding the non-mapped wetland types
 
 ```r
-wetland[wetland %!in% ntyp_fill$NiN_mainType]
+wetland[!wetland %in% ntyp_fill$NiN_mainType]
 #> [1] "V6"
 ```
 V6 is *Våtsnøleie*, and my guess is that it *is* mapped, but grouped with the alpine ecosystem. I'll therefore not add it in here, but mention it in the figure caption below.
@@ -1225,8 +1258,8 @@ ntyp_fill2 %>%
 ```
 
 <div class="figure">
-<img src="naturtype_files/figure-html/unnamed-chunk-75-1.png" alt="The areas mapped for each NiN main type, and the degree of spatial representativity (or coverage) of the mapping units (nature types). V6 Våtsnøleie og snøleiekilde is not included." width="672" />
-<p class="caption">(\#fig:unnamed-chunk-75)The areas mapped for each NiN main type, and the degree of spatial representativity (or coverage) of the mapping units (nature types). V6 Våtsnøleie og snøleiekilde is not included.</p>
+<img src="naturtype_files/figure-html/unnamed-chunk-73-1.png" alt="The areas mapped for each NiN main type, and the degree of spatial representativity (or coverage) of the mapping units (nature types). V6 Våtsnøleie og snøleiekilde is not included." width="672" />
+<p class="caption">(\#fig:unnamed-chunk-73)The areas mapped for each NiN main type, and the degree of spatial representativity (or coverage) of the mapping units (nature types). V6 Våtsnøleie og snøleiekilde is not included.</p>
 </div>
 
 ### Number of localities per NiN main type
@@ -1250,6 +1283,7 @@ ntyp_fill2 %>%
          NiN_mainTypeCoverage,
          count)%>%
   ungroup() %>%
+  mutate(count = replace_na(count, 0)) %>%
   mutate(NiN_mainType = fct_reorder(NiN_mainType, count)) %>%
   ggplot(aes(x = NiN_mainType,
              y = count,
@@ -1266,27 +1300,25 @@ ntyp_fill2 %>%
   facet_wrap(vars(Ecosystem),
              scales = "free",
              labeller = label_wrap_gen(width=25))
-#> Warning: Removed 10 rows containing missing values
-#> (position_stack).
 ```
 
 <div class="figure">
-<img src="naturtype_files/figure-html/unnamed-chunk-76-1.png" alt="The number of localities mapped for each NiN main type, and the degree of spatial representativity (or coverage) of the mapping units (nature types). V6 Våtsnøleie og snøleiekilde is not included. NiN main types are arranged rougly by decreasing order, except for types that are not mapped at all, which are arranged on top." width="672" />
-<p class="caption">(\#fig:unnamed-chunk-76)The number of localities mapped for each NiN main type, and the degree of spatial representativity (or coverage) of the mapping units (nature types). V6 Våtsnøleie og snøleiekilde is not included. NiN main types are arranged rougly by decreasing order, except for types that are not mapped at all, which are arranged on top.</p>
+<img src="naturtype_files/figure-html/unnamed-chunk-74-1.png" alt="The number of localities mapped for each NiN main type, and the degree of spatial representativity (or coverage) of the mapping units (nature types). V6 Våtsnøleie og snøleiekilde is not included. NiN main types are arranged rougly by decreasing order, except for types that are not mapped at all, which are arranged on top." width="672" />
+<p class="caption">(\#fig:unnamed-chunk-74)The number of localities mapped for each NiN main type, and the degree of spatial representativity (or coverage) of the mapping units (nature types). V6 Våtsnøleie og snøleiekilde is not included. NiN main types are arranged rougly by decreasing order, except for types that are not mapped at all, which are arranged on top.</p>
 </div>
 
 
-From the figure above I take that *Naturlig åpne områder* is very poorly represented in general as there are many NiN main types that are completely missing from the dataset. The three most common types by area, however, have complete thematic coverage (if excluding the year 2018 and including all sub-types). I will need to investigate especially if there are some NiN variables for the nature types mapping T18 Åpen flomfastmark, T12 Strandeng and T21 Sanddynemark which we can use. 
+From the figure above I take that *Naturlig åpne områder* is very poorly represented in general as there are many NiN main types that are completely missing from the data set. The three most common types by area, however, have complete thematic coverage (if excluding the year 2018 and including all sub-types). I will need to investigate especially if there are some NiN variables for the nature types mapping T18 Åpen flomfastmark, T12 Strandeng and T21 Sanddynemark which we can use. 
 
-For *Semi-naturlig mark* we have quite good thematic coverage for the three main types (by area). The other three types probably makes up a considerably smaller area, but note that T33 has some coverage, and is classes as *all (-2018)*. Of the three main ecosystems, semi-naturlig mark dominates clearly in ters of area and in terms of number of localities. 
+For *Semi-naturlig mark* we have quite good thematic coverage for the three main types (by area). The other three types probably makes up a considerably smaller area, but note that T33 has some coverage, and is classes as *all (-2018)*. Of the three main ecosystems, semi-naturlig mark dominates clearly in terms of area and in terms of number of localities. 
 
-For *Våtmark* we have good thematic coverage for V3 nedbørsmyr and V9 semi-naturlig myr, but for V1 åpen jordvassmyr only calcareous localities are mapped and assessed. A question is then whether, for a given NiN variable, that calcareous localities can be representative for all mires (poor and rich) or if this will introduce too much bias in one way or another. Another important bias for this main ecosystem is related to the lower size limit for mapping units (MMU), which is quite big for V3. We need to think about whether small bogs are more or less prone to different pressures compared to big bogs.
+For *Våtmark* we have good thematic coverage for V3 nedbørsmyr and _V9 semi-naturlig myr_, but for _V1 åpen jordvassmyr_ only calcareous localities are mapped and assessed. A question is then whether, for a given NiN variable, that calcareous localities can be representative for all mires (poor and rich) or if this will introduce too much bias in one way or another. Another important bias for this main ecosystem is related to the lower size limit for mapping units (MMU), which is quite big for V3. We need to think about whether small bogs are more or less prone to different pressures compared to big bogs.
 
 ### Commonness of NiN variables
 
-I want to see how common the different NiN variables are, and if we can use this to select core variables (kjernevariabler).
+I want to see how common the different NiN variables are, and if we can use this to select core variables \(_kjernevariabler_\).
 
-First I will get the total area mappe per main ecosystem
+First I will get the total area mapped per main ecosystem
 
 ```r
 areaSum <- ntyp_fill2 %>%
@@ -1339,14 +1371,15 @@ ntyp_fill2 %>%
   coord_flip()+
   scale_fill_brewer(palette = "Set1")+
   theme_bw(base_size = mySize)
-#> `summarise()` has grouped output by 'NiN_code', 'Ecosystem'. You can override using the `.groups` argument.
+#> `summarise()` has grouped output by 'NiN_code',
+#> 'Ecosystem'. You can override using the `.groups` argument.
 #> Warning in RColorBrewer::brewer.pal(n, pal): n too large, allowed maximum for palette Set1 is 9
 #> Returning the palette you asked for with that many colors
 ```
 
 <div class="figure">
-<img src="naturtype_files/figure-html/unnamed-chunk-78-1.png" alt="Barplot showing the proportion area for which each NiN variable is recorded. The total mapped area for each main ecosystem (the facets) is shown as a dashed red line. The three most dominant NiN main types for each ecosystem is given a uniqe colour, and all the remaining are grouped as 'other'." width="672" />
-<p class="caption">(\#fig:unnamed-chunk-78)Barplot showing the proportion area for which each NiN variable is recorded. The total mapped area for each main ecosystem (the facets) is shown as a dashed red line. The three most dominant NiN main types for each ecosystem is given a uniqe colour, and all the remaining are grouped as 'other'.</p>
+<img src="naturtype_files/figure-html/unnamed-chunk-76-1.png" alt="Barplot showing the proportion area for which each NiN variable is recorded. The total mapped area for each main ecosystem (the facets) is shown as a dashed red line. The three most dominant NiN main types for each ecosystem is given a uniqe colour, and all the remaining are grouped as 'other'." width="672" />
+<p class="caption">(\#fig:unnamed-chunk-76)Barplot showing the proportion area for which each NiN variable is recorded. The total mapped area for each main ecosystem (the facets) is shown as a dashed red line. The three most dominant NiN main types for each ecosystem is given a uniqe colour, and all the remaining are grouped as 'other'.</p>
 </div>
 
 This figure, in combination with the above, points to he most obvious NiN variable candidates. 
@@ -1359,7 +1392,7 @@ For *Våtmark*, 7GR-Gi is the most common variables, but this is a pressure vari
 
 
 ## Tables
-Here are some output tables with numbers the numbers underlying the above figures. 
+Here are some output tables with the numbers underlying the above figures. 
 
 
 ```r
@@ -1374,11 +1407,11 @@ DT::datatable(ntyp_fill2,
 <div class="figure">
 
 ```{=html}
-<div id="htmlwidget-57fa69c9e2639ab55d59" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-57fa69c9e2639ab55d59">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54"],["Slåttemark","Kystlynghei","Naturbeitemark","Slåttemyr","Boreal hei","Semi-naturlig eng","Platåhøymyr","Strandeng","Hagemark","Semi-naturlig våteng","Eksentrisk høymyr","Rik åpen jordvannsmyr i mellomboreal sone","Sørlig slåttemyr","Terrengdekkende myr","Semi-naturlig myr","Åpen flomfastmark","Svært tørkeutsatt sørlig kalkberg","Isinnfrysingsmark","Eng-aktig sterkt endret fastmark","Høgereligende og nordlig nedbørsmyr","Øyblandingsmyr","Semi-naturlig strandeng","Lauveng","Kalkrik helofyttsump","Sørlig nedbørsmyr","Rik åpen sørlig jordvannsmyr","Fossepåvirket berg","Aktiv skredmark","Palsmyr","Silt og leirskred","Nakent tørkeutsatt kalkberg","Sørlig kaldkilde","Åpen grunnlendt kalkrik mark i boreonemoral sone","Sørlig etablert sanddynemark","Atlantisk høymyr","Rik åpen jordvannsmyr i nordboreal og lavalpin sone","Sanddynemark","Åpen grunnlendt kalkrik mark i sørboreal sone","Fuglefjell-eng og fugletopp","Fosseberg","Kanthøymyr","Fosse-eng","Øvre sandstrand uten pionervegetasjon","Konsentrisk høymyr",null,null,null,null,null,null,null,null,null,null],["2018, 2019, 2020, 2021","2018, 2019, 2020, 2021","2018, 2019, 2020, 2021","2018, 2019, 2020, 2021","2018, 2019, 2020, 2021","2018, 2019, 2020, 2021","2019, 2020, 2021","2018, 2019, 2020, 2021","2018, 2019, 2020, 2021","2018, 2019, 2020, 2021","2019, 2020, 2021","2019, 2020, 2021","2019, 2020, 2021","2019, 2020, 2021","2019, 2020, 2021","2018, 2019, 2020, 2021","2019, 2020, 2021","2018, 2019, 2020, 2021","2018, 2019, 2020, 2021","2019, 2020, 2021","2019, 2020, 2021","2018, 2019, 2020, 2021","2019, 2020","2019, 2020, 2021","2019, 2020, 2021","2018, 2019, 2020, 2021","2019, 2020, 2021","2019, 2020, 2021","2021","2019, 2020, 2021","2018, 2019, 2020, 2021","2018, 2019, 2020, 2021","2018, 2019, 2020, 2021","2018, 2019, 2020, 2021","2019, 2020, 2021","2018, 2019, 2020, 2021","2018, 2019, 2020, 2021","2019, 2020, 2021","2019, 2020, 2021","2021","2019, 2020, 2021","2019, 2020","2019, 2020, 2021","2019, 2020",null,null,null,null,null,null,null,null,null,null],["Semi-naturlig mark","Semi-naturlig mark","Semi-naturlig mark","Våtmark","Semi-naturlig mark","Semi-naturlig mark","Våtmark","Naturlig åpne områder under skoggrensa","Semi-naturlig mark","Våtmark","Våtmark","Våtmark","Våtmark","Våtmark","Våtmark","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Semi-naturlig mark","Våtmark","Våtmark","Semi-naturlig mark","Semi-naturlig mark","Våtmark","Våtmark","Våtmark","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Våtmark","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Våtmark","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Våtmark","Våtmark","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Våtmark","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Våtmark","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Semi-naturlig mark"],["T32","T34","T32","V9","T31","T32","V3","T12","T32","V10","V3","V1","V9","V3","V9","T18","T1","T20","T41","V3","V1","T33","T32","L4","V3","V1","T1","T17","V3","T17","T1","V4","T2","T21","V3","V1","T21","T2","T8","T1","V3","T15","T29","V3","T6","T11","T13","T16","T23","T24","T25","T26","T27","T40"],["all (if including sub-types)","all","all (if including sub-types)","all (if including sub-types)","all","all (if including sub-types)","all (if including sub-types)","all (-2018)","all (if including sub-types)","all (-2018)","all (if including sub-types)","calcareous","all (if including sub-types)","all (if including sub-types)","all (if including sub-types)","all","calcareous and dry","all","all","all (if including sub-types)","partial","all (-2018)","all (if including sub-types)","calcareous","all (if including sub-types)","calcareous","extra wet","all (if including sub-types)","all (if including sub-types)","all (if including sub-types)","calcareous and dry","southern","calcareous","all (if including sub-types)","all (if including sub-types)","calcareous","all (if including sub-types)","calcareous","all","extra wet","all (if including sub-types)","all","sandy and vegetated","all (if including sub-types)","Not mapped","Not mapped","Not mapped","Not mapped","Not mapped","Not mapped","Not mapped","Not mapped","Not mapped","Not mapped"],[null,null,0,null,null,null,null,null,19.4,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,9.3,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,80.5,null,null,null,null,null,null,null,null,null,null,null,null,null,100,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,100,null,null,null,null,null,null,null,null,100,null,100,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,100,null,null,null,null,null,null,null,null,100,null,100,null,null,null,null,null,null,null,null,100,null,null,null,null,null,null,null,null,99.5,null,null,null,null,100,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,0,null,null,null,null,null,19.3,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,42.6,null,null,null,null,null,null,null,null,39.1,null,36.5,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[99.7,99.9,99.9,7.4,100,99.9,null,99.9,99.9,99.8,null,100,null,null,null,66.6,100,null,100,null,null,98.9,100,100,null,100,null,null,null,null,100,null,99.8,100,null,5.5,100,100,null,null,null,null,100,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,99.8,null,null,100,null,null,null,100,100,100,100,100,null,null,null,null,99.7,100,null,null,100,100,98.9,null,null,100,null,null,98.4,null,null,100,94.5,null,null,null,null,100,null,null,100,null,null,null,null,null,null,null,null,null,null],[99.9,null,100,null,null,99.9,null,2.5,100,100,null,null,null,null,null,null,null,null,99.8,null,null,98.7,100,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,99.9,null,null,100,null,null,null,null,null,null,null,null,null,null,86.5,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,100,null,null,98.9,null,100,null,null,100,100,null,null,null,null,null,null,null,null,null,null,null],[98.5,null,99.7,null,null,99.2,null,null,99.8,99.7,null,null,null,null,null,null,null,null,99.3,null,null,null,100,null,null,null,null,null,null,null,null,null,null,100,null,null,98.9,null,null,null,null,null,100,null,null,null,null,null,null,null,null,null,null,null],[null,0,null,null,100,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[99.9,99.9,100,null,null,99.9,null,1.8,99.9,100,null,null,null,null,null,null,null,null,99.3,null,null,98.6,100,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,45.2,null,7.4,32.4,null,100,99.9,null,null,100,100,null,100,null,86.7,100,88.9,99.5,99.7,100,15.8,null,null,100,100,100,null,100,null,100,9.4,99.5,100,100,100,100,100,100,null,100,100,100,100,null,null,null,null,null,null,null,null,null,null],[null,54.2,null,100,67.4,null,null,99.9,null,null,null,null,100,null,100,86.6,null,88.9,null,null,null,null,null,100,null,17.4,null,100,null,100,14.6,null,99.5,100,null,5.5,100,100,null,null,null,100,100,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,93,null,null,null,null,null,null,null,null,null,null,100,null,null,null,null,null,null,null,null,null,null,null,null,100,null,100,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,100,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,92.6,null,null,null,null,null,null,null,null,100,null,100,null,null,null,null,null,null,83.2,null,100,null,null,null,null,null,null,null,90.6,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,100,null,null,null,100,100,null,100,null,null,null,null,null,99.7,100,null,null,null,100,82.6,null,null,100,null,null,null,null,null,100,94.5,null,null,null,null,100,null,null,100,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,100,null,null,null,100,null,null,100,null,null,null,null,null,99.7,null,null,null,null,100,null,null,null,null,null,null,null,null,null,100,null,null,null,null,null,100,null,null,100,null,null,null,null,null,null,null,null,null,null],[6.81956356593571,446.638733529904,108.83795146733,8.94881563070796,311.179910500879,25.6749258232426,3.64513842004613,4.18015991464149,13.9306785922215,4.99997030545661,5.40129720245494,6.67459600985544,0.849630753543558,16.951171252332,6.97532795463438,10.2576622102261,0.0939286599663424,0.0172138593255082,1.1136383496571,12.3792368582634,4.23571529897774,3.40471202718152,0.0276215101012527,1.9365690032333,12.3314095299565,4.41543153836709,0.0459278897347861,0.405816768116717,1.30286814519671,0.022958446379465,1.48426109399653,0.0528799856375842,0.68576061110412,0.333717528775667,3.32734000458103,0.212262234086063,1.89650385103741,0.156271240033891,0.248655085415105,0.00792215845906082,0.109073191077505,0.00237313203080123,0.0165918400637099,0.35986377082405,0,0,0,0,0,0,0,0,0,0],[1577,7444,9657,554,4887,3402,73,1376,1796,1000,106,797,133,326,693,1554,74,9,565,361,189,935,11,250,766,755,21,155,38,37,342,127,440,55,85,55,284,124,20,11,17,3,19,9,null,null,null,null,null,null,null,null,null,null]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Nature_type<\/th>\n      <th>Year<\/th>\n      <th>Ecosystem<\/th>\n      <th>NiN_mainType<\/th>\n      <th>NiN_mainTypeCoverage<\/th>\n      <th>1AG-A-0<\/th>\n      <th>1AG-A-E<\/th>\n      <th>1AG-A-G<\/th>\n      <th>1AG-B<\/th>\n      <th>1AG-C<\/th>\n      <th>1AR-C-L<\/th>\n      <th>7FA<\/th>\n      <th>7GR-GI<\/th>\n      <th>7JB-BA<\/th>\n      <th>7JB-BT<\/th>\n      <th>7JB-GJ<\/th>\n      <th>7RA-BH<\/th>\n      <th>7RA-SJ<\/th>\n      <th>7SE<\/th>\n      <th>7TK<\/th>\n      <th>7VR-RI<\/th>\n      <th>PRHT<\/th>\n      <th>PRSL<\/th>\n      <th>PRTK<\/th>\n      <th>PRTO<\/th>\n      <th>km2<\/th>\n      <th>numberOfLocalities<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"scrollY":true,"pageLength":10,"columnDefs":[{"className":"dt-right","targets":[6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-58b64928cd14a2a01e58" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-58b64928cd14a2a01e58">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54"],["Slåttemyr","Hagemark","Naturbeitemark","Semi-naturlig eng","Eng-aktig sterkt endret fastmark","Sørlig kaldkilde","Åpen flomfastmark","Høgereligende og nordlig nedbørsmyr","Øyblandingsmyr","Strandeng","Nakent tørkeutsatt kalkberg","Kystlynghei","Sørlig slåttemyr","Konsentrisk høymyr","Boreal hei","Semi-naturlig våteng","Slåttemark","Sanddynemark","Semi-naturlig strandeng","Rik åpen jordvannsmyr i mellomboreal sone","Sørlig nedbørsmyr","Atlantisk høymyr","Terrengdekkende myr","Åpen grunnlendt kalkrik mark i boreonemoral sone","Rik åpen sørlig jordvannsmyr","Aktiv skredmark","Semi-naturlig myr","Silt og leirskred","Eksentrisk høymyr","Øvre sandstrand uten pionervegetasjon","Kalkrik helofyttsump","Fuglefjell-eng og fugletopp","Isinnfrysingsmark","Åpen grunnlendt kalkrik mark i sørboreal sone","Sørlig etablert sanddynemark","Rik åpen jordvannsmyr i nordboreal og lavalpin sone","Fossepåvirket berg","Fosse-eng","Svært tørkeutsatt sørlig kalkberg","Lauveng","Kanthøymyr","Platåhøymyr","Palsmyr","Fosseberg",null,null,null,null,null,null,null,null,null,null],["2018, 2019, 2020, 2021, 2022","2018, 2019, 2020, 2021, 2022","2018, 2019, 2020, 2021, 2022","2018, 2019, 2020, 2021, 2022","2018, 2019, 2020, 2021, 2022","2018, 2019, 2020, 2021, 2022","2018, 2019, 2020, 2021, 2022","2019, 2020, 2021, 2022","2019, 2020, 2021, 2022","2018, 2019, 2020, 2021, 2022","2019, 2020, 2021, 2022","2018, 2019, 2020, 2021, 2022","2019, 2020, 2021, 2022","2019, 2020, 2022","2018, 2019, 2020, 2021, 2022","2018, 2019, 2020, 2021, 2022","2018, 2019, 2020, 2021, 2022","2018, 2019, 2020, 2021, 2022","2018, 2019, 2020, 2021, 2022","2019, 2020, 2021, 2022","2019, 2020, 2021, 2022","2019, 2020, 2021, 2022","2019, 2020, 2021, 2022","2018, 2019, 2020, 2021, 2022","2018, 2019, 2020, 2021, 2022","2019, 2020, 2021, 2022","2019, 2020, 2021, 2022","2019, 2020, 2021, 2022","2019, 2020, 2021, 2022","2019, 2020, 2021, 2022","2019, 2020, 2021, 2022","2019, 2020, 2021, 2022","2018, 2019, 2020, 2021, 2022","2019, 2020, 2021","2018, 2019, 2020, 2021, 2022","2019, 2020, 2021, 2022","2019, 2020, 2021, 2022","2019, 2020, 2022","2019, 2020, 2021, 2022","2019, 2020, 2022","2019, 2020, 2021, 2022","2019, 2020, 2021, 2022","2021, 2022","2021, 2022",null,null,null,null,null,null,null,null,null,null],["våtmark","semi-naturligMark","semi-naturligMark","semi-naturligMark","semi-naturligMark","våtmark","naturligÅpneOmråderUnderSkoggrensa","våtmark","våtmark","naturligÅpneOmråderUnderSkoggrensa","naturligÅpneOmråderUnderSkoggrensa","semi-naturligMark","våtmark","våtmark","semi-naturligMark","våtmark","semi-naturligMark","naturligÅpneOmråderUnderSkoggrensa","semi-naturligMark","våtmark","våtmark","våtmark","våtmark","naturligÅpneOmråderUnderSkoggrensa","våtmark","naturligÅpneOmråderUnderSkoggrensa","våtmark","naturligÅpneOmråderUnderSkoggrensa","våtmark","naturligÅpneOmråderUnderSkoggrensa","våtmark","naturligÅpneOmråderUnderSkoggrensa","naturligÅpneOmråderUnderSkoggrensa","naturligÅpneOmråderUnderSkoggrensa","naturligÅpneOmråderUnderSkoggrensa","våtmark","naturligÅpneOmråderUnderSkoggrensa","naturligÅpneOmråderUnderSkoggrensa","naturligÅpneOmråderUnderSkoggrensa","semi-naturligMark","våtmark","våtmark","våtmark","naturligÅpneOmråderUnderSkoggrensa","naturligÅpneOmråderUnderSkoggrensa","naturligÅpneOmråderUnderSkoggrensa","naturligÅpneOmråderUnderSkoggrensa","naturligÅpneOmråderUnderSkoggrensa","naturligÅpneOmråderUnderSkoggrensa","naturligÅpneOmråderUnderSkoggrensa","naturligÅpneOmråderUnderSkoggrensa","naturligÅpneOmråderUnderSkoggrensa","naturligÅpneOmråderUnderSkoggrensa","semi-naturligMark"],["V9","T32","T32","T32","T41","V4","T18","V3","V1","T12","T1","T34","V9","V3","T31","V10","T32","T21","T33","V1","V3","V3","V3","T2","V1","T17","V9","T17","V3","T29","L4","T8","T20","T2","T21","V1","T1","T15","T1","T32","V3","V3","V3","T1","T6","T11","T13","T16","T23","T24","T25","T26","T27","T40"],["all (if including sub-types)","all (if including sub-types)","all (if including sub-types)","all (if including sub-types)","all","southern","all","all (if including sub-types)","partial","all (-2018)","calcareous and dry","all","all (if including sub-types)","all (if including sub-types)","all","all (-2018)","all (if including sub-types)","all (if including sub-types)","all (-2018)","calcareous","all (if including sub-types)","all (if including sub-types)","all (if including sub-types)","calcareous","calcareous","all (if including sub-types)","all (if including sub-types)","all (if including sub-types)","all (if including sub-types)","sandy and vegetated","calcareous","all","all","calcareous","all (if including sub-types)","calcareous","extra wet","all","calcareous and dry","all (if including sub-types)","all (if including sub-types)","all (if including sub-types)","all (if including sub-types)","extra wet","Not mapped","Not mapped","Not mapped","Not mapped","Not mapped","Not mapped","Not mapped","Not mapped","Not mapped","Not mapped"],[null,16.9,0,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,8.7,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,82.9,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,100,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[100,null,null,null,null,null,null,null,null,null,null,null,100,null,null,null,null,null,null,null,null,null,null,null,null,null,100,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[100,null,null,null,null,null,null,null,null,null,null,null,100,null,null,null,null,null,null,null,null,null,null,99.6,null,null,100,null,null,null,100,null,null,100,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,16.9,0,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[57.6,null,null,null,null,null,null,null,null,null,null,null,39.6,null,null,null,null,null,null,null,null,null,null,null,null,null,44.4,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[5.5,99.9,99.9,99.9,100,null,70.7,null,null,99.9,100,99.9,null,null,100,99.8,99.8,100,99.1,100,null,null,null,99.8,100,null,null,null,null,100,100,null,null,100,100,100,null,null,100,100,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[99.6,null,null,null,null,98.5,null,99.8,100,null,null,null,100,100,null,null,null,null,null,100,100,100,100,null,100,null,100,null,100,null,100,null,null,null,null,null,null,null,null,null,100,100,100,null,null,null,null,null,null,null,null,null,null,null],[null,100,100,99.9,99.9,null,null,null,null,1.9,null,null,null,null,null,100,99.9,null,98.9,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,100,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,88.2,null,null,null,null,100,null,null,100,null,null,99.2,null,null,null,null,null,null,null,null,null,null,null,100,null,100,null,null,100,null,null,100,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,99.8,99.7,99.4,99.4,null,null,null,null,null,null,null,null,null,null,99.7,98.8,99.2,null,null,null,null,null,null,null,null,null,null,null,100,null,null,null,null,100,null,null,null,null,100,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,0,null,null,100,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,99.9,100,99.9,99.4,null,null,null,null,1.4,null,100,null,null,null,100,99.9,null,98.8,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,100,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[5.5,null,null,null,99.6,9.1,88.4,99.8,100,99.9,100,41.5,null,100,23.6,null,null,100,13.6,100,100,100,100,99.6,100,null,null,null,100,100,null,100,93.3,100,100,100,100,100,100,null,100,100,100,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[99.9,null,null,null,null,null,88.3,null,null,99.9,100,58,100,null,76.3,null,null,100,null,null,null,null,null,99.6,100,100,100,100,null,100,100,null,93.3,100,100,100,null,100,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,93.8,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,100,100,null,null,null,null,null,100,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,100,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[94.5,null,null,null,null,90.9,null,null,null,null,null,null,100,null,null,null,null,null,85.6,null,null,null,null,null,null,null,100,null,null,null,100,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,99.8,100,null,null,null,null,100,null,null,null,null,null,100,100,100,100,null,null,null,null,null,100,null,null,null,null,null,null,null,null,null,null,null,100,100,100,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,99.8,null,null,null,null,null,100,null,null,null,null,null,null,100,100,100,null,null,null,null,null,100,null,null,null,null,null,null,null,null,null,null,null,100,100,null,null,null,null,null,null,null,null,null,null,null,null],[10.8599681769678,17.2892756436555,125.395454959427,29.5273133834903,1.30060426791085,0.054693214794524,11.2210640471648,17.0161039645494,4.47342889033033,5.31240419413453,0.153160113321643,530.333666293998,0.859130020342248,0.409299904933389,368.076228072285,5.70309815289171,8.08730162096645,2.12492117847008,3.74860715696163,9.30242158937103,15.8891449971379,3.71004777569769,21.1853317928982,0.711262375853877,0.232630287231787,0.429869567548852,8.82716234570841,0.0281316995894742,5.54454125198943,0.173325803167218,2.12141082941421,0.256328309129139,0.0229694300823598,0.156271240033641,0.391864908667946,0.00540369751175468,0.0691880614123939,0.00615737757466229,0.105362181789421,0.0291096401727506,0.396661041366587,3.97834096015764,1.31405172299685,0.00941745752789786,0,0,0,0,0,0,0,0,0,0],[750,2057,11548,4051,684,132,1777,518,213,1812,50,8110,134,13,6719,1134,1869,364,1092,1169,953,92,451,469,60,172,792,49,117,25,302,21,15,124,73,3,32,5,91,12,32,88,39,14,null,null,null,null,null,null,null,null,null,null]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Nature_type<\/th>\n      <th>Year<\/th>\n      <th>Ecosystem<\/th>\n      <th>NiN_mainType<\/th>\n      <th>NiN_mainTypeCoverage<\/th>\n      <th>1AG-A-0<\/th>\n      <th>1AG-A-E<\/th>\n      <th>1AG-A-G<\/th>\n      <th>1AG-B<\/th>\n      <th>1AG-C<\/th>\n      <th>1AR-A-E<\/th>\n      <th>1AR-C-L<\/th>\n      <th>4TS-TS<\/th>\n      <th>7FA<\/th>\n      <th>7GR-GI<\/th>\n      <th>7JB-BA<\/th>\n      <th>7JB-BT<\/th>\n      <th>7JB-GJ<\/th>\n      <th>7RA-BH<\/th>\n      <th>7RA-SJ<\/th>\n      <th>7SE<\/th>\n      <th>7SN-BE<\/th>\n      <th>7TK<\/th>\n      <th>7VR-RE<\/th>\n      <th>7VR-RI<\/th>\n      <th>PRHT<\/th>\n      <th>PRSL<\/th>\n      <th>PRTK<\/th>\n      <th>PRTO<\/th>\n      <th>km2<\/th>\n      <th>numberOfLocalities<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"scrollY":true,"pageLength":10,"columnDefs":[{"className":"dt-right","targets":[6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ```
 
-<p class="caption">(\#fig:unnamed-chunk-79)List of 45 nature types additionam data, including the proportion of localities for which there is data for each of the NiN variables.</p>
+<p class="caption">(\#fig:unnamed-chunk-77)List of 45 nature types additionam data, including the proportion of localities for which there is data for each of the NiN variables.</p>
 </div>
 
 
@@ -1396,21 +1429,22 @@ DT::datatable(
     scrollX = T,
     scrollY=T,
     pageLength = 10))
-#> `summarise()` has grouped output by 'NiN_code', 'Ecosystem'. You can override using the `.groups` argument.
+#> `summarise()` has grouped output by 'NiN_code',
+#> 'Ecosystem'. You can override using the `.groups` argument.
 ```
 
 <div class="figure">
 
 ```{=html}
-<div id="htmlwidget-fa9c5df32e6fd51fca48" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-fa9c5df32e6fd51fca48">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95"],["1AG-A-0","1AG-A-0","1AG-A-E","1AG-A-G","1AG-B","1AG-B","1AG-B","1AG-C","1AR-C-L","7FA","7FA","7FA","7FA","7FA","7FA","7FA","7FA","7FA","7FA","7FA","7FA","7FA","7FA","7FA","7GR-GI","7GR-GI","7GR-GI","7GR-GI","7GR-GI","7JB-BA","7JB-BA","7JB-BA","7JB-BA","7JB-BA","7JB-BT","7JB-BT","7JB-BT","7JB-BT","7JB-BT","7JB-BT","7JB-BT","7JB-GJ","7JB-GJ","7JB-GJ","7JB-GJ","7JB-GJ","7RA-BH","7RA-SJ","7RA-SJ","7RA-SJ","7RA-SJ","7RA-SJ","7RA-SJ","7SE","7SE","7SE","7SE","7SE","7SE","7SE","7SE","7SE","7SE","7SE","7SE","7SE","7SE","7SE","7SE","7SE","7TK","7TK","7TK","7TK","7TK","7TK","7TK","7TK","7TK","7TK","7TK","7TK","7TK","7TK","7VR-RI","7VR-RI","7VR-RI","PRHT","PRSL","PRSL","PRSL","PRSL","PRTK","PRTK","PRTO"],["Naturlig åpne områder under skoggrensa","Semi-naturlig mark","Semi-naturlig mark","Våtmark","Naturlig åpne områder under skoggrensa","Våtmark","Våtmark","Semi-naturlig mark","Våtmark","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Semi-naturlig mark","Semi-naturlig mark","Semi-naturlig mark","Semi-naturlig mark","Semi-naturlig mark","Våtmark","Våtmark","Våtmark","Våtmark","Våtmark","Våtmark","Våtmark","Våtmark","Våtmark","Naturlig åpne områder under skoggrensa","Semi-naturlig mark","Semi-naturlig mark","Semi-naturlig mark","Våtmark","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Semi-naturlig mark","Semi-naturlig mark","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Semi-naturlig mark","Semi-naturlig mark","Våtmark","Semi-naturlig mark","Naturlig åpne områder under skoggrensa","Semi-naturlig mark","Semi-naturlig mark","Semi-naturlig mark","Semi-naturlig mark","Våtmark","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Semi-naturlig mark","Semi-naturlig mark","Semi-naturlig mark","Semi-naturlig mark","Våtmark","Våtmark","Våtmark","Våtmark","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Semi-naturlig mark","Semi-naturlig mark","Våtmark","Våtmark","Våtmark","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Naturlig åpne områder under skoggrensa","Semi-naturlig mark","Semi-naturlig mark","Våtmark","Våtmark","Våtmark","Våtmark","Våtmark","Våtmark"],["T2","T32","T32","V9","T2","L4","V9","T32","V9","T1","T12","T18","T2","T21","T29","T31","T32","T33","T34","T41","L4","V1","V10","V9","L4","V1","V3","V4","V9","T12","T32","T33","T41","V10","T15","T18","T21","T29","T8","T31","T34","T21","T29","T32","T41","V10","T31","T12","T32","T33","T34","T41","V10","T1","T12","T15","T18","T2","T20","T21","T29","T8","T31","T33","T34","T41","V1","V3","V4","V9","T1","T12","T15","T17","T18","T2","T20","T21","T29","T31","T34","L4","V1","V9","T1","T15","T18","T32","T33","L4","V4","V9","V1","V3","V3"],[0.68576061110412,13.9306785922215,13.9583001023227,16.7737743388859,0.842031851138011,1.9365690032333,16.7737743388859,13.9306785922215,16.7737743388859,1.57818975396287,4.18015991464149,10.2576622102261,0.842031851138011,2.23022137981308,0.0165918400637099,311.179910500879,155.290740958831,3.40471202718152,446.638733529904,1.1136383496571,1.9365690032333,11.3022897823086,4.99997030545661,8.94881563070796,1.9365690032333,15.5380050812863,55.8073983747322,0.0528799856375842,16.7737743388859,4.18015991464149,155.290740958831,3.40471202718152,1.1136383496571,4.99997030545661,0.00237313203080123,10.2576622102261,2.23022137981308,0.0165918400637099,0.248655085415105,311.179910500879,446.638733529904,2.23022137981308,0.0165918400637099,155.290740958831,1.1136383496571,4.99997030545661,311.179910500879,4.18015991464149,155.290740958831,3.40471202718152,446.638733529904,1.1136383496571,4.99997030545661,1.62411764369765,4.18015991464149,0.00237313203080123,10.2576622102261,0.842031851138011,0.0172138593255082,2.23022137981308,0.0165918400637099,0.248655085415105,311.179910500879,3.40471202718152,446.638733529904,1.1136383496571,15.5380050812863,55.8073983747322,0.0528799856375842,8.94881563070796,1.48426109399653,4.18015991464149,0.00237313203080123,0.428775214496182,10.2576622102261,0.842031851138011,0.0172138593255082,2.23022137981308,0.0165918400637099,311.179910500879,446.638733529904,1.9365690032333,4.62769377245315,16.7737743388859,0.0538500481938469,0.00237313203080123,10.2576622102261,0.0276215101012527,3.40471202718152,1.9365690032333,0.0528799856375842,16.7737743388859,15.5380050812863,55.8073983747322,54.5045302295355]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>NiN_code<\/th>\n      <th>Ecosystem<\/th>\n      <th>NiN_mainType<\/th>\n      <th>km2<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"scrollY":true,"pageLength":10,"columnDefs":[{"className":"dt-right","targets":4},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-7c3ea4d4dfebaa4e3e5e" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-7c3ea4d4dfebaa4e3e5e">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95"],["1AG-A-0","1AG-A-0","1AG-A-E","1AG-A-G","1AG-B","1AG-B","1AG-B","1AG-C","1AR-C-L","7FA","7FA","7FA","7FA","7FA","7FA","7FA","7FA","7FA","7FA","7FA","7FA","7FA","7FA","7FA","7GR-GI","7GR-GI","7GR-GI","7GR-GI","7GR-GI","7JB-BA","7JB-BA","7JB-BA","7JB-BA","7JB-BA","7JB-BT","7JB-BT","7JB-BT","7JB-BT","7JB-BT","7JB-BT","7JB-BT","7JB-GJ","7JB-GJ","7JB-GJ","7JB-GJ","7JB-GJ","7RA-BH","7RA-SJ","7RA-SJ","7RA-SJ","7RA-SJ","7RA-SJ","7RA-SJ","7SE","7SE","7SE","7SE","7SE","7SE","7SE","7SE","7SE","7SE","7SE","7SE","7SE","7SE","7SE","7SE","7SE","7TK","7TK","7TK","7TK","7TK","7TK","7TK","7TK","7TK","7TK","7TK","7TK","7TK","7TK","7VR-RI","7VR-RI","7VR-RI","PRHT","PRSL","PRSL","PRSL","PRSL","PRTK","PRTK","PRTO"],["naturligÅpneOmråderUnderSkoggrensa","semi-naturligMark","semi-naturligMark","våtmark","naturligÅpneOmråderUnderSkoggrensa","våtmark","våtmark","semi-naturligMark","våtmark","naturligÅpneOmråderUnderSkoggrensa","naturligÅpneOmråderUnderSkoggrensa","naturligÅpneOmråderUnderSkoggrensa","naturligÅpneOmråderUnderSkoggrensa","naturligÅpneOmråderUnderSkoggrensa","naturligÅpneOmråderUnderSkoggrensa","semi-naturligMark","semi-naturligMark","semi-naturligMark","semi-naturligMark","semi-naturligMark","våtmark","våtmark","våtmark","våtmark","våtmark","våtmark","våtmark","våtmark","våtmark","naturligÅpneOmråderUnderSkoggrensa","semi-naturligMark","semi-naturligMark","semi-naturligMark","våtmark","naturligÅpneOmråderUnderSkoggrensa","naturligÅpneOmråderUnderSkoggrensa","naturligÅpneOmråderUnderSkoggrensa","naturligÅpneOmråderUnderSkoggrensa","naturligÅpneOmråderUnderSkoggrensa","semi-naturligMark","semi-naturligMark","naturligÅpneOmråderUnderSkoggrensa","naturligÅpneOmråderUnderSkoggrensa","semi-naturligMark","semi-naturligMark","våtmark","semi-naturligMark","naturligÅpneOmråderUnderSkoggrensa","semi-naturligMark","semi-naturligMark","semi-naturligMark","semi-naturligMark","våtmark","naturligÅpneOmråderUnderSkoggrensa","naturligÅpneOmråderUnderSkoggrensa","naturligÅpneOmråderUnderSkoggrensa","naturligÅpneOmråderUnderSkoggrensa","naturligÅpneOmråderUnderSkoggrensa","naturligÅpneOmråderUnderSkoggrensa","naturligÅpneOmråderUnderSkoggrensa","naturligÅpneOmråderUnderSkoggrensa","naturligÅpneOmråderUnderSkoggrensa","semi-naturligMark","semi-naturligMark","semi-naturligMark","semi-naturligMark","våtmark","våtmark","våtmark","våtmark","naturligÅpneOmråderUnderSkoggrensa","naturligÅpneOmråderUnderSkoggrensa","naturligÅpneOmråderUnderSkoggrensa","naturligÅpneOmråderUnderSkoggrensa","naturligÅpneOmråderUnderSkoggrensa","naturligÅpneOmråderUnderSkoggrensa","naturligÅpneOmråderUnderSkoggrensa","naturligÅpneOmråderUnderSkoggrensa","naturligÅpneOmråderUnderSkoggrensa","semi-naturligMark","semi-naturligMark","våtmark","våtmark","våtmark","naturligÅpneOmråderUnderSkoggrensa","naturligÅpneOmråderUnderSkoggrensa","naturligÅpneOmråderUnderSkoggrensa","semi-naturligMark","semi-naturligMark","våtmark","våtmark","våtmark","våtmark","våtmark","våtmark"],["T2","T32","T32","V9","T2","L4","V9","T32","V9","T1","T12","T18","T2","T21","T29","T31","T32","T33","T34","T41","L4","V1","V10","V9","L4","V1","V3","V4","V9","T12","T32","T33","T41","V10","T15","T18","T21","T29","T8","T31","T34","T21","T29","T32","T41","V10","T31","T12","T32","T33","T34","T41","V10","T1","T12","T15","T18","T2","T20","T21","T29","T8","T31","T33","T34","T41","V1","V3","V4","V9","T1","T12","T15","T17","T18","T2","T20","T21","T29","T31","T34","L4","V1","V9","T1","T15","T18","T32","T33","L4","V4","V9","V1","V3","V3"],[0.711262375853877,17.2892756436555,17.3183852838282,20.5462605430184,0.867533615887518,2.12141082941421,20.5462605430184,17.2892756436555,20.5462605430184,0.258522295111064,5.31240419413453,11.2210640471648,0.867533615887518,2.51678608713803,0.173325803167218,368.076228072285,180.328455247712,3.74860715696163,530.333666293998,1.30060426791085,2.12141082941421,9.54045557411458,5.70309815289171,10.8599681769678,2.12141082941421,14.0084807669331,69.4435234117271,0.054693214794524,20.5462605430184,5.31240419413453,180.328455247712,3.74860715696163,1.30060426791085,5.70309815289171,0.00615737757466229,11.2210640471648,2.51678608713803,0.173325803167218,0.256328309129139,368.076228072285,530.333666293998,2.51678608713803,0.173325803167218,180.328455247712,1.30060426791085,5.70309815289171,368.076228072285,5.31240419413453,180.328455247712,3.74860715696163,530.333666293998,1.30060426791085,5.70309815289171,0.327710356523457,5.31240419413453,0.00615737757466229,11.2210640471648,0.867533615887518,0.0229694300823598,2.51678608713803,0.173325803167218,0.256328309129139,368.076228072285,3.74860715696163,530.333666293998,1.30060426791085,14.0138844644449,69.4435234117271,0.054693214794524,10.8599681769678,0.153160113321643,5.31240419413453,0.00615737757466229,0.458001267138326,11.2210640471648,0.867533615887518,0.0229694300823598,2.51678608713803,0.173325803167218,368.076228072285,530.333666293998,2.12141082941421,0.238033984743542,20.5462605430184,0.0786055189402917,0.00615737757466229,11.2210640471648,0.0291096401727506,3.74860715696163,2.12141082941421,0.054693214794524,20.5462605430184,13.7758504797014,69.4435234117271,68.1294716887303]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>NiN_code<\/th>\n      <th>Ecosystem<\/th>\n      <th>NiN_mainType<\/th>\n      <th>km2<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"scrollY":true,"pageLength":10,"columnDefs":[{"className":"dt-right","targets":4},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ```
 
-<p class="caption">(\#fig:unnamed-chunk-80)List of unique combinatios of NiN variable codes and naturetypes with the summed area for which we have this data.</p>
+<p class="caption">(\#fig:unnamed-chunk-78)List of unique combinatios of NiN variable codes and naturetypes with the summed area for which we have this data.</p>
 </div>
 
-## Export data
-Exporting the table with the summary statistics and other information that I compled for each nature type in the three main ecosystems. This can be merged with the main dataset in order to subset according to a specific research question. 
+## Export data {#exp-natureType-summary}
+Exporting the table with the summary statistics and other information that I compiled for each nature type in the three main ecosystems. This can be merged with the main data set in order to subset according to a specific research question. 
 
 
 ```r
@@ -1418,9 +1452,9 @@ saveRDS(ntyp_fill2, "data/naturetypes/natureType_summary.rds")
 ```
 
 
-Note also that the main dataset still contains some localities where there is a mis-match between the nature type definition and the NiN mapping uits recorded in the field. Each researcher should decide to include or exclude these. 
+Note also that the main data set still contains some localities where there is a mis-match between the nature type definition and the NiN mapping uits recorded in the field. Each researcher should decide to include or exclude these. 
 
-The main data set also includes mosaic localities, that are less suitable to use as ground trouth data for remote sensing methods.
+The main data set also includes mosaic localities, that are less suitable to use as ground truth data for remote sensing methods.
 
 
 
@@ -1430,9 +1464,9 @@ Here is a deeper look into the causes for why some localities are recorded with 
 Lets have a look at how the NiN main types (recorded in the field) cover the different *hovedøkosystem* when we exclude *Hule eiker* and all localities that have more than one NiN main type.
 
 ```r
-dat_red <- dat_melt[dat_melt$n_ninkartleggingsenheter==1 & 
+dat_red <- dat_melt[dat_melt$n_ninKartleggingsenheter==1 & 
                       dat_melt$naturtype != "Hule eiker" &
-                      dat_melt$mosaikk == "Nei",]
+                      dat_melt$mosaikk == "nei",]
 ```
 
 
@@ -1440,21 +1474,15 @@ Let's focus in on our three targeted ecosystems.
 
 ```r
 dat_red_tally <- stats::aggregate(data = dat_red,
-                                  area~hovedøkosystem+ninkartleggingsenheter3, FUN = length)
+                                  area~hovedøkosystem+ninKartleggingsenheter3, FUN = length)
 names(dat_red_tally)[3] <- "count"
 ```
 
 
-```r
-target <- c("Semi-naturlig mark",
-            "Våtmark",
-            "Naturlig åpne områder under skoggrensa")
-```
-
 
 ```r
 ggplot(dat_red_tally[dat_red_tally$hovedøkosystem %in% target,],
-       aes(x = ninkartleggingsenheter3,
+       aes(x = ninKartleggingsenheter3,
                y = count))+
   geom_bar(
            fill="grey",
@@ -1473,14 +1501,14 @@ ggplot(dat_red_tally[dat_red_tally$hovedøkosystem %in% target,],
 ```
 
 <div class="figure">
-<img src="naturtype_files/figure-html/unnamed-chunk-85-1.png" alt="Number of localities for each combination of main ecosystem and NiN main type" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-85)Number of localities for each combination of main ecosystem and NiN main type</p>
+<img src="naturtype_files/figure-html/unnamed-chunk-82-1.png" alt="Number of localities for each combination of main ecosystem and NiN main type" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-82)Number of localities for each combination of main ecosystem and NiN main type</p>
 </div>
 
 Still some weird cases which I will look at in turn below, trying to understand how they came to be recorded in this way.
 
-#### Naturlig åpne områder under skoggrensa
-Listing the NiN main types recorded for nature types belonging to *Naturlig åpne områder under skoggrensa*, but which clearly don't belong there:
+#### naturligÅpneOmråderUnderSkoggrensa
+Listing the NiN main types recorded for nature types belonging to *naturligÅpneOmråderUnderSkoggrensa*, but which clearly don't belong there:
 
 * V10 (semi-naturlig våteng)
     + One case of Åpen flomfastmark wrongly associated with V10 whan it should be T18.
@@ -1510,12 +1538,12 @@ Listing the remaining NiN main types:
 ```r
 `%!in%` <- Negate(`%in%`)
 dat_red2 <- dat_red[
-  dat_red$hovedøkosystem!="Naturlig åpne områder under skoggrensa" |
-  dat_red$hovedøkosystem=="Naturlig åpne områder under skoggrensa" & 
-    dat_red$ninkartleggingsenheter3 %!in% c("T30", "T32", "T33", "V10"),]
+  dat_red$hovedøkosystem!="naturligÅpneOmråderUnderSkoggrensa" |
+  dat_red$hovedøkosystem=="naturligÅpneOmråderUnderSkoggrensa" & 
+    dat_red$ninKartleggingsenheter3 %!in% c("T30", "T32", "T33", "V10"),]
 ```
 
-This resulted in deleting 19m localities.
+This resulted in deleting 20m localities.
 
 #### Semi-naturlig mark
 Listing the NiN main types recorded for nature types belonging to *Semi-naturlig mark*, but which clearly don't belong there:
@@ -1544,11 +1572,11 @@ Listing the remaining NiN-main types:
 
 ```r
 dat_red3 <- dat_red2[
-  dat_red2$hovedøkosystem!="Semi-naturlig mark" |
-  dat_red2$hovedøkosystem=="Semi-naturlig mark" & dat_red2$ninkartleggingsenheter3 %!in% c("V9", "T4", "T35", "T3", "T12", "T1"),]
+  dat_red2$hovedøkosystem!="semi-naturligMark" |
+  dat_red2$hovedøkosystem=="semi-naturligMark" & dat_red2$ninKartleggingsenheter3 %!in% c("V9", "T4", "T35", "T3", "T12", "T1"),]
 ```
 
-This resulted in the deletion of 57 localities.
+This resulted in the deletion of 87 localities.
 
 #### Våtmark
 Listing the NiN main types recorded for nature types belonging to *Våtmark*, but which clearly don't belong there.
@@ -1570,9 +1598,9 @@ Våtmark doesn't distinguish between semi-natural and natural, so all V-types ar
 
 ```r
 dat_red4 <- dat_red3[
-  dat_red3$hovedøkosystem!="Våtmark" |
-  dat_red3$hovedøkosystem=="Våtmark" & dat_red3$ninkartleggingsenheter3 %!in% c("T4", "T30", "T31", "T32", "V11", "V12", "V13"),]
+  dat_red3$hovedøkosystem!="våtmark" |
+  dat_red3$hovedøkosystem=="våtmark" & dat_red3$ninKartleggingsenheter3 %!in% c("T4", "T30", "T31", "T32", "V11", "V12", "V13"),]
 ```
-This resulted in the deletion of 31 localities.
+This resulted in the deletion of 33 localities.
 
-
+In total 140 localities, or 0.2% of localities, have a field-recorded NiN main that don't match the definition of the nature type. I see this as a symptom of a bigger problem with data validation.

@@ -1,0 +1,17 @@
+abbrev	bit	nodata	bare_ground	name	unit	navn	beskrivelse	grass_mapset	color_table
+sdfsw	16	65535	65534	fresh snow depth	mm	Nysnødybde	Verdier i fil i 16bit integer verdier som angir mm snødybde.	gt_Meteorology_Norway_seNorge_FreshSnowDepth_days	
+fsw	8	255	254	fresh snow	mm (water equivalent)	Nysnø	Verdier angir mm vannekvivalent.	gt_Meteorology_Norway_seNorge_FreshSnow_days	
+sd	16	65535		snow depth	mm	Snødybde 	Verdier angir mm snødybde.	gt_Meteorology_Norway_seNorge_SnowDepth_days	
+age	8	255	254	snow age	number of days since last snowfall	Snøens alder	Verdiene angir antall dager siden siste snøfall.	gt_Meteorology_Norway_seNorge_SnowAge_days	
+swe	16	65535		snow water equivalent	1/10 mm (water equivalent)	Snømengde 	Verdiene angir 1/10mm vannekvivalent. Altså en verdi på 102 er 10.2 mm vann.	gt_Meteorology_Norway_seNorge_SnowAmount_days	
+#swepr	no longer included
+#swepr	16	65535		snow water equivalent percentage	1/10 %	Prosentandel swe	Veldig uklar beskrivelse gitt av NVE. Må sjekkes!	gt_Meteorology_Norway_seNorge_SnowAmountPercentage_days	
+qsw	8	255	254	snow melt	mm (water equivalent)	Snøsmelting	Verdiene angir mm vannekvivalent.	gt_Meteorology_Norway_seNorge_SnowMelt_days	
+lwc	8	255	254	free water content in snow	1/10 % free water in the snow layer	Snøtilstand	Verdien angir i prosent hvor mye fritt vann det er i snøpakka. Oppgitt i 1/10 %. En verdi på 45 er altså 4.5%.	gt_Meteorology_Norway_seNorge_SnowFreeWaterContent_days	
+gwb_q	16	65535		runoff	1/10 mm	Avrenning	Angir avrenning i 1/10mm vann. En verdi på 34 er altså 3.4 mm.	gt_Meteorology_Norway_seNorge_Runoff_days	
+gwb_eva	8	255		evapotranspiration	1/10 mm	Fordamping	Angir fordampning i 1/10 mm vann.	gt_Meteorology_Norway_seNorge_Evapotranspiration_days	
+gwb_gwtcl	8	255		ground water condition	24h percentile of the normal period	Grunnvannstilstand	Verdien angir hvilken døgnpercentilene i normalperioden som verdien tilhører. Verdiene er her 5, 25, 50, 75 og 95.	gt_Meteorology_Norway_seNorge_GroundWaterCondition_days
+gwb_sssdev	16	32767		water capacity of the soil	mm in relation to maximum value of the normal period	Jordas vannkapasitet	Verdien angir lagerkapasiteten (i mm) i forhold til maxverdien registrert i 30 årsperioden (1981-2010). Negativ verdi betyr altså at dagens vannlager verdi er over maxverdien.	gt_Meteorology_Norway_seNorge_WaterCapacitySoil_days	
+gwb_sssrel	16	65535		current water saturation of the soil	% of the maximum value of the normal period 	Vannmetting i jord	Dagens vannlager verdi i prosent av den samme maksimale verdien som brukes i gwb_ssdev. En verdi over 100 angir altså at maksverdien er overskredet.	gt_Meteorology_Norway_seNorge_WaterSaturationSoil_days	
+tm	16	65535		temperature	celsius	Temperatur	Verdien angir grader i Celsius (re-skalert fra tiendels Kelvin, der en verdi på 2811 er (2811-2731)/10 = 8.0 C.	gt_Meteorology_Norway_seNorge_Temperature_days	celsius	
+rr	16	65535		precipitation	mm	Nedbør	Verdien angir nedbør i mm (re-skalert fra tiendels mm).	gt_Meteorology_Norway_seNorge_Precipitation_days	precipitation_daily
