@@ -44,21 +44,21 @@ pData <- ifelse(dir == "C:",
 
 <!-- Document you work below. Try not to change  the headers too much. Data can be stored on NINA server. Since the book is rendered on the R Server this works fine, but note that directory paths are different on the server compared to you local machine. If it is not too big you may store under /data/ on this repository -->
 
-## Introduction
+## Introduction[?]
 
-Here we will develop indicators of ecological condition for Norway, based on the distribution of biomass between trophic levels - specifically between vegetation and vertebrate consumers. This includes three trophic levels, plants, herbivores and carnivores. Indicators of trophic interactions are based on deviation between the observed biomass at each consumer trophic level from the expected biomass based on the biomass at the prey trophic level. The expected biomass estimates are derived from global relationships between plants and vertebrate herbivores ([Fløjgaard et al. 2022](https://doi.org/10.1111/1365-2664.14047)) and between vertebrate prey and predators ([Hatton et al 2015](https://www.science.org/doi/pdf/10.1126/science.aac6284?casa_token=mM3vaCIMkpAAAAAA:bo4aODtkJORM0kIeFfezII4T_0wo7Y7X8ktWxI6vHN64sGmMw9Xi9xCc_g33c437swJaeTeiEE_N))
+Here we will develop indicators of ecological condition for Norway, based on the distribution of biomass between trophic levels – specifically between vegetation and vertebrate consumers. This includes three trophic levels, plants, herbivores and carnivores. Indicators of trophic interactions are based on deviation between the observed biomass at each consumer trophic level from the expected biomass based on the biomass at the prey trophic level. The expected biomass estimates are derived from global relationships between plants and vertebrate herbivores ([Fløjgaard et al. 2022](https://doi.org/10.1111/1365-2664.14047)) and between vertebrate prey and predators ([Hatton et al 2015](https://doi.org/10.1126/science.aac6284)).
 
 As the plant biomass level we use Net Primary Productivity. MODIS NPP was selected since it provides the highest temporal extent of available data sources (1999 to present). Spatial resolution is low relative to other remote sensing sources, however, the spatial resolution is still far higher than the consumer data, so the temporal extent was prioritised.
 
-The herbivore data is an extension of the data presented in Austrheim et al. 2008 <https://onlinelibrary.wiley.com/doi/pdf/10.2981/10-038> and Speed et al. 2015 <https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0217166>. For the development of the trophic interaction indicators the same methods were applied to herbivore data going back to 1907 (contra 1949 in the two studies above). This data was extracted by Gunnar Austrheim (livestock) and Erling J. Solberg (wild cervids). In each dataset, the metabolic biomass and the raw biomass of a given species is provided for each year and municipality. The 2007 municipalities were used. The data were rasterized to the same grid as the NPP data.
+The herbivore data is an extension of the data presented in [Austrheim et al. (2008)](https://doi.org/10.2981/10-038) and [Speed et al. (2015)](https://doi.org/10.1371/journal.pone.0217166). For the development of the trophic interaction indicators the same methods were applied to herbivore data going back to 1907 (contra 1949 in the two studies above). This data was extracted by Gunnar Austrheim (livestock) and Erling J. Solberg (wild cervids). In each dataset, the metabolic biomass and the raw biomass of a given species is provided for each year and municipality. The 2007 municipalities were used. The data were rasterized to the same grid as the NPP data.
 
 Metabolic biomass measures were used in the previous studies on Norwegian herbivores cited above. However, for consistency with the global studies used to find predicted biomass, we use raw (unscaled) biomass here.
 
-Herbivore species are wild herbivores: moose/elg, red deer/hjort, roe deer/rådyr, wild reindeer/villrein and livestock: cattle/storfe, sheep/sau, horses/hest, goats/geit and semi-domestic reindeer/tamrein
+Herbivore species are wild herbivores: moose/elg, red deer/hjort, roe deer/rådyr, wild reindeer/villrein; and livestock: cattle/storfe, sheep/sau, horses/hest, goats/geit and semi-domestic reindeer/tamrein.
 
-The carnivore data is taken from back-cast population modelling for the large carnivores in Norway (wolf/ulv, brown bear/bjørn, lynx/gaupe and wolverine/jerv). The data was based on hunting statistics, and was collated and modelled by Anna Sobocinski in a master thesis: <https://ntnuopen.ntnu.no/ntnu-xmlui/handle/11250/3047580> The thesis also presented metabolic biomass, but we use raw biomass to make the indicators. This data was also rasterized.
+The carnivore data is taken from back-cast population modelling for the large carnivores in Norway (wolf/ulv, brown bear/bjørn, lynx/gaupe and wolverine/jerv). The data was based on hunting statistics, and was collated and modelled by Anna Sobocinski in a [master thesis](https://ntnuopen.ntnu.no/ntnu-xmlui/handle/11250/3047580). The thesis also presented metabolic biomass, but we use raw biomass to make the indicators. This data was also rasterized.
 
-We calculate indicators (1) across all ecosystems and the total consumer communities (all localities and all herbivores and all carnivores) and (2) specific indicators for each main ecosystem type
+We calculate indicators (1) across all ecosystems and the total consumer communities (all localities and all herbivores and all carnivores) and (2) specific indicators for each main ecosystem type.
 
 ## Part 1: Total communities
 
@@ -93,7 +93,7 @@ norcounty<-norcounty_shp %>%
 
 Now we can plot the raw biomass data.
 
-First NPP
+First NPP:
 
 ```{r}
 #| label: Plotting basic data
@@ -104,12 +104,12 @@ npprast_yrs<-npprast[[names(npprast)%in%c("NPP_2000","NPP_2009","NPP_2015")]]
 
 ggplot()+geom_sf(data=norcounty,fill="white",lwd=0.1)+
          geom_spatraster(data=npprast_yrs)+facet_grid(~lyr)+
-         scale_fill_continuous(low="lightgreen",high="darkgreen",na.value=NA,expression('kgC km'^-2~'year'^-1))+theme_bw()
+         scale_fill_continuous(low="lightgreen",high="darkgreen",na.value=NA,expression('kg C km'^-2~'year'^-1))+theme_bw()
 
 
 ```
 
-Next total herbivore biomass
+Next total herbivore biomass:
 
 ```{r}
 #| label: PlotTotalHerbivoreBiomass
@@ -123,12 +123,12 @@ names(totalherbivorebiomass)<-allyears_vect
 totalherbivorebiomass
 ggplot()+geom_sf(data=norcounty,fill="white",lwd=0.1)+
   geom_spatraster(data=totalherbivorebiomass)+facet_wrap(~lyr)+
-  scale_fill_continuous(trans='log10',low="lightskyblue",high="darkblue", na.value=NA,expression('Herbivore \nbiomass \nkg km'^-2 ))+theme_bw()
+  scale_fill_continuous(trans='log10',low="lightskyblue",high="darkblue", na.value=NA,expression(atop('Herbivore \nbiomass', 'kg km'^-2)))+theme_bw()
 
 
 ```
 
-And finally total carnivore biomass
+And finally total carnivore biomass:[?]
 
 ```{r}
 #| label: Plot carnivore biomass
@@ -139,11 +139,11 @@ totalcarnivores<-carnivorerast[[49:60]]
 
 ggplot()+geom_sf(data=norcounty,fill="white",lwd=0.1)+
   geom_spatraster(data=totalcarnivores)+facet_wrap(~lyr)+
-  scale_fill_continuous(low='white',high='red', na.value=NA, expression('Carnviore\nBiomass \nkg km'^-2 ))+theme_bw()
+  scale_fill_continuous(low='white',high='red', na.value=NA, expression(atop('Carnviore\nbiomass', 'kg km'^-2)))+theme_bw()
 
 ```
 
-Now we use the NPP to estimate the expected herbivore biomass Fløjgaard et al. 2015 Figure 1/Table 1 Global relationship (mean NPP1km)
+Now we use the NPP to estimate the expected herbivore biomass (Fløjgaard et al. 2015, Figure 1/Table 1, Global relationship "mean NPP1km"):
 
 ```{r}
 #| label: Calculating expected herbivore biomass
@@ -160,13 +160,13 @@ ggplot()+geom_sf(data=norcounty,fill="white",lwd=0.1)+
 
 ```
 
-Now we can calculate the deviation between the observed herbivore biomass and the expected herbivore biomass. We calculate this as a % change.
+Now we can calculate the deviation between the observed herbivore biomass and the expected herbivore biomass. We calculate this as a % change:
 
-100 x (ActualBiomass -- ExpectedBiomass)/(ExpectedBiomass +1)
+100 x (ActualBiomass -- ExpectedBiomass) / (ExpectedBiomass +1)
 
 To display this we truncated to 100%\|-100%
 
-A value of 0 indicates that the locality has expected biomass. Value of 100 indicates that the locality has 100% (or more) higher biomass than expected Value of -100 indicates that the locality has 100% (or more) lower biomass than expected
+A value of 0 indicates that the locality has expected biomass. Value of 100 indicates that the locality has 100% (or more) higher biomass than expected. Value of -100 indicates that the locality has 100% (or more) lower biomass than expected.
 
 «Good» condition assumed to be 0 to \|40%\|
 
@@ -187,7 +187,7 @@ totalherbivorebiomass_npp<-totalherbivorebiomass[[names(totalherbivorebiomass) %
  ggplot()+geom_sf(data=norcounty,fill="white",lwd=0.1)+
    geom_spatraster(data=diffherb)+
    ggtitle("Difference from expected herbivore biomass")+
-   scale_fill_distiller(type="div",limit=c(-100,100),oob=squish, na.value=NA,'% Difference from \nexpected biomass')+
+   scale_fill_distiller(type="div",limit=c(-100,100),oob=squish, na.value=NA,'% difference from \nexpected biomass')+
    facet_wrap(~lyr)+theme_bw()
  
 #writeRaster(diffherb,paste0(pData,"/Trophic_levels/HerbivoreBiomassDiffExpected.tif"),overwrite=TRUE)
@@ -196,7 +196,7 @@ totalherbivorebiomass_npp<-totalherbivorebiomass[[names(totalherbivorebiomass) %
 
 Above we see that on the West coast, Trøndelag, Oppland have double herbivore biomass than expected. There is more herbivore biomass than expected in parts of Finnmark, while Nordland and Lierne have lower herbivore biomass than expected based on NPP. Vestfold & Telemark (and parts of Viken) change from having more herbivore biomass than expected in 2000 to less than expected in 2015 (this is consistent with reduction in moose population in these regions)
 
--- Next we move on to estimate the expected carnivore biomass based on observed herbivore biomass and calculate the deviation as a % difference from expected as for the herbivores. This is based on Hatton et al. 2015 Figure 1 (predator prey biomass relationships)
+-- Next we move on to estimate the expected carnivore biomass based on observed herbivore biomass and calculate the deviation as a % difference from expected as for the herbivores. This is based on Hatton et al. (2015, Figure 1, predator prey biomass relationships).
 
 ```{r}
 #| label: Expected carnivore biomass
@@ -223,7 +223,7 @@ names(diffcarn)<-allyears_vect
 ggplot()+geom_sf(data=norcounty,fill="white",lwd=0.1)+
   geom_spatraster(data=diffcarn)+
   ggtitle('Difference from expected carnivore biomass')+
-  scale_fill_distiller(type="div",limit=c(-100,100),oob=squish,na.value=NA,"%difference from \nexpected biomass")+
+  scale_fill_distiller(type="div",limit=c(-100,100),oob=squish,na.value=NA,"% difference from \nexpected biomass")+
   facet_wrap(~lyr)+theme_bw()
 
 #writeRaster(expected_carnivore_biomass,paste0(pData,"/Trophic_levels/expectedcarnivorebiomass.tif"),overwrite=TRUE)
@@ -238,7 +238,7 @@ From the above we see that Norway has had less carnivore biomass than expected b
 
 We now create biomass ratios for specific habitat types. To do this we need an ecosystem map and to place each consumer species within each habitat.
 
-Indicators were not developed for mire ecosystems. This decision was taken in conversation with the mire ecosystem group, on the basis that herbivores have minimum use of the mrie ecosystems.
+Indicators were not developed for mire ecosystems. This decision was taken in conversation with the mire ecosystem group, on the basis that herbivores have minimum use of the mire ecosystems.
 
 Table of the consumer species associated with each habitat.
 
@@ -250,7 +250,7 @@ Table of the consumer species associated with each habitat.
 | Naturlig åpne områder | Sau, geit, storfe       | Hjort             | Gaupe, ulv        |
 | Myr                   | \-\--                   | \-\--             | \-\--             |
 
-Since a suitable ecosystem map is still under development, we use the AR50 land-cover map as a place-holding solution. AR50 does not give a good representation of naturlig åpen områder or semi-naturlig mark, so we demonstrate the habitat specific biomass distributions using the forest class in AR50 and the species outlined above.
+Since a suitable ecosystem map is still under development, we use the AR50 land-cover map as a place-holding solution. AR50 does not give a good representation of naturlig åpne områder or semi-naturlig mark, so we demonstrate the habitat specific biomass distributions using the forest class in AR50 and the species outlined above.
 
 ```{r}
 #| label: Habitat specific rasters
