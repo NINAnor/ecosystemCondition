@@ -28,3 +28,5 @@ vignettes/*.pdf
 .Renviron
 ecosystemCondition.rds
 test.html
+# RDS files
+*.rds
