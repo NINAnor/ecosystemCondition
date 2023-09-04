@@ -308,6 +308,8 @@ plotNI_Map(shp = CustomNI_map,
 ### Uncertainty
 Based on recent work done as part of a pilot study on visualizing NI products (https://ninanor.github.io/NIviz/index.html) I have also implemented some more advanced plotting functions. The first one plots a time-series as well, but including the entire uncertainty distribution, not just summary statistics:
 ```{r, results = FALSE, message = FALSE}
+Index <- Index <- CustomNI$CustomIndex
+
 plotNI_DensityRidgeTS(Index = Index, 
                       OutputType = OutputType, 
                       ecosystem = ecosystem_use, 
