@@ -1,0 +1,28 @@
+﻿ID,Navn,Nøkkelindikator_NI2020,Funksjon,Datagrunnlag,Forventet_med_NI2025,Merknader
+7,Atlantisk høgmyr areal,Ja,ikke definert,Ekspertvurdering. Tilstandsnivå 1-5 på kommunenivå. ,Ja,Indikatoroppdatering realistisk i følge ansvarlig (Jarle Bjerke)
+338,Brunmyrak,Nei,Primærprodusent,Modellering av karplante-forekomst basert på GBIF data. ,Ja,Automatisert arbeidsflyt satt opp. 
+340,Dikesoldogg,Nei,Primærprodusent,Modellering av karplante-forekomst basert på GBIF data. ,Ja,Automatisert arbeidsflyt satt opp. 
+300,Dobbeltbekkasin,Nei,Mellompredator,"Beregning fra / modellering av TOV-E data, samt noe (?) ekspertvurdering. ",Ja,Arbeidsflyt delvis automatisert. Videreutvikles i løpet av 2023. 
+211,Engmarihand,Nei,Primærprodusent,Modellering av karplante-forekomst basert på GBIF data. ,Ja,Automatisert arbeidsflyt satt opp. 
+301,Enkeltbekkasin,Nei,Mellompredator,"Beregning fra / modellering av TOV-E data, samt noe (?) ekspertvurdering. ",Ja,Arbeidsflyt delvis automatisert. Videreutvikles i løpet av 2023. 
+51,Fjellgittermose,Nei,Primærprodusent,Ekspertvurdering. ,Nei,Det kommer ikke til å være datagrunnlag for oppdatering av indikatoren mot NI 2025. 
+303,Gluttsnipe,Nei,Mellompredator,"Beregning fra / modellering av TOV-E data, samt noe (?) ekspertvurdering. ",Ja,Arbeidsflyt delvis automatisert. Videreutvikles i løpet av 2023. 
+304,Grønnstilk,Nei,Mellompredator,"Beregning fra / modellering av TOV-E data, samt noe (?) ekspertvurdering. ",Ja,Arbeidsflyt delvis automatisert. Videreutvikles i løpet av 2023. 
+305,Gulerle,Nei,Mellompredator,"Beregning fra / modellering av TOV-E data, samt noe (?) ekspertvurdering. ",Ja,Arbeidsflyt delvis automatisert. Videreutvikles i løpet av 2023. 
+337,Hvitmyrak,Nei,Primærprodusent,Modellering av karplante-forekomst basert på GBIF data. ,Ja,Automatisert arbeidsflyt satt opp. 
+420,Kysttorvmose,Nei,Primærprodusent,Ekspertvurdering. ,Nei,Det kommer ikke til å være datagrunnlag for oppdatering av indikatoren mot NI 2025. 
+14,Mosesumpløper,Nei,Mellompredator,Ekspertvurdering. ,Nei,Det kommer ikke til å være datagrunnlag for oppdatering av indikatoren mot NI 2025. 
+307,Myrsnipe,Nei,Mellompredator,"Beregning fra / modellering av TOV-E data, samt noe (?) ekspertvurdering. ",Ja,Arbeidsflyt delvis automatisert. Videreutvikles i løpet av 2023. 
+125,Myrtelg,Nei,Primærprodusent,Modellering av karplante-forekomst basert på GBIF data. ,Ja,Automatisert arbeidsflyt satt opp. 
+142,Palsmyr areal,Ja,ikke definert,Ekspertvurdering med hensyn til overvåkingsdata fra 2007. ,uavklart,"Tidligere overvåkingsprogramm for palsmyr er nedlagt, og ny overvåkingsprogramm er ikke under regi til NINA. Det er uavklart hvorvidt den nye overvåkingsprogrammet er kompatibelt med det tidligere og med rammeverket generelt. "
+436,Tamrein,Nei,Plantespisere og filterspisere,Offentlige tidsserier for antall tamrein på kommunenivå. ,Nei,"Tamrein droppes fra NI2025 siden den har lite med ""ville bestander"" å gjøre og er svært kontroversiell."
+308,Rødstilk,Nei,Mellompredator,"Beregning fra / modellering av TOV-E data, samt noe (?) ekspertvurdering. ",Ja,Arbeidsflyt delvis automatisert. Videreutvikles i løpet av 2023. 
+167,Sennegras,Nei,Primærprodusent,Modellering av karplante-forekomst basert på GBIF data. ,Ja,Automatisert arbeidsflyt satt opp. 
+309,Sivsanger,Nei,Mellompredator,"Beregning fra / modellering av TOV-E data, samt noe (?) ekspertvurdering. ",Ja,Arbeidsflyt delvis automatisert. Videreutvikles i løpet av 2023. 
+310,Sivspurv,Nei,Mellompredator,"Beregning fra / modellering av TOV-E data, samt noe (?) ekspertvurdering. ",Ja,Arbeidsflyt delvis automatisert. Videreutvikles i løpet av 2023. 
+339,Smalsoldogg,Nei,Primærprodusent,Modellering av karplante-forekomst basert på GBIF data. ,Ja,Automatisert arbeidsflyt satt opp. 
+311,Småspove,Nei,Mellompredator,"Beregning fra / modellering av TOV-E data, samt noe (?) ekspertvurdering. ",Ja,Arbeidsflyt delvis automatisert. Videreutvikles i løpet av 2023. 
+184,Stakesvanemose,Nei,Primærprodusent,Ekspertvurdering. ,Nei,Det kommer ikke til å være datagrunnlag for oppdatering av indikatoren mot NI 2025. 
+196,Sveltstarr,Nei,Primærprodusent,Modellering av karplante-forekomst basert på GBIF data. ,Ja,Automatisert arbeidsflyt satt opp. 
+313,Trane,Nei,Mellompredator,"Beregning fra / modellering av TOV-E data, samt noe (?) ekspertvurdering. ",Ja,Arbeidsflyt delvis automatisert. Videreutvikles i løpet av 2023. 
+216,Villrein,Nei,Plantespisere og filterspisere,Integrert modellering av ulike typer overvåkingsdata. ,Ja,"Ny arbeidsflyt og oppdatering av modellen er ønskelig, men ikke finansiert så lenge. Noe uenighet om tilnærming, samt overlap med villreinnormen. "
