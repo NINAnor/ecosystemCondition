@@ -25,7 +25,6 @@ vignettes/*.pdf
 *.utf8.md
 *.knit.md
 # R Environment Variables
-.Renviron
 ecosystemCondition.rds
 test.html
 # RDS files
