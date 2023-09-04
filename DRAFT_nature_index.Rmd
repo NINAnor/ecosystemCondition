@@ -2,6 +2,7 @@
 title: "Nature Index product"
 output:
   html_document
+bibliography: book.bib
 ---
 
 
@@ -55,7 +56,7 @@ The Norwegian Nature Index (NI) is a composite metric for quantifying the state 
 
 NI is a composite index made up of single- and multi-species (abundance) indicators that are scaled to fall between 0 and 1 (where 0 = absent/extinct and 1 = abundance corresponding to expected abundance in a natural environment with minimum human disturbance). During the aggregation process, indicators are  weighed on three levels: functional group (trophic weights), spatial coverage (area weights)and key function (key weights).
 
-The methodology for calculating NI is well established and has been described in  detail in NINA reports 347, 425, 426, 797, 1130, and 1886 (https://www.nina.no/Publikasjoner/NINA-Rapport) and several international scientific articles (e.g. https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0018930) and will not be elaborated on further here. 
+The methodology for calculating NI is well established and has been described in  detail in NINA reports 347 [@nybo2008a], 425 [@nybo2008b], 797 [@pedersen2012], 1130 [@pedersen2015], and 1886 [@jakobsson2020] and several international scientific articles [e.g. @certain2011] and will not be elaborated on further here. 
 
 It is important to note that the NI products that are used indicators in Ecosystem Condition Assessment and the Norwegian Nature Index that has been previously published, and will be published again in 2025, as a national biodiversity assessment are not identical. 
 We use modified versions of the NI in Ecosystem Condition Assessments, the details of which will be described below. Moving forward, it will be important to stress this distinction, and we will therefore start talking about "NI products" when referring to composite indices built based on data in the Nature Index Database (see below) that are not identical to the regularly published national assessments (i.e. what is published on https://www.naturindeks.no/).
