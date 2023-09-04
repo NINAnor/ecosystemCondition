@@ -141,8 +141,7 @@ We present some thoughts and suggestions regarding these latter questions in the
 [This section will hold some insights and suggestions based on a discussion to be held once Anders is back from leave. Content will be added later.]
 
 ## References
-TBA
-
+<div id="refs"></div>
 
 ## Analyses
 The following analysis workflow is almost entirely arranged in functions. The functions for the different steps are from the NIflex R package (https://github.com/NINAnor/NIflex).Many of the NIflex functions call on functions from NIcalc (https://github.com/NINAnor/NIcalc), the R package written for entering and extracting data from the NI database and calculating NI products from it. 
