@@ -374,7 +374,7 @@ there is no difference between `i_yyyy` and `v_yyyy`.
 Lastly, we can save the results in the designated folder: 
 
 ```{r}
-saveRDS(CustomNI, "indicators/indicatorMaps/naturindeks.rds")
+saveRDS(CustomNI, "indicators/naturindeks.rds")
 saveRDS(CustomNI_map, "indicators/indicatorMaps/naturindeks_map.rds")
 ```
 
