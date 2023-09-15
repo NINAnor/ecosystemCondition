@@ -34,6 +34,10 @@ library(data.table)
 library(terra)
 dir <- substr(getwd(), 1,2)
 
+pData <- ifelse(dir == "C:", 
+               "P:/41201785_okologisk_tilstand_2022_2023/data/",
+               "/data/P-Prosjekter2/41201785_okologisk_tilstand_2022_2023/data/")
+
 ```
 
 ```{r, echo=F}
@@ -325,7 +329,7 @@ write_stars(real_temp_summer, "/data/P-Prosjekter2/41201785_okologisk_tilstand_2
 
 
 ```{r, include=F}
-summer_median_temp <- read_stars("/data/P-Prosjekter2/41201785_okologisk_tilstand_2022_2023/data/climate_indicators/aggregated_climate_time_series/temp_median_summer.tiff",
+summer_median_temp <- read_stars(paste0(pData, "climate_indicators/aggregated_climate_time_series/temp_median_summer.tiff"),
                                  proxy=F)
 ```
 
@@ -394,7 +398,7 @@ saveRDS(summer_median_temp_ref, "/data/P-Prosjekter2/41201785_okologisk_tilstand
 ```
 
 ```{r, eval=T, include=F}
-summer_median_temp_ref <- readRDS("/data/P-Prosjekter2/41201785_okologisk_tilstand_2022_2023/data/climate_indicators/aggregated_climate_time_series/temp_median_summer_ref.RData")
+summer_median_temp_ref <- readRDS(paste0(pData, "climate_indicators/aggregated_climate_time_series/temp_median_summer_ref.RData"))
 ```
 
 Pivot and turn dimension into attributes, and rename attribute:
