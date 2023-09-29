@@ -1,0 +1,1878 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Chapter 1 Insect indicators | DRAFT_insectIndicators.knit</title>
+
+  
+   
+   <meta name="generator" content="placeholder" />
+  <meta property="og:title" content="Chapter 1 Insect indicators | DRAFT_insectIndicators.knit" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 1 Insect indicators | DRAFT_insectIndicators.knit" />
+  
+  
+  
+  <!-- JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script>
+    <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet" />
+    <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script>
+    <script src="libs/bs3compat-0.4.2/transition.js"></script>
+    <script src="libs/bs3compat-0.4.2/tabs.js"></script>
+    <script src="libs/bs3compat-0.4.2/bs3compat.js"></script>
+    <link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet" />
+    <script src="libs/bs4_book-1.0.0/bs4_book.js"></script>
+    <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+    <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script>
+
+  <!-- CSS -->
+  <style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+      <link rel="stylesheet" href="style.css" />
+  
+</head>
+
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book">
+    <a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title=""></a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+      </form>
+
+      <nav aria-label="Table of contents">
+        <h2>Table of contents</h2>
+        <div id="book-toc"></div>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="#">View book source <i class="fab fa-github"></i></a></li></p>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="col-sm-12 col-md-9 col-lg-7" id="content">
+<!--bookdown:title:end-->
+<!--bookdown:title:start-->
+<div id="insect-indicators" class="section level1" number="1">
+<h1><span class="header-section-number">Chapter 1</span> Insect indicators</h1>
+<p><br /></p>
+<p><em>Author and date:</em>
+Jens Åström 2023-09-29</p>
+<p><br /></p>
+<!--# Notes on this draft
+Most things are done but some things needs updates or touching up.
+
+Incomplete list of things that will change:
+
+* Upgrade genetic diversity calculation. The current calculation is just a placeholder, awaiting some new data from Marie. Waiting for software installation by IT. Unsure of timeline.
+* Calculate NorIns indicators on 5 year interval. (Moving window?)
+* Fix remaining comments in this draft inside hard brackets.-->
+<!-- Load all you dependencies here -->
+<!-- Fill in which ecosystem the indicator belongs to, as well as the ecosystem characteristic it should be linked to. It's OK to use some Norwegian here -->
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Ecosystem
+</th>
+<th style="text-align:left;">
+Økologisk egenskap
+</th>
+<th style="text-align:left;">
+ECT class
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Semi-naturlig mark
+</td>
+<td style="text-align:left;">
+Biologisk mangfold, Funksjonelle grupper innen trofiske nivåer, Funksjonelt viktige arter og biofysiske strukturer
+</td>
+<td style="text-align:left;">
+Functional state characteristics
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Semi-naturlig mark
+</td>
+<td style="text-align:left;">
+Biologisk mangfold, Funksjonelle grupper innen trofiske nivåer, Funksjonelt viktige arter og biofysiske strukturer
+</td>
+<td style="text-align:left;">
+Functional state characteristics
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Semi-naturlig mark
+</td>
+<td style="text-align:left;">
+Biologisk mangfold, Funksjonelle grupper innen trofiske nivåer, Funksjonelt viktige arter og biofysiske strukturer
+</td>
+<td style="text-align:left;">
+Functional state characteristics
+</td>
+</tr>
+</tbody>
+</table>
+<!-- Don't remove these three html lines -->
+<br />
+<br />
+<hr />
+<!-- Document you work below. Try not to change  the headers too much. Data can be stored on NINA server. Since the book is rendered on the R Server this works fine, but note that directory paths are different on the server compared to you local machine. If it is not too big you may store under /data/ on this repository -->
+<div id="introduction" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Introduction</h2>
+<p>We here show how to calculate a set of indicators for terrestrial insects in Norway. Two of them are adapted from earlier work on the Nature Index for Norway and use data from the Norwegian monitoring program on bumblebees and butterflies (<strong>NMBB</strong>). The others are developed during 2023, and use data from the Norwegian insect monitoring program (<strong>NorIns</strong>).</p>
+<p>This workflow is shortened by putting most of the underlying code in separate R-packages, which are freely available through Github. The relevant packages are <code>bombLepiSurv</code> <a href="https://github.com/jenast/bombLepiSurv" class="uri">https://github.com/jenast/bombLepiSurv</a> for the bumblebee and butterfly indicators (<strong>Not public yet</strong>), and <code>Norimon</code> <a href="https://github.com/jenast/Norimon" class="uri">https://github.com/jenast/Norimon</a> for the rest of the indicators.</p>
+<p>For the indicators from the NMBB program, community reference values has been elicited from experts, and is explained further below. For the indicators from the NorIns program, this is significantly harder to do, because of the size of the communities, lack of historical timeseries and changes in sampling and identification techniques. We therefore currently lack reference values for many of these indicators.</p>
+<p>Below is a list of the indicators calculated in this document, and their state of development. Some details is further expanded on below.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Dataset
+</th>
+<th style="text-align:left;">
+Indicator
+</th>
+<th style="text-align:left;">
+Norwegian type
+</th>
+<th style="text-align:left;">
+ECT
+</th>
+<th style="text-align:left;">
+Current geographical scope
+</th>
+<th style="text-align:left;">
+Indicator data
+</th>
+<th style="text-align:left;">
+Reference values
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+NMBB
+</td>
+<td style="text-align:left;">
+Bumblebees in semi-natural grasslands
+</td>
+<td style="text-align:left;">
+Funksjonelt viktige arter og biofysiske stukturer
+</td>
+<td style="text-align:left;">
+B1
+</td>
+<td style="text-align:left;">
+Sørlandet, Østfold-Vestfold, Vestlandet, Trøndelag
+</td>
+<td style="text-align:left;">
+Present
+</td>
+<td style="text-align:left;">
+Present
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NMBB
+</td>
+<td style="text-align:left;">
+Butterflies in semi-natural grasslands
+</td>
+<td style="text-align:left;">
+Funksjonelt viktige arter og biofysiske stukturer
+</td>
+<td style="text-align:left;">
+B1
+</td>
+<td style="text-align:left;">
+Sørlandet, Østfold-Vestfold, Vestlandet, Trøndelag
+</td>
+<td style="text-align:left;">
+Present
+</td>
+<td style="text-align:left;">
+Present
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NorIns
+</td>
+<td style="text-align:left;">
+Biomass of flying insects
+</td>
+<td style="text-align:left;">
+Funksjonelt viktige arter og biofysiske stukturer
+</td>
+<td style="text-align:left;">
+B2
+</td>
+<td style="text-align:left;">
+Sørlandet, Østlandet, Trøndelag, Nord-Norge
+</td>
+<td style="text-align:left;">
+Present
+</td>
+<td style="text-align:left;">
+Lacking
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NorIns
+</td>
+<td style="text-align:left;">
+Species richness of flying insects
+</td>
+<td style="text-align:left;">
+Biologisk mangfold
+</td>
+<td style="text-align:left;">
+B1
+</td>
+<td style="text-align:left;">
+Sørlandet, Østlandet, Trøndelag, Nord-Norge
+</td>
+<td style="text-align:left;">
+Present
+</td>
+<td style="text-align:left;">
+Lacking
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NorIns
+</td>
+<td style="text-align:left;">
+Species richness of pollinating insects
+</td>
+<td style="text-align:left;">
+Biologisk mangfold
+</td>
+<td style="text-align:left;">
+B1
+</td>
+<td style="text-align:left;">
+Sørlandet, Østlandet, Trøndelag, Nord-Norge
+</td>
+<td style="text-align:left;">
+Present
+</td>
+<td style="text-align:left;">
+Lacking
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NorIns
+</td>
+<td style="text-align:left;">
+Species richness of dung associated insects
+</td>
+<td style="text-align:left;">
+Biologisk mangfold
+</td>
+<td style="text-align:left;">
+B1
+</td>
+<td style="text-align:left;">
+Sørlandet, Østlandet, Trøndelag, Nord-Norge
+</td>
+<td style="text-align:left;">
+Present
+</td>
+<td style="text-align:left;">
+Lacking
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NorIns
+</td>
+<td style="text-align:left;">
+Quotent of Apocrita vs Symphyta species richness
+</td>
+<td style="text-align:left;">
+Funksjonelt viktige arter og biofysiske strukturer
+</td>
+<td style="text-align:left;">
+B2
+</td>
+<td style="text-align:left;">
+Sørlandet, Østlandet, Trøndelag, Nord-Norge
+</td>
+<td style="text-align:left;">
+Present
+</td>
+<td style="text-align:left;">
+Lacking
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NorIns
+</td>
+<td style="text-align:left;">
+Intraspesific genetic variation
+</td>
+<td style="text-align:left;">
+Biologisk mangfold
+</td>
+<td style="text-align:left;">
+B1
+</td>
+<td style="text-align:left;">
+Sørlandet, Østlandet, Trøndelag, Nord-Norge
+</td>
+<td style="text-align:left;">
+Present
+</td>
+<td style="text-align:left;">
+Lacking
+</td>
+</tr>
+</tbody>
+</table>
+<p>Many of these indicators are self-explanatory and don’t require much justification. <strong>Bumblebees in semi-natural grasslands</strong> and <strong>Butterflies in semi-natural grasslands</strong> are functionally important pollinators, and are as a community dependent on a varied herbaceous flora. They therefore both represent key functionality, as well as indicators of habitat quality. <strong>Biomass of flying insects</strong> represent a key functional characteristic in ecosystem functioning as food for insectivores, and as a response to habitat quality and management. <strong>Species richness of flying insects</strong> represents the total breadth of the insect community, and <strong>Species richness of pollinating insects</strong> complements the butterfly and bumblebee indicators in taxonomic breadth and spatial resolution.
+<strong>Species richness of dung associated insects</strong> represent a key functional group in decomposition, and function as an indicator of grazing intensity and diversity. <strong>Quotent of Apocrita vs Symphyta species richness</strong> tries to go beyond simple amounts, and capture compositional changes in the insect community. Apocrita covers predatory and parasitic wasps, while Symphyta is plant-feeding wasps. A relative decrease in predatory/parasitic wasps could indicate a degradation in insect prey communities, and a decrease in the potential for natural pest control. Lastly, <strong>Intraspecific genetic variation</strong> captures biodiversity that until now has been hidden, due to lack of practical technologies to measure it. The need to conserve genetic diversity is identified in Norwegian law, and decreased intraspecific diversity could signal population decreases, and decreased potential to adapt to environmental changes, before whole species are lost to an area.</p>
+</div>
+<div id="about-the-underlying-data" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> About the underlying data</h2>
+<p>The data used here comes from the ongoing monitoring programs “Norwegian insect monitoring” (<a href="https://www.nina.no/Naturmangfold/Insekter/Overv%C3%A5king-av-insekter">NorIns</a>) and “Norwegian monitoring of bumblebees and butterflies” (<a href="https://www.nina.no/V%C3%A5re-fagomr%C3%A5der/Milj%C3%B8overv%C3%A5king-p%C3%A5-land/Humler-og-dagsommerfugler">NMBB</a>). Both programs are initiated and financed by the Environmental agency, with the aim to produce continuous, areal representative, time-series of insect community data. The <strong>NorIns</strong> program use malaise and window traps to sample a broad community of insect species, which are identified through metabarcoding of DNA. The <strong>NMBB</strong> program use sweep netting along transect walks where the species are identified manually in the field. More information is available in the links above.</p>
+<div id="representativity-in-time-and-space" class="section level3" number="1.2.1">
+<h3><span class="header-section-number">1.2.1</span> Representativity in time and space</h3>
+<p>The <strong>NorIns</strong> program started in 2020 with monitoring in semi-natural land and forests in the south-eastern region of Norway (Østlandet), with the long-term ambition to cover the entire country. In 2021, the program was expanded to semi-natural land in central Norway (Trøndelag), in 2022 to semi-natural land in south-western Norway (Sørlandet), and in 2023 to semi-natural land in northern Norway (Nord-Norge), with a possible expansion to western Norway (Vestlandet) in 2024. So far, forest habitats are only monitored in south-eastern Norway.</p>
+<p>These 5 regions represents the planned spatial precision of the survey. Finer resolution could be evaluated in the future, although it is unlikely to be feasible without more intense sampling. This program uses a staggered sampling scheme where we visit different locations each year, and return to each location every 5 years. This sampling scheme, coupled with the strong yearly variation in insect abundances makes it reasonable to use a temporal resolution of 5 years. [How to deal with this now? average over 5 years? Add 5 year aggregation in bootstrap_value()]</p>
+<p>The <strong>NMBB</strong> program started in 2009 in a subset of south-eastern Norway (counties of Vestfold and Østfold), and was expanded to central Norway (Trøndelag) in 2010, south-western Norway in 2013, and to western Norway (Vestland and Møre og Romsdal fylke) in 2022. The spatial resolution aligns with these (as of now) 4 regions, and it is not recommended to downscale the predictions due to the limited number of sampling locations in each region. Since the same locations are visited each year, yearly estimates of the condition could be calculated, but should be interpreted by caution due to natural yearly variability.</p>
+<p>Both programs are designed to be area representative, within their respective habitat types and regions. Both use semi-randomized selection schemes of localities, the <strong>NorIns</strong> selects by random draws, and the <strong>NMBB</strong> by a predefined continuous network of survey squares. In both programs however, some subjective decisions are made to define habitat criteria and to discard unpractical survey locations.</p>
+</div>
+<div id="original-units" class="section level3" number="1.2.2">
+<h3><span class="header-section-number">1.2.2</span> Original units</h3>
+<p>The original units from <strong>NorIns</strong> include number of species, total biomass as wet weight, and inter-specific genetic diversity (unit to be determined). For the <strong>NMBB</strong> program, original units are number of individuals of each species within a transect, although only presences in transects (as presence frequencies) are used for the indicator calculations.</p>
+</div>
+<div id="temporal-coverage" class="section level3" number="1.2.3">
+<h3><span class="header-section-number">1.2.3</span> Temporal coverage</h3>
+<p>2009-present for the <strong>NMBB</strong> data, and 2020-present for the <strong>NorIns</strong> data.</p>
+</div>
+</div>
+<div id="ecosystem-characteristic" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Ecosystem characteristic</h2>
+<div id="norwegian-standard" class="section level3" number="1.3.1">
+<h3><span class="header-section-number">1.3.1</span> Norwegian standard</h3>
+<p>Four of the indicators are tied to the <em>Økologisk egenskap</em> (Ecological characteristic) of <strong>Funksjonelt viktige arter og biofysiske stukturer</strong> (Funktionally important species and structures), and the other four to <strong>Biologisk mangfold</strong> (Biodiversity).</p>
+</div>
+<div id="un-standard" class="section level3" number="1.3.2">
+<h3><span class="header-section-number">1.3.2</span> UN standard</h3>
+<p>Six of the indicators are tied to the UN standard (ECT-classes) <strong>B1 Compositional state characteristics</strong>, and the two remaining to <strong>B2 Structural state characteristics</strong>.</p>
+</div>
+</div>
+<div id="collinearities-with-other-indicators" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> Collinearities with other indicators</h2>
+<p>None measured so far, but it is reasonable to assume that some of these indicators will share some causal relationships with each other, and therefore correlate to some degree. They might also correlate to other indicators, not described here, as well.</p>
+</div>
+<div id="reference-condition-and-values" class="section level2" number="1.5">
+<h2><span class="header-section-number">1.5</span> Reference condition and values</h2>
+<p>The reference condition is meant to be one with minimal negative human impact, but this has a special interpretation for semi-natural land. These habitats are formed and maintained through human activities. Thus, “minimal negative human impact” is replaced by a state of “good maintenance”, here understood as resembling the traditional agricultural maintenance regime, existing for several hundred years up until the late 1800s. This is characterized by extensive grazing, meadows and lays, crop rotation with legumes to bind nitrogen in addition to fertilization from manure, relatively small field sizes and abundant field margins, and a lack of artificial fertilization and mechanized tilling.</p>
+<div id="reference-condition" class="section level3" number="1.5.1">
+<h3><span class="header-section-number">1.5.1</span> Reference condition</h3>
+<p>Assessing the current state of insect communities may be a complicated task, due to their taxonomic and functional breadth and high temporal and spatial variability. Still, even more challenging is to establishing reference values, when the reference states are extinct or prohibitively difficult to measure empirically. We currently lack reference values for all indicators from the <strong>NorIns</strong> program. It is unlikely that this can be solved “simply” by surveying a state in a reference area, since intact reference areas of sufficient size and numbers likely no longer exist. The question of how to handle these reference values is currently unresolved, and we present these indicator value calculations with made up reference values as placeholders in the code.</p>
+<p>For the <strong>NMBB</strong> indicators, the communities are small enough and well known enough to identify reference communities by expert opinion. These communities specify the expected rate of observing each species. The current rates of observation are then compared to the expected rates. The calculations are further explained below.</p>
+</div>
+<div id="reference-values-thresholds-for-defining-good-ecological-condition-minimum-andor-maximum-values" class="section level3" number="1.5.2">
+<h3><span class="header-section-number">1.5.2</span> Reference values, thresholds for defining <em>good ecological condition</em>, minimum and/or maximum values</h3>
+<!-- Text here -->
+<p>The specific reference communities for the <strong>NMBB</strong> indicators won’t be spelled out here, see instead the scripts below. We have not specified a value for <em>good ecological condition</em> as of yet, since there lack a straightforward empirical basis to do so.</p>
+</div>
+</div>
+<div id="uncertainties" class="section level2" number="1.6">
+<h2><span class="header-section-number">1.6</span> Uncertainties</h2>
+<p>The uncertainties for the indicator values is calculated by bootstrapping the average values for each locality within a year. This takes the variability between the localities into account. For the <strong>NorIns</strong> indicators, this uncertainties are given as standard deviation, as well as confidence intervals.The uncertainties for the <strong>NMBB</strong> indicators are constituted by a distribution of discrete values, and therefore we only provide confidence intervals and not a standard deviation.</p>
+</div>
+<div id="references" class="section level2" number="1.7">
+<h2><span class="header-section-number">1.7</span> References</h2>
+<ul>
+<li><p>Åström, Jens; Birkemoe, Tone; Brandsegg, Hege; Dahle, Sondre; Davey, Marie Louise; Ekrem, Torbjørn; Fossøy, Frode; Hanssen, Oddvar; Laugsand, Arne Endre; Majaneva, Markus; Staverløkk, Arnstein; Sverdrup-Thygeson, Anne; Ødegaard, Frode.
+Insektovervåking på Østlandet, Sørlandet og i Trøndelag. Rapport fra feltsesong 2022. Trondheim: Norsk institutt for naturforskning (NINA) 2023 (ISBN 978‐82‐426‐5037‐5) 99 s. NINA rapport(2241)</p></li>
+<li><p>Åström, Sandra Charlotte Helene; Åström, Jens; Bøhn, Kristoffer; Gjershaug, Jan Ove; Staverløkk, Arnstein; Dahle, Sondre; Ødegaard, Frode. Nasjonal overvåking av dagsommerfugler og humler i Norge. Oppsummering av aktiviteten i 2022. Trondheim: Norsk institutt for naturforskning (NINA) 2023 (ISBN 978-82-426-5009-2) 54 s. NINA rapport(2214)</p></li>
+<li><p>Connor M French, Laura D Bertola, Ana C Carnaval, Evan P Economo, Jamie M Kass, David J Lohman, Katharine A Marske, Rudolf Meier, Isaac Overcast, Andrew J. Rominger, Phillip Staniczenko, Michael J Hickerson. 2023. Global determinants of insect mitochondrial genetic diversity. <a href="https://doi.org/10.1101/2022.02.09.479762" class="uri">https://doi.org/10.1101/2022.02.09.479762</a></p></li>
+<li><p>Öberg, S., Gjershaug, J. O., Diserud, O. &amp; Ødegaard, F. 2011. Videreutvikling av metodikk for
+arealrepresentativ overvåking av dagsommerfugler og humler. Naturindeks for Norge. – NINA
+Rapport 663.</p></li>
+</ul>
+</div>
+<div id="analyses" class="section level2" number="1.8">
+<h2><span class="header-section-number">1.8</span> Analyses</h2>
+<div id="calculation-principles-for-norins-indicators" class="section level3" number="1.8.1">
+<h3><span class="header-section-number">1.8.1</span> Calculation principles for NorIns indicators</h3>
+<p>The indicators from the Norwegian insect monitoring are calculated with functions in the <code>Norimon</code> R-package <a href="https://github.com/NINAnor/Norimon">link</a>. This methodology is meant to facilitate the calculation of a broad variety of insect indicators using data from <strong>NorIns</strong>.</p>
+<p><strong>Main steps of workflow:</strong></p>
+<ol style="list-style-type: decimal">
+<li>Fetch data of biomass or community diversity from a centralized database. Diversity data can be filtered on several taxonomic levels, but biomass is only available for whole samples.</li>
+<li>Bootstrap observations and calculate mean and uncertainty of point estimates.</li>
+<li>Compare observations to reference points.</li>
+<li>Display and plot the results</li>
+</ol>
+<p><img src="images/NorIns_flow_chart.png" width="400pt" /></p>
+<p>Most of the ecology comes into step 1, in choosing what data to use to describe a quality. This can be a custom selection of species, or a set of higher taxa such as specific genuses, families or even order. The goal is to choose a set of taxa that represent specific qualities of the community that can indicate the ecological status of the ecosystem. In addition to the selection of taxa, we have to decide on the level of spatial and temporal aggregation, e.g. if we should aggregate the data spatially on the region scale, habitat scale or locality scale, and if we should aggregate it temporally on yearly or even the individual sample occasions within years. For the ecological indicators, we will aggregate the raw observation values to the year locality scale, where the data summarize all catches in a locality in a year.</p>
+<p>The second step is to get an estimate of the uncertainty of the data, were we use the bootstrap method. This method is also flexible, as we could bootstrap the samples on different sampling levels (e.g. samples within localities, localities within a region, or regions within country). When working with raw data on the year locality level, the most granular bootstrap would be to summarize the variables to the yearly, habitat, and regional level, for example expressing the mean values of insect biomass in semi-natural land and forests in Østlandet in 2021, with uncertainty.</p>
+<p>Ecological knowledge also comes into step 3, comparing the values to a reference state. Here we have several options. We could for example use a single defined value as the reference state. But we can also use a point in time as a reference point (e.g. the start of a time series).</p>
+<p>Taken together, this framework is meant to facilitate the calculation of an arbitrary set of insect indicators, based on the combination of choices in data to fetch, aggregation level, and reference comparison. We can work through an example with pollinators, to showcase the framework.</p>
+<p>In the example, we start with connecting to the database in order to fetch the data.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">connect_to_insect_db</span>()</span></code></pre></div>
+<p>For convenience, the pollinator families can be retrieved by the <code>get_pollinators()</code> function.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pollinators <span class="ot">&lt;-</span> <span class="fu">get_pollinators</span>()</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>pollinators_fam <span class="ot">&lt;-</span> pollinators <span class="sc">%&gt;%</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(family_latin) <span class="sc">%&gt;%</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>()</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+family_norwegian
+</th>
+<th style="text-align:left;">
+family_latin
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Gravebier
+</td>
+<td style="text-align:left;">
+Andrenidae
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Langtungbebier
+</td>
+<td style="text-align:left;">
+Apidae
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Korttungebier
+</td>
+<td style="text-align:left;">
+Colletidae
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Markbier
+</td>
+<td style="text-align:left;">
+Halictidae
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Buksamlerbier
+</td>
+<td style="text-align:left;">
+Megachilidae
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Blomsterbier
+</td>
+<td style="text-align:left;">
+Melittidae
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Blomfluer
+</td>
+<td style="text-align:left;">
+Syrphidae
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Smygere
+</td>
+<td style="text-align:left;">
+Hesperiidae
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Glansvinger
+</td>
+<td style="text-align:left;">
+Lycaenidae
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Nymfevinger
+</td>
+<td style="text-align:left;">
+Nymphalidae
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Svalestjerter
+</td>
+<td style="text-align:left;">
+Papilionidae
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hvitvinger
+</td>
+<td style="text-align:left;">
+Pieridae
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Metallmerker (uoffisiell)
+</td>
+<td style="text-align:left;">
+Riodinidae
+</td>
+</tr>
+</tbody>
+</table>
+<p>We then fetch the community data for these families through the <code>get_observations</code> function. We additionally subset the habitat type that we are interested in, here semi-natural land. The result is a tibble of the aggregated number of species, shannon diversity, and the mean number of genetic variants per species. The default aggregation level is “year_locality”, meaning the total observations for a locality within a year.</p>
+<p>Note that the output currently contains some experimental values, awaiting a more robust methodology. “Shannon diversity” doesn’t really make sense without counts or amounts, etc. This will be replaced by measurements of genetic diversity that are based on published peer-reviewed methodology (Connor et al. 2023), in the (hopefully near) future.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>poll_loc_year <span class="ot">&lt;-</span> <span class="fu">get_observations</span>(<span class="at">subset_families =</span> pollinators_fam,</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">subset_habitat =</span> <span class="st">&quot;Semi-nat&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>poll_loc_year <span class="sc">%&gt;%</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>kableExtra<span class="sc">::</span><span class="fu">kbl</span>()</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:right;">
+year
+</th>
+<th style="text-align:left;">
+locality
+</th>
+<th style="text-align:left;">
+habitat_type
+</th>
+<th style="text-align:left;">
+region_name
+</th>
+<th style="text-align:right;">
+no_species
+</th>
+<th style="text-align:right;">
+shannon_div
+</th>
+<th style="text-align:right;">
+mean_no_asv_per_species
+</th>
+<th style="text-align:right;">
+GDE_by_asv
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+2020
+</td>
+<td style="text-align:left;">
+Semi-nat_01
+</td>
+<td style="text-align:left;">
+Semi-nat
+</td>
+<td style="text-align:left;">
+Østlandet
+</td>
+<td style="text-align:right;">
+98
+</td>
+<td style="text-align:right;">
+49.47
+</td>
+<td style="text-align:right;">
+2.68
+</td>
+<td style="text-align:right;">
+0.50
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2020
+</td>
+<td style="text-align:left;">
+Semi-nat_02
+</td>
+<td style="text-align:left;">
+Semi-nat
+</td>
+<td style="text-align:left;">
+Østlandet
+</td>
+<td style="text-align:right;">
+34
+</td>
+<td style="text-align:right;">
+28.64
+</td>
+<td style="text-align:right;">
+1.44
+</td>
+<td style="text-align:right;">
+0.84
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2020
+</td>
+<td style="text-align:left;">
+Semi-nat_03
+</td>
+<td style="text-align:left;">
+Semi-nat
+</td>
+<td style="text-align:left;">
+Østlandet
+</td>
+<td style="text-align:right;">
+40
+</td>
+<td style="text-align:right;">
+34.07
+</td>
+<td style="text-align:right;">
+1.57
+</td>
+<td style="text-align:right;">
+0.85
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2020
+</td>
+<td style="text-align:left;">
+Semi-nat_04
+</td>
+<td style="text-align:left;">
+Semi-nat
+</td>
+<td style="text-align:left;">
+Østlandet
+</td>
+<td style="text-align:right;">
+56
+</td>
+<td style="text-align:right;">
+42.90
+</td>
+<td style="text-align:right;">
+1.89
+</td>
+<td style="text-align:right;">
+0.77
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2020
+</td>
+<td style="text-align:left;">
+Semi-nat_05
+</td>
+<td style="text-align:left;">
+Semi-nat
+</td>
+<td style="text-align:left;">
+Østlandet
+</td>
+<td style="text-align:right;">
+78
+</td>
+<td style="text-align:right;">
+52.19
+</td>
+<td style="text-align:right;">
+1.90
+</td>
+<td style="text-align:right;">
+0.67
+</td>
+</tr>
+</tbody>
+</table>
+<div id="bootstrap-observations" class="section level4" number="1.8.1.1">
+<h4><span class="header-section-number">1.8.1.1</span> Bootstrap observations</h4>
+<p>The localities in the NorIns program are (semi-)randomly selected and can be viewed as samples of a larger population. Individually, they represent a single measurement of an insect community in a habitat type in a region. To get the sampling uncertainty for this representation, we can bootstrap the values by this simple process: we choose a random set of localities within a year and region (with replacement) and calculate the average values. We then repeat this process a large number of times to get a bootstrap sample of values, which can be used to express the uncertainty in the dataset.</p>
+<p>We typically have 10 localities for a given habitat type and region each year, which is not very much to base our uncertainty estimates on. But bootstrapping works fairly well on small samples and has the advantage that is doesn’t make assumptions of the statistical distribution of the errors. We will use this level to showcase the functionality and to visualize some variation between years. However, since the sampling scheme semi-randomly selects 10 new localities for each of the 5 years the rotating scheme, each year will include some randomness that is caused by variability between localities. This means that the values between individual years might appear more random than the underlying overall trend. To get robust estimates that averages over this variability, we will summarize the actual indicator values to 5 year periods, further described below.</p>
+<p>When <strong>NorIns</strong> is fully scaled up, it will have 50 localities for each covered habitat type in every country region, with 10 localities every year, in a rotating survey scheme over 5 years. Since the program is rolled out sequentially starting in 2020, for semi-natural land it currently covers 4/5 of the country, with varying amounts of localities within each region. The map below displays the localities surveyed so far.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>semi_loc <span class="ot">&lt;-</span> <span class="fu">get_localities</span>(<span class="at">dataset =</span> <span class="st">&quot;NasIns&quot;</span>,</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">habitat_type =</span> <span class="st">&quot;Semi-nat&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>norway_regions <span class="ot">&lt;-</span> <span class="fu">get_map</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(norway_regions) <span class="sc">+</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="st">&quot;region&quot;</span>) <span class="sc">+</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(semi_loc) <span class="sc">+</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_symbols</span>(<span class="at">col =</span> <span class="st">&quot;red&quot;</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">shape =</span> <span class="dv">22</span>,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">size =</span> <span class="fl">0.8</span>)</span></code></pre></div>
+<p><img src="DRAFT_insectIndicators_files/figure-html/location_map-1.png" width="672" /></p>
+<p>The bootstrap routine is implemented in the function <code>bootstrap_value()</code>, which takes a community (from <code>get_observation</code>) or weight dataset (from <code>get_biomass</code>) as its first input. It also needs to know what measurement in the dataset to bootstrap, and what, if any, grouping structure to aggregate the results on. In this example, we bootstrap the number of pollinator species, and aggregate the results on the year and regional scale.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>poll_richness_boot <span class="ot">&lt;-</span> <span class="fu">bootstrap_value</span>(poll_loc_year,</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">value =</span> no_species,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">groups =</span> <span class="fu">c</span>(<span class="st">&quot;year&quot;</span>,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>                                                 <span class="st">&quot;region_name&quot;</span>),</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">rolling_year_window =</span> <span class="cn">FALSE</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>                                      )</span></code></pre></div>
+<p>This creates an object of type <code>boot_stat</code>. Calling it prints a simple summary of the bootstrap values.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>poll_richness_boot</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 6
+##    year region_name no_species boot_sd boot_lower2.5 boot_upper97.5
+##   &lt;int&gt; &lt;chr&gt;            &lt;dbl&gt;   &lt;dbl&gt;         &lt;dbl&gt;          &lt;dbl&gt;
+## 1  2020 Østlandet         60.5    6.17          48.4           72.7
+## 2  2021 Trøndelag         41.9    3.10          35.4           47.2
+## 3  2021 Østlandet         53.5    6.04          41.2           65  
+## 4  2022 Sørlandet         29.3    5.70          18.3           40.4
+## 5  2022 Trøndelag         34.8    2.46          30             39.9
+## 6  2022 Østlandet         35.9    2.98          30.1           41.7</code></pre>
+<p>But the <code>boot_stat</code> object also stores the individual bootstrap values for later computation. By default, we use 999 bootstrap samples, which here results in 999 samples * 6 groups = 5994 rows of bootstrap values.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>poll_richness_boot[<span class="dv">2</span>]</span></code></pre></div>
+<pre><code>## $bootstrap_values
+## # A tibble: 5,994 × 3
+## # Groups:   year, region_name [6]
+##     year region_name boot_values
+##    &lt;int&gt; &lt;chr&gt;             &lt;dbl&gt;
+##  1  2020 Østlandet          63.9
+##  2  2020 Østlandet          52.4
+##  3  2020 Østlandet          50.4
+##  4  2020 Østlandet          53.5
+##  5  2020 Østlandet          60.4
+##  6  2020 Østlandet          50.3
+##  7  2020 Østlandet          62  
+##  8  2020 Østlandet          59.1
+##  9  2020 Østlandet          66.4
+## 10  2020 Østlandet          57.3
+## # ℹ 5,984 more rows</code></pre>
+</div>
+<div id="comparing-bootstrap-values-to-a-reference-point" class="section level4" number="1.8.1.2">
+<h4><span class="header-section-number">1.8.1.2</span> Comparing bootstrap values to a reference point</h4>
+<p>Setting aside the practical difficulties in establishing robust reference values, the next step in the methodology is to compare the observed values (with bootstrapped uncertainty) to a chosen reference value. This can be made in several ways. Most simply, if we have a single numeric value as a reference value, we can simply subtract that from the observed values. For example, if we observe 13 species of pollinators in 2022 at a location, and the reference point is 10, the 2022 value has increased by 13 - 10 = 3 species. Such subtractions should be made on the set of bootstrapped values, followed by new summary statistics being calculated, preserving the uncertainty from the bootstrap. The <code>boot_stat</code> has its own subtraction method <code>-</code> do to just that. In this example, we set the reference value arbitrarily to 30 species.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>poll_richness_boot</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 6
+##    year region_name no_species boot_sd boot_lower2.5 boot_upper97.5
+##   &lt;int&gt; &lt;chr&gt;            &lt;dbl&gt;   &lt;dbl&gt;         &lt;dbl&gt;          &lt;dbl&gt;
+## 1  2020 Østlandet         60.5    6.17          48.4           72.7
+## 2  2021 Trøndelag         41.9    3.10          35.4           47.2
+## 3  2021 Østlandet         53.5    6.04          41.2           65  
+## 4  2022 Sørlandet         29.3    5.70          18.3           40.4
+## 5  2022 Trøndelag         34.8    2.46          30             39.9
+## 6  2022 Østlandet         35.9    2.98          30.1           41.7</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>diff_poll_richness_boot <span class="ot">&lt;-</span> poll_richness_boot <span class="sc">-</span> <span class="dv">30</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>diff_poll_richness_boot</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 6
+##    year region_name no_species boot_sd boot_lower2.5 boot_upper97.5
+##   &lt;int&gt; &lt;chr&gt;            &lt;dbl&gt;   &lt;dbl&gt;         &lt;dbl&gt;          &lt;dbl&gt;
+## 1  2020 Østlandet       30.5      6.17        18.4             42.7
+## 2  2021 Trøndelag       11.9      3.10         5.4             17.2
+## 3  2021 Østlandet       23.5      6.04        11.2             35  
+## 4  2022 Sørlandet       -0.671    5.70       -11.7             10.4
+## 5  2022 Trøndelag        4.76     2.46         0                9.9
+## 6  2022 Østlandet        5.92     2.98         0.100           11.7</code></pre>
+<p>Alternatively, we could use a reference point in the time series itself. Say for example that we want to use the values for species richness of pollinators in semi-natural land i Østlandet 2020 as a reference point. We can then calculate the difference (the contrast) between this level and all the other levels. We do this by the function <code>boot_contrast()</code></p>
+<p><strong>NB! This functionality is in development. It currently works for single rows as reference points, but needs updating to allow for referencing several values simultaneously, e.g using the start values for all regions and habitat types as their own reference points.</strong></p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>diff_poll_richness_boot2 <span class="ot">&lt;-</span> poll_richness_boot <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">boot_contrast</span>(year <span class="sc">==</span> <span class="dv">2020</span> <span class="sc">&amp;</span> region_name <span class="sc">==</span> <span class="st">&#39;Østlandet&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>diff_poll_richness_boot2</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 6
+##    year region_name no_species boot_sd boot_lower2.5 boot_upper97.5
+##   &lt;int&gt; &lt;chr&gt;            &lt;dbl&gt;   &lt;dbl&gt;         &lt;dbl&gt;          &lt;dbl&gt;
+## 1  2020 Østlandet         0       0              0              0  
+## 2  2021 Trøndelag       -18.6     6.81         -31.9           -4.9
+## 3  2021 Østlandet        -7.02    8.58         -24.4           10.7
+## 4  2022 Sørlandet       -31.2     8.49         -47.5          -14.5
+## 5  2022 Trøndelag       -25.7     6.60         -38.5          -13.2
+## 6  2022 Østlandet       -24.6     6.69         -38.6          -11.9</code></pre>
+</div>
+<div id="normalizing-the-values" class="section level4" number="1.8.1.3">
+<h4><span class="header-section-number">1.8.1.3</span> Normalizing the values</h4>
+<p>After the comparison to a reference value, we need to normalize the indicator values so that they lie between 0 and 1. This can be done in several ways (se e.g. <a href="https://github.com/NINAnor/eaTools">eaTools</a>). The simplest case is to use a linear scaling, with a natural zero, which e.g. can be done by dividing the indicator values by the highest value state. A <code>boot_stat</code> class has a <code>/</code> function that divides each bootstrap value by a given value, truncates the highest values to 1, and recalculates the summary values. We can also simply divide by the reference state, to compare the values to the reference state, and normalize them in one go. Here, we exemplify the method by dividing the value by 30.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>diff_poll_richness_boot3 <span class="ot">&lt;-</span> poll_richness_boot <span class="sc">/</span> <span class="dv">30</span></span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>diff_poll_richness_boot3</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 6
+##    year region_name no_species  boot_sd boot_lower2.5 boot_upper97.5
+##   &lt;int&gt; &lt;chr&gt;            &lt;dbl&gt;    &lt;dbl&gt;         &lt;dbl&gt;          &lt;dbl&gt;
+## 1  2020 Østlandet        1     0                 1                 1
+## 2  2021 Trøndelag        1.00  0.000527          1                 1
+## 3  2021 Østlandet        1     0                 1                 1
+## 4  2022 Sørlandet        0.912 0.116             0.61              1
+## 5  2022 Trøndelag        0.999 0.00607           1                 1
+## 6  2022 Østlandet        0.999 0.00679           1                 1</code></pre>
+</div>
+<div id="display-and-plot-bootstrap-values" class="section level4" number="1.8.1.4">
+<h4><span class="header-section-number">1.8.1.4</span> Display and plot bootstrap values</h4>
+<p>The boot_stat class also has its own plot function. It tries to plot a comparison of the bootstrap distributions over years, for each group. For example, if we plot the object <code>diff_poll_richness_boot</code>, we can look at the yearly differences in beetles species richness in the two geographic regions: (Note that we have only 1 year of data from Sørlandet so far)</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(diff_poll_richness_boot)</span></code></pre></div>
+<p><img src="DRAFT_insectIndicators_files/figure-html/poll_richness_boot-1.png" width="672" /></p>
+<p>In the cases where we have used a single row as a reference point, this shows up as a sharp spike at 0.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(diff_poll_richness_boot2)</span></code></pre></div>
+<p><img src="DRAFT_insectIndicators_files/figure-html/diff_beetle_richness_boot2-1.png" width="672" /></p>
+<p>More plotting options are available, see the <code>Norimon</code> indicator workflow vignette.</p>
+</div>
+<div id="map-plots" class="section level4" number="1.8.1.5">
+<h4><span class="header-section-number">1.8.1.5</span> Map plots</h4>
+<p>In addition to the density plots above, we can also display the values geographically. The <code>map_plot()</code> function takes a <code>boot_stat</code> object and plots the values according to its region names.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map_plot</span>(poll_richness_boot)</span></code></pre></div>
+<p><img src="DRAFT_insectIndicators_files/figure-html/map_plot_cutout-1.png" width="672" /></p>
+<p>By default, it only shows the regions with data, but this can be overridden manually:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map_plot</span>(poll_richness_boot,</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">whole_country =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="DRAFT_insectIndicators_files/figure-html/map_plot_whole-1.png" width="672" /></p>
+<p>We can also choose a different palette, for example from the NinaR package, and visualize the uncertainty by setting the transparency of the colors from the bootstrap standard deviations. By the way, most of these functions can be piped as well:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>diff_poll_richness_boot <span class="sc">%&gt;%</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">map_plot</span>(<span class="at">palette =</span> <span class="st">&quot;orange-green&quot;</span>,</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">whole_country =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">alpha_from_sd =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="DRAFT_insectIndicators_files/figure-html/diff_beetle_richness_boot_map-1.png" width="672" /></p>
+</div>
+<div id="year-rolling-window-summaries" class="section level4" number="1.8.1.6">
+<h4><span class="header-section-number">1.8.1.6</span> 5 year rolling window summaries</h4>
+<p>As described above, to take the staggered 5 year survey scheme into account, it makes sense to summarize the state over a whole 5 year period. This does not need to adhere to predefined periods, since any 5 year long period will result in a complete data set. We can therefore calculate 5 year long summaries in rolling windows, where each focal year is surrounded by +- 2 years. The bootstrap_value does this by default, if we don’t specify <code>rolling_year_average = FALSE</code></p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>poll_richness_boot_5_year <span class="ot">&lt;-</span> <span class="fu">bootstrap_value</span>(poll_loc_year,</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">value =</span> no_species,</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">groups =</span> <span class="fu">c</span>(<span class="st">&quot;year&quot;</span>,</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>                                                 <span class="st">&quot;region_name&quot;</span>),</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">rolling_year_window =</span> <span class="cn">TRUE</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>                                      )</span></code></pre></div>
+<p>Since we are only on the third year in the survey scheme however, the rolling windows are too large to show any differences between years. This will change, starting with the 2023 year data.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(poll_richness_boot_5_year)</span></code></pre></div>
+<p><img src="DRAFT_insectIndicators_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p>This concludes the tour of the <code>Norimon</code> functionality.</p>
+</div>
+</div>
+<div id="calculation-principles-for-nbbm-indicators" class="section level3" number="1.8.2">
+<h3><span class="header-section-number">1.8.2</span> Calculation principles for NBBM indicators</h3>
+<p>These indicators were developed for the Nature Index of Norway, back in 2010 by Ola Diserud and Sandra Öberg (Öberg et. al 2011), and are calculated routinely on a yearly basis (see Åström et. al 2022 for the latest report).</p>
+<p>These indicators summarize the state of a bumblebee or butterfly community by estimating the difference from a reference community. Formally, the community indicator (CI) is expressed as the relative change of the community from a state of reference (SR), were the change is calculated by a state of change (SC).</p>
+<p><span class="math display">\[CI = \frac{SR-SC}{SR}\]</span>
+The state of reference (SR) represents a community of species that can be expected to be observed in a given habitat type and region. It is calculated by assigning each species to class of expected commonality: common (C), sporadic (S) and rare (R) species. This classification is done by expert opinion, informed by known present and past species distributions. Note that this state of reference only contains a subset of highlighted species, making up a historical reference community. Potential observations of “new” species therefore don’t inform the indicator value at all. Common species are expected to be observed in at least 5 % of the surveyed transects in a habitat type and region. Sporadic species similarly are defined as having a presence below 5 % but above 1 %. Rare species are seen in no more than 1 % of the transects, and lastly, species not seen in any transect are assumed as lost (L) for the purpose of this calculation.</p>
+<p>Each commonality class gets its own weight, so that common species inform the reference state more than sporadic species, followed by rare species. The state of reference (SR) is thus a value where each species adds to the state according to its commonality. Formally, it is defined as:</p>
+<p><span class="math display">\[SR = n_C * w_{C, SR} + n_S * w_{S, SR} + n_R * w_{R, SR} = \sum_{i = (C, S, R)} n_i * w_{i, SR}, \]</span>
+where <span class="math inline">\(n_i\)</span> is the number of species in a commonality class (C, S, R), and the weights <span class="math inline">\([w_{C, SR}, w_{S, SR}, w_{R, SR}]\)</span> specify their respective contribution to the reference state (SR). The weights used are <span class="math inline">\([w_{C, SR}, w_{S, SR}, w_{R, SR}] = [1.0, 0.75, 0.50]\)</span>, i.e. a sporadic species has 75 % the weight of a common species, and a rare species has 50 % the weight of a common species.</p>
+<p>The state of change (SC) is calculated as
+<span class="math display">\[SC = n_{CS} * w_{CS} + n_{CR} * w_{CR} + n_{CL} * w_{CL} + n_{SR} * w_{SR} + n_{SL} * w_{SL} + n_{RL} * w_{RL}, \]</span>
+where <span class="math inline">\(n_{CS}\)</span> is the number of expected common species (C) that is observed sporadically (S), and <span class="math inline">\(w_{CS}\)</span> is the weight of this change. Similarly, <span class="math inline">\(n_{CR}\)</span> is the number of expected species that is observed rarely, <span class="math inline">\(n_{RL}\)</span> is the number of rare species that is lost, and so on. Potential increases in observation rates do not inform the indicator. Changes for common species are weighted more heavily than changes for less common species, and larger decreases are weighted more heavily than smaller decreases, such that <span class="math inline">\([w_{CS}, w_{CR}, w_{CL}, w_{SR}, w_{SL}, w_{RL}]= [0.50, 0.75, 1.00, 0.50, 0.75, 0.50]\)</span>.</p>
+<p>The indicator values are estimated with uncertainty, by bootstrapping the set of localities within a region, and calculating the indicator for each of 9999 such samples.</p>
+<div id="calculation-example" class="section level4" number="1.8.2.1">
+<h4><span class="header-section-number">1.8.2.1</span> Calculation example</h4>
+<p>These calculations with bootstrap sampling are implemented in the R-package <code>bombLepiSurv</code> (<a href="https://github.com/jenast/bombLepiSurv">Bombus and Lepidoptera Survey</a>). We briefly show this functionality with bumblebees in semi-natural lands as an example.</p>
+<p>We connect to the internal database with a convenience function.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>bombLepiSurv<span class="sc">::</span><span class="fu">humlesommerfConnect</span>()</span></code></pre></div>
+<p>We can fetch all observations of bumblebees in semi-natural land with the <code>getAllData</code> function. Species names are here shown in Norwegian.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>allBombusGrassland2022 <span class="ot">&lt;-</span> <span class="fu">getAllData</span>(<span class="at">type =</span> <span class="st">&quot;bumblebees&quot;</span>,</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">habitat =</span> <span class="st">&quot;gressmark&quot;</span>,</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">year =</span> <span class="dv">2022</span>,</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">language =</span> <span class="st">&quot;norsk&quot;</span>)</span></code></pre></div>
+<p>A summary of the records is most easily plotted by <code>surveyBarPlot</code>:</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">surveyBarplot</span>(allBombusGrassland2022)</span></code></pre></div>
+<p><img src="DRAFT_insectIndicators_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<p>Note that for calculating the indicator values, we only consider the transects that were surveyed for the standard 3 times per year, to cover the phenology of the entire season without bias. Data of these complete survey rounds can be fetched from the database by the function <code>getComplData</code>, which fetches data from one habitat type and region at a time.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>bombus_trond_2022 <span class="ot">&lt;-</span> <span class="fu">getComplData</span>(<span class="at">type =</span> <span class="st">&quot;Humler&quot;</span>,</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">region_short =</span> <span class="st">&quot;Trond&quot;</span>,</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">habitat =</span> <span class="st">&quot;Gressmark&quot;</span>,</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">year =</span> <span class="dv">2022</span>)</span></code></pre></div>
+<p>The observed relative to the expected occurrences can be visualized through the <code>plotArt</code> function. This requires a reference community, which can be fetched through the <code>getExpValues</code> function.</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>exp_bombus_trond <span class="ot">&lt;-</span> <span class="fu">getExpValues</span>(<span class="at">type =</span> <span class="st">&quot;Humler&quot;</span>,</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">region_short =</span> <span class="st">&quot;Trond&quot;</span>,</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">habitat =</span> <span class="st">&quot;Gressmark&quot;</span>)</span></code></pre></div>
+<p>Species in green bars are species that are expected to be common, who need to reach the green areas in the plot not to decrease the indicator value (from 1). Similarly with the blue (sporadic species), and red (rare species). We see in this case that <em>Bombus soroeensis</em> is expected to be a sporadic species, but that it was only observed rarely.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotArt</span>(bombus_trond_2022,</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>        exp_bombus_trond)</span></code></pre></div>
+<p><img src="DRAFT_insectIndicators_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+<p>The actual calculation and bootstrapping of the indicator is done in the function <code>calcInd</code>. This function calls the <code>getComplData</code> and <code>getExpectedValues</code> functions internally. It also requires the weights for the commonality classes in the reference community (SR), and the weights for the changes in state (CS). This is fetched internally via the functions <code>getAmountWeights</code> and <code>getDiffWeights</code>, respectively. Here the classes are coded in Norwegian (v = common, m = sporadic, s = rare).</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getDiffWeights</span>()</span></code></pre></div>
+<pre><code>##      v    m   s
+## v 0.00 0.00 0.0
+## m 0.50 0.00 0.0
+## s 0.75 0.50 0.0
+## t 1.00 0.75 0.5</code></pre>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getAmountWeights</span>()</span></code></pre></div>
+<pre><code>##   v    m   s
+## 1 1 0.75 0.5</code></pre>
+<p>Lastly, we specify the number of samples for the bootstrap. To speed up, only 999 samples are used here.</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>nIter <span class="ot">=</span> <span class="dv">999</span></span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>hInd2022TrondGress <span class="ot">&lt;-</span> <span class="fu">calcInd</span>(<span class="at">type =</span> <span class="st">&quot;Humler&quot;</span>,</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>                              <span class="at">region_short =</span> <span class="st">&quot;Trond&quot;</span>,</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">habitat =</span> <span class="st">&quot;Gressmark&quot;</span>,</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>                              <span class="at">year =</span> <span class="dv">2022</span>,</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>                              <span class="at">nIter =</span> nIter,</span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>                              <span class="at">save.draws =</span> T)</span></code></pre></div>
+<p>The result is an object of class “comm_index” (community index). It comes with some (still rudimentary) print and plotting functions, showing the point estimate and the limits of a 95% confidence interval. Due to the limited number of species and the fixed “weights” of each species and state of change, the indicator calculation returns a distribution of discrete values. Therefore it can happen that the 95% and the 90% confidence intervals are the same, as in this case.</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>hInd2022TrondGress</span></code></pre></div>
+<pre><code>## $`Community indicator estimates, with percentiles`
+##           2.5%             5% Point estimate            95%          97.5% 
+##      0.5416667      0.5625000      0.7083333      0.7500000      0.7500000</code></pre>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(hInd2022TrondGress)</span></code></pre></div>
+<p><img src="DRAFT_insectIndicators_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+<p>Plotting functions for a series of indicator values is shown below in the indicator calculations.</p>
+</div>
+</div>
+<div id="data-sets" class="section level3" number="1.8.3">
+<h3><span class="header-section-number">1.8.3</span> Data sets</h3>
+<p>There are a few different ways to access the data required for these indicators. Both the NMBB and the NorIns project store their data in an internal database at NINA. They both also export most of their data to GBIF, but those exports need to be restructured before they can be processed in the following scripts.</p>
+<div id="norins-data" class="section level4" number="1.8.3.1">
+<h4><span class="header-section-number">1.8.3.1</span> NorIns data</h4>
+<p>The <code>Norimon</code> package has convenience functions to fetch data from the database, housed internally at NINA. This database is currently not available outside NINA, but we will implement a solution for this. Either we will make the database externally available, or we will provide an alternative route to the data from the GBIF export. For now, we will fetch the data through the <code>Norimon</code> functions.</p>
+</div>
+<div id="nmbb-data" class="section level4" number="1.8.3.2">
+<h4><span class="header-section-number">1.8.3.2</span> NMBB data</h4>
+<p>The data for the bumblebee and butterfly indicators can be accessed through the R-package <code>bombLepiSurv</code>.</p>
+</div>
+<div id="regions" class="section level4" number="1.8.3.3">
+<h4><span class="header-section-number">1.8.3.3</span> Regions</h4>
+<!-- In case you need to map the indicator value to regions, you can do that here. Remove this chapter if not relevant. -->
+<p>We here show how to import a shape file with the regional delineation. The indicators associated with the NorIns project can be attributed to the 5 country regions of Norway. Currently however, the data program only covers 4 of the 5 regions.</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">connect_to_insect_db</span>()</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>norway_regions <span class="ot">&lt;-</span> Norimon<span class="sc">::</span><span class="fu">get_map</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>norway_reg_NorIns <span class="ot">&lt;-</span> norway_regions <span class="sc">%&gt;%</span> </span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(region <span class="sc">!=</span> <span class="st">&quot;Vestlandet&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(region) <span class="sc">%&gt;%</span> </span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(region) <span class="sc">%&gt;%</span> </span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">geom =</span> <span class="fu">st_union</span>(geom))</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(norway_reg_NorIns) <span class="sc">+</span> </span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">col =</span> <span class="st">&quot;region&quot;</span>) </span></code></pre></div>
+<p><img src="DRAFT_insectIndicators_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
+<p>The indicators from the NMBB program are similarly connected to regions, with the exception that the south-east region only covers the old counties of Vestfold and Østfold, and that Nord-Norge isn’t covered yet.</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>nbbm_norway_regions <span class="ot">&lt;-</span> bombLepiSurv<span class="sc">::</span><span class="fu">get_map</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>norway_reg_NBBM <span class="ot">&lt;-</span> nbbm_norway_regions <span class="sc">%&gt;%</span> </span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(region <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Øst&quot;</span>, <span class="st">&quot;Sørlandet&quot;</span>, <span class="st">&quot;Trøndelag&quot;</span>, <span class="st">&quot;Vestlandet&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(region) <span class="sc">%&gt;%</span> </span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(region) <span class="sc">%&gt;%</span> </span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">geom =</span> <span class="fu">st_union</span>(geom))</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(norway_reg_NBBM) <span class="sc">+</span> </span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">col =</span> <span class="st">&quot;region&quot;</span>) </span></code></pre></div>
+<p><img src="DRAFT_insectIndicators_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
+</div>
+</div>
+<div id="calculation-of-norins-indicators" class="section level3" number="1.8.4">
+<h3><span class="header-section-number">1.8.4</span> Calculation of NorIns indicators</h3>
+<p>Here we calculate the indicators in abbreviated form, following the general framework outlined above.</p>
+<div id="biomass-of-flying-insects-in-semi-natural-land" class="section level4" number="1.8.4.1">
+<h4><span class="header-section-number">1.8.4.1</span> Biomass of flying insects in semi-natural land</h4>
+<p>Fetch the data.</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>biomass_sn <span class="ot">&lt;-</span> <span class="fu">get_biomass</span>(<span class="at">subset_year =</span> <span class="dv">2020</span><span class="sc">:</span><span class="dv">2022</span>,</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">subset_region =</span> <span class="cn">NULL</span>,</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">subset_habitat =</span> <span class="st">&quot;Semi-nat&quot;</span>)</span></code></pre></div>
+<p>Calculate the indicator values for each region and year.</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>biomass_sn_boot <span class="ot">&lt;-</span> <span class="fu">bootstrap_value</span>(<span class="at">df =</span> biomass_sn,</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">value =</span> avg_wet_weight,</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">groups =</span> <span class="fu">c</span>(<span class="st">&quot;year&quot;</span>,</span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>                                              <span class="st">&quot;region_name&quot;</span>)</span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>                                   )</span></code></pre></div>
+<p>Compare values to a reference state. The reference state is here set uniformly for all regions, with a made-up value just to be able to continue the calculations. Alternatively, we could calculate the indicator values for each region separately, compare to individual reference states, and then put it all together again.</p>
+<p>We here use a single value as a reference state and normalize the values at the same time, using the <code>/</code> function.</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>biomass_ref <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>biomass_sn_diff <span class="ot">&lt;-</span> biomass_sn_boot <span class="sc">/</span> biomass_ref</span></code></pre></div>
+<p>Plot the results and display uncertainty.</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>biomass_sn_diff</span></code></pre></div>
+<pre><code>## # A tibble: 9 × 6
+##   year_window region_name avg_wet_weight boot_sd boot_lower2.5 boot_upper97.5
+##         &lt;int&gt; &lt;chr&gt;                &lt;dbl&gt;   &lt;dbl&gt;         &lt;dbl&gt;          &lt;dbl&gt;
+## 1        2020 Sørlandet            0.464  0.0665         0.339          0.601
+## 2        2020 Trøndelag            0.749  0.0689         0.618          0.897
+## 3        2020 Østlandet            0.754  0.0495         0.657          0.860
+## 4        2021 Sørlandet            0.468  0.0654         0.353          0.606
+## 5        2021 Trøndelag            0.749  0.0705         0.612          0.889
+## 6        2021 Østlandet            0.756  0.0518         0.656          0.859
+## 7        2022 Sørlandet            0.467  0.0653         0.339          0.594
+## 8        2022 Trøndelag            0.746  0.0694         0.605          0.884
+## 9        2022 Østlandet            0.756  0.0500         0.656          0.851</code></pre>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(biomass_sn_diff)</span></code></pre></div>
+<p><img src="DRAFT_insectIndicators_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
+<p>Prepare export format.</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>biomass_sn_to_exp <span class="ot">&lt;-</span> biomass_sn_diff<span class="sc">$</span>bootstrap_summary</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>biomass_sn_to_exp <span class="ot">&lt;-</span> biomass_sn_to_exp <span class="sc">%&gt;%</span> </span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year_window,</span>
+<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">region =</span> region_name,</span>
+<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">ind_value =</span> boot_value,</span>
+<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">ind_sd =</span> boot_sd,</span>
+<span id="cb58-8"><a href="#cb58-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">ind_lower2.5 =</span> boot_lower2<span class="fl">.5</span>,</span>
+<span id="cb58-9"><a href="#cb58-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">ind_upper97.5 =</span> boot_upper97<span class="fl">.5</span>)</span>
+<span id="cb58-10"><a href="#cb58-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-11"><a href="#cb58-11" aria-hidden="true" tabindex="-1"></a>biomass_sn_to_exp <span class="ot">&lt;-</span> norway_reg_NorIns  <span class="sc">%&gt;%</span> </span>
+<span id="cb58-12"><a href="#cb58-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(biomass_sn_to_exp,</span>
+<span id="cb58-13"><a href="#cb58-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;region&quot;</span> <span class="ot">=</span> <span class="st">&quot;region&quot;</span>),</span>
+<span id="cb58-14"><a href="#cb58-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">multiple =</span> <span class="st">&quot;all&quot;</span>)</span>
+<span id="cb58-15"><a href="#cb58-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-16"><a href="#cb58-16" aria-hidden="true" tabindex="-1"></a>biomass_sn_to_exp</span></code></pre></div>
+<pre><code>## Simple feature collection with 9 features and 6 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -76208 ymin: 6450245 xmax: 468357.5 ymax: 7237323
+## Projected CRS: ETRS89 / UTM zone 33N
+## # A tibble: 9 × 7
+##   region                                                                              geom year_window ind_value ind_sd ind_lower2.5 ind_upper97.5
+##   &lt;chr&gt;                                                                 &lt;MULTIPOLYGON [m]&gt;       &lt;int&gt;     &lt;dbl&gt;  &lt;dbl&gt;        &lt;dbl&gt;         &lt;dbl&gt;
+## 1 Sørlandet (((-31605 6513854, -31464 6513743, -31449 6513590, -32255 6512745, -32512 651…        2020     0.464 0.0665        0.339         0.601
+## 2 Sørlandet (((-31605 6513854, -31464 6513743, -31449 6513590, -32255 6512745, -32512 651…        2021     0.468 0.0654        0.353         0.606
+## 3 Sørlandet (((-31605 6513854, -31464 6513743, -31449 6513590, -32255 6512745, -32512 651…        2022     0.467 0.0653        0.339         0.594
+## 4 Trøndelag (((227783 7068646, 227876 7069284, 227998 7069292, 228247 7069134, 228869 706…        2020     0.749 0.0689        0.618         0.897
+## 5 Trøndelag (((227783 7068646, 227876 7069284, 227998 7069292, 228247 7069134, 228869 706…        2021     0.749 0.0705        0.612         0.889
+## 6 Trøndelag (((227783 7068646, 227876 7069284, 227998 7069292, 228247 7069134, 228869 706…        2022     0.746 0.0694        0.605         0.884
+## 7 Østlandet (((179915 6537265, 180246 6536997, 180600 6536671, 181028 6536601, 181197 653…        2020     0.754 0.0495        0.657         0.860
+## 8 Østlandet (((179915 6537265, 180246 6536997, 180600 6536671, 181028 6536601, 181197 653…        2021     0.756 0.0518        0.656         0.859
+## 9 Østlandet (((179915 6537265, 180246 6536997, 180600 6536671, 181028 6536601, 181197 653…        2022     0.756 0.0500        0.656         0.851</code></pre>
+</div>
+<div id="species-richness-of-flying-insects-in-semi-natural-land" class="section level4" number="1.8.4.2">
+<h4><span class="header-section-number">1.8.4.2</span> Species richness of flying insects in semi-natural land</h4>
+<p>Fetch the data.</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>richness_sn <span class="ot">&lt;-</span> <span class="fu">get_observations</span>(<span class="at">subset_year =</span> <span class="dv">2020</span><span class="sc">:</span><span class="dv">2022</span>,</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>                                <span class="at">subset_region =</span> <span class="cn">NULL</span>,</span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>                                <span class="at">subset_habitat =</span> <span class="st">&quot;Semi-nat&quot;</span>)</span></code></pre></div>
+<p>Calculate the indicator values for each region and year.</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>richness_sn_boot <span class="ot">&lt;-</span> <span class="fu">bootstrap_value</span>(<span class="at">df =</span> richness_sn,</span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">value =</span> no_species,</span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">groups =</span> <span class="fu">c</span>(<span class="st">&quot;year&quot;</span>,</span>
+<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a>                                              <span class="st">&quot;region_name&quot;</span>)</span>
+<span id="cb61-5"><a href="#cb61-5" aria-hidden="true" tabindex="-1"></a>                                   )</span></code></pre></div>
+<p>Compare to arbitrary reference value and normalize.</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>richness_ref <span class="ot">&lt;-</span> <span class="dv">4000</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>richness_sn_diff <span class="ot">&lt;-</span> richness_sn_boot <span class="sc">/</span> richness_ref</span></code></pre></div>
+<p>Plot the results and display uncertainty.</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>richness_sn_diff</span></code></pre></div>
+<pre><code>## # A tibble: 9 × 6
+##   year_window region_name no_species boot_sd boot_lower2.5 boot_upper97.5
+##         &lt;int&gt; &lt;chr&gt;            &lt;dbl&gt;   &lt;dbl&gt;         &lt;dbl&gt;          &lt;dbl&gt;
+## 1        2020 Sørlandet        0.547  0.0646         0.424          0.681
+## 2        2020 Trøndelag        0.664  0.0275         0.606          0.715
+## 3        2020 Østlandet        0.705  0.0374         0.633          0.782
+## 4        2021 Sørlandet        0.546  0.0649         0.423          0.673
+## 5        2021 Trøndelag        0.665  0.0275         0.605          0.717
+## 6        2021 Østlandet        0.703  0.0361         0.629          0.772
+## 7        2022 Sørlandet        0.546  0.0641         0.420          0.673
+## 8        2022 Trøndelag        0.663  0.0274         0.609          0.718
+## 9        2022 Østlandet        0.703  0.0350         0.639          0.773</code></pre>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(richness_sn_diff)</span></code></pre></div>
+<p><img src="DRAFT_insectIndicators_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
+<p>Prepare export format.</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>richness_sn_to_exp <span class="ot">&lt;-</span> richness_sn_diff<span class="sc">$</span>bootstrap_summary</span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>richness_sn_to_exp <span class="ot">&lt;-</span> richness_sn_to_exp <span class="sc">%&gt;%</span> </span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year_window,</span>
+<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">region =</span> region_name,</span>
+<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">ind_value =</span> boot_value,</span>
+<span id="cb66-7"><a href="#cb66-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">ind_sd =</span> boot_sd,</span>
+<span id="cb66-8"><a href="#cb66-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">ind_lower2.5 =</span> boot_lower2<span class="fl">.5</span>,</span>
+<span id="cb66-9"><a href="#cb66-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">ind_upper97.5 =</span> boot_upper97<span class="fl">.5</span>)</span>
+<span id="cb66-10"><a href="#cb66-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-11"><a href="#cb66-11" aria-hidden="true" tabindex="-1"></a>richness_sn_to_exp <span class="ot">&lt;-</span> norway_reg_NorIns  <span class="sc">%&gt;%</span> </span>
+<span id="cb66-12"><a href="#cb66-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(richness_sn_to_exp,</span>
+<span id="cb66-13"><a href="#cb66-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;region&quot;</span> <span class="ot">=</span> <span class="st">&quot;region&quot;</span>),</span>
+<span id="cb66-14"><a href="#cb66-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">multiple =</span> <span class="st">&quot;all&quot;</span>)</span>
+<span id="cb66-15"><a href="#cb66-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-16"><a href="#cb66-16" aria-hidden="true" tabindex="-1"></a>richness_sn_to_exp</span></code></pre></div>
+<pre><code>## Simple feature collection with 9 features and 6 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -76208 ymin: 6450245 xmax: 468357.5 ymax: 7237323
+## Projected CRS: ETRS89 / UTM zone 33N
+## # A tibble: 9 × 7
+##   region                                                                              geom year_window ind_value ind_sd ind_lower2.5 ind_upper97.5
+##   &lt;chr&gt;                                                                 &lt;MULTIPOLYGON [m]&gt;       &lt;int&gt;     &lt;dbl&gt;  &lt;dbl&gt;        &lt;dbl&gt;         &lt;dbl&gt;
+## 1 Sørlandet (((-31605 6513854, -31464 6513743, -31449 6513590, -32255 6512745, -32512 651…        2020     0.547 0.0646        0.424         0.681
+## 2 Sørlandet (((-31605 6513854, -31464 6513743, -31449 6513590, -32255 6512745, -32512 651…        2021     0.546 0.0649        0.423         0.673
+## 3 Sørlandet (((-31605 6513854, -31464 6513743, -31449 6513590, -32255 6512745, -32512 651…        2022     0.546 0.0641        0.420         0.673
+## 4 Trøndelag (((227783 7068646, 227876 7069284, 227998 7069292, 228247 7069134, 228869 706…        2020     0.664 0.0275        0.606         0.715
+## 5 Trøndelag (((227783 7068646, 227876 7069284, 227998 7069292, 228247 7069134, 228869 706…        2021     0.665 0.0275        0.605         0.717
+## 6 Trøndelag (((227783 7068646, 227876 7069284, 227998 7069292, 228247 7069134, 228869 706…        2022     0.663 0.0274        0.609         0.718
+## 7 Østlandet (((179915 6537265, 180246 6536997, 180600 6536671, 181028 6536601, 181197 653…        2020     0.705 0.0374        0.633         0.782
+## 8 Østlandet (((179915 6537265, 180246 6536997, 180600 6536671, 181028 6536601, 181197 653…        2021     0.703 0.0361        0.629         0.772
+## 9 Østlandet (((179915 6537265, 180246 6536997, 180600 6536671, 181028 6536601, 181197 653…        2022     0.703 0.0350        0.639         0.773</code></pre>
+</div>
+<div id="species-richness-of-pollinators-in-semi-natural-land" class="section level4" number="1.8.4.3">
+<h4><span class="header-section-number">1.8.4.3</span> Species richness of pollinators in semi-natural land</h4>
+<p>Fetch the data.</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>pollinator_fam <span class="ot">&lt;-</span> <span class="fu">get_pollinators</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(family_latin) <span class="sc">%&gt;%</span> </span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>pollinators_sn <span class="ot">&lt;-</span> <span class="fu">get_observations</span>(<span class="at">subset_year =</span> <span class="dv">2020</span><span class="sc">:</span><span class="dv">2022</span>,</span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">subset_families =</span> pollinator_fam,</span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">subset_habitat =</span> <span class="st">&quot;Semi-nat&quot;</span>)</span></code></pre></div>
+<p>Calculate the indicator values for each region and year.</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>pollinators_sn_boot <span class="ot">&lt;-</span> <span class="fu">bootstrap_value</span>(<span class="at">df =</span> pollinators_sn,</span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">value =</span> no_species,</span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">groups =</span> <span class="fu">c</span>(<span class="st">&quot;year&quot;</span>,</span>
+<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a>                                                  <span class="st">&quot;region_name&quot;</span>)</span>
+<span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a>                                       )</span></code></pre></div>
+<p>Compare to arbitrary reference value and normalize.</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>pollinators_ref <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>pollinators_sn_diff <span class="ot">&lt;-</span> pollinators_sn_boot <span class="sc">/</span> pollinators_ref</span></code></pre></div>
+<p>Plot the results and display uncertainty.</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>pollinators_sn_diff</span></code></pre></div>
+<pre><code>## # A tibble: 9 × 6
+##   year_window region_name no_species boot_sd boot_lower2.5 boot_upper97.5
+##         &lt;int&gt; &lt;chr&gt;            &lt;dbl&gt;   &lt;dbl&gt;         &lt;dbl&gt;          &lt;dbl&gt;
+## 1        2020 Sørlandet        0.596  0.118          0.368          0.838
+## 2        2020 Trøndelag        0.766  0.0425         0.676          0.848
+## 3        2020 Østlandet        0.970  0.0424         0.863          1    
+## 4        2021 Sørlandet        0.593  0.112          0.372          0.824
+## 5        2021 Trøndelag        0.766  0.0440         0.678          0.847
+## 6        2021 Østlandet        0.970  0.0402         0.867          1    
+## 7        2022 Sørlandet        0.592  0.116          0.368          0.828
+## 8        2022 Trøndelag        0.766  0.0431         0.672          0.849
+## 9        2022 Østlandet        0.971  0.0409         0.86           1</code></pre>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pollinators_sn_diff)</span></code></pre></div>
+<p><img src="DRAFT_insectIndicators_files/figure-html/unnamed-chunk-61-1.png" width="672" /></p>
+<p>Prepare export format.</p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>pollinators_sn_to_exp <span class="ot">&lt;-</span> pollinators_sn_diff<span class="sc">$</span>bootstrap_summary</span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a>pollinators_sn_to_exp <span class="ot">&lt;-</span> pollinators_sn_to_exp <span class="sc">%&gt;%</span> </span>
+<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year_window,</span>
+<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">region =</span> region_name,</span>
+<span id="cb75-6"><a href="#cb75-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">ind_value =</span> boot_value,</span>
+<span id="cb75-7"><a href="#cb75-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">ind_sd =</span> boot_sd,</span>
+<span id="cb75-8"><a href="#cb75-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">ind_lower2.5 =</span> boot_lower2<span class="fl">.5</span>,</span>
+<span id="cb75-9"><a href="#cb75-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">ind_upper97.5 =</span> boot_upper97<span class="fl">.5</span>)</span>
+<span id="cb75-10"><a href="#cb75-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-11"><a href="#cb75-11" aria-hidden="true" tabindex="-1"></a>pollinators_sn_to_exp <span class="ot">&lt;-</span> norway_reg_NorIns  <span class="sc">%&gt;%</span> </span>
+<span id="cb75-12"><a href="#cb75-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(pollinators_sn_to_exp,</span>
+<span id="cb75-13"><a href="#cb75-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;region&quot;</span> <span class="ot">=</span> <span class="st">&quot;region&quot;</span>),</span>
+<span id="cb75-14"><a href="#cb75-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">multiple =</span> <span class="st">&quot;all&quot;</span>)</span>
+<span id="cb75-15"><a href="#cb75-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-16"><a href="#cb75-16" aria-hidden="true" tabindex="-1"></a>pollinators_sn_to_exp</span></code></pre></div>
+<pre><code>## Simple feature collection with 9 features and 6 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -76208 ymin: 6450245 xmax: 468357.5 ymax: 7237323
+## Projected CRS: ETRS89 / UTM zone 33N
+## # A tibble: 9 × 7
+##   region                                                                              geom year_window ind_value ind_sd ind_lower2.5 ind_upper97.5
+##   &lt;chr&gt;                                                                 &lt;MULTIPOLYGON [m]&gt;       &lt;int&gt;     &lt;dbl&gt;  &lt;dbl&gt;        &lt;dbl&gt;         &lt;dbl&gt;
+## 1 Sørlandet (((-31605 6513854, -31464 6513743, -31449 6513590, -32255 6512745, -32512 651…        2020     0.596 0.118         0.368         0.838
+## 2 Sørlandet (((-31605 6513854, -31464 6513743, -31449 6513590, -32255 6512745, -32512 651…        2021     0.593 0.112         0.372         0.824
+## 3 Sørlandet (((-31605 6513854, -31464 6513743, -31449 6513590, -32255 6512745, -32512 651…        2022     0.592 0.116         0.368         0.828
+## 4 Trøndelag (((227783 7068646, 227876 7069284, 227998 7069292, 228247 7069134, 228869 706…        2020     0.766 0.0425        0.676         0.848
+## 5 Trøndelag (((227783 7068646, 227876 7069284, 227998 7069292, 228247 7069134, 228869 706…        2021     0.766 0.0440        0.678         0.847
+## 6 Trøndelag (((227783 7068646, 227876 7069284, 227998 7069292, 228247 7069134, 228869 706…        2022     0.766 0.0431        0.672         0.849
+## 7 Østlandet (((179915 6537265, 180246 6536997, 180600 6536671, 181028 6536601, 181197 653…        2020     0.970 0.0424        0.863         1    
+## 8 Østlandet (((179915 6537265, 180246 6536997, 180600 6536671, 181028 6536601, 181197 653…        2021     0.970 0.0402        0.867         1    
+## 9 Østlandet (((179915 6537265, 180246 6536997, 180600 6536671, 181028 6536601, 181197 653…        2022     0.971 0.0409        0.86          1</code></pre>
+</div>
+<div id="species-richness-of-dung-associated-insects" class="section level4" number="1.8.4.4">
+<h4><span class="header-section-number">1.8.4.4</span> Species richness of dung associated insects</h4>
+<p>Note that the species list will probably be expanded, after a taxonomic review.</p>
+<p>Fetch the data.</p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>dung_fam <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Muscidae&quot;</span>) </span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a>dung_sn <span class="ot">&lt;-</span> <span class="fu">get_observations</span>(<span class="at">subset_year =</span> <span class="dv">2020</span><span class="sc">:</span><span class="dv">2022</span>,</span>
+<span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">subset_families =</span> dung_fam,</span>
+<span id="cb77-5"><a href="#cb77-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">subset_habitat =</span> <span class="st">&quot;Semi-nat&quot;</span>)</span></code></pre></div>
+<p>[This will be amended with data based on genus and species lists. Need to use the lowest taxonomic resolution. Will implement a species lookup list in the database]</p>
+<p>Calculate the indicator values for each region and year.</p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>dung_sn_boot <span class="ot">&lt;-</span> <span class="fu">bootstrap_value</span>(<span class="at">df =</span> dung_sn,</span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">value =</span> no_species,</span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">groups =</span> <span class="fu">c</span>(<span class="st">&quot;year&quot;</span>,</span>
+<span id="cb78-4"><a href="#cb78-4" aria-hidden="true" tabindex="-1"></a>                                                  <span class="st">&quot;region_name&quot;</span>)</span>
+<span id="cb78-5"><a href="#cb78-5" aria-hidden="true" tabindex="-1"></a>                                       )</span></code></pre></div>
+<p>Compare to arbitrary reference value and normalize.</p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>dung_ref <span class="ot">&lt;-</span> <span class="dv">90</span></span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a>dung_sn_diff <span class="ot">&lt;-</span> dung_sn_boot <span class="sc">/</span> dung_ref</span></code></pre></div>
+<p>Plot the results and display uncertainty.</p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>dung_sn_diff</span></code></pre></div>
+<pre><code>## # A tibble: 9 × 6
+##   year_window region_name no_species boot_sd boot_lower2.5 boot_upper97.5
+##         &lt;int&gt; &lt;chr&gt;            &lt;dbl&gt;   &lt;dbl&gt;         &lt;dbl&gt;          &lt;dbl&gt;
+## 1        2020 Sørlandet        0.671  0.0673         0.543          0.808
+## 2        2020 Trøndelag        0.925  0.0347         0.855          0.989
+## 3        2020 Østlandet        0.845  0.0359         0.774          0.914
+## 4        2021 Sørlandet        0.675  0.0707         0.541          0.826
+## 5        2021 Trøndelag        0.927  0.0339         0.848          0.99 
+## 6        2021 Østlandet        0.847  0.0352         0.773          0.913
+## 7        2022 Sørlandet        0.672  0.0678         0.551          0.816
+## 8        2022 Trøndelag        0.925  0.0350         0.854          0.987
+## 9        2022 Østlandet        0.844  0.0365         0.771          0.914</code></pre>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dung_sn_diff)</span></code></pre></div>
+<p><img src="DRAFT_insectIndicators_files/figure-html/unnamed-chunk-67-1.png" width="672" /></p>
+<p>Prepare export format.</p>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>dung_sn_to_exp <span class="ot">&lt;-</span> dung_sn_diff<span class="sc">$</span>bootstrap_summary</span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a>dung_sn_to_exp <span class="ot">&lt;-</span> dung_sn_to_exp <span class="sc">%&gt;%</span> </span>
+<span id="cb83-4"><a href="#cb83-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year_window,</span>
+<span id="cb83-5"><a href="#cb83-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">region =</span> region_name,</span>
+<span id="cb83-6"><a href="#cb83-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">ind_value =</span> boot_value,</span>
+<span id="cb83-7"><a href="#cb83-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">ind_sd =</span> boot_sd,</span>
+<span id="cb83-8"><a href="#cb83-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">ind_lower2.5 =</span> boot_lower2<span class="fl">.5</span>,</span>
+<span id="cb83-9"><a href="#cb83-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">ind_upper97.5 =</span> boot_upper97<span class="fl">.5</span>)</span>
+<span id="cb83-10"><a href="#cb83-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-11"><a href="#cb83-11" aria-hidden="true" tabindex="-1"></a>dung_sn_to_exp <span class="ot">&lt;-</span> norway_reg_NorIns  <span class="sc">%&gt;%</span> </span>
+<span id="cb83-12"><a href="#cb83-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(dung_sn_to_exp,</span>
+<span id="cb83-13"><a href="#cb83-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;region&quot;</span> <span class="ot">=</span> <span class="st">&quot;region&quot;</span>),</span>
+<span id="cb83-14"><a href="#cb83-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">multiple =</span> <span class="st">&quot;all&quot;</span>)</span>
+<span id="cb83-15"><a href="#cb83-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-16"><a href="#cb83-16" aria-hidden="true" tabindex="-1"></a>dung_sn_to_exp</span></code></pre></div>
+<pre><code>## Simple feature collection with 9 features and 6 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -76208 ymin: 6450245 xmax: 468357.5 ymax: 7237323
+## Projected CRS: ETRS89 / UTM zone 33N
+## # A tibble: 9 × 7
+##   region                                                                              geom year_window ind_value ind_sd ind_lower2.5 ind_upper97.5
+##   &lt;chr&gt;                                                                 &lt;MULTIPOLYGON [m]&gt;       &lt;int&gt;     &lt;dbl&gt;  &lt;dbl&gt;        &lt;dbl&gt;         &lt;dbl&gt;
+## 1 Sørlandet (((-31605 6513854, -31464 6513743, -31449 6513590, -32255 6512745, -32512 651…        2020     0.671 0.0673        0.543         0.808
+## 2 Sørlandet (((-31605 6513854, -31464 6513743, -31449 6513590, -32255 6512745, -32512 651…        2021     0.675 0.0707        0.541         0.826
+## 3 Sørlandet (((-31605 6513854, -31464 6513743, -31449 6513590, -32255 6512745, -32512 651…        2022     0.672 0.0678        0.551         0.816
+## 4 Trøndelag (((227783 7068646, 227876 7069284, 227998 7069292, 228247 7069134, 228869 706…        2020     0.925 0.0347        0.855         0.989
+## 5 Trøndelag (((227783 7068646, 227876 7069284, 227998 7069292, 228247 7069134, 228869 706…        2021     0.927 0.0339        0.848         0.99 
+## 6 Trøndelag (((227783 7068646, 227876 7069284, 227998 7069292, 228247 7069134, 228869 706…        2022     0.925 0.0350        0.854         0.987
+## 7 Østlandet (((179915 6537265, 180246 6536997, 180600 6536671, 181028 6536601, 181197 653…        2020     0.845 0.0359        0.774         0.914
+## 8 Østlandet (((179915 6537265, 180246 6536997, 180600 6536671, 181028 6536601, 181197 653…        2021     0.847 0.0352        0.773         0.913
+## 9 Østlandet (((179915 6537265, 180246 6536997, 180600 6536671, 181028 6536601, 181197 653…        2022     0.844 0.0365        0.771         0.914</code></pre>
+</div>
+<div id="relationship-between-symphyta-and-parasitica-in-semi-natural-land" class="section level4" number="1.8.4.5">
+<h4><span class="header-section-number">1.8.4.5</span> Relationship between Symphyta and Parasitica in semi-natural land</h4>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>symphyta_fam <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Argidae&quot;</span>, <span class="st">&quot;Cephidae&quot;</span>, <span class="st">&quot;Cimbicidae&quot;</span>, </span>
+<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>                  <span class="st">&quot;Diprionidae&quot;</span>, <span class="st">&quot;Orussidae&quot;</span>, <span class="st">&quot;Pamphiliidae&quot;</span>, </span>
+<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a>                  <span class="st">&quot;Pergidae&quot;</span>, <span class="st">&quot;Siricidae&quot;</span>, <span class="st">&quot;Anaxyelidae&quot;</span>,</span>
+<span id="cb85-4"><a href="#cb85-4" aria-hidden="true" tabindex="-1"></a>                  <span class="st">&quot;Tenthredinidae&quot;</span>, <span class="st">&quot;Xiphydriidae&quot;</span>, <span class="st">&quot;Xyelidae&quot;</span>) </span>
+<span id="cb85-5"><a href="#cb85-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb85-6"><a href="#cb85-6" aria-hidden="true" tabindex="-1"></a>symphyta_sn <span class="ot">&lt;-</span> <span class="fu">get_observations</span>(<span class="at">subset_year =</span> <span class="dv">2020</span><span class="sc">:</span><span class="dv">2022</span>,</span>
+<span id="cb85-7"><a href="#cb85-7" aria-hidden="true" tabindex="-1"></a>                                <span class="at">subset_families =</span> symphyta_fam,</span>
+<span id="cb85-8"><a href="#cb85-8" aria-hidden="true" tabindex="-1"></a>                                <span class="at">subset_habitat =</span> <span class="st">&quot;Semi-nat&quot;</span>)</span>
+<span id="cb85-9"><a href="#cb85-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb85-10"><a href="#cb85-10" aria-hidden="true" tabindex="-1"></a>symphyta_sn</span></code></pre></div>
+<pre><code>## # A tibble: 60 × 8
+##     year locality    habitat_type region_name no_species shannon_div mean_no_asv_per_species GDE_by_asv
+##    &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;        &lt;chr&gt;            &lt;int&gt;       &lt;dbl&gt;                   &lt;dbl&gt;      &lt;dbl&gt;
+##  1  2020 Semi-nat_01 Semi-nat     Østlandet           38        31.9                    1.66       0.84
+##  2  2020 Semi-nat_02 Semi-nat     Østlandet           16        15.7                    1.06       0.98
+##  3  2020 Semi-nat_03 Semi-nat     Østlandet           13        12.3                    1.23       0.95
+##  4  2020 Semi-nat_04 Semi-nat     Østlandet           39        34.6                    1.38       0.89
+##  5  2020 Semi-nat_05 Semi-nat     Østlandet           65        58.5                    1.58       0.9 
+##  6  2020 Semi-nat_06 Semi-nat     Østlandet           22        20.0                    1.14       0.91
+##  7  2020 Semi-nat_07 Semi-nat     Østlandet           36        33.2                    1.31       0.92
+##  8  2020 Semi-nat_08 Semi-nat     Østlandet           46        40.4                    1.48       0.88
+##  9  2020 Semi-nat_09 Semi-nat     Østlandet           21        18.2                    1.62       0.86
+## 10  2020 Semi-nat_10 Semi-nat     Østlandet           68        56.9                    1.62       0.84
+## # ℹ 50 more rows</code></pre>
+<p>[Note, this list needs to be checked over by e.g. Arnstein.]</p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>parasitica_fam <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Braconidae&quot;</span>, <span class="st">&quot;Ichneumonidae&quot;</span>, <span class="st">&quot;Chalcididae&quot;</span>, </span>
+<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Eulophidae&quot;</span>, <span class="st">&quot;Pteromalidae&quot;</span>, <span class="st">&quot;Aphelinidae&quot;</span>, </span>
+<span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Scelionidae&quot;</span>, <span class="st">&quot;Eupelmidae&quot;</span>, <span class="st">&quot;Encyrtidae&quot;</span>, </span>
+<span id="cb87-4"><a href="#cb87-4" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Mymaridae&quot;</span>, <span class="st">&quot;Diapriidae&quot;</span>, <span class="st">&quot;Bethylidae&quot;</span>, </span>
+<span id="cb87-5"><a href="#cb87-5" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Evaniidae&quot;</span>, <span class="st">&quot;Ceraphronidae&quot;</span>, <span class="st">&quot;Torymidae&quot;</span>, </span>
+<span id="cb87-6"><a href="#cb87-6" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Dryinidae&quot;</span>, <span class="st">&quot;Eucharitidae&quot;</span>, <span class="st">&quot;Mymarommatidae&quot;</span>, </span>
+<span id="cb87-7"><a href="#cb87-7" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Orussidae&quot;</span>, <span class="st">&quot;Megaspilidae&quot;</span>, <span class="st">&quot;Stephanidae&quot;</span>, </span>
+<span id="cb87-8"><a href="#cb87-8" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Trigonalidae&quot;</span>, <span class="st">&quot;Platygastridae&quot;</span>, <span class="st">&quot;Aulacidae&quot;</span>, </span>
+<span id="cb87-9"><a href="#cb87-9" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Gasteruptiidae&quot;</span>, <span class="st">&quot;Rhopalosomatidae&quot;</span>, <span class="st">&quot;Larridae&quot;</span>, </span>
+<span id="cb87-10"><a href="#cb87-10" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Agaonidae&quot;</span>, <span class="st">&quot;Pompilidae&quot;</span>, <span class="st">&quot;Bradynobaenidae&quot;</span></span>
+<span id="cb87-11"><a href="#cb87-11" aria-hidden="true" tabindex="-1"></a>                    )</span>
+<span id="cb87-12"><a href="#cb87-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb87-13"><a href="#cb87-13" aria-hidden="true" tabindex="-1"></a>parasitica_sn <span class="ot">&lt;-</span> <span class="fu">get_observations</span>(<span class="at">subset_year =</span> <span class="dv">2020</span><span class="sc">:</span><span class="dv">2022</span>,</span>
+<span id="cb87-14"><a href="#cb87-14" aria-hidden="true" tabindex="-1"></a>                                <span class="at">subset_families =</span> parasitica_fam,</span>
+<span id="cb87-15"><a href="#cb87-15" aria-hidden="true" tabindex="-1"></a>                                <span class="at">subset_habitat =</span> <span class="st">&quot;Semi-nat&quot;</span>)</span>
+<span id="cb87-16"><a href="#cb87-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb87-17"><a href="#cb87-17" aria-hidden="true" tabindex="-1"></a>parasitica_sn</span></code></pre></div>
+<pre><code>## # A tibble: 60 × 8
+##     year locality    habitat_type region_name no_species shannon_div mean_no_asv_per_species GDE_by_asv
+##    &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;        &lt;chr&gt;            &lt;int&gt;       &lt;dbl&gt;                   &lt;dbl&gt;      &lt;dbl&gt;
+##  1  2020 Semi-nat_01 Semi-nat     Østlandet          480        413.                    1.43       0.86
+##  2  2020 Semi-nat_02 Semi-nat     Østlandet          112        107.                    1.12       0.95
+##  3  2020 Semi-nat_03 Semi-nat     Østlandet          119        113.                    1.14       0.95
+##  4  2020 Semi-nat_04 Semi-nat     Østlandet          369        316.                    1.47       0.86
+##  5  2020 Semi-nat_05 Semi-nat     Østlandet          642        526.                    1.64       0.82
+##  6  2020 Semi-nat_06 Semi-nat     Østlandet          190        177.                    1.19       0.93
+##  7  2020 Semi-nat_07 Semi-nat     Østlandet          253        233.                    1.23       0.92
+##  8  2020 Semi-nat_08 Semi-nat     Østlandet          323        292.                    1.27       0.9 
+##  9  2020 Semi-nat_09 Semi-nat     Østlandet          216        187.                    1.38       0.86
+## 10  2020 Semi-nat_10 Semi-nat     Østlandet          531        463.                    1.41       0.87
+## # ℹ 50 more rows</code></pre>
+<p>Divide the richness of Parasitica by Symphyta. [Could make a function for this later on.]</p>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a>par_sym <span class="ot">&lt;-</span> symphyta_sn <span class="sc">%&gt;%</span> </span>
+<span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">full_join</span>(parasitica_sn,</span>
+<span id="cb89-3"><a href="#cb89-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;year&quot;</span> <span class="ot">=</span><span class="st">&quot;year&quot;</span>,</span>
+<span id="cb89-4"><a href="#cb89-4" aria-hidden="true" tabindex="-1"></a>              <span class="st">&quot;locality&quot;</span> <span class="ot">=</span> <span class="st">&quot;locality&quot;</span>,</span>
+<span id="cb89-5"><a href="#cb89-5" aria-hidden="true" tabindex="-1"></a>              <span class="st">&quot;habitat_type&quot;</span> <span class="ot">=</span> <span class="st">&quot;habitat_type&quot;</span>,</span>
+<span id="cb89-6"><a href="#cb89-6" aria-hidden="true" tabindex="-1"></a>              <span class="st">&quot;region_name&quot;</span> <span class="ot">=</span> <span class="st">&quot;region_name&quot;</span>),</span>
+<span id="cb89-7"><a href="#cb89-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">suffix =</span> <span class="fu">c</span>(<span class="st">&quot;_sym&quot;</span>, <span class="st">&quot;_par&quot;</span>)</span>
+<span id="cb89-8"><a href="#cb89-8" aria-hidden="true" tabindex="-1"></a>       ) <span class="sc">%&gt;%</span> </span>
+<span id="cb89-9"><a href="#cb89-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">par_per_sym_richn =</span> no_species_par <span class="sc">/</span> no_species_sym)</span></code></pre></div>
+<p>Bootstrap the fraction of Parasitica to Symphyta.</p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a>par_sym_sn_boot <span class="ot">&lt;-</span> <span class="fu">bootstrap_value</span>(par_sym,</span>
+<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a>                                <span class="at">value =</span> par_per_sym_richn,</span>
+<span id="cb90-3"><a href="#cb90-3" aria-hidden="true" tabindex="-1"></a>                                <span class="at">groups =</span> <span class="fu">c</span>(<span class="st">&quot;year&quot;</span>, </span>
+<span id="cb90-4"><a href="#cb90-4" aria-hidden="true" tabindex="-1"></a>                                           <span class="st">&quot;region_name&quot;</span>))</span></code></pre></div>
+<p>Compare to arbitrary reference value and normalize.</p>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a>par_sym_ref <span class="ot">&lt;-</span> <span class="dv">40</span></span>
+<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a>par_sym_sn_diff <span class="ot">&lt;-</span> par_sym_sn_boot <span class="sc">/</span> par_sym_ref</span></code></pre></div>
+<p>Plot the results and display uncertainty.</p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>par_sym_sn_diff</span></code></pre></div>
+<pre><code>## # A tibble: 9 × 6
+##   year_window region_name par_per_sym_richn boot_sd boot_lower2.5 boot_upper97.5
+##         &lt;int&gt; &lt;chr&gt;                   &lt;dbl&gt;   &lt;dbl&gt;         &lt;dbl&gt;          &lt;dbl&gt;
+## 1        2020 Sørlandet               0.816  0.170          0.511          1    
+## 2        2020 Trøndelag               0.735  0.0758         0.590          0.892
+## 3        2020 Østlandet               0.448  0.0413         0.366          0.533
+## 4        2021 Sørlandet               0.826  0.166          0.523          1    
+## 5        2021 Trøndelag               0.734  0.0828         0.583          0.907
+## 6        2021 Østlandet               0.447  0.0417         0.367          0.537
+## 7        2022 Sørlandet               0.832  0.164          0.528          1    
+## 8        2022 Trøndelag               0.736  0.0805         0.584          0.914
+## 9        2022 Østlandet               0.447  0.0428         0.363          0.538</code></pre>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(par_sym_sn_diff)</span></code></pre></div>
+<p><img src="DRAFT_insectIndicators_files/figure-html/unnamed-chunk-75-1.png" width="672" /></p>
+<p>Prepare export format.</p>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a>par_sym_sn_exp <span class="ot">&lt;-</span> par_sym_sn_diff<span class="sc">$</span>bootstrap_summary</span>
+<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-3"><a href="#cb95-3" aria-hidden="true" tabindex="-1"></a>par_sym_sn_exp <span class="ot">&lt;-</span> par_sym_sn_exp <span class="sc">%&gt;%</span> </span>
+<span id="cb95-4"><a href="#cb95-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year_window,</span>
+<span id="cb95-5"><a href="#cb95-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">region =</span> region_name,</span>
+<span id="cb95-6"><a href="#cb95-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">ind_value =</span> boot_value,</span>
+<span id="cb95-7"><a href="#cb95-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">ind_sd =</span> boot_sd,</span>
+<span id="cb95-8"><a href="#cb95-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">ind_lower2.5 =</span> boot_lower2<span class="fl">.5</span>,</span>
+<span id="cb95-9"><a href="#cb95-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">ind_upper97.5 =</span> boot_upper97<span class="fl">.5</span>)</span>
+<span id="cb95-10"><a href="#cb95-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-11"><a href="#cb95-11" aria-hidden="true" tabindex="-1"></a>par_sym_sn_exp <span class="ot">&lt;-</span> norway_reg_NorIns  <span class="sc">%&gt;%</span> </span>
+<span id="cb95-12"><a href="#cb95-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(par_sym_sn_exp,</span>
+<span id="cb95-13"><a href="#cb95-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;region&quot;</span> <span class="ot">=</span> <span class="st">&quot;region&quot;</span>),</span>
+<span id="cb95-14"><a href="#cb95-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">multiple =</span> <span class="st">&quot;all&quot;</span>)</span>
+<span id="cb95-15"><a href="#cb95-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-16"><a href="#cb95-16" aria-hidden="true" tabindex="-1"></a>par_sym_sn_exp</span></code></pre></div>
+<pre><code>## Simple feature collection with 9 features and 6 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -76208 ymin: 6450245 xmax: 468357.5 ymax: 7237323
+## Projected CRS: ETRS89 / UTM zone 33N
+## # A tibble: 9 × 7
+##   region                                                                              geom year_window ind_value ind_sd ind_lower2.5 ind_upper97.5
+##   &lt;chr&gt;                                                                 &lt;MULTIPOLYGON [m]&gt;       &lt;int&gt;     &lt;dbl&gt;  &lt;dbl&gt;        &lt;dbl&gt;         &lt;dbl&gt;
+## 1 Sørlandet (((-31605 6513854, -31464 6513743, -31449 6513590, -32255 6512745, -32512 651…        2020     0.816 0.170         0.511         1    
+## 2 Sørlandet (((-31605 6513854, -31464 6513743, -31449 6513590, -32255 6512745, -32512 651…        2021     0.826 0.166         0.523         1    
+## 3 Sørlandet (((-31605 6513854, -31464 6513743, -31449 6513590, -32255 6512745, -32512 651…        2022     0.832 0.164         0.528         1    
+## 4 Trøndelag (((227783 7068646, 227876 7069284, 227998 7069292, 228247 7069134, 228869 706…        2020     0.735 0.0758        0.590         0.892
+## 5 Trøndelag (((227783 7068646, 227876 7069284, 227998 7069292, 228247 7069134, 228869 706…        2021     0.734 0.0828        0.583         0.907
+## 6 Trøndelag (((227783 7068646, 227876 7069284, 227998 7069292, 228247 7069134, 228869 706…        2022     0.736 0.0805        0.584         0.914
+## 7 Østlandet (((179915 6537265, 180246 6536997, 180600 6536671, 181028 6536601, 181197 653…        2020     0.448 0.0413        0.366         0.533
+## 8 Østlandet (((179915 6537265, 180246 6536997, 180600 6536671, 181028 6536601, 181197 653…        2021     0.447 0.0417        0.367         0.537
+## 9 Østlandet (((179915 6537265, 180246 6536997, 180600 6536671, 181028 6536601, 181197 653…        2022     0.447 0.0428        0.363         0.538</code></pre>
+</div>
+<div id="genetic-diversity-evenness-of-flying-insects-in-semi-natural-land" class="section level4" number="1.8.4.6">
+<h4><span class="header-section-number">1.8.4.6</span> Genetic diversity evenness of flying insects in semi-natural land</h4>
+<p>This is not fully implemented yet, and the method shown here functions as a placeholder, awaiting a proper calculation. Here, the intraspecific variation is based simply on the number of unique genetic variants (ASVs), and their relative abundance measured as number of DNA-reads in the samples. But to do this properly, we need to use the full COI sequence to calculate the true GDE (see Connor et al. 2023). This temporarily postponed due to lack of software, but will be updated (and amended here) as soon as possible.</p>
+<p>Fetch the data.</p>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a>richness_sn <span class="ot">&lt;-</span> <span class="fu">get_observations</span>(<span class="at">subset_year =</span> <span class="dv">2020</span><span class="sc">:</span><span class="dv">2022</span>,</span>
+<span id="cb97-2"><a href="#cb97-2" aria-hidden="true" tabindex="-1"></a>                                <span class="at">subset_habitat =</span> <span class="st">&quot;Semi-nat&quot;</span>)</span></code></pre></div>
+<p>Calculate the indicator values for each region and year.</p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a>gde_sn_boot <span class="ot">&lt;-</span> <span class="fu">bootstrap_value</span>(<span class="at">df =</span> richness_sn,</span>
+<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">value =</span> GDE_by_asv,</span>
+<span id="cb98-3"><a href="#cb98-3" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">groups =</span> <span class="fu">c</span>(<span class="st">&quot;year&quot;</span>,</span>
+<span id="cb98-4"><a href="#cb98-4" aria-hidden="true" tabindex="-1"></a>                                              <span class="st">&quot;region_name&quot;</span>)</span>
+<span id="cb98-5"><a href="#cb98-5" aria-hidden="true" tabindex="-1"></a>                                   )</span></code></pre></div>
+<p>Compare to arbitrary reference value and normalize.</p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a>gde_sn_ref <span class="ot">&lt;-</span> <span class="fl">0.7</span></span>
+<span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb99-3"><a href="#cb99-3" aria-hidden="true" tabindex="-1"></a>gde_sn_diff <span class="ot">&lt;-</span> gde_sn_boot <span class="sc">/</span> gde_sn_ref</span></code></pre></div>
+<p>Plot the results and display uncertainty.</p>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a>gde_sn_diff</span></code></pre></div>
+<pre><code>## # A tibble: 9 × 6
+##   year_window region_name GDE_by_asv boot_sd boot_lower2.5 boot_upper97.5
+##         &lt;int&gt; &lt;chr&gt;            &lt;dbl&gt;   &lt;dbl&gt;         &lt;dbl&gt;          &lt;dbl&gt;
+## 1        2020 Sørlandet        0.811  0.0284         0.759          0.867
+## 2        2020 Trøndelag        0.749  0.0159         0.718          0.781
+## 3        2020 Østlandet        0.900  0.0197         0.862          0.938
+## 4        2021 Sørlandet        0.809  0.0269         0.759          0.864
+## 5        2021 Trøndelag        0.751  0.0165         0.719          0.784
+## 6        2021 Østlandet        0.900  0.0201         0.86           0.937
+## 7        2022 Sørlandet        0.811  0.0278         0.76           0.866
+## 8        2022 Trøndelag        0.751  0.0172         0.718          0.786
+## 9        2022 Østlandet        0.900  0.0200         0.862          0.940</code></pre>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gde_sn_diff)</span></code></pre></div>
+<p><img src="DRAFT_insectIndicators_files/figure-html/unnamed-chunk-81-1.png" width="672" /></p>
+<p>Prepare export format.</p>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a>gde_sn_to_exp <span class="ot">&lt;-</span> gde_sn_diff<span class="sc">$</span>bootstrap_summary</span>
+<span id="cb103-2"><a href="#cb103-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-3"><a href="#cb103-3" aria-hidden="true" tabindex="-1"></a>gde_sn_to_exp <span class="ot">&lt;-</span> gde_sn_to_exp <span class="sc">%&gt;%</span> </span>
+<span id="cb103-4"><a href="#cb103-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year_window,</span>
+<span id="cb103-5"><a href="#cb103-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">region =</span> region_name,</span>
+<span id="cb103-6"><a href="#cb103-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">ind_value =</span> boot_value,</span>
+<span id="cb103-7"><a href="#cb103-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">ind_sd =</span> boot_sd,</span>
+<span id="cb103-8"><a href="#cb103-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">ind_lower2.5 =</span> boot_lower2<span class="fl">.5</span>,</span>
+<span id="cb103-9"><a href="#cb103-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">ind_upper97.5 =</span> boot_upper97<span class="fl">.5</span>)</span>
+<span id="cb103-10"><a href="#cb103-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-11"><a href="#cb103-11" aria-hidden="true" tabindex="-1"></a>gde_sn_to_exp <span class="ot">&lt;-</span> norway_reg_NorIns  <span class="sc">%&gt;%</span> </span>
+<span id="cb103-12"><a href="#cb103-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(gde_sn_to_exp,</span>
+<span id="cb103-13"><a href="#cb103-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;region&quot;</span> <span class="ot">=</span> <span class="st">&quot;region&quot;</span>),</span>
+<span id="cb103-14"><a href="#cb103-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">multiple =</span> <span class="st">&quot;all&quot;</span>)</span>
+<span id="cb103-15"><a href="#cb103-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-16"><a href="#cb103-16" aria-hidden="true" tabindex="-1"></a>gde_sn_to_exp</span></code></pre></div>
+<pre><code>## Simple feature collection with 9 features and 6 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -76208 ymin: 6450245 xmax: 468357.5 ymax: 7237323
+## Projected CRS: ETRS89 / UTM zone 33N
+## # A tibble: 9 × 7
+##   region                                                                              geom year_window ind_value ind_sd ind_lower2.5 ind_upper97.5
+##   &lt;chr&gt;                                                                 &lt;MULTIPOLYGON [m]&gt;       &lt;int&gt;     &lt;dbl&gt;  &lt;dbl&gt;        &lt;dbl&gt;         &lt;dbl&gt;
+## 1 Sørlandet (((-31605 6513854, -31464 6513743, -31449 6513590, -32255 6512745, -32512 651…        2020     0.811 0.0284        0.759         0.867
+## 2 Sørlandet (((-31605 6513854, -31464 6513743, -31449 6513590, -32255 6512745, -32512 651…        2021     0.809 0.0269        0.759         0.864
+## 3 Sørlandet (((-31605 6513854, -31464 6513743, -31449 6513590, -32255 6512745, -32512 651…        2022     0.811 0.0278        0.76          0.866
+## 4 Trøndelag (((227783 7068646, 227876 7069284, 227998 7069292, 228247 7069134, 228869 706…        2020     0.749 0.0159        0.718         0.781
+## 5 Trøndelag (((227783 7068646, 227876 7069284, 227998 7069292, 228247 7069134, 228869 706…        2021     0.751 0.0165        0.719         0.784
+## 6 Trøndelag (((227783 7068646, 227876 7069284, 227998 7069292, 228247 7069134, 228869 706…        2022     0.751 0.0172        0.718         0.786
+## 7 Østlandet (((179915 6537265, 180246 6536997, 180600 6536671, 181028 6536601, 181197 653…        2020     0.900 0.0197        0.862         0.938
+## 8 Østlandet (((179915 6537265, 180246 6536997, 180600 6536671, 181028 6536601, 181197 653…        2021     0.900 0.0201        0.86          0.937
+## 9 Østlandet (((179915 6537265, 180246 6536997, 180600 6536671, 181028 6536601, 181197 653…        2022     0.900 0.0200        0.862         0.940</code></pre>
+</div>
+</div>
+<div id="calculation-of-nbbm-indicators" class="section level3" number="1.8.5">
+<h3><span class="header-section-number">1.8.5</span> Calculation of NBBM indicators</h3>
+</div>
+<div id="bumblebees-in-open-landscapes" class="section level3" number="1.8.6">
+<h3><span class="header-section-number">1.8.6</span> Bumblebees in open landscapes</h3>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(bombLepiSurv)</span>
+<span id="cb105-2"><a href="#cb105-2" aria-hidden="true" tabindex="-1"></a><span class="fu">humlesommerfConnect</span>(<span class="at">host =</span> <span class="st">&quot;ninradardata01.nina.no&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a>allBombusGressmark2022 <span class="ot">&lt;-</span> <span class="fu">getAllData</span>(<span class="at">type =</span> <span class="st">&quot;bumblebees&quot;</span>,</span>
+<span id="cb106-2"><a href="#cb106-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">habitat =</span> <span class="st">&quot;gressmark&quot;</span>,</span>
+<span id="cb106-3"><a href="#cb106-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">year =</span> <span class="dv">2022</span>,</span>
+<span id="cb106-4"><a href="#cb106-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">language =</span> <span class="st">&quot;norsk&quot;</span>)</span>
+<span id="cb106-5"><a href="#cb106-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb106-6"><a href="#cb106-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb106-7"><a href="#cb106-7" aria-hidden="true" tabindex="-1"></a><span class="fu">surveyBarplot</span>(allBombusGressmark2022)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:bombusGressBarplot"></span>
+<img src="DRAFT_insectIndicators_files/figure-html/bombusGressBarplot-1.png" alt="Bumblebees in grasslands 2021" width="672" />
+<p class="caption">
+Figure 1.1: Bumblebees in grasslands 2021
+</p>
+</div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a>nIter <span class="ot">=</span> <span class="dv">999</span></span>
+<span id="cb107-2"><a href="#cb107-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb107-3"><a href="#cb107-3" aria-hidden="true" tabindex="-1"></a>hInd2022TrondGress <span class="ot">&lt;-</span> <span class="fu">calcInd</span>(<span class="at">type =</span> <span class="st">&quot;Humler&quot;</span>,</span>
+<span id="cb107-4"><a href="#cb107-4" aria-hidden="true" tabindex="-1"></a>                              <span class="at">region_short =</span> <span class="st">&quot;Trond&quot;</span>,</span>
+<span id="cb107-5"><a href="#cb107-5" aria-hidden="true" tabindex="-1"></a>                              <span class="at">habitat =</span> <span class="st">&quot;Gressmark&quot;</span>,</span>
+<span id="cb107-6"><a href="#cb107-6" aria-hidden="true" tabindex="-1"></a>                              <span class="at">year =</span> <span class="dv">2022</span>,</span>
+<span id="cb107-7"><a href="#cb107-7" aria-hidden="true" tabindex="-1"></a>                              <span class="at">nIter =</span> nIter,</span>
+<span id="cb107-8"><a href="#cb107-8" aria-hidden="true" tabindex="-1"></a>                              <span class="at">save.draws =</span> T)</span></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a>hInd2022SorGress <span class="ot">&lt;-</span> <span class="fu">calcInd</span>(<span class="at">type =</span> <span class="st">&quot;Humler&quot;</span>,</span>
+<span id="cb108-2"><a href="#cb108-2" aria-hidden="true" tabindex="-1"></a>                              <span class="at">region_short =</span> <span class="st">&quot;Sor&quot;</span>,</span>
+<span id="cb108-3"><a href="#cb108-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">habitat =</span> <span class="st">&quot;Gressmark&quot;</span>,</span>
+<span id="cb108-4"><a href="#cb108-4" aria-hidden="true" tabindex="-1"></a>                              <span class="at">year =</span> <span class="dv">2022</span>,</span>
+<span id="cb108-5"><a href="#cb108-5" aria-hidden="true" tabindex="-1"></a>                              <span class="at">nIter =</span> nIter,</span>
+<span id="cb108-6"><a href="#cb108-6" aria-hidden="true" tabindex="-1"></a>                              <span class="at">save.draws =</span> T)</span></code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a>hInd2022OstGress <span class="ot">&lt;-</span> <span class="fu">calcInd</span>(<span class="at">type =</span> <span class="st">&quot;Humler&quot;</span>,</span>
+<span id="cb109-2"><a href="#cb109-2" aria-hidden="true" tabindex="-1"></a>                              <span class="at">region_short =</span> <span class="st">&quot;Ost&quot;</span>,</span>
+<span id="cb109-3"><a href="#cb109-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">habitat =</span> <span class="st">&quot;Gressmark&quot;</span>,</span>
+<span id="cb109-4"><a href="#cb109-4" aria-hidden="true" tabindex="-1"></a>                              <span class="at">year =</span> <span class="dv">2022</span>,</span>
+<span id="cb109-5"><a href="#cb109-5" aria-hidden="true" tabindex="-1"></a>                              <span class="at">nIter =</span> nIter,</span>
+<span id="cb109-6"><a href="#cb109-6" aria-hidden="true" tabindex="-1"></a>                              <span class="at">save.draws =</span> T)</span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a>hInd2022VestGress <span class="ot">&lt;-</span> <span class="fu">calcInd</span>(<span class="at">type =</span> <span class="st">&quot;Humler&quot;</span>,</span>
+<span id="cb110-2"><a href="#cb110-2" aria-hidden="true" tabindex="-1"></a>                              <span class="at">region_short =</span> <span class="st">&quot;Vest&quot;</span>,</span>
+<span id="cb110-3"><a href="#cb110-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">habitat =</span> <span class="st">&quot;Gressmark&quot;</span>,</span>
+<span id="cb110-4"><a href="#cb110-4" aria-hidden="true" tabindex="-1"></a>                              <span class="at">year =</span> <span class="dv">2022</span>,</span>
+<span id="cb110-5"><a href="#cb110-5" aria-hidden="true" tabindex="-1"></a>                              <span class="at">nIter =</span> nIter,</span>
+<span id="cb110-6"><a href="#cb110-6" aria-hidden="true" tabindex="-1"></a>                              <span class="at">save.draws =</span> T)</span></code></pre></div>
+</div>
+<div id="butterflies-in-open-landscapes" class="section level3" number="1.8.7">
+<h3><span class="header-section-number">1.8.7</span> Butterflies in open landscapes</h3>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a>nIter <span class="ot">=</span> <span class="dv">999</span></span>
+<span id="cb111-2"><a href="#cb111-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb111-3"><a href="#cb111-3" aria-hidden="true" tabindex="-1"></a>sInd2022TrondGress <span class="ot">&lt;-</span> <span class="fu">calcInd</span>(<span class="at">type =</span> <span class="st">&quot;Sommerfugl&quot;</span>,</span>
+<span id="cb111-4"><a href="#cb111-4" aria-hidden="true" tabindex="-1"></a>                              <span class="at">region_short =</span> <span class="st">&quot;Trond&quot;</span>,</span>
+<span id="cb111-5"><a href="#cb111-5" aria-hidden="true" tabindex="-1"></a>                              <span class="at">habitat =</span> <span class="st">&quot;Gressmark&quot;</span>,</span>
+<span id="cb111-6"><a href="#cb111-6" aria-hidden="true" tabindex="-1"></a>                              <span class="at">year =</span> <span class="dv">2022</span>,</span>
+<span id="cb111-7"><a href="#cb111-7" aria-hidden="true" tabindex="-1"></a>                              <span class="at">nIter =</span> nIter,</span>
+<span id="cb111-8"><a href="#cb111-8" aria-hidden="true" tabindex="-1"></a>                              <span class="at">save.draws =</span> T)</span></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a>sInd2022SorGress <span class="ot">&lt;-</span> <span class="fu">calcInd</span>(<span class="at">type =</span> <span class="st">&quot;Sommerfugl&quot;</span>,</span>
+<span id="cb112-2"><a href="#cb112-2" aria-hidden="true" tabindex="-1"></a>                              <span class="at">region_short =</span> <span class="st">&quot;Sor&quot;</span>,</span>
+<span id="cb112-3"><a href="#cb112-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">habitat =</span> <span class="st">&quot;Gressmark&quot;</span>,</span>
+<span id="cb112-4"><a href="#cb112-4" aria-hidden="true" tabindex="-1"></a>                              <span class="at">year =</span> <span class="dv">2022</span>,</span>
+<span id="cb112-5"><a href="#cb112-5" aria-hidden="true" tabindex="-1"></a>                              <span class="at">nIter =</span> nIter,</span>
+<span id="cb112-6"><a href="#cb112-6" aria-hidden="true" tabindex="-1"></a>                              <span class="at">save.draws =</span> T)</span></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a>sInd2022OstGress <span class="ot">&lt;-</span> <span class="fu">calcInd</span>(<span class="at">type =</span> <span class="st">&quot;Sommerfugl&quot;</span>,</span>
+<span id="cb113-2"><a href="#cb113-2" aria-hidden="true" tabindex="-1"></a>                              <span class="at">region_short =</span> <span class="st">&quot;Ost&quot;</span>,</span>
+<span id="cb113-3"><a href="#cb113-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">habitat =</span> <span class="st">&quot;Gressmark&quot;</span>,</span>
+<span id="cb113-4"><a href="#cb113-4" aria-hidden="true" tabindex="-1"></a>                              <span class="at">year =</span> <span class="dv">2022</span>,</span>
+<span id="cb113-5"><a href="#cb113-5" aria-hidden="true" tabindex="-1"></a>                              <span class="at">nIter =</span> nIter,</span>
+<span id="cb113-6"><a href="#cb113-6" aria-hidden="true" tabindex="-1"></a>                              <span class="at">save.draws =</span> T)</span></code></pre></div>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a>sInd2022VestGress <span class="ot">&lt;-</span> <span class="fu">calcInd</span>(<span class="at">type =</span> <span class="st">&quot;Sommerfugl&quot;</span>,</span>
+<span id="cb114-2"><a href="#cb114-2" aria-hidden="true" tabindex="-1"></a>                              <span class="at">region_short =</span> <span class="st">&quot;Vest&quot;</span>,</span>
+<span id="cb114-3"><a href="#cb114-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">habitat =</span> <span class="st">&quot;Gressmark&quot;</span>,</span>
+<span id="cb114-4"><a href="#cb114-4" aria-hidden="true" tabindex="-1"></a>                              <span class="at">year =</span> <span class="dv">2022</span>,</span>
+<span id="cb114-5"><a href="#cb114-5" aria-hidden="true" tabindex="-1"></a>                              <span class="at">nIter =</span> nIter,</span>
+<span id="cb114-6"><a href="#cb114-6" aria-hidden="true" tabindex="-1"></a>                              <span class="at">save.draws =</span> T)</span></code></pre></div>
+<p>The calculations for earlier years are already present as datasets in the R-package and can be fetched individually. Once this is done, we can plot the timeseries of values using the function <code>indPlot</code>.</p>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2022VestGress&quot;</span>)</span>
+<span id="cb115-2"><a href="#cb115-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2022VestSkog&quot;</span>)</span>
+<span id="cb115-3"><a href="#cb115-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2022TrondGress&quot;</span>)</span>
+<span id="cb115-4"><a href="#cb115-4" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2022TrondSkog&quot;</span>)</span>
+<span id="cb115-5"><a href="#cb115-5" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2022OstGress&quot;</span>)</span>
+<span id="cb115-6"><a href="#cb115-6" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2022OstSkog&quot;</span>)</span>
+<span id="cb115-7"><a href="#cb115-7" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2022SorGress&quot;</span>)</span>
+<span id="cb115-8"><a href="#cb115-8" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2022SorSkog&quot;</span>)</span>
+<span id="cb115-9"><a href="#cb115-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb115-10"><a href="#cb115-10" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2021TrondGress&quot;</span>)</span>
+<span id="cb115-11"><a href="#cb115-11" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2021TrondSkog&quot;</span>)</span>
+<span id="cb115-12"><a href="#cb115-12" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2021OstGress&quot;</span>)</span>
+<span id="cb115-13"><a href="#cb115-13" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2021OstSkog&quot;</span>)</span>
+<span id="cb115-14"><a href="#cb115-14" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2021SorGress&quot;</span>)</span>
+<span id="cb115-15"><a href="#cb115-15" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2021SorSkog&quot;</span>)</span>
+<span id="cb115-16"><a href="#cb115-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb115-17"><a href="#cb115-17" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2020TrondGress&quot;</span>)</span>
+<span id="cb115-18"><a href="#cb115-18" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2020TrondSkog&quot;</span>)</span>
+<span id="cb115-19"><a href="#cb115-19" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2020OstGress&quot;</span>)</span>
+<span id="cb115-20"><a href="#cb115-20" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2020OstSkog&quot;</span>)</span>
+<span id="cb115-21"><a href="#cb115-21" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2020SorGress&quot;</span>)</span>
+<span id="cb115-22"><a href="#cb115-22" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2020SorSkog&quot;</span>)</span>
+<span id="cb115-23"><a href="#cb115-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb115-24"><a href="#cb115-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb115-25"><a href="#cb115-25" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2019TrondGress&quot;</span>)</span>
+<span id="cb115-26"><a href="#cb115-26" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2019TrondSkog&quot;</span>)</span>
+<span id="cb115-27"><a href="#cb115-27" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2019OstGress&quot;</span>)</span>
+<span id="cb115-28"><a href="#cb115-28" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2019OstSkog&quot;</span>)</span>
+<span id="cb115-29"><a href="#cb115-29" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2019SorGress&quot;</span>)</span>
+<span id="cb115-30"><a href="#cb115-30" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2019SorSkog&quot;</span>)</span>
+<span id="cb115-31"><a href="#cb115-31" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2018TrondGress&quot;</span>)</span>
+<span id="cb115-32"><a href="#cb115-32" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2018TrondSkog&quot;</span>)</span>
+<span id="cb115-33"><a href="#cb115-33" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2018OstGress&quot;</span>)</span>
+<span id="cb115-34"><a href="#cb115-34" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2018OstSkog&quot;</span>)</span>
+<span id="cb115-35"><a href="#cb115-35" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2018SorGress&quot;</span>)</span>
+<span id="cb115-36"><a href="#cb115-36" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2018SorSkog&quot;</span>)</span>
+<span id="cb115-37"><a href="#cb115-37" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2017TrondGress&quot;</span>)</span>
+<span id="cb115-38"><a href="#cb115-38" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2017TrondSkog&quot;</span>)</span>
+<span id="cb115-39"><a href="#cb115-39" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2017OstGress&quot;</span>)</span>
+<span id="cb115-40"><a href="#cb115-40" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2017OstSkog&quot;</span>)</span>
+<span id="cb115-41"><a href="#cb115-41" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2017SorGress&quot;</span>)</span>
+<span id="cb115-42"><a href="#cb115-42" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2017SorSkog&quot;</span>)</span>
+<span id="cb115-43"><a href="#cb115-43" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2016TrondGress&quot;</span>)</span>
+<span id="cb115-44"><a href="#cb115-44" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2016TrondSkog&quot;</span>)</span>
+<span id="cb115-45"><a href="#cb115-45" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2016OstGress&quot;</span>)</span>
+<span id="cb115-46"><a href="#cb115-46" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2016OstSkog&quot;</span>)</span>
+<span id="cb115-47"><a href="#cb115-47" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2016SorGress&quot;</span>)</span>
+<span id="cb115-48"><a href="#cb115-48" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2016SorSkog&quot;</span>)</span>
+<span id="cb115-49"><a href="#cb115-49" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2015TrondGress&quot;</span>)</span>
+<span id="cb115-50"><a href="#cb115-50" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2015TrondSkog&quot;</span>)</span>
+<span id="cb115-51"><a href="#cb115-51" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2015OstGress&quot;</span>)</span>
+<span id="cb115-52"><a href="#cb115-52" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2015OstSkog&quot;</span>)</span>
+<span id="cb115-53"><a href="#cb115-53" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2015SorGress&quot;</span>)</span>
+<span id="cb115-54"><a href="#cb115-54" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2015SorSkog&quot;</span>)</span>
+<span id="cb115-55"><a href="#cb115-55" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2014TrondGress&quot;</span>)</span>
+<span id="cb115-56"><a href="#cb115-56" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2014TrondSkog&quot;</span>)</span>
+<span id="cb115-57"><a href="#cb115-57" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2014OstGress&quot;</span>)</span>
+<span id="cb115-58"><a href="#cb115-58" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2014OstSkog&quot;</span>)</span>
+<span id="cb115-59"><a href="#cb115-59" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2014SorGress&quot;</span>)</span>
+<span id="cb115-60"><a href="#cb115-60" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2014SorSkog&quot;</span>)</span>
+<span id="cb115-61"><a href="#cb115-61" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2013TrondGress&quot;</span>)</span>
+<span id="cb115-62"><a href="#cb115-62" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2013TrondSkog&quot;</span>)</span>
+<span id="cb115-63"><a href="#cb115-63" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2013OstGress&quot;</span>)</span>
+<span id="cb115-64"><a href="#cb115-64" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2013OstSkog&quot;</span>)</span>
+<span id="cb115-65"><a href="#cb115-65" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2013SorGress&quot;</span>)</span>
+<span id="cb115-66"><a href="#cb115-66" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2013SorSkog&quot;</span>)</span>
+<span id="cb115-67"><a href="#cb115-67" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2012TrondGress&quot;</span>)</span>
+<span id="cb115-68"><a href="#cb115-68" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2012TrondSkog&quot;</span>)</span>
+<span id="cb115-69"><a href="#cb115-69" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2012OstGress&quot;</span>)</span>
+<span id="cb115-70"><a href="#cb115-70" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2012OstSkog&quot;</span>)</span>
+<span id="cb115-71"><a href="#cb115-71" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2011OstGress&quot;</span>)</span>
+<span id="cb115-72"><a href="#cb115-72" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2011OstSkog&quot;</span>)</span>
+<span id="cb115-73"><a href="#cb115-73" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2010OstGress&quot;</span>)</span>
+<span id="cb115-74"><a href="#cb115-74" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2010OstSkog&quot;</span>)</span>
+<span id="cb115-75"><a href="#cb115-75" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2009OstGress&quot;</span>)</span>
+<span id="cb115-76"><a href="#cb115-76" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sInd2009OstSkog&quot;</span>)</span>
+<span id="cb115-77"><a href="#cb115-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb115-78"><a href="#cb115-78" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2022VestGress&quot;</span>)</span>
+<span id="cb115-79"><a href="#cb115-79" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2022VestSkog&quot;</span>)</span>
+<span id="cb115-80"><a href="#cb115-80" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2022TrondGress&quot;</span>)</span>
+<span id="cb115-81"><a href="#cb115-81" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2022TrondSkog&quot;</span>)</span>
+<span id="cb115-82"><a href="#cb115-82" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2022OstGress&quot;</span>)</span>
+<span id="cb115-83"><a href="#cb115-83" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2022OstSkog&quot;</span>)</span>
+<span id="cb115-84"><a href="#cb115-84" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2022SorGress&quot;</span>)</span>
+<span id="cb115-85"><a href="#cb115-85" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2022SorSkog&quot;</span>)</span>
+<span id="cb115-86"><a href="#cb115-86" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2021TrondGress&quot;</span>)</span>
+<span id="cb115-87"><a href="#cb115-87" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2021TrondSkog&quot;</span>)</span>
+<span id="cb115-88"><a href="#cb115-88" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2021OstGress&quot;</span>)</span>
+<span id="cb115-89"><a href="#cb115-89" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2021OstSkog&quot;</span>)</span>
+<span id="cb115-90"><a href="#cb115-90" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2021SorGress&quot;</span>)</span>
+<span id="cb115-91"><a href="#cb115-91" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2021SorSkog&quot;</span>)</span>
+<span id="cb115-92"><a href="#cb115-92" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2020TrondGress&quot;</span>)</span>
+<span id="cb115-93"><a href="#cb115-93" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2020TrondSkog&quot;</span>)</span>
+<span id="cb115-94"><a href="#cb115-94" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2020OstGress&quot;</span>)</span>
+<span id="cb115-95"><a href="#cb115-95" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2020OstSkog&quot;</span>)</span>
+<span id="cb115-96"><a href="#cb115-96" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2020SorGress&quot;</span>)</span>
+<span id="cb115-97"><a href="#cb115-97" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2020SorSkog&quot;</span>)</span>
+<span id="cb115-98"><a href="#cb115-98" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2019TrondGress&quot;</span>)</span>
+<span id="cb115-99"><a href="#cb115-99" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2019TrondSkog&quot;</span>)</span>
+<span id="cb115-100"><a href="#cb115-100" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2019OstGress&quot;</span>)</span>
+<span id="cb115-101"><a href="#cb115-101" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2019OstSkog&quot;</span>)</span>
+<span id="cb115-102"><a href="#cb115-102" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2019SorGress&quot;</span>)</span>
+<span id="cb115-103"><a href="#cb115-103" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2019SorSkog&quot;</span>)</span>
+<span id="cb115-104"><a href="#cb115-104" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2018TrondGress&quot;</span>)</span>
+<span id="cb115-105"><a href="#cb115-105" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2018TrondSkog&quot;</span>)</span>
+<span id="cb115-106"><a href="#cb115-106" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2018OstGress&quot;</span>)</span>
+<span id="cb115-107"><a href="#cb115-107" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2018OstSkog&quot;</span>)</span>
+<span id="cb115-108"><a href="#cb115-108" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2018SorGress&quot;</span>)</span>
+<span id="cb115-109"><a href="#cb115-109" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2018SorSkog&quot;</span>)</span>
+<span id="cb115-110"><a href="#cb115-110" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2017TrondGress&quot;</span>)</span>
+<span id="cb115-111"><a href="#cb115-111" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2017TrondSkog&quot;</span>)</span>
+<span id="cb115-112"><a href="#cb115-112" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2017OstGress&quot;</span>)</span>
+<span id="cb115-113"><a href="#cb115-113" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2017OstSkog&quot;</span>)</span>
+<span id="cb115-114"><a href="#cb115-114" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2017SorGress&quot;</span>)</span>
+<span id="cb115-115"><a href="#cb115-115" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2017SorSkog&quot;</span>)</span>
+<span id="cb115-116"><a href="#cb115-116" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2016TrondGress&quot;</span>)</span>
+<span id="cb115-117"><a href="#cb115-117" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2016TrondSkog&quot;</span>)</span>
+<span id="cb115-118"><a href="#cb115-118" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2016OstGress&quot;</span>)</span>
+<span id="cb115-119"><a href="#cb115-119" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2016OstSkog&quot;</span>)</span>
+<span id="cb115-120"><a href="#cb115-120" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2016SorGress&quot;</span>)</span>
+<span id="cb115-121"><a href="#cb115-121" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2016SorSkog&quot;</span>)</span>
+<span id="cb115-122"><a href="#cb115-122" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2015TrondGress&quot;</span>)</span>
+<span id="cb115-123"><a href="#cb115-123" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2015TrondSkog&quot;</span>)</span>
+<span id="cb115-124"><a href="#cb115-124" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2015OstGress&quot;</span>)</span>
+<span id="cb115-125"><a href="#cb115-125" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2015OstSkog&quot;</span>)</span>
+<span id="cb115-126"><a href="#cb115-126" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2015SorGress&quot;</span>)</span>
+<span id="cb115-127"><a href="#cb115-127" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2015SorSkog&quot;</span>)</span>
+<span id="cb115-128"><a href="#cb115-128" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2014TrondGress&quot;</span>)</span>
+<span id="cb115-129"><a href="#cb115-129" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2014TrondSkog&quot;</span>)</span>
+<span id="cb115-130"><a href="#cb115-130" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2014OstGress&quot;</span>)</span>
+<span id="cb115-131"><a href="#cb115-131" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2014OstSkog&quot;</span>)</span>
+<span id="cb115-132"><a href="#cb115-132" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2014SorGress&quot;</span>)</span>
+<span id="cb115-133"><a href="#cb115-133" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2014SorSkog&quot;</span>)</span>
+<span id="cb115-134"><a href="#cb115-134" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2013TrondGress&quot;</span>)</span>
+<span id="cb115-135"><a href="#cb115-135" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2013TrondSkog&quot;</span>)</span>
+<span id="cb115-136"><a href="#cb115-136" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2013OstGress&quot;</span>)</span>
+<span id="cb115-137"><a href="#cb115-137" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2013OstSkog&quot;</span>)</span>
+<span id="cb115-138"><a href="#cb115-138" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2013SorGress&quot;</span>)</span>
+<span id="cb115-139"><a href="#cb115-139" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2013SorSkog&quot;</span>)</span>
+<span id="cb115-140"><a href="#cb115-140" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2012TrondGress&quot;</span>)</span>
+<span id="cb115-141"><a href="#cb115-141" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2012TrondSkog&quot;</span>)</span>
+<span id="cb115-142"><a href="#cb115-142" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2012OstGress&quot;</span>)</span>
+<span id="cb115-143"><a href="#cb115-143" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2012OstSkog&quot;</span>)</span>
+<span id="cb115-144"><a href="#cb115-144" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2011OstGress&quot;</span>)</span>
+<span id="cb115-145"><a href="#cb115-145" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2011OstSkog&quot;</span>)</span>
+<span id="cb115-146"><a href="#cb115-146" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2010OstGress&quot;</span>)</span>
+<span id="cb115-147"><a href="#cb115-147" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2010OstSkog&quot;</span>)</span>
+<span id="cb115-148"><a href="#cb115-148" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2009OstGress&quot;</span>)</span>
+<span id="cb115-149"><a href="#cb115-149" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;hInd2009OstSkog&quot;</span>)</span></code></pre></div>
+<p>Once loaded, the yearly datasets can be organized through the convenience function <code>collectIndData</code>, and plotted with <code>indPlot</code>.</p>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a>hGressIndVals <span class="ot">&lt;-</span> <span class="fu">collectIndData</span>(<span class="at">taxa =</span> <span class="st">&quot;bumblebees&quot;</span>, </span>
+<span id="cb116-2"><a href="#cb116-2" aria-hidden="true" tabindex="-1"></a>                                <span class="at">habitat =</span> <span class="st">&quot;gressmark&quot;</span>,</span>
+<span id="cb116-3"><a href="#cb116-3" aria-hidden="true" tabindex="-1"></a>                                <span class="at">years =</span> <span class="dv">2009</span><span class="sc">:</span><span class="dv">2022</span>)</span>
+<span id="cb116-4"><a href="#cb116-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb116-5"><a href="#cb116-5" aria-hidden="true" tabindex="-1"></a><span class="fu">indPlot</span>(<span class="at">input =</span> hGressIndVals,</span>
+<span id="cb116-6"><a href="#cb116-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">confLevel =</span> <span class="st">&quot;95%&quot;</span>,</span>
+<span id="cb116-7"><a href="#cb116-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">lineWidth =</span> <span class="dv">1</span>,</span>
+<span id="cb116-8"><a href="#cb116-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">dodge =</span> <span class="fl">0.5</span>,</span>
+<span id="cb116-9"><a href="#cb116-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">pointSize =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb116-10"><a href="#cb116-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Indicator values for bumblebees in semi-natural landscapes&quot;</span>) <span class="sc">+</span></span>
+<span id="cb116-11"><a href="#cb116-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">2009</span><span class="sc">:</span><span class="dv">2022</span>)</span></code></pre></div>
+<p><img src="DRAFT_insectIndicators_files/figure-html/bombusGressIndPlot-1.png" width="672" /></p>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1" aria-hidden="true" tabindex="-1"></a>sGressIndVals <span class="ot">&lt;-</span> <span class="fu">collectIndData</span>(<span class="at">taxa =</span> <span class="st">&quot;butterflies&quot;</span>, </span>
+<span id="cb117-2"><a href="#cb117-2" aria-hidden="true" tabindex="-1"></a>                                <span class="at">habitat =</span> <span class="st">&quot;gressmark&quot;</span>,</span>
+<span id="cb117-3"><a href="#cb117-3" aria-hidden="true" tabindex="-1"></a>                                <span class="at">years =</span> <span class="dv">2009</span><span class="sc">:</span><span class="dv">2022</span>)</span>
+<span id="cb117-4"><a href="#cb117-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb117-5"><a href="#cb117-5" aria-hidden="true" tabindex="-1"></a><span class="fu">indPlot</span>(<span class="at">input =</span> sGressIndVals,</span>
+<span id="cb117-6"><a href="#cb117-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">confLevel =</span> <span class="st">&quot;95%&quot;</span>,</span>
+<span id="cb117-7"><a href="#cb117-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">lineWidth =</span> <span class="dv">1</span>,</span>
+<span id="cb117-8"><a href="#cb117-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">dodge =</span> <span class="fl">0.5</span>,</span>
+<span id="cb117-9"><a href="#cb117-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">pointSize =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb117-10"><a href="#cb117-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Indicator values for butterflies in semi-natural landscapes&quot;</span>) <span class="sc">+</span></span>
+<span id="cb117-11"><a href="#cb117-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">2009</span><span class="sc">:</span><span class="dv">2022</span>)</span></code></pre></div>
+<p><img src="DRAFT_insectIndicators_files/figure-html/lepiGressIndPlot-1.png" width="672" /></p>
+</div>
+</div>
+<div id="prepare-export" class="section level2" number="1.9">
+<h2><span class="header-section-number">1.9</span> Prepare export</h2>
+<p>We here fetch the indicator regions as an sf and join the calculated indicator values.</p>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a>norway_reg_NBBM <span class="ot">&lt;-</span> bombLepiSurv<span class="sc">::</span><span class="fu">get_map</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb118-2"><a href="#cb118-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(region <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Sør&quot;</span>, <span class="st">&quot;Vestlandet&quot;</span>, <span class="st">&quot;Øst&quot;</span>, <span class="st">&quot;Trøndelag&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb118-3"><a href="#cb118-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(region) <span class="sc">%&gt;%</span> </span>
+<span id="cb118-4"><a href="#cb118-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(region) <span class="sc">%&gt;%</span> </span>
+<span id="cb118-5"><a href="#cb118-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">geom =</span> <span class="fu">st_union</span>(geom))</span></code></pre></div>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="#cb119-1" aria-hidden="true" tabindex="-1"></a>hGressIndVals_to_exp <span class="ot">&lt;-</span> hGressIndVals <span class="sc">%&gt;%</span> </span>
+<span id="cb119-2"><a href="#cb119-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="at">year =</span> Year,</span>
+<span id="cb119-3"><a href="#cb119-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">region =</span> Region,</span>
+<span id="cb119-4"><a href="#cb119-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">ind_value =</span> Indicator_value,</span>
+<span id="cb119-5"><a href="#cb119-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">ind_sd =</span> <span class="cn">NULL</span>,</span>
+<span id="cb119-6"><a href="#cb119-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">ind_lower2.5 =</span> lower95,</span>
+<span id="cb119-7"><a href="#cb119-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">ind_upper97.5 =</span> upper95)</span>
+<span id="cb119-8"><a href="#cb119-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb119-9"><a href="#cb119-9" aria-hidden="true" tabindex="-1"></a>hGressIndVals_to_exp <span class="ot">&lt;-</span> norway_reg_NBBM  <span class="sc">%&gt;%</span> </span>
+<span id="cb119-10"><a href="#cb119-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(hGressIndVals_to_exp,</span>
+<span id="cb119-11"><a href="#cb119-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;region&quot;</span> <span class="ot">=</span> <span class="st">&quot;region&quot;</span>),</span>
+<span id="cb119-12"><a href="#cb119-12" aria-hidden="true" tabindex="-1"></a>            <span class="at">multiple =</span> <span class="st">&quot;all&quot;</span>)</span>
+<span id="cb119-13"><a href="#cb119-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb119-14"><a href="#cb119-14" aria-hidden="true" tabindex="-1"></a>hGressIndVals_to_exp</span></code></pre></div>
+<pre><code>## Simple feature collection with 36 features and 5 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -76208 ymin: 6450245 xmax: 468357.5 ymax: 7237323
+## Projected CRS: ETRS89 / UTM zone 33N
+## # A tibble: 36 × 6
+##    region                                                                                    geom  year ind_value ind_lower2.5 ind_upper97.5
+##    &lt;chr&gt;                                                                       &lt;MULTIPOLYGON [m]&gt; &lt;int&gt;     &lt;dbl&gt;        &lt;dbl&gt;         &lt;dbl&gt;
+##  1 Sør    (((-31605 6513854, -31464 6513743, -31449 6513590, -32255 6512745, -32512 6512740, -...  2013     0.596        0.423         0.635
+##  2 Sør    (((-31605 6513854, -31464 6513743, -31449 6513590, -32255 6512745, -32512 6512740, -...  2014     0.635        0.5           0.673
+##  3 Sør    (((-31605 6513854, -31464 6513743, -31449 6513590, -32255 6512745, -32512 6512740, -...  2015     0.519        0.385         0.558
+##  4 Sør    (((-31605 6513854, -31464 6513743, -31449 6513590, -32255 6512745, -32512 6512740, -...  2016     0.635        0.462         0.673
+##  5 Sør    (((-31605 6513854, -31464 6513743, -31449 6513590, -32255 6512745, -32512 6512740, -...  2017     0.615        0.423         0.654
+##  6 Sør    (((-31605 6513854, -31464 6513743, -31449 6513590, -32255 6512745, -32512 6512740, -...  2018     0.577        0.462         0.615
+##  7 Sør    (((-31605 6513854, -31464 6513743, -31449 6513590, -32255 6512745, -32512 6512740, -...  2019     0.519        0.422         0.558
+##  8 Sør    (((-31605 6513854, -31464 6513743, -31449 6513590, -32255 6512745, -32512 6512740, -...  2020     0.593        0.444         0.593
+##  9 Sør    (((-31605 6513854, -31464 6513743, -31449 6513590, -32255 6512745, -32512 6512740, -...  2021     0.519        0.389         0.593
+## 10 Sør    (((-31605 6513854, -31464 6513743, -31449 6513590, -32255 6512745, -32512 6512740, -...  2022     0.593        0.370         0.704
+## # ℹ 26 more rows</code></pre>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a>sGressIndVals_to_exp <span class="ot">&lt;-</span> sGressIndVals <span class="sc">%&gt;%</span> </span>
+<span id="cb121-2"><a href="#cb121-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="at">year =</span> Year,</span>
+<span id="cb121-3"><a href="#cb121-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">region =</span> Region,</span>
+<span id="cb121-4"><a href="#cb121-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">ind_value =</span> Indicator_value,</span>
+<span id="cb121-5"><a href="#cb121-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">ind_sd =</span> <span class="cn">NULL</span>,</span>
+<span id="cb121-6"><a href="#cb121-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">ind_lower2.5 =</span> lower95,</span>
+<span id="cb121-7"><a href="#cb121-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">ind_upper97.5 =</span> upper95)</span>
+<span id="cb121-8"><a href="#cb121-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb121-9"><a href="#cb121-9" aria-hidden="true" tabindex="-1"></a>sGressIndVals_to_exp <span class="ot">&lt;-</span> norway_reg_NBBM  <span class="sc">%&gt;%</span> </span>
+<span id="cb121-10"><a href="#cb121-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(sGressIndVals_to_exp,</span>
+<span id="cb121-11"><a href="#cb121-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;region&quot;</span> <span class="ot">=</span> <span class="st">&quot;region&quot;</span>),</span>
+<span id="cb121-12"><a href="#cb121-12" aria-hidden="true" tabindex="-1"></a>            <span class="at">multiple =</span> <span class="st">&quot;all&quot;</span>)</span>
+<span id="cb121-13"><a href="#cb121-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb121-14"><a href="#cb121-14" aria-hidden="true" tabindex="-1"></a>sGressIndVals_to_exp</span></code></pre></div>
+<pre><code>## Simple feature collection with 36 features and 5 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -76208 ymin: 6450245 xmax: 468357.5 ymax: 7237323
+## Projected CRS: ETRS89 / UTM zone 33N
+## # A tibble: 36 × 6
+##    region                                                                                    geom  year ind_value ind_lower2.5 ind_upper97.5
+##    &lt;chr&gt;                                                                       &lt;MULTIPOLYGON [m]&gt; &lt;int&gt;     &lt;dbl&gt;        &lt;dbl&gt;         &lt;dbl&gt;
+##  1 Sør    (((-31605 6513854, -31464 6513743, -31449 6513590, -32255 6512745, -32512 6512740, -...  2013     0.259        0.151         0.295
+##  2 Sør    (((-31605 6513854, -31464 6513743, -31449 6513590, -32255 6512745, -32512 6512740, -...  2014     0.374        0.273         0.424
+##  3 Sør    (((-31605 6513854, -31464 6513743, -31449 6513590, -32255 6512745, -32512 6512740, -...  2015     0.345        0.230         0.360
+##  4 Sør    (((-31605 6513854, -31464 6513743, -31449 6513590, -32255 6512745, -32512 6512740, -...  2016     0.302        0.216         0.353
+##  5 Sør    (((-31605 6513854, -31464 6513743, -31449 6513590, -32255 6512745, -32512 6512740, -...  2017     0.345        0.237         0.367
+##  6 Sør    (((-31605 6513854, -31464 6513743, -31449 6513590, -32255 6512745, -32512 6512740, -...  2018     0.309        0.201         0.345
+##  7 Sør    (((-31605 6513854, -31464 6513743, -31449 6513590, -32255 6512745, -32512 6512740, -...  2019     0.388        0.281         0.417
+##  8 Sør    (((-31605 6513854, -31464 6513743, -31449 6513590, -32255 6512745, -32512 6512740, -...  2020     0.419        0.284         0.432
+##  9 Sør    (((-31605 6513854, -31464 6513743, -31449 6513590, -32255 6512745, -32512 6512740, -...  2021     0.399        0.270         0.439
+## 10 Sør    (((-31605 6513854, -31464 6513743, -31449 6513590, -32255 6512745, -32512 6512740, -...  2022     0.358        0.25          0.399
+## # ℹ 26 more rows</code></pre>
+<div id="eksport-file-final-product" class="section level3" number="1.9.1">
+<h3><span class="header-section-number">1.9.1</span> Eksport file (final product)</h3>
+<!-- Export final file. Ideally a georeferenced shape or raster with indicators values (raw and normalised), reference values and errors. -->
+<p>TBD. Need to consult with others.</p>
+</div>
+</div>
+</div>
+  </main>
+
+  <div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page">
+      <h2>On this page</h2>
+      <div id="book-on-this-page"></div>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          <li><a id="book-source" href="#">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="#">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5">
+  <div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong></strong>" was written by . </p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+<script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+
+</html>
