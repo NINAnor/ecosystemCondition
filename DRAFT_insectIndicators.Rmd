@@ -177,7 +177,7 @@ indList <- tibble("Dataset" = indDataset,
 knitr::kable(indList)
 ```
 Many of these indicators are self-explanatory and don't require much justification. **Bumblebees in semi-natural grasslands** and **Butterflies in semi-natural grasslands** are functionally important pollinators, and are as a community dependent on a varied herbaceous flora. They therefore both represent key functionality, as well as indicators of habitat quality. **Biomass of flying insects** represent a key functional characteristic in ecosystem functioning as food for insectivores, and as a response to habitat quality and management. **Species richness of flying insects** represents the total breadth of the insect community, and **Species richness of pollinating insects** complements the butterfly and bumblebee indicators in taxonomic breadth and spatial resolution.
-**Species richness of dung associated insects** represent a key functional group in decomposition, and function as an indicator of grazing intensity and diversity. **Quotent of Apocrita vs Symphyta species richness** tries to go beyond simple amounts, and capture compositional changes in the insect community. Apocrita covers predatory and parasitic wasps, while Symphyta is plant-feeding wasps. A relative decrease in predatory/parasitic wasps could indicate a degradation in insect prey communities, and a decrease in the potential for natural pest control. **Number of alien species** simply sums the number of alien species found in a region. This is based on the alien species list from the Norwegian Biodiversity Information Center, which lists known alien species and an increasing list of door-knocker species. Note that due to large historical knowledge gaps of insect species distributions, there could potentially be many more alien species in Norway, that are not picked up on this alien species list. Lastly, **Intraspecific genetic variation** captures biodiversity that until now has been hidden, due to lack of practical technologies to measure it. The need to conserve genetic diversity is identified in Norwegian law, and decreased intraspecific diversity could signal population decreases, and decreased potential to adapt to environmental changes, before whole species are lost to an area. 
+**Species richness of dung associated insects** represent a key functional group in decomposition, and function as an indicator of grazing intensity and diversity. **Quotent of Apocrita vs Symphyta species richness** tries to go beyond simple amounts, and capture compositional changes in the insect community. Apocrita covers predatory and parasitic wasps, while Symphyta is plant-feeding wasps. A relative decrease in predatory/parasitic wasps could indicate a degradation in insect prey communities, and a decrease in the potential for natural pest control. **Number of alien species** takes into account the number of alien species found in a region and the frequency of sampling events they are observed in. This is based on the alien species list from the Norwegian Biodiversity Information Center, which lists known alien species and an increasing list of door-knocker species. Note that due to large historical knowledge gaps of insect species distributions, there could potentially be many more alien species in Norway, that are not picked up on this alien species list. Lastly, **Intraspecific genetic variation** captures biodiversity that until now has been hidden, due to lack of practical technologies to measure it. The need to conserve genetic diversity is identified in Norwegian law, and decreased intraspecific diversity could signal population decreases, and decreased potential to adapt to environmental changes, before whole species are lost to an area. 
 
 
 ## About the underlying data
@@ -1072,7 +1072,13 @@ par_sym_sn_exp
 ```
 
 #### Number of alien species in semi-natural land
-Here we measure the number of species found that are present on the alien species list from the Norwegian biodiversity information center.
+Here we measure the prevalence of alien species in the trap catches. A simple count of the number of species present in a region will take into account the spread of the species, a measure that is especially relevant for rare but increasing species. Therefore, we here calculate the proportion of trap catches each alien species is observed in, and combine these proportions/frequencies together in a measurement similar to Shannon information. We express this as the Hill number.
+
+For each alien species, the observation frequency is calculated as the number of locality samplings the species is observed in, divided by the total amount of locality samplings in a geographical region and time period. $$p_i = \frac{1}{N} \sum_{i=1, j=1}^{N}{obs_{ij}}$$, where $obs_ij$ is an observation of species $i$ in sampling event $j$, and $N$ is the total number of possible observations (locality sampling events).
+These proportions are combined into a common score for all alien species in $$H_{alien} =\exp(\sum_{i=1}^{S}{-~p_{i}*ln(p_i)})$$, where $p_i$ is the observation frequency of species $i$, and $S$ is the set of all observed alien species. The uncertainty is calculated by bootstrapping the set of localities within a temporal and spatial scope, similarly to the other indicators. 
+
+This routine is not currently implemented in `Norimon`, and is therefore showed here.
+
 
 Fetch the species list.
 ```{r}
@@ -1090,12 +1096,72 @@ alien_species <- alien_list %>%
   select(species = scientificName) %>% 
   pull()
 ```
+
+Write custom DB-query
 ```{r}
-alien_sn <- get_observations(subset_year = 2020:2022,
-                               subset_habitat = "Semi-nat",
-                               subset_species = alien_species)
-alien_sn
+
+alien_freq_obs_q <- "
+WITH bar as
+(SELECT ls.id,
+o.species_latin_fixed,
+'1'::numeric as present
+FROM events.year_locality yl,
+events.locality_sampling ls,
+events.sampling_trap st,
+events.identifications i,
+occurrences.observations o,
+lookup.fremmedartslista_2018_artsdatabanken alien_list
+WHERE ls.year_locality_id = yl.id
+AND st.locality_sampling_id = ls.id
+AND i.sampling_trap_id = st.id
+AND o.identification_id = i.id
+AND alien_list.\"scientificName\" = o.species_latin_fixed
+AND yl.project_short_name = 'NasIns'
+AND yl.year < 2023
+)
+
+SELECT foo.*, coalesce(bar.present, 0) as present
+FROM
+(SELECT yl.id as yl_id, yl.year, l.region_name, ls.id as ls_id, bar.species_latin_fixed
+FROM events.locality_sampling ls,
+events.year_locality yl,
+locations.localities l
+CROSS JOIN
+bar
+WHERE ls.year_locality_id = yl.id
+AND yl.locality_id = l.id
+AND yl.project_short_name = 'NasIns'
+AND yl.year < 2023) foo
+LEFT JOIN
+bar
+ON (foo.ls_id = bar.id
+AND foo.species_latin_fixed = bar.species_latin_fixed)
+ORDER BY species_latin_fixed, present DESC
+
+" 
+
+alien_freq_obs <- dbGetQuery(con,
+                             alien_freq_obs_q) %>% 
+  collect() %>% 
+  as_tibble()
+
+
 ```
+
+
+```{r}
+alien_freq_obs %>% 
+  summarize(n_distinct(ls_id))
+
+alien_freq_obs %>% 
+  summarize(n_distinct(yl_id))
+
+alien_freq_obs %>% 
+  summarize(n_distinct(species_latin_fixed))
+
+```
+
+
 
 Bootstrap the alien observations
 ```{r}
@@ -1118,7 +1184,7 @@ Compare to reference value and normalize. [Here we need 0 as reference value. Ho
 
 
 ```{r}
-plot(alien_spec_boot)
+plot(alien_sn_boot)
 ```
 
 Prepare export format.
