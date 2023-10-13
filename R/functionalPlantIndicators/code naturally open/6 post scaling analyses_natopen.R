@@ -269,7 +269,7 @@ plot.alien.1 +
   geom_ribbon(aes(x=fremmedartsdekning, ymin=low, ymax=up, fill='red',colour="red"), alpha=0.2, data = pred.ci) +
   geom_line(aes(x=fremmedartsdekning,y=scaled_value), data = pred.mean)
 
-# better but still shitty
+# better but still pretty shitty
 
 
 
