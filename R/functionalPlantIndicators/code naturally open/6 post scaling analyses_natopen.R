@@ -198,9 +198,9 @@ ggplot(res.natopen.GRUK, aes(x=driving, y=scaled_value)) +
   facet_wrap(~fp_ind, scale="fixed")
 
 
-plot.erosion.1 <- ggplot(res.natopen.GRUK[res.natopen.GRUK$fp_ind=="RR2",], aes(x=erosion, y=scaled_value)) +
+plot.erosion.1 <- ggplot(res.natopen.GRUK[res.natopen.GRUK$fp_ind=="RR2",], aes(x=erosion, y=original)) +
   geom_point() +
-  xlab("Erosion score") + ylab("Scaled CSR-R2 value (GRUK data)")
+  xlab("Erosion score") + ylab("CSR-R value")
 
 
 plot.alien.1 <- ggplot(res.natopen.GRUK[res.natopen.GRUK$fp_ind=="Nitrogen2",], aes(x=fremmedartsdekning, y=scaled_value)) +
@@ -213,21 +213,79 @@ plot.alien.1 <- ggplot(res.natopen.GRUK[res.natopen.GRUK$fp_ind=="Nitrogen2",], 
 # use beta-regression for analysis of response between 0 and 1
 expit <- function(L) exp(L) / (1+exp(L))
 
-### erosion
+res.natopen.GRUK <-
+  res.natopen.GRUK %>%
+  mutate(scaled_beta = replace(scaled_value, scaled_value == 0, 0.0001)) %>%
+  mutate(scaled_beta = replace(scaled_beta, scaled_beta == 1, 0.9999))
+
+res.natopen.GRUK <-
+  res.natopen.GRUK %>%
+  mutate(original_beta = replace(original, original == 0, 0.0001)) %>%
+  mutate(original_beta = replace(original_beta, original_beta == 1, 0.9999))
+
+
+### erosion vs. CSR-R
 mod.GRUK.R2.erosion <- glmmTMB(scaled_value ~ erosion +(1|Flate_ID), family=beta_family(), data=res.natopen.GRUK[res.natopen.GRUK$fp_ind=="RR2",])
 summary(mod.GRUK.R2.erosion)
 
 ## remove all localities with aliens as reason for reduced condition
-res.natopen.GRUK %>%
+plot.R.erosion.1 <- 
+  res.natopen.GRUK %>%
   filter(fp_ind=="RR2") %>%
   filter(tilstandsgrunn.x!="fremmedarter") %>%
-  ggplot(aes(x=erosion, y=scaled_value)) +
+  ggplot(aes(x=erosion, y=original)) +
   geom_point() +
-  xlab("Erosion (%)") + ylab("Scaled R2 value (GRUK data)")
+  xlab("Erosion (%)") + ylab("CSR-R value")
 
 
-mod.GRUK.R2.erosion <- glmmTMB(scaled_value ~ erosion +(1|Flate_ID), family=beta_family(), data=res.natopen.GRUK[res.natopen.GRUK$fp_ind=="RR2" & res.natopen.GRUK$tilstandsgrunn.x!="fremmedarter",])
+
+
+mod.GRUK.R2.erosion <- glmmTMB(original_beta ~ erosion +(1|Flate_ID), family=beta_family(), data=res.natopen.GRUK[res.natopen.GRUK$fp_ind=="RR2" & res.natopen.GRUK$tilstandsgrunn.x!="fremmedarter",])
 summary(mod.GRUK.R2.erosion)
+
+pred.l <- predict(mod.GRUK.R2.erosion,newdata=data.frame(erosion=0:100,Flate_ID=NA), re.form=NA, se.fit=T, type="link")
+pred.ci <- data.frame(erosion=0:100,original=expit(pred.l$fit),up=expit(pred.l$fit+2*pred.l$se.fit),low=expit(pred.l$fit-2*pred.l$se.fit))
+
+plot.R.erosion.1 +
+  geom_ribbon(aes(x=erosion, ymin=low, ymax=up, fill='red',colour="red"), alpha=0.2, data = pred.ci) +
+  geom_line(aes(x=erosion,y=original), data = pred.ci) +
+  theme(legend.position = "none")
+
+### erosion vs. lys
+
+
+mod.GRUK.L2.erosion <- glmmTMB(scaled_beta ~ erosion +(1|Flate_ID), family=beta_family(), data=res.natopen.GRUK[res.natopen.GRUK$fp_ind=="Light2" & res.natopen.GRUK$tilstandsgrunn.x!="fremmedarter",])
+summary(mod.GRUK.L2.erosion)
+
+plot.L.erosion.1 <- 
+  res.natopen.GRUK %>%
+  filter(fp_ind=="Light2") %>%
+  filter(tilstandsgrunn.x!="fremmedarter") %>%
+  ggplot(aes(x=erosion, y=original)) +
+  geom_point() +
+  xlab("Erosion (%)") + ylab("Light value")
+
+
+mod.GRUK.L2.erosion2 <- lmer(log(original) ~ erosion +(1|Flate_ID), data=res.natopen.GRUK[res.natopen.GRUK$fp_ind=="Light2" & res.natopen.GRUK$tilstandsgrunn.x!="fremmedarter",])
+summary(mod.GRUK.L2.erosion2)
+
+x <- 0:100
+y.m <- exp(predict(mod.GRUK.L2.erosion2,newdata=data.frame(erosion=x),re.form=NA) )
+# 95%-confidence interval
+yv <- expand.grid(erosion = x)  
+# you need to define the fixed effects part of the model as it was specified above
+X <- model.matrix(~ erosion,data = yv)
+yv$original <- X %*% fixef(mod.GRUK.L2.erosion2)
+yv$SE <- sqrt(diag(X %*% vcov(mod.GRUK.L2.erosion2) %*% t(X)))
+yv$lo <- yv$original - (1.96 * yv$SE )
+yv$up <- yv$original + (1.96 * yv$SE )
+
+plot.L.erosion.1 +
+  geom_ribbon(aes(x=erosion, ymin=exp(lo), ymax=exp(up), fill='red',colour="red"), alpha=0.2, data = yv) +
+  geom_line(aes(x=erosion,y=exp(original)), data = yv) +
+  theme(legend.position = "none")
+
+
 
 
 ### aliens
@@ -255,6 +313,56 @@ plot.alien.1 <-
   geom_point() +
   xlab("Alien species cover (%)") + ylab("Scaled Nitrogen2 value (GRUK data)")
 
+plot.alien.2 <-
+  res.natopen.GRUK %>%
+  filter(fp_ind=="Nitrogen2") %>%
+  filter(tilstandsgrunn.x!="slitasje") %>%
+  ggplot(aes(x=fremmedartsdekning, y=original)) +
+  geom_point() +
+  xlab("Alien species cover (%)") + ylab("Nitrogen value") #+ ggtitle("GRUK - Nitrogen vs. aliens")
+
+mod.GRUK.N2.alien2 <- lmer(log(original) ~ fremmedartsdekning +(1|Flate_ID), data=res.natopen.GRUK[res.natopen.GRUK$fp_ind=="Nitrogen2" & res.natopen.GRUK$tilstandsgrunn.x!="slitasje",])
+summary(mod.GRUK.N2.alien2)
+
+pred.mean2 <- exp(predict(mod.GRUK.N2.alien2,newdata=data.frame(fremmedartsdekning=0:100,Flate_ID=NA), re.form=NA))
+pred.mean2 <- data.frame(fremmedartsdekning=0:100,scaled_value=pred.mean2)
+
+
+
+x <- 0:100
+y.m <- exp(predict(mod.GRUK.N2.alien2,newdata=data.frame(fremmedartsdekning=x),re.form=NA) )
+# 95%-confidence interval
+yv <- expand.grid(fremmedartsdekning = x)  
+# you need to define the fixed effects part of the model as it was specified above
+X <- model.matrix(~ fremmedartsdekning,data = yv)
+yv$original <- X %*% fixef(mod.GRUK.N2.alien2)
+yv$SE <- sqrt(diag(X %*% vcov(mod.GRUK.N2.alien2) %*% t(X)))
+yv$lo <- yv$original - (1.96 * yv$SE )
+yv$up <- yv$original + (1.96 * yv$SE )
+
+
+with(res.natopen.GRUK[res.natopen.GRUK$fp_ind=="Nitrogen2" & res.natopen.GRUK$tilstandsgrunn.x!="slitasje",],
+     plot(fremmedartsdekning,original))
+points(x,y.m,type="l",col="red")
+polygon(x=c(x,rev(x)),y=c(exp(yv$lo),rev(exp(yv$up))),col=rgb(0, 0, 1, alpha=0.3),border=rgb(0, 0, 1, alpha=0.3))
+lines(x,exp(yv$fit),col="blue")
+
+
+plot.alien.2 +
+  geom_ribbon(aes(x=fremmedartsdekning, ymin=exp(lo), ymax=exp(up), fill='red',colour="red"), alpha=0.2, data = yv) +
+  geom_line(aes(x=fremmedartsdekning,y=exp(original)), data = yv) +
+  theme(legend.position = "none")
+
+
+
+
+
+plot.alien.1 +
+#  geom_ribbon(aes(x=fremmedartsdekning, ymin=low, ymax=up, fill='red',colour="red"), alpha=0.2, data = pred.ci) +
+  geom_line(aes(x=fremmedartsdekning,y=scaled_value), data = pred.mean2)
+
+
+
 
 mod.GRUK.N2.alien <- glmmTMB(scaled_value ~ fremmedartsdekning +(1|Flate_ID), family=beta_family(), data=res.natopen.GRUK[res.natopen.GRUK$fp_ind=="Nitrogen2" & res.natopen.GRUK$tilstandsgrunn.x!="slitasje",])
 summary(mod.GRUK.N2.alien)
@@ -267,10 +375,61 @@ pred.ci <- data.frame(fremmedartsdekning=0:100,scaled_value=expit(pred.l$fit),up
 
 plot.alien.1 +
   geom_ribbon(aes(x=fremmedartsdekning, ymin=low, ymax=up, fill='red',colour="red"), alpha=0.2, data = pred.ci) +
-  geom_line(aes(x=fremmedartsdekning,y=scaled_value), data = pred.mean)
+  geom_line(aes(x=fremmedartsdekning,y=scaled_value), data = pred.mean) +
+  geom_line(aes(x=fremmedartsdekning,y=scaled_value), data = pred.mean2, linetype=2)
 
 # better but still pretty shitty
 
+
+
+### aliens vs. CSR-C
+mod.GRUK.C2.alien <- glmmTMB(scaled_beta ~ fremmedartsdekning +(1|Flate_ID), family=beta_family(), data=res.natopen.GRUK[res.natopen.GRUK$fp_ind=="SS2" & res.natopen.GRUK$tilstandsgrunn.x!="erosion",])
+summary(mod.GRUK.C2.erosion)
+
+## remove all localities with aliens as reason for reduced condition
+plot.C.alien.1 <- 
+  res.natopen.GRUK %>%
+  filter(fp_ind=="CC2") %>%
+  filter(tilstandsgrunn.x!="erosion") %>%
+  ggplot(aes(x=fremmedartsdekning, y=original)) +
+  geom_point() +
+  xlab("Alien species cover (%)") + ylab("CSR-C value")
+
+
+
+
+mod.GRUK.C2.alien <- glmmTMB(original_beta ~ fremmedartsdekning +(1|Flate_ID), family=beta_family(), data=res.natopen.GRUK[res.natopen.GRUK$fp_ind=="CC2" & res.natopen.GRUK$tilstandsgrunn.x!="erosion",])
+summary(mod.GRUK.C2.alien)
+
+pred.l <- predict(mod.GRUK.C2.alien,newdata=data.frame(fremmedartsdekning=0:100,Flate_ID=NA), re.form=NA, se.fit=T, type="link")
+pred.ci <- data.frame(fremmedartsdekning=0:100,original=expit(pred.l$fit),up=expit(pred.l$fit+2*pred.l$se.fit),low=expit(pred.l$fit-2*pred.l$se.fit))
+
+plot.C.alien.1 +
+  geom_ribbon(aes(x=fremmedartsdekning, ymin=low, ymax=up, fill='red',colour="red"), alpha=0.2, data = pred.ci) +
+  geom_line(aes(x=fremmedartsdekning,y=original), data = pred.ci) +
+  theme(legend.position = "none")
+
+
+
+
+
+## scaled value violin plot for only CSR-R, Light and Nitrogen
+res.natopen.GRUK %>%
+  filter(fp_ind %in% c("RR1","Light1","Nitrogen1","RR2","Light2","Nitrogen2")) %>%
+  filter(!is.na(scaled_value)) %>%
+  ggplot(aes(x=factor(Kartleggingsenhet), y=scaled_value, fill=fp_ind)) + 
+  geom_hline(yintercept=0.6, linetype="dashed") + 
+  geom_violin(color = NA) +
+  #  geom_boxplot(width=0.2, color="grey") +
+  geom_point(size=1, shape=16, color="black") +
+  facet_wrap(~factor(fp_ind,levels=c("RR1","Light1","Nitrogen1",
+                                     "RR2","Light2","Nitrogen2"),
+                     labels=c("CSR-R1","Light1","Nitrogen1",
+                              "CSR-R2","Light2","Nitrogen2")), ncol = 3) + 
+  xlab("Basic ecosystem type") + 
+  ylab("Scaled indicator value") + 
+  theme(legend.position="none") +
+  theme(axis.text.x = element_text(angle = -45, vjust = 0.5, hjust=0.2))
 
 
 #### scaled value maps ####
