@@ -8,6 +8,8 @@ library(tidyverse)
 library(readxl)
 library(tmap)
 library(tmaptools)
+library(lme4)
+library(lmerTest)
 library(betareg)
 library(glmmTMB)
 
@@ -216,12 +218,12 @@ expit <- function(L) exp(L) / (1+exp(L))
 res.natopen.GRUK <-
   res.natopen.GRUK %>%
   mutate(scaled_beta = replace(scaled_value, scaled_value == 0, 0.0001)) %>%
-  mutate(scaled_beta = replace(scaled_beta, scaled_beta == 1, 0.9999))
-
-res.natopen.GRUK <-
-  res.natopen.GRUK %>%
+  mutate(scaled_beta = replace(scaled_beta, scaled_beta == 1, 0.9999)) %>%
   mutate(original_beta = replace(original, original == 0, 0.0001)) %>%
-  mutate(original_beta = replace(original_beta, original_beta == 1, 0.9999))
+  mutate(original_beta = replace(original_beta, original_beta == 1, 0.9999)) %>%
+  mutate(erosion_sc = scale(erosion)) %>%
+  mutate(fremmedartsdekning_sc = scale(fremmedartsdekning))
+
 
 
 ### erosion vs. CSR-R
@@ -249,7 +251,10 @@ pred.ci <- data.frame(erosion=0:100,original=expit(pred.l$fit),up=expit(pred.l$f
 plot.R.erosion.1 +
   geom_ribbon(aes(x=erosion, ymin=low, ymax=up, fill='red',colour="red"), alpha=0.2, data = pred.ci) +
   geom_line(aes(x=erosion,y=original), data = pred.ci) +
-  theme(legend.position = "none")
+  theme(legend.position = "none") +
+  theme(axis.text=element_text(size=30),
+        axis.title=element_text(size=32,face="bold"))
+
 
 ### erosion vs. lys
 
@@ -269,21 +274,27 @@ plot.L.erosion.1 <-
 mod.GRUK.L2.erosion2 <- lmer(log(original) ~ erosion +(1|Flate_ID), data=res.natopen.GRUK[res.natopen.GRUK$fp_ind=="Light2" & res.natopen.GRUK$tilstandsgrunn.x!="fremmedarter",])
 summary(mod.GRUK.L2.erosion2)
 
-x <- 0:100
-y.m <- exp(predict(mod.GRUK.L2.erosion2,newdata=data.frame(erosion=x),re.form=NA) )
+mod.GRUK.L2.erosion2 <- glmer(original ~ erosion_sc +(1|Flate_ID), family=Gamma(link='log'), data=res.natopen.GRUK[res.natopen.GRUK$fp_ind=="Light2" & res.natopen.GRUK$tilstandsgrunn.x!="fremmedarter",])
+summary(mod.GRUK.L2.erosion2)
+
+x <- ( (0:100)-attr(res.natopen.GRUK$erosion_sc,'scaled:center') ) / attr(res.natopen.GRUK$erosion_sc,'scaled:scale') 
+y.m <- exp(predict(mod.GRUK.L2.erosion2,newdata=data.frame(erosion_sc=x),re.form=NA) )
 # 95%-confidence interval
-yv <- expand.grid(erosion = x)  
+yv <- expand.grid(erosion_sc = x)  
 # you need to define the fixed effects part of the model as it was specified above
-X <- model.matrix(~ erosion,data = yv)
+X <- model.matrix(~ erosion_sc,data = yv)
 yv$original <- X %*% fixef(mod.GRUK.L2.erosion2)
 yv$SE <- sqrt(diag(X %*% vcov(mod.GRUK.L2.erosion2) %*% t(X)))
 yv$lo <- yv$original - (1.96 * yv$SE )
 yv$up <- yv$original + (1.96 * yv$SE )
+yv$x_orig <- 0:100
 
 plot.L.erosion.1 +
-  geom_ribbon(aes(x=erosion, ymin=exp(lo), ymax=exp(up), fill='red',colour="red"), alpha=0.2, data = yv) +
-  geom_line(aes(x=erosion,y=exp(original)), data = yv) +
-  theme(legend.position = "none")
+  geom_ribbon(aes(x=x_orig, ymin=exp(lo), ymax=exp(up), fill='red',colour="red"), alpha=0.2, data = yv) +
+  geom_line(aes(x=x_orig,y=exp(original)), data = yv) +
+  theme(legend.position = "none") +
+  theme(axis.text=element_text(size=14),
+        axis.title=element_text(size=16,face="bold"))
 
 
 
@@ -324,21 +335,25 @@ plot.alien.2 <-
 mod.GRUK.N2.alien2 <- lmer(log(original) ~ fremmedartsdekning +(1|Flate_ID), data=res.natopen.GRUK[res.natopen.GRUK$fp_ind=="Nitrogen2" & res.natopen.GRUK$tilstandsgrunn.x!="slitasje",])
 summary(mod.GRUK.N2.alien2)
 
+mod.GRUK.N2.alien2 <- glmer(original ~ fremmedartsdekning_sc +(1|Flate_ID), family=Gamma(link='log'), data=res.natopen.GRUK[res.natopen.GRUK$fp_ind=="Nitrogen2" & res.natopen.GRUK$tilstandsgrunn.x!="slitasje",])
+summary(mod.GRUK.N2.alien2)
+
 pred.mean2 <- exp(predict(mod.GRUK.N2.alien2,newdata=data.frame(fremmedartsdekning=0:100,Flate_ID=NA), re.form=NA))
 pred.mean2 <- data.frame(fremmedartsdekning=0:100,scaled_value=pred.mean2)
 
 
 
-x <- 0:100
-y.m <- exp(predict(mod.GRUK.N2.alien2,newdata=data.frame(fremmedartsdekning=x),re.form=NA) )
+x <- ( (0:100)-attr(res.natopen.GRUK$fremmedartsdekning_sc,'scaled:center') ) / attr(res.natopen.GRUK$fremmedartsdekning_sc,'scaled:scale') 
+y.m <- exp(predict(mod.GRUK.N2.alien2,newdata=data.frame(fremmedartsdekning_sc=x),re.form=NA) )
 # 95%-confidence interval
-yv <- expand.grid(fremmedartsdekning = x)  
+yv <- expand.grid(fremmedartsdekning_sc = x)  
 # you need to define the fixed effects part of the model as it was specified above
-X <- model.matrix(~ fremmedartsdekning,data = yv)
+X <- model.matrix(~ fremmedartsdekning_sc,data = yv)
 yv$original <- X %*% fixef(mod.GRUK.N2.alien2)
 yv$SE <- sqrt(diag(X %*% vcov(mod.GRUK.N2.alien2) %*% t(X)))
 yv$lo <- yv$original - (1.96 * yv$SE )
 yv$up <- yv$original + (1.96 * yv$SE )
+yv$x_orig <- 0:100
 
 
 with(res.natopen.GRUK[res.natopen.GRUK$fp_ind=="Nitrogen2" & res.natopen.GRUK$tilstandsgrunn.x!="slitasje",],
@@ -349,9 +364,11 @@ lines(x,exp(yv$fit),col="blue")
 
 
 plot.alien.2 +
-  geom_ribbon(aes(x=fremmedartsdekning, ymin=exp(lo), ymax=exp(up), fill='red',colour="red"), alpha=0.2, data = yv) +
-  geom_line(aes(x=fremmedartsdekning,y=exp(original)), data = yv) +
-  theme(legend.position = "none")
+  geom_ribbon(aes(x=x_orig, ymin=exp(lo), ymax=exp(up), fill='red',colour="red"), alpha=0.2, data = yv) +
+  geom_line(aes(x=x_orig,y=exp(original)), data = yv) +
+  theme(legend.position = "none") +
+  theme(axis.text=element_text(size=30),
+        axis.title=element_text(size=32,face="bold"))
 
 
 
@@ -407,7 +424,9 @@ pred.ci <- data.frame(fremmedartsdekning=0:100,original=expit(pred.l$fit),up=exp
 plot.C.alien.1 +
   geom_ribbon(aes(x=fremmedartsdekning, ymin=low, ymax=up, fill='red',colour="red"), alpha=0.2, data = pred.ci) +
   geom_line(aes(x=fremmedartsdekning,y=original), data = pred.ci) +
-  theme(legend.position = "none")
+  theme(legend.position = "none") +
+  theme(axis.text=element_text(size=14),
+        axis.title=element_text(size=16,face="bold"))
 
 
 
@@ -429,7 +448,12 @@ res.natopen.GRUK %>%
   xlab("Basic ecosystem type") + 
   ylab("Scaled indicator value") + 
   theme(legend.position="none") +
-  theme(axis.text.x = element_text(angle = -45, vjust = 0.5, hjust=0.2))
+  theme(axis.text.x = element_text(angle = -45, vjust = 0.5, hjust=0.2)) +
+  theme(axis.text=element_text(size=14),
+        axis.title=element_text(size=16,face="bold")) +
+  theme(strip.text = element_text(
+    size = 16))
+
 
 
 #### scaled value maps ####
