@@ -37,7 +37,7 @@ Notice the degree of annotation.
 <br />
 
 _Author and date:_
-Jens Åström `r Sys.Date()`
+Jens Åström, Marie Davey `r Sys.Date()`
 
 
 <br />
@@ -114,7 +114,7 @@ knitr::kable(metaData)
 ## Introduction
 We here show how to calculate a set of indicators for terrestrial insects in Norway. Two of them are adapted from earlier work on the Nature Index for Norway and use data from the Norwegian monitoring program on bumblebees and butterflies (**NMBB**). The others are developed during 2023, and use data from the Norwegian insect monitoring program (**NorIns**). 
 
-This workflow is shortened by putting most of the underlying code in separate R-packages, which are freely available through Github. The relevant packages are `bombLepiSurv` https://github.com/jenast/bombLepiSurv for the bumblebee and butterfly indicators (**Not public yet**), and `Norimon` https://github.com/jenast/Norimon for the rest of the indicators.
+This workflow is shortened by putting most of the underlying code in separate R-packages, which are freely available through Github. The relevant packages are `bombLepiSurv` https://github.com/jenast/bombLepiSurv for the bumblebee and butterfly indicators, and `Norimon` https://github.com/jenast/Norimon for the rest of the indicators.
 
 For the indicators from the NMBB program, community reference values has been elicited from experts, and is explained further below. For the indicators from the NorIns program, this is significantly harder to do, because of the size of the communities, lack of historical timeseries and changes in sampling and identification techniques. We therefore currently lack reference values for many of these indicators.
 
@@ -233,6 +233,10 @@ The uncertainties for the indicator values is calculated by bootstrapping the av
 
 * French, C. M., Bertola, L. D., Carnaval, A. C., Economo, E. P., Kass, J. M., Lohman, D. J., … Hickerson, M. J. 2023, juli 17. Global determinants of insect mitochondrial genetic diversity. bioRxiv. bioRxiv. https://doi.org/10.1101/2022.02.09.479762
 
+* Miraldo, A., Li, S., Borregaard, M. K., Flórez-Rodríguez, A., Gopalakrishnan, S., Rizvanovic, M., … Nogués-Bravo, D. 2016. An Anthropocene map of genetic diversity. Science 353(6307): 1532–1535. https://doi.org/10.1126/science.aaf4381
+
+* Rohde, K. 1992. Latitudinal Gradients in Species Diversity: The Search for the Primary Cause. Oikos 65(3): 514. https://doi.org/10.2307/3545569
+
 * Theodoridis, S., Fordham, D. A., Brown, S. C., Li, S., Rahbek, C., & Nogues-Bravo, D. 2020. Evolutionary history and past climate change shape the distribution of genetic diversity in terrestrial mammals. Nature Communications 11(1): 2557. https://doi.org/10.1038/s41467-020-16449-5
 
 * Åström, Jens; Birkemoe, Tone; Brandsegg, Hege; Dahle, Sondre; Davey, Marie Louise; Ekrem, Torbjørn; Fossøy, Frode; Hanssen, Oddvar; Laugsand, Arne Endre; Majaneva, Markus; Staverløkk, Arnstein; Sverdrup-Thygeson, Anne; Ødegaard, Frode.
@@ -297,7 +301,7 @@ kable(pollinators)
 
 We then fetch the community data for these families through the `get_observations` function. We additionally subset the habitat type that we are interested in, here semi-natural land. The result is a tibble of the aggregated number of species, shannon diversity, and the mean number of genetic variants per species. The default aggregation level is "year_locality", meaning the total observations for a locality within a year. 
 
-Note that the output currently contains some experimental values, awaiting a more robust methodology. "Shannon diversity" doesn't really make sense without counts or amounts, etc. This will be replaced by measurements of genetic diversity that are based on published peer-reviewed methodology (Connor et al. 2023), in the (hopefully near) future.
+Note that the output currently contains some experimental values, awaiting a more robust methodology. "Shannon diversity" doesn't really make sense without counts or amounts, etc. This will be replaced by measurements of genetic diversity that are based on published peer-reviewed methodology (French et al. 2023), in the (hopefully near) future.
 
 ```{r}
 
@@ -422,7 +426,13 @@ In the cases where we have used a single row as a reference point, this shows up
 plot(diff_poll_richness_boot2)
 ```
 
-More plotting options are available, see the `Norimon` indicator workflow vignette.
+
+#### Time-series plots
+The default plots are good for showing the uncertainty distributions, but can be a bit difficult to track the time series trends with. We can use the `ts_plot` function for a simple time-series plot.
+
+```{r}
+ts_plot(poll_richness_boot)
+```
 
 
 #### Map plots
@@ -447,6 +457,9 @@ map_plot(palette = "orange-green",
          alpha_from_sd = TRUE)
 ```
 
+More plotting options are available, see the `Norimon` indicator workflow vignette.
+
+
 #### 5 year rolling window summaries
 As described above, to take the staggered 5 year survey scheme into account, it makes sense to summarize the state over a whole 5 year period. This does not need to adhere to predefined periods, since any 5 year long period will result in a complete data set. We can therefore calculate 5 year long summaries in rolling windows, where each focal year is surrounded by +- 2 years. The bootstrap_value does this by default, if we don't specify `rolling_year_average = FALSE`
 
@@ -464,6 +477,12 @@ Since we are only on the third year in the survey scheme however, the rolling wi
 
 ```{r}
 plot(poll_richness_boot_5_year)
+```
+
+The averaging over 5-years naturally also shows up in the time-series plots. Note the very wide confidence intervals of the Sørlandet region, with only 1-year worth of data.
+
+```{r}
+ts_plot(poll_richness_boot_5_year)
 ```
 
 
@@ -689,7 +708,7 @@ Plot the results and display uncertainty.
 biomass_sn_diff
 ```
 
-```{r}
+```{r biomass_diff}
 plot(biomass_sn_diff)
 ```
 
@@ -749,8 +768,17 @@ richness_sn_diff
 ```
 
 ```{r}
-plot(richness_sn_diff)
+plot(richness_sn_diff,
+     limit = c(0, 1))
 ```
+
+```{r richness}
+map_plot(richness_sn_diff,
+         whole_country = T,
+         limit = c(0, 1))
+```
+   
+   
 
 Prepare export format.
 
@@ -813,7 +841,8 @@ pollinators_sn_diff
 ```
 
 ```{r}
-plot(pollinators_sn_diff)
+plot(pollinators_sn_diff,
+     limit = c(0, 1))
 ```
 
 Prepare export format.
@@ -951,7 +980,8 @@ dung_sn_diff
 ```
 
 ```{r}
-plot(dung_sn_diff)
+plot(dung_sn_diff,
+     limit = c(0, 1))
 ```
 
 Prepare export format.
@@ -1081,8 +1111,8 @@ The simplest approach is to just sum up the number of alien species present in a
 
 In addition, this approach will not take into account the spread of the species, a measure that is especially relevant for rare but increasing species. A species found only once will count as much as a species found in every locality. To take into account the prevalence of the species, we can observe the proportion of localities each alien species is observed in. These proportions could then be summed together for at total score of alien species. Here, a species found in all localities will count much more, than a species only found once. 
 
-For each alien species, the observation frequency is calculated as the number of localities the species is observed in, divided by the total amount of localities in a geographical region and time period. $$p_i = \frac{1}{N} \sum_{i=1, j=1}^{N}{obs_{ij}}$$, where $obs_ij$ is an observation of species $i$ in locality $j$, and $N$ is the total number of possible observations (localities in the region and time period).
-These proportions are combined into a common score for all alien species in $$alien~score =\sum_{i=1}^{S}{~p_{i}}$$, where $p_i$ is the observation frequency of species $i$, and $S$ is the set of all observed alien species. The uncertainty of both types of indicators is calculated by bootstrapping the set of localities within a temporal and spatial scope, similarly to the other indicators. If all alien species are present in all localities, the indicator value simply becomes $S$. If the species is not present in all localities, it's influence on the indicator is weighted down linearly with it presence frequency.
+For each alien species, the observation frequency is calculated as the number of localities the species is observed in, divided by the total amount of localities in a geographical region and time period. $$p_i = \frac{1}{N} \sum_{i=1, j=1}^{N}{obs_{ij}},$$ where $obs_ij$ is an observation of species $i$ in locality $j$, and $N$ is the total number of possible observations (localities in the region and time period).
+These proportions are combined into a common score for all alien species simply by summing them together; $$alien~score =\sum_{i=1}^{S}{~p_{i}},$$ where $p_i$ is the observation frequency of species $i$, and $S$ is the set of all observed alien species. The uncertainty of both types of indicators is calculated by bootstrapping the set of localities within a temporal and spatial scope, similarly to the other indicators. If all alien species are present in all localities, the indicator value simply becomes $S$. If the species is not present in all localities, it's influence on the indicator is weighted down linearly with it presence frequency.
 
 **Fetch the species list.**
 
@@ -1137,7 +1167,7 @@ alien_obs_yl <- alien_obs %>%
 alien_obs_yl
 ```
 
-Next step is to bootstrap the alien observations to get the uncertainty measurement. This has to be done in a slightly different way than for the aggregated diversity or biomass values that we have used for the other indicators. Here we have a set of alien species presences for a locality, and when we bootstrap the localities, all these presences should go together. So we first have to take bootstrap samples of sets of localities (with replacement). Then we calculate the presence (or presence frequency) of each alien species $p_i$, before we can summarize all of these into the indicator value $H_alien$. This is implemented in a separate function `bootstrap_alien_obs` in the `Norimon` package, were we can optionally either sum the species numbers, or sum the species presence frequencies. Note that for all alien species recorded in at least one locality, we have recorded the presences and absences in all localities. This is needed for his function to work. This function is more computer intensive than the bootstrap of already aggregated values, so we employ parallelization through the `parallel` package internally.
+Next step is to bootstrap the alien observations to get the uncertainty measurement. This has to be done in a slightly different way than for the aggregated diversity or biomass values that we have used for the other indicators. Here we have a set of alien species presences for a locality, and when we bootstrap the localities, all these presences should go together. So we first have to take bootstrap samples of sets of localities (with replacement). Then we calculate the presence (or presence frequency) of each alien species $p_i$, before we can summarize all of these into the indicator value $H_{alien}$. This is implemented in a separate function `bootstrap_alien_obs` in the `Norimon` package, were we can optionally either sum the species numbers, or sum the species presence frequencies. Note that for all alien species recorded in at least one locality, we have recorded the presences and absences in all localities. This is needed for his function to work. This function is more computer intensive than the bootstrap of already aggregated values, so we employ parallelization through the `parallel` package internally.
 
 **We first calculate the indicator based on the the number of alien species** 
 
@@ -1154,7 +1184,7 @@ alien_sn_boot <- bootstrap_alien_obs(alien_obs_yl,
 plot(alien_sn_boot)
 ```
 
-The jagged lines in the density plot comes from the discrete values of number of species. Østlandet has the most alien species, followed by Sørlandet, and lastly Trøndelag.
+The jagged lines in the density plot comes from the discrete values of number of species. Østlandet has the most alien species, followed by Sørlandet, and lastly Trøndelag. Trøndelag has a fewer total number of species, but similar amount of alien species in each locality, leading to a very narrow confidence band from the bootstrap.
 
 ```{r}
 ts_plot(alien_sn_boot)
@@ -1325,10 +1355,16 @@ alien_H_boot_sf
 
 
 
-#### Genetic diversity evenness of flying insects in semi-natural land
-This calculation is not fully implemented yet, and the script shown here functions as a placeholder, awaiting a proper routines. Here, the intraspecific variation is based simply on the number of unique genetic variants (ASVs), and their relative abundance measured as number of DNA-reads in the samples. But to do this properly, we need to use the full COI sequence to calculate the true genetic diversity (GD), and from there the mean diversity (GDM) and the evenness (GDE) of a set of species in a spatial and temporal unit  (see Connor et al. 2023). This work is on the way.
+#### Genetic diversity of flying insects in semi-natural land
+The genetic diversity (GD) of a species is a measurement of the differences between DNA variants within the same species, here calculated on the COI region of the mitochondrial DNA. It is in principle a different measurement than the total number of species in a community, or the number of distinct DNA variants in a community. It is an empirical question whether these measurement correlate correlate on the global or local scale. For instance, Miraldo et al. (2016) found global patterns of decreasing GD near the poles, coinciding with global patterns of species richness. These patterns may share causes, such as higher mutation rates and shorter generation times in warmer climates (Rohde K. 1992). However, it is not clear if and how these patterns are distributed within a smaller region, such as within Norway. Further, spatial and temporal trends in GD, may can indicate pressures on species, before they are visible as loss of species.
 
-**Update**, Marie now have calculated the GDM manually, for all species on the year locality level. The GDE still remains to be calculated.  
+Following e.g. Miranda et al. (2016), we define GD as the average number of nucleotide differences per nucleotide site across all pairwise sequence comparisons within a species. Mathematically this can be expressed as: $$\hat{\prod}_s = \frac{1}{(\frac{n}{2})} \sum_{i=1}^{n-1}\sum_{j=i+1}^{n}\frac{k_{ij}}{m_{ij}},$$ where $s$ is a single species, $k_{ij}$ is the number of different nucleotides between sequence $i$ and sequence $j$, $(\frac{n}{2})$ represents the number of pairwise comparisons made, and $m_{ij}$ is the number of shared base pairs between sequence $i$ and $j$ (Theodoridis et al 2020). Following French et al. (2023), we here considered only species that where found at least 3 separate times, to make sure we had enough samples to observe any intraspecific diversity.
+
+This species-specific measurement can be combined into a community measurement in several ways. Firstly, we can simply take the average GD of a community of species (GDM), or $$GDM = \frac{1}{S}\sum_{s=1}^{S}\hat{\prod}_s, $$ where $S$ is the total number of species, and $s$ is each species (Theodoridis et al. 2020). The mean genetic diversity of a community is a natural starting point, but can - analogous to species richness -, hide important patterns in the relative contributions from individual species. In short, the distributions of GD might be skewed, so that a few species carries the most influence on the measurement. Therefore, French et al. (2023) has developed a genetic evenness measurement (GDE), that is analogous to Shannon's entropy for communities on the species level. This is defined as $$\frac{exp(\sum_{i=0}^{N} - \hat{\prod}_i ln(\hat{\prod}_i))}{N},$$ where N is the number of species in the community, and $\hat{\prod}_i$ is the GD calculated above for a single species. The numerator is the Hill number of the Shannon entropy. This results in a measurement that can be compared across communities of different species richness.
+
+We here present both GDM and GDE, as potential indicators. These are relatively new measures, and it is the first time it is calculated for large insect communities in Norway. We need further experience with these measurements to tease out potential pro's and con's in the Norwegian setting. The raw-data on the DNA-sequences is as of yet not  publicly available, and the calculations of GDM and GDE is not shown in detail. 
+
+**NOTE** As of now, we only have calculations by Marie on GDM, for all species on the year locality level. The GDE still remains to be calculated. We here import the ready made calculations for file.
 
 ```{r}
 gdm <- readRDS("data/GDM_year_locality.rds")
@@ -1348,7 +1384,7 @@ gdm_yl <- alien_obs_yl  %>%
 gdm_yl
 ```
 
-We can explore how the mean genetic diversity relates to the total species richness of the localities.
+Since these calculations are so novel, it can be worth spending some time exploring how the mean genetic diversity relates to other richness measurement at the locality level. Remember that globally, the species richness and genetic mean diversity show a general positive correlation (Miraldo et al. 2016). 
 
 ```{r}
 richness_yl <- get_observations(agg_level = "year_locality",
@@ -1371,9 +1407,11 @@ ggplot(richness_gdm_join) +
   geom_smooth(aes(x = no_species,
                  y = GDM,
                  color = region_name),
-              method = lm)
+              method = lm) +
+  scale_color_nina(name = "Region") +
+  xlab("Antall arter")
 ```
-Interestingly, and perhaps reassuringly, the number of species doesn't seem to be related to the average genetic diversity. We can look at the mean number of ASVs as well.
+Interestingly, and perhaps reassuringly, the number of species doesn't seem to be clearly related to the average genetic diversity. We can look at the mean number of ASVs as well.
 
 ```{r}
 ggplot(richness_gdm_join) +
@@ -1383,9 +1421,13 @@ ggplot(richness_gdm_join) +
   geom_smooth(aes(x = mean_no_asv_per_species,
                  y = GDM,
                  color = region_name),
-              method = lm)
+              method = lm) +
+  scale_color_nina(name = "Region") +
+  xlab("Antall genetiske varianter per art")
 ```
-While the number of ASVs (genetic variants) and the number of species per locality show more clear relationships.
+Here we see a positive relationship in Trøndelag (although uncertain), but not the other regions.
+
+
 ```{r}
 ggplot(richness_gdm_join) +
   geom_point(aes(x = no_species,
@@ -1394,10 +1436,13 @@ ggplot(richness_gdm_join) +
   geom_smooth(aes(x = no_species,
                  y = mean_no_asv_per_species,
                  color = region_name),
-              method = lm)
-```
+              method = lm) +
+  scale_color_nina(name = "Region") +
+  xlab("Antall arter") +
+  ylab("Antall genetiske varianter per art")
 
-We can bootstrap the mean genetic diversity like with the other indicators. 
+```
+While the number of ASVs (genetic variants) and the number of species per locality show more clear relationships. This was just a quick look at the genetic aspect of biodiversity, that require some further analysis to support robust interpretations. In the meantime, we continue with the calculation example of the indicators. We bootstrap the mean genetic diversity like with the other indicators. 
 
 ```{r}
 gdm_yl_boot <- bootstrap_value(df = gdm_yl,
@@ -1423,10 +1468,10 @@ Although, as with the other indicators, we see variation between years. This can
  
 ```{r}
 gdm_yl_yearly_boot <- bootstrap_value(df = gdm_yl,
-                                   value = GDM,
-                                   groups = c("year",
-                                              "region_name"),
-                               rolling_year_window = FALSE
+                                      value = GDM,
+                                      groups = c("year",
+                                                 "region_name"),
+                                      rolling_year_window = FALSE
                                    )
 ```
 
@@ -1468,7 +1513,8 @@ gde_sn_diff
 ```
 
 ```{r}
-plot(gde_sn_diff)
+plot(gde_sn_diff,
+     limit = c(0, 1))
 ```
 
 Prepare export format.
